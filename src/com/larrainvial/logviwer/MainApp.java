@@ -39,7 +39,7 @@ public class MainApp extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/rootLayout.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             Scene scene = new Scene(rootLayout);
