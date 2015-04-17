@@ -31,6 +31,9 @@ public class MainApp extends Application {
         Control.initialize();
         Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.fileDolar));
 
+
+
+        
     }
 
 
