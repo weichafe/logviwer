@@ -10,12 +10,9 @@ public class  Repository {
     public static final String DOLAR = "DOLAR";
     public static final String MKD_NYSE = "NYSE";
     public static final String NameAdrArbitrageXSGO = "ADRArbitrageXSGO";
-    public static String fileDolar = "C:\\DOLAR.log";
+    public static String fileDolar = "C:\\logfix.log";
 
     public static ObservableList<ModelMarketData> adrArbitrageXSGO_DOLAR = FXCollections.observableArrayList();
-
-
-    public static  FXMLLoader principalPanel_LOADER = new FXMLLoader();
     public static  FXMLLoader adrArbitrageXSGO_DOLAR_LOADER = new FXMLLoader();
 
 

@@ -5,6 +5,19 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane prefHeight="516.0" prefWidth="945.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <center>
+    <Pane prefHeight="200.0" prefWidth="200.0">
+      <children>
+        <HBox layoutX="0.0" layoutY="0.0" prefHeight="492.0" prefWidth="945.0">
+          <children>
+
+
+
+          </children>
+        </HBox>
+      </children>
+    </Pane>
+  </center>
   <top>
     <MenuBar BorderPane.alignment="CENTER">
       <menus>

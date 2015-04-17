@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer;
 
+import com.larrainvial.logviwer.controller.adrarbitragexsgo.AdrArbitrageXSGODolarController;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.utils.Control;
 import com.larrainvial.trading.emp.Controller;
@@ -19,21 +20,20 @@ public class MainApp extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Log Viwer");
 
         this.initRootLayout();
-        this.adrArbitrageXSGO();
         this.principalPanel();
 
-        Control.initialize();
-        Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.fileDolar));
 
+        //Control.initialize();
+        //Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.fileDolar));
 
+        this.adrArbitrageXSGO();
 
-        
     }
 
 
@@ -42,7 +42,7 @@ public class MainApp extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
+            loader.setLocation(MainApp.class.getResource("view/rootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             Scene scene = new Scene(rootLayout);
@@ -59,11 +59,14 @@ public class MainApp extends Application {
 
         try {
 
-            Repository.principalPanel_LOADER.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
-            AnchorPane principalPanel = (AnchorPane) Repository.principalPanel_LOADER.load();
+           FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
+            AnchorPane principalPanel = (AnchorPane) loader.load();
             rootLayout.setCenter(principalPanel);
 
-        } catch (IOException e) {
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -72,14 +75,24 @@ public class MainApp extends Application {
 
         try {
 
-            Repository.adrArbitrageXSGO_DOLAR_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_DOLAR.fxml"));
-            AnchorPane adrArbitrageXSGO_DOLAR_LOADER = (AnchorPane) Repository.adrArbitrageXSGO_DOLAR_LOADER.load();
-            rootLayout.setCenter(adrArbitrageXSGO_DOLAR_LOADER);
+            FXMLLoader adrArbitrageXSGO_DOLAR_LOADER = new FXMLLoader();
+            adrArbitrageXSGO_DOLAR_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_DOLAR.fxml"));
 
-        } catch (IOException e) {
+            AnchorPane personOverview = (AnchorPane) adrArbitrageXSGO_DOLAR_LOADER.load();
+
+            // Set person overview into the center of root layout.
+            rootLayout.setCenter(personOverview);
+
+            AdrArbitrageXSGODolarController controller =  adrArbitrageXSGO_DOLAR_LOADER.getController();
+            controller.getModelDolar().setItems(Repository.adrArbitrageXSGO_DOLAR);
+
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
 
     public static void main(String[] args) {
