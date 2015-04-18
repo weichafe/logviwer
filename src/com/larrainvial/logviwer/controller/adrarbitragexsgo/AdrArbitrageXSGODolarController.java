@@ -1,9 +1,13 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
+import com.larrainvial.logviwer.MainApp;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import javafx.fxml.FXML;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
 public class AdrArbitrageXSGODolarController {
 
@@ -70,9 +74,26 @@ public class AdrArbitrageXSGODolarController {
         closePx.setVisible(true);
     }
 
+    public void setComponentToPrincipalPanel() {
+
+        try {
+
+            Repository.adrArbitrageXSGO_DOLAR_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_DOLAR.fxml"));
+            AnchorPane adrArbitrageXSGO_DOLAR_LOADER = (AnchorPane) Repository.adrArbitrageXSGO_DOLAR_LOADER.load();
+
+            Repository.adrArbitrageXSGO_NYSE_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_NYSE.fxml"));
+            AnchorPane adrArbitrageXSGO_MKD_NYSE = (AnchorPane) Repository.adrArbitrageXSGO_NYSE_LOADER.load();
+
+            Repository.tabPanePrincipalTabPanel.getTabs().get(0).setContent(adrArbitrageXSGO_DOLAR_LOADER);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(0).setContent(adrArbitrageXSGO_MKD_NYSE);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     public TableView<ModelMarketData> getModelDolar() {
-
         return adrArbitrageXSGODolar;
     }
 

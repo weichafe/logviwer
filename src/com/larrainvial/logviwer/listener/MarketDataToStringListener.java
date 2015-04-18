@@ -64,7 +64,7 @@ public class MarketDataToStringListener implements Listener {
             }
 
             if(ev.nameAlgo.equals(Repository.NameAdrArbitrageXSGO)) {
-                Repository.adrArbitrageXSGO_DOLAR.add(new ModelMarketData(anio, hour, messageByType, symbol,  buyPx, buyQty, sellPx, sellQty, closePx));
+                Repository.adrArbitrageXSGO_MKD_DOLAR.add(new ModelMarketData(anio, hour, messageByType, symbol,  buyPx, buyQty, sellPx, sellQty, closePx));
             }
 
             Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket));

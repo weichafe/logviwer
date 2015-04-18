@@ -1,23 +1,23 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.controller.adrarbitragexsgo.AdrArbitrageXSGODolarController;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.utils.Control;
 import com.larrainvial.trading.emp.Controller;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.awt.*;
+import java.util.Collection;
 
 public class MainApp extends Application {
 
     private Stage primaryStage;
-    private BorderPane rootLayout;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,78 +25,42 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Log Viwer");
 
-        this.initRootLayout();
-        this.principalPanel();
+        Repository.rootLayout_Loader.setLocation(MainApp.class.getResource("view/rootLayout.fxml"));
+        BorderPane rootLayout_Loader = (BorderPane) Repository.rootLayout_Loader.load();
+
+        Repository.principalTabPanel_Loader.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
+        Repository.tabPanePrincipalTabPanel = (TabPane) Repository.principalTabPanel_Loader.load();
+
+        Repository.adrArbitrageXSGO_DOLAR_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_DOLAR.fxml"));
+        AnchorPane adrArbitrageXSGO_DOLAR_LOADER = (AnchorPane) Repository.adrArbitrageXSGO_DOLAR_LOADER.load();
+
+        Repository.adrArbitrageXSGO_NYSE_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_NYSE.fxml"));
+        AnchorPane adrArbitrageXSGO_MKD_NYSE = (AnchorPane) Repository.adrArbitrageXSGO_NYSE_LOADER.load();
 
 
-        //Control.initialize();
-        //Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.fileDolar));
+        AnchorPane AnchorPane = new AnchorPane();
+        AnchorPane.getChildren().add(adrArbitrageXSGO_MKD_NYSE);
+        AnchorPane.getChildren().add(adrArbitrageXSGO_DOLAR_LOADER);
 
-        this.adrArbitrageXSGO();
+        Repository.tabPanePrincipalTabPanel.getTabs().get(0).setContent(AnchorPane);
+
+
+        rootLayout_Loader.setCenter(Repository.tabPanePrincipalTabPanel);
+
+
+        Control.initialize();
+        Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.fileDolar));
+
+        Scene scene = new Scene(rootLayout_Loader);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
     }
-
-
-    public void initRootLayout() {
-
-        try {
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/rootLayout.fxml"));
-            rootLayout = (BorderPane) loader.load();
-
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void principalPanel() {
-
-        try {
-
-           FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("view/PrincipalTabPanel.fxml"));
-            AnchorPane principalPanel = (AnchorPane) loader.load();
-            rootLayout.setCenter(principalPanel);
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void adrArbitrageXSGO() {
-
-        try {
-
-            FXMLLoader adrArbitrageXSGO_DOLAR_LOADER = new FXMLLoader();
-            adrArbitrageXSGO_DOLAR_LOADER.setLocation(MainApp.class.getResource("view/ARDArbitrage_XSGO_MKD_DOLAR.fxml"));
-
-            AnchorPane personOverview = (AnchorPane) adrArbitrageXSGO_DOLAR_LOADER.load();
-
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
-
-            AdrArbitrageXSGODolarController controller =  adrArbitrageXSGO_DOLAR_LOADER.getController();
-            controller.getModelDolar().setItems(Repository.adrArbitrageXSGO_DOLAR);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
 
     public static void main(String[] args) {
 
         launch(args);
     }
+
 }

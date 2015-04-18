@@ -4,8 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="897.0" prefWidth="1026.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
-  <children>
 
     <TabPane layoutX="0.0" layoutY="0.0" prefHeight="897.0" prefWidth="1026.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
@@ -16,13 +14,13 @@
 
                 <HBox layoutX="86.0" layoutY="45.0" prefHeight="196.0" prefWidth="907.0">
                   <children>
-                    <fx:include fx:id="fooTabPage" source="ARDArbitrage_XSGO_MKD_DOLAR.fxml" />
+
                   </children>
                 </HBox>
 
                 <HBox layoutX="78.0" layoutY="275.0" prefHeight="196.0" prefWidth="907.0">
                   <children>
-                    <fx:include fx:id="fooTabPage2" source="ARDArbitrage_XSGO_MKD_DOLAR.fxml" />
+
                   </children>
                 </HBox>
 
@@ -33,6 +31,3 @@
         <Tab content="$null" text="Untitled Tab 2" />
       </tabs>
     </TabPane>
-
-  </children>
-</AnchorPane>
