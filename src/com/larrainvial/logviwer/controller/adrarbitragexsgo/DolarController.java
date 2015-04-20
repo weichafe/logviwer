@@ -5,10 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class AdrArbitrageXSGOMKDNYSEController {
+public class DolarController {
 
     @FXML
-    private TableView<ModelMarketData> adrArbitrageXSGONYSE;
+    private TableView<ModelMarketData> dolar;
 
     @FXML
     private TableColumn<ModelMarketData, String> anio;
@@ -40,25 +40,25 @@ public class AdrArbitrageXSGOMKDNYSEController {
     @FXML
     private void initialize() {
 
-        symbol.setCellValueFactory(cellData -> cellData.getValue().symbol);
-        messageByType.setCellValueFactory(cellData -> cellData.getValue().messageByType);
-        hour.setCellValueFactory(cellData -> cellData.getValue().hour);
-        anio.setCellValueFactory(cellData -> cellData.getValue().anio);
+        symbol.setCellValueFactory(cellData -> cellData.getValue().getSymbol());
+        messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
+        hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
+        anio.setCellValueFactory(cellData -> cellData.getValue().getYear());
 
-        buyQty.setCellValueFactory(cellData2 -> cellData2.getValue().buyQty.asString());
-        buyPx.setCellValueFactory(cellData2 -> cellData2.getValue().buyPx.asString());
+        buyQty.setCellValueFactory(cellData -> cellData.getValue().getBuyQty().asString());
+        buyPx.setCellValueFactory(cellData -> cellData.getValue().getBuyPx().asString());
 
-        sellQty.setCellValueFactory(cellData2 -> cellData2.getValue().sellQty.asString());
-        sellPx.setCellValueFactory(cellData2 -> cellData2.getValue().sellPx.asString());
+        sellQty.setCellValueFactory(cellData -> cellData.getValue().getSellQty().asString());
+        sellPx.setCellValueFactory(cellData -> cellData.getValue().getSellPx().asString());
 
-        closePx.setCellValueFactory(cellData2 -> cellData2.getValue().closePx.asString());
+        closePx.setCellValueFactory(cellData -> cellData.getValue().getClosePx().asString());
 
     }
 
     @FXML
-    private void refreshTableView() {
+    private void refreshTableView() throws Exception{
 
-        adrArbitrageXSGONYSE.setVisible(true);
+        dolar.setVisible(true);
         anio.setVisible(true);
         messageByType.setVisible(true);
         symbol.setVisible(true);
@@ -68,12 +68,11 @@ public class AdrArbitrageXSGOMKDNYSEController {
         sellPx.setVisible(true);
         sellQty.setVisible(true);
         closePx.setVisible(true);
+
     }
 
-
-    public TableView<ModelMarketData> getModelNYSE() {
-
-        return adrArbitrageXSGONYSE;
+    public TableView<ModelMarketData> getDolar() {
+        return dolar;
     }
 
 }

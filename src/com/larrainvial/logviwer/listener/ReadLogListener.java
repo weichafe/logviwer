@@ -1,8 +1,7 @@
 package com.larrainvial.logviwer.listener;
 
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.ReadLogEvent;
-import com.larrainvial.logviwer.event.MarketDataToStringEvent;
+import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
@@ -18,11 +17,7 @@ public class ReadLogListener implements Listener {
         try {
 
             ReadLogEvent ev = (ReadLogEvent) event;
-
-            if (ev.typeMarket.equals(Repository.DOLAR)){
-                this.readlogDolar(ev.namefile, ev.nameAlgo , ev.typeMarket);
-            }
-
+            this.readlogDolar(ev.namefile, ev.nameAlgo , ev.typeMarket);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -38,10 +33,8 @@ public class ReadLogListener implements Listener {
             FileReader f = new FileReader(namefile);
             BufferedReader b = new BufferedReader(f);
 
-            while (true){
-                if ((lineFromLog = b.readLine()) != null){
-                    Controller.dispatchEvent(new MarketDataToStringEvent(this, lineFromLog, nameAlgo, typeMarket));
-                }
+            while ((lineFromLog = b.readLine()) != null){
+                Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, typeMarket));
             }
 
         }catch (Exception e) {

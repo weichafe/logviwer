@@ -7,36 +7,21 @@ import javafx.beans.property.StringProperty;
 
 public class ModelMarketData {
 
-    public final StringProperty symbol;
-    public final StringProperty hour;
-    public final StringProperty anio;
-    public final StringProperty messageByType;
+    private final StringProperty symbol;
+    private final StringProperty hour;
+    private final StringProperty year;
+    private final StringProperty messageByType;
+    private final DoubleProperty buyPx;
+    private final DoubleProperty buyQty;
+    private final DoubleProperty sellPx;
+    private final DoubleProperty sellQty;
+    private final DoubleProperty closePx;
 
-    public final DoubleProperty buyPx;
-    public final DoubleProperty buyQty;
-
-    public final DoubleProperty sellPx;
-    public final DoubleProperty sellQty;
-
-    public final DoubleProperty closePx;
-
-    /**
-     * Constructor with some initial data
-
-     * @param messageByType
-     * @param symbol
-       @param hour
-     * @param buyPx
-     * @param buyQty
-     * @param sellPx
-     * @param sellQty
-     * @param closePx
-     */
 
     public ModelMarketData(String anio, String hour, String messageByType, String symbol, Double buyPx, Double buyQty, Double sellPx,
                            Double sellQty, Double closePx) {
 
-        this.anio = new SimpleStringProperty(anio);
+        this.year = new SimpleStringProperty(anio);
         this.messageByType = new SimpleStringProperty(messageByType);
         this.symbol = new SimpleStringProperty(symbol);
         this.hour = new SimpleStringProperty(hour);
@@ -47,6 +32,111 @@ public class ModelMarketData {
         this.closePx = new SimpleDoubleProperty(closePx);
     }
 
+    public StringProperty getSymbol() {
+        return symbol;
+    }
 
+    public StringProperty symbolProperty() {
+        return symbol;
+    }
 
+    public void setSymbol(String symbol) {
+        this.symbol.set(symbol);
+    }
+
+    public StringProperty getHour() {
+        return hour;
+    }
+
+    public StringProperty hourProperty() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour.set(hour);
+    }
+
+    public StringProperty getYear() {
+        return year;
+    }
+
+    public StringProperty yearProperty() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year.set(year);
+    }
+
+    public StringProperty getMessageByType() {
+        return messageByType;
+    }
+
+    public StringProperty messageByTypeProperty() {
+        return messageByType;
+    }
+
+    public void setMessageByType(String messageByType) {
+        this.messageByType.set(messageByType);
+    }
+
+    public DoubleProperty getBuyPx() {
+        return buyPx;
+    }
+
+    public DoubleProperty buyPxProperty() {
+        return buyPx;
+    }
+
+    public void setBuyPx(double buyPx) {
+        this.buyPx.set(buyPx);
+    }
+
+    public DoubleProperty getBuyQty() {
+        return buyQty;
+    }
+
+    public DoubleProperty buyQtyProperty() {
+        return buyQty;
+    }
+
+    public void setBuyQty(double buyQty) {
+        this.buyQty.set(buyQty);
+    }
+
+    public DoubleProperty getSellPx() {
+        return sellPx;
+    }
+
+    public DoubleProperty sellPxProperty() {
+        return sellPx;
+    }
+
+    public void setSellPx(double sellPx) {
+        this.sellPx.set(sellPx);
+    }
+
+    public DoubleProperty getSellQty() {
+        return sellQty;
+    }
+
+    public DoubleProperty sellQtyProperty() {
+        return sellQty;
+    }
+
+    public void setSellQty(double sellQty) {
+        this.sellQty.set(sellQty);
+    }
+
+    public DoubleProperty getClosePx() {
+        return closePx;
+    }
+
+    public DoubleProperty closePxProperty() {
+        return closePx;
+    }
+
+    public void setClosePx(double closePx) {
+        this.closePx.set(closePx);
+    }
 }

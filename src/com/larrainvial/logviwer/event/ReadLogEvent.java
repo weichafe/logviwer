@@ -9,6 +9,7 @@ public class ReadLogEvent extends Event {
     public String nameAlgo;
 
     public ReadLogEvent(Object source, String nameAlgo, String typeMarket, String namefile) {
+
         super(source);
         this.namefile = namefile;
         this.typeMarket = typeMarket;

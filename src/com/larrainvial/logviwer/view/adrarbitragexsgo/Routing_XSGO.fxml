@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="174.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.DolarController">
+  <children>
+    <TableView fx:id="adrArbitrageXSGODolar" layoutX="22.0" layoutY="14.0" prefHeight="160.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Year" fx:id="anio" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Hour" fx:id="hour" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="Type" fx:id="messageByType" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Symbol" fx:id="symbol" />
+        <TableColumn prefWidth="75.0" text="Buy Px" fx:id="buyPx" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="75.0" text="Buy Qty" fx:id="buyQty" />
+        <TableColumn prefWidth="75.0" text="Sell Px" fx:id="sellPx" />
+        <TableColumn prefWidth="75.0" text="Sell Qty" fx:id="sellQty" />
+        <TableColumn prefWidth="75.0" text="Close Px" fx:id="closePx" />
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>
