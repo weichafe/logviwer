@@ -9,6 +9,7 @@ import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import quickfix.field.MDEntryType;
 import quickfix.field.NoMDEntries;
+import quickfix.fix42.MarketDataSnapshotFullRefresh;
 import quickfix.fix44.MarketDataIncrementalRefresh;
 import quickfix.fix44.Message;
 
@@ -26,7 +27,9 @@ public class MarketDataMessageListener implements Listener {
 
             modelMarketData = ev.modelMarketData;
 
-            this.setMarketData(ev.messageFix);
+            if( ev.messageFix.getHeader().getString(35).equals(MarketDataSnapshotFullRefresh.MSGTYPE) || ev.messageFix.getHeader().getString(35).equals(MarketDataIncrementalRefresh.MSGTYPE)){
+               this.setMarketData(ev.messageFix);
+            }
 
             if(ev.nameAlgo.equals(Repository.NameAdrArbitrageXSGO)) {
                 Repository.adrArbitrageXSGO_MKD_DOLAR.add(modelMarketData);
@@ -65,7 +68,7 @@ public class MarketDataMessageListener implements Listener {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace(System.out);
+            System.out.println(mktDataInc);
 
         }
 

@@ -37,11 +37,11 @@ public class MainApp extends Application {
 
         Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.MKD_NYSE, Repository.file_adrArbitrageXsgo_mkd_nyse));
         Controller.dispatchEvent(new ReadLogEvent(this, Repository.NameAdrArbitrageXSGO, Repository.DOLAR, Repository.file_adrArbitrageXsgo_mkd_dolar));
+
     }
 
 
     public static void main(String[] args) {
-
         launch(args);
     }
 

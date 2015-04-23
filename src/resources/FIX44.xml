@@ -1202,6 +1202,14 @@
 		<message name="MarketDataIncrementalRefresh" msgcat="app" msgtype="X">
 			<field name="MDReqID" required="N"/>
 			<component name="Instrument" required="Y"/>
+
+			<group name="NoUnderlyings" required="N">
+				<component name="UnderlyingInstrument" required="N"/>
+			</group>
+
+			<group name="NoLegs" required="N">
+				<component name="InstrumentLeg" required="N"/>
+			</group>
 			<group name="NoMDEntries" required="Y">
 				<field name="MDUpdateAction" required="Y"/>
 				<field name="DeleteReason" required="N"/>
@@ -1255,6 +1263,7 @@
 			<field name="ApplQueueDepth" required="N"/>
 			<field name="ApplQueueResolution" required="N"/>
 		</message>
+
 		<message name="MarketDataRequestReject" msgcat="app" msgtype="Y">
 			<field name="MDReqID" required="Y"/>
 			<field name="MDReqRejReason" required="N"/>

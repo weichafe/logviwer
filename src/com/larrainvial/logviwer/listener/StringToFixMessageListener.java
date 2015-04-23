@@ -10,14 +10,15 @@ import com.larrainvial.trading.emp.Listener;
 import quickfix.DataDictionary;
 import quickfix.field.*;
 import quickfix.fix42.MarketDataSnapshotFullRefresh;
-import quickfix.fix44.Message;
-import quickfix.fix44.NewOrderSingle;
+import quickfix.fix44.*;
 
 
 public class StringToFixMessageListener implements Listener {
 
-    private  DataDictionary dictionary;
-    private  String symbol;
+    private DataDictionary dictionary;
+    private String symbol;
+    private String mesage;
+    private Message messageFix;
 
     public StringToFixMessageListener() {
 
@@ -38,28 +39,54 @@ public class StringToFixMessageListener implements Listener {
 
             StringToFixMessageEvent ev = (StringToFixMessageEvent) event;
 
-            String mesage = ev.lineFromLog;
 
-            Message messageFix = stringToFix(mesage);
+            mesage = ev.lineFromLog;
+            String[] date = mesage.split("8=")[0].split("-");
+            messageFix = stringToFix(mesage.split("FIX.4.4" + "\u0001")[1]);
+            if(mesage.equals("")) return;
+
             MsgType msgType = Message.identifyType(mesage);
 
-            String[] date = mesage.split("8=")[0].split("-");
 
             if(msgType.valueEquals(NewOrderSingle.MSGTYPE)){
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getString(Symbol.FIELD),  0d, 0d, 0d, 0d, 0d);
+
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroups(146).get(0).toString(), 0d, 0d, 0d, 0d, 0d);
                 Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelMarketData));
 
             } else if(msgType.valueEquals(MarketDataSnapshotFullRefresh.MSGTYPE)){
+
                 ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getString(Symbol.FIELD),  0d, 0d, 0d, 0d, 0d);
                 Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
 
+            } else if(msgType.valueEquals(MarketDataIncrementalRefresh.MSGTYPE)){
+
+                ModelMarketData modelMarketData;
+
+                if(messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).isSetField(55))
+                    modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).getString(55),  0d, 0d, 0d, 0d, 0d);
+                else
+                    modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new MarketDataIncrementalRefresh.NoMDEntries()).getString(55),  0d, 0d, 0d, 0d, 0d);
+
+                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
+
+
+            } else if(msgType.valueEquals(MarketDataRequest.MSGTYPE)){
+
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).getString(55),  0d, 0d, 0d, 0d, 0d);
+                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
+
             }else {
-                //ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getString(Symbol.FIELD),  0d, 0d, 0d, 0d, 0d);
-                //Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
+
+                if(msgType.valueEquals(News.MSGTYPE)) return;
+
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), "",  0d, 0d, 0d, 0d, 0d);
+                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
             }
 
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println(messageFix);
+
         }
 
     }
@@ -70,7 +97,8 @@ public class StringToFixMessageListener implements Listener {
         Message fixMessage = new Message();
 
         try {
-            fixMessage.fromString(fixMsg.split("FIX.4.4" + "\u0001")[1], dictionary, false);
+            fixMessage.fromString(fixMsg, dictionary, false);
+
         }catch (Exception e){
             e.printStackTrace();
         }
