@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.listener;
 
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.MarketDataMessageEvent;
 import com.larrainvial.logviwer.event.SendToViewEvent;
@@ -16,6 +17,7 @@ import quickfix.fix44.Message;
 public class MarketDataMessageListener implements Listener {
 
     public ModelMarketData modelMarketData;
+    private Algo algo;
 
 
     @Override
@@ -27,14 +29,7 @@ public class MarketDataMessageListener implements Listener {
 
             modelMarketData = ev.modelMarketData;
 
-            if( ev.messageFix.getHeader().getString(35).equals(MarketDataSnapshotFullRefresh.MSGTYPE) || ev.messageFix.getHeader().getString(35).equals(MarketDataIncrementalRefresh.MSGTYPE)){
-               this.setMarketData(ev.messageFix);
-            }
-
-            if(ev.nameAlgo.equals(Repository.NameAdrArbitrageXSGO)) {
-                Repository.adrArbitrageXSGO_MKD_DOLAR.add(modelMarketData);
-            }
-
+            this.setMarketData(ev.messageFix);
             Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData));
 
         }catch (Exception e){
@@ -68,7 +63,7 @@ public class MarketDataMessageListener implements Listener {
             }
 
         } catch (Exception ex) {
-            System.out.println(mktDataInc);
+            //System.out.println(mktDataInc);
 
         }
 

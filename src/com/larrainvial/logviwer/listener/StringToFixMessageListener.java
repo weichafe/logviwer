@@ -4,6 +4,7 @@ import com.larrainvial.logviwer.event.MarketDataMessageEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.logviwer.event.RoutingMessageEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
+import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
@@ -48,10 +49,10 @@ public class StringToFixMessageListener implements Listener {
             MsgType msgType = Message.identifyType(mesage);
 
 
-            if(msgType.valueEquals(NewOrderSingle.MSGTYPE)){
+            if(ev.typeMarket.startsWith("ROUTING")){
 
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroups(146).get(0).toString(), 0d, 0d, 0d, 0d, 0d);
-                Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelMarketData));
+                ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], msgType.getValue(), "", "", "", "", "", "", "", "", "", "", "", "", "", "","","","", 0d,0d,0d,0d,0d,0d,0d);
+                Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelRoutingData));
 
             } else if(msgType.valueEquals(MarketDataSnapshotFullRefresh.MSGTYPE)){
 
@@ -85,7 +86,7 @@ public class StringToFixMessageListener implements Listener {
 
         }catch (Exception e){
             e.printStackTrace();
-            System.out.println(messageFix);
+            //System.out.println(messageFix);
 
         }
 

@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.listener;
 
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
@@ -17,7 +18,7 @@ public class ReadLogListener implements Listener {
 
     private long lastModified;
     private TimerTask timerTask;
-
+    private Algo algo;
 
     @Override
     public void eventOccurred(Event event){
@@ -25,6 +26,8 @@ public class ReadLogListener implements Listener {
         try {
 
             ReadLogEvent ev = (ReadLogEvent) event;
+
+            algo = Repository.strategy.get(ev.nameAlgo);
             this.readlogDolar(ev.namefile, ev.nameAlgo , ev.typeMarket);
             lastModified = 0;
 
@@ -41,11 +44,10 @@ public class ReadLogListener implements Listener {
             File archivo = new File(namefile);
             FileReader f = new FileReader(archivo);
             BufferedReader b = new BufferedReader(f);
-            int timer_initial = Repository.hashMap_timeSlider.get(nameAlgo).intValue();
+            double timer_initial = algo.getTime();
             stopTimer();
 
             timerTask = new TimerTask(){
-
 
                 public void run() {
 
@@ -61,7 +63,7 @@ public class ReadLogListener implements Listener {
                                 Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, typeMarket));
                             }
 
-                            if(timer_initial != Repository.hashMap_timeSlider.get(nameAlgo).intValue()){
+                            if(timer_initial != algo.getTime()){
                                 readlogDolar(namefile, nameAlgo, typeMarket);
                             }
 
@@ -75,21 +77,20 @@ public class ReadLogListener implements Listener {
             };
 
             Timer timer = new Timer();
-            timer.scheduleAtFixedRate(timerTask, 1, Repository.hashMap_timeSlider.get(nameAlgo).intValue() * 1000);
-
-
+            timer.scheduleAtFixedRate(timerTask, 1, (int) algo.getTime() * 1000);
 
         }catch (Exception e) {
             e.printStackTrace();
         }
 
-
     }
 
     public void stopTimer() {
+
         if (timerTask != null) {
             timerTask.cancel();
             timerTask = null;
         }
+
     }
 }

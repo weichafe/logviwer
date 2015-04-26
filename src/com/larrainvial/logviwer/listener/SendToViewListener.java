@@ -1,13 +1,20 @@
 package com.larrainvial.logviwer.listener;
 
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.controller.adrarbitragexsgo.DolarController;
 import com.larrainvial.logviwer.controller.adrarbitragexsgo.NyseMKDController;
 import com.larrainvial.logviwer.event.SendToViewEvent;
+import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import javafx.collections.ObservableList;
+
+import java.util.Objects;
 
 public class SendToViewListener implements Listener {
+
+    private Algo algo;
 
     @Override
     public void eventOccurred(Event event){
@@ -16,18 +23,33 @@ public class SendToViewListener implements Listener {
 
             SendToViewEvent ev = (SendToViewEvent) event;
 
-            if(ev.nameAlgo.equals(Repository.NameAdrArbitrageXSGO) & ev.typeMarket.equals(Repository.DOLAR)){
+            algo = Repository.strategy.get(ev.nameAlgo);
 
-                DolarController controller =  Repository.adrArbitrageXSGO_MKD_DOLAR_LOADER.getController();
-                Repository.adrArbitrageXSGO_MKD_DOLAR.add(ev.modelMarketData);
-                controller.getDolar().setItems(Repository.adrArbitrageXSGO_MKD_DOLAR);
+            if(ev.typeMarket.equals(algo.getMkd_dolar())){
+                algo.getDolarList().add(ev.modelMarketData);
+                algo.getMkd_dolar_tableView().setItems(algo.getDolarList());
             }
 
-            if(ev.nameAlgo.equals(Repository.NameAdrArbitrageXSGO) & ev.typeMarket.equals(Repository.MKD_NYSE)){
-                Repository.adrArbitrageXSGO_MKD_NYSE.add(ev.modelMarketData);
-                NyseMKDController controller =  Repository.adrArbitrageXSGO_MKD_NYSE_LOADER.getController();
-                controller.getModelNyseMkd().setItems(Repository.adrArbitrageXSGO_MKD_DOLAR);
+            if(ev.typeMarket.equals(algo.getMkd_adr())){
+                algo.getMkd_adr_list().add(ev.modelMarketData);
+                algo.getMkd_adr_tableView().setItems(algo.getMkd_adr_list());
             }
+
+            if(ev.typeMarket.equals(algo.getMkd_local())){
+                algo.getMkd_local_list().add(ev.modelMarketData);
+                algo.getMkd_local_tableView().setItems(algo.getMkd_local_list());
+            }
+
+            if(ev.typeMarket.equals(algo.getRouting_adr())){
+                algo.getRouting_adr_list().add(ev.modelRoutingData);
+                algo.getRouting_adr_tableView().setItems(algo.getRouting_adr_list());
+            }
+
+            if(ev.typeMarket.equals(algo.getRouting_local())){
+                algo.getRouting_local_list().add(ev.modelRoutingData);
+                algo.getRouting_local_tableView().setItems(algo.getRouting_local_list());
+            }
+
 
 
         }catch (Exception e){
