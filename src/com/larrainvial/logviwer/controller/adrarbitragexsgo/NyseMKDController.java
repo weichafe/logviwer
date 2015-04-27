@@ -71,7 +71,7 @@ public class NyseMKDController {
     }
 
 
-    public TableView<ModelMarketData> getModelNyseMkd() {
+    public TableView<ModelMarketData> getType() {
 
         return mkd_nyse;
     }

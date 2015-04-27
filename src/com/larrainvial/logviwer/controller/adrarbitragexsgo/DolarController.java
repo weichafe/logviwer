@@ -71,7 +71,7 @@ public class DolarController {
 
     }
 
-    public TableView<ModelMarketData> getDolar() {
+    public TableView<ModelMarketData> getType() {
         return dolar;
     }
 

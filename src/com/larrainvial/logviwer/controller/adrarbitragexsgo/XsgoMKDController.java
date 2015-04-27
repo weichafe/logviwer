@@ -71,7 +71,7 @@ public class XsgoMKDController {
     }
 
 
-    public javafx.scene.control.TableView<ModelMarketData> getMkdXsgo() {
+    public javafx.scene.control.TableView<ModelMarketData> getType() {
         return mkd_xsgo;
     }
 }
