@@ -36,9 +36,6 @@ public class XsgoRoutingController {
     private TableColumn<ModelRoutingData, String> execID;
 
     @FXML
-    private TableColumn<ModelRoutingData, String> execRefID;
-
-    @FXML
     private TableColumn<ModelRoutingData, String> execType;
 
     @FXML
@@ -49,9 +46,6 @@ public class XsgoRoutingController {
 
     @FXML
     private TableColumn<ModelRoutingData, String> side;
-
-    @FXML
-    private TableColumn<ModelRoutingData, String> currency;
 
     @FXML
     private TableColumn<ModelRoutingData, String> clOrdLinkID;
@@ -103,13 +97,11 @@ public class XsgoRoutingController {
         clOrdLinkID.setCellValueFactory(cellData2 -> cellData2.getValue().getClOrdLinkID());
 
         execID.setCellValueFactory(cellData2 -> cellData2.getValue().getExecID());
-        execRefID.setCellValueFactory(cellData2 -> cellData2.getValue().getExecRefID());
         execType.setCellValueFactory(cellData2 -> cellData2.getValue().getExecType());
         ordStatus.setCellValueFactory(cellData2 -> cellData2.getValue().getOrdStatus());
         account.setCellValueFactory(cellData2 -> cellData2.getValue().getAccount());
         side.setCellValueFactory(cellData2 -> cellData2.getValue().getSide());
 
-        currency.setCellValueFactory(cellData2 -> cellData2.getValue().getCurrency());
         effectiveTime.setCellValueFactory(cellData2 -> cellData2.getValue().getEffectiveTime());
         expireTime.setCellValueFactory(cellData2 -> cellData2.getValue().getExpireTime());
         exDestination.setCellValueFactory(cellData2 -> cellData2.getValue().getExDestination());
@@ -139,13 +131,11 @@ public class XsgoRoutingController {
         clOrdLinkID.setVisible(true);
 
         execID.setVisible(true);
-        execRefID.setVisible(true);
         execType.setVisible(true);
         ordStatus.setVisible(true);
         account.setVisible(true);
         side.setVisible(true);
 
-        currency.setVisible(true);
         effectiveTime.setVisible(true);
         expireTime.setVisible(true);
         exDestination.setVisible(true);
@@ -165,8 +155,5 @@ public class XsgoRoutingController {
     public TableView<ModelRoutingData> getType() {
         return routing_xsgo;
     }
-
-
-
 
 }

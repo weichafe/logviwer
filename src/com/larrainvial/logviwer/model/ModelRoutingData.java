@@ -14,18 +14,15 @@ public class ModelRoutingData {
     public final StringProperty symbol;
 
     public final StringProperty orderID;
-    public final StringProperty secondaryClOrdID;
     public final StringProperty clOrdID;
     public final StringProperty origClOrdID;
     public final StringProperty clOrdLinkID;
     public final StringProperty execID;
-    public final StringProperty execRefID;
     public final StringProperty execType;
     public final StringProperty ordStatus;
     public final StringProperty account;
     public final StringProperty side;
 
-    public final StringProperty currency;
     public final StringProperty effectiveTime;
     public final StringProperty expireTime;
     public final StringProperty exDestination;
@@ -41,9 +38,9 @@ public class ModelRoutingData {
 
 
 
-    public ModelRoutingData(String hour, String year, String messageByType, String execType, String symbol, String orderID, String secondaryClOrdID, String clOrdID, String origClOrdID,
-                            String clOrdLinkID, String execID, String execRefID, String ordStatus, String account, String side,
-                            String exDestination, String securityExchange, String currency, String effectiveTime, String expireTime, Double lastQty,
+    public ModelRoutingData(String year, String hour, String messageByType, String execType, String symbol, String orderID, String clOrdID, String origClOrdID,
+                            String clOrdLinkID, String execID, String ordStatus, String account, String side,
+                            String exDestination, String securityExchange, String effectiveTime, String expireTime, Double lastQty,
                             Double lastPx, Double cumQty, Double avgPx, Double leavesQty, Double maxFloor, Double price) {
 
         this.year = new SimpleStringProperty(year);
@@ -51,18 +48,15 @@ public class ModelRoutingData {
         this.symbol = new SimpleStringProperty(symbol);
         this.hour = new SimpleStringProperty(hour);
         this.orderID = new SimpleStringProperty(orderID);
-        this.secondaryClOrdID = new SimpleStringProperty(secondaryClOrdID);
         this.clOrdID = new SimpleStringProperty(clOrdID);
         this.origClOrdID = new SimpleStringProperty(origClOrdID);
         this.clOrdLinkID = new SimpleStringProperty(clOrdLinkID);
         this.execID = new SimpleStringProperty(execID);
-        this.execRefID = new SimpleStringProperty(execRefID);
         this.execType = new SimpleStringProperty(execType);
         this.ordStatus = new SimpleStringProperty(ordStatus);
         this.account = new SimpleStringProperty(account);
         this.side = new SimpleStringProperty(side);
         this.effectiveTime = new SimpleStringProperty(effectiveTime);
-        this.currency = new SimpleStringProperty(currency);
         this.expireTime = new SimpleStringProperty(expireTime);
         this.exDestination = new SimpleStringProperty(exDestination);
         this.securityExchange = new SimpleStringProperty(securityExchange);
@@ -136,18 +130,6 @@ public class ModelRoutingData {
         this.orderID.set(orderID);
     }
 
-    public StringProperty getSecondaryClOrdID() {
-        return secondaryClOrdID;
-    }
-
-    public StringProperty secondaryClOrdIDProperty() {
-        return secondaryClOrdID;
-    }
-
-    public void setSecondaryClOrdID(String secondaryClOrdID) {
-        this.secondaryClOrdID.set(secondaryClOrdID);
-    }
-
     public StringProperty getClOrdID() {
         return clOrdID;
     }
@@ -196,18 +178,6 @@ public class ModelRoutingData {
         this.execID.set(execID);
     }
 
-    public StringProperty getExecRefID() {
-        return execRefID;
-    }
-
-    public StringProperty execRefIDProperty() {
-        return execRefID;
-    }
-
-    public void setExecRefID(String execRefID) {
-        this.execRefID.set(execRefID);
-    }
-
     public StringProperty getExecType() {
         return execType;
     }
@@ -254,18 +224,6 @@ public class ModelRoutingData {
 
     public void setSide(String side) {
         this.side.set(side);
-    }
-
-    public StringProperty getCurrency() {
-        return currency;
-    }
-
-    public StringProperty currencyProperty() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency.set(currency);
     }
 
     public StringProperty getEffectiveTime() {

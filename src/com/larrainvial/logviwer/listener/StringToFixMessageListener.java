@@ -42,51 +42,31 @@ public class StringToFixMessageListener implements Listener {
 
 
             mesage = ev.lineFromLog;
+            if(mesage.equals("")) return;
+
             String[] date = mesage.split("8=")[0].split("-");
             messageFix = stringToFix(mesage.split("FIX.4.4" + "\u0001")[1]);
-            if(mesage.equals("")) return;
+
+
 
             MsgType msgType = Message.identifyType(mesage);
 
 
             if(ev.typeMarket.startsWith("ROUTING")){
 
-                ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], msgType.getValue(), "", "", "", "", "", "", "", "", "", "", "", "", "", "","","","", 0d,0d,0d,0d,0d,0d,0d);
+                ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], msgType.getValue(), "", "", "", "", "", "", "", "", "", "", "","","","", 0d,0d,0d,0d,0d,0d,0d);
                 Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelRoutingData));
 
-            } else if(msgType.valueEquals(MarketDataSnapshotFullRefresh.MSGTYPE)){
+            } else {
 
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getString(Symbol.FIELD),  0d, 0d, 0d, 0d, 0d);
-                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
-
-            } else if(msgType.valueEquals(MarketDataIncrementalRefresh.MSGTYPE)){
-
-                ModelMarketData modelMarketData;
-
-                if(messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).isSetField(55))
-                    modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).getString(55),  0d, 0d, 0d, 0d, 0d);
-                else
-                    modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new MarketDataIncrementalRefresh.NoMDEntries()).getString(55),  0d, 0d, 0d, 0d, 0d);
-
-                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
-
-
-            } else if(msgType.valueEquals(MarketDataRequest.MSGTYPE)){
-
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getGroup(1, new RFQRequest.NoRelatedSym()).getString(55),  0d, 0d, 0d, 0d, 0d);
-                Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
-
-            }else {
-
-                if(msgType.valueEquals(News.MSGTYPE)) return;
-
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), "",  0d, 0d, 0d, 0d, 0d);
+                String symbol = (messageFix.isSetField(Symbol.FIELD) ? messageFix.getString(Symbol.FIELD) : "");
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), symbol,  0d, 0d, 0d, 0d, 0d);
                 Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
             }
 
         }catch (Exception e){
             e.printStackTrace();
-            //System.out.println(messageFix);
+            System.out.println(messageFix);
 
         }
 
@@ -106,8 +86,5 @@ public class StringToFixMessageListener implements Listener {
 
         return fixMessage;
     }
-
-
-
 
 }

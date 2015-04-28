@@ -4,36 +4,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="174" prefWidth="1700" layoutX="7"  layoutY="740"  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.XsgoRoutingController">
+<AnchorPane layoutX="7.0" layoutY="430" prefHeight="174.0" prefWidth="1500" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.XsgoRoutingController">
   <children>
-    <TableView fx:id="routing_xsgo" layoutX="14" layoutY="7" prefHeight="160" prefWidth="1700">
+    <TableView fx:id="routing_xsgo" layoutX="14.0" layoutY="7.0" prefHeight="160.0" prefWidth="1400">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Year" fx:id="year"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Hour" fx:id="hour"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="MessageByType" fx:id="messageByType"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Symbol" fx:id="symbol"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="OrderID" fx:id="orderID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ClOrdID" fx:id="clOrdID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="OrigClOrdID" fx:id="origClOrdID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExecID" fx:id="execID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExecRefID" fx:id="execRefID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExecType" fx:id="execType"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="OrdStatus" fx:id="ordStatus"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0"  text="Account" fx:id="account"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="97.0"  text="Side" fx:id="side"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Currency" fx:id="currency"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ClOrdLinkID" fx:id="clOrdLinkID"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="EffectiveTime" fx:id="effectiveTime"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExpireTime" fx:id="expireTime"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExDestination" fx:id="exDestination"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="SecurityExchange" fx:id="securityExchange"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Price" fx:id="price"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LastQty" fx:id="lastQty"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LastPx" fx:id="lastPx"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="CumQty" fx:id="cumQty"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="AvgPx" fx:id="avgPx"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LeavesQty" fx:id="leavesQty"/>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="MaxFloor" fx:id="maxFloor"/>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Year" fx:id="year" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Hour" fx:id="hour" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80" text="Type" fx:id="messageByType" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Symbol" fx:id="symbol" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ClOrdID" fx:id="clOrdID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="OrderID" fx:id="orderID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="OrigClOrdID" fx:id="origClOrdID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80" text="ExecType" fx:id="execType" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80" text="OrdStatus" fx:id="ordStatus" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="Account" fx:id="account" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80" text="Side" fx:id="side" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ClOrdLinkID" fx:id="clOrdLinkID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExDestination" fx:id="exDestination" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="SecurityExchange" fx:id="securityExchange" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Price" fx:id="price" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LastQty" fx:id="lastQty" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LastPx" fx:id="lastPx" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="LeavesQty" fx:id="leavesQty" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="CumQty" fx:id="cumQty" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="AvgPx" fx:id="avgPx" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExecID" fx:id="execID" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="MaxFloor" fx:id="maxFloor" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="EffectiveTime" fx:id="effectiveTime" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ExpireTime" fx:id="expireTime" />
       </columns>
     </TableView>
   </children>

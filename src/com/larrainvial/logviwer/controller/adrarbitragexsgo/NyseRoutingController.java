@@ -1,9 +1,6 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
-import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -38,9 +35,6 @@ public class NyseRoutingController {
     private TableColumn<ModelRoutingData, String> execID;
 
     @FXML
-    private TableColumn<ModelRoutingData, String> execRefID;
-
-    @FXML
     private TableColumn<ModelRoutingData, String> execType;
 
     @FXML
@@ -51,9 +45,6 @@ public class NyseRoutingController {
 
     @FXML
     private TableColumn<ModelRoutingData, String> side;
-
-    @FXML
-    private TableColumn<ModelRoutingData, String> currency;
 
     @FXML
     private TableColumn<ModelRoutingData, String> clOrdLinkID;
@@ -105,13 +96,11 @@ public class NyseRoutingController {
         clOrdLinkID.setCellValueFactory(cellData2 -> cellData2.getValue().getClOrdLinkID());
 
         execID.setCellValueFactory(cellData2 -> cellData2.getValue().getExecID());
-        execRefID.setCellValueFactory(cellData2 -> cellData2.getValue().getExecRefID());
         execType.setCellValueFactory(cellData2 -> cellData2.getValue().getExecType());
         ordStatus.setCellValueFactory(cellData2 -> cellData2.getValue().getOrdStatus());
         account.setCellValueFactory(cellData2 -> cellData2.getValue().getAccount());
         side.setCellValueFactory(cellData2 -> cellData2.getValue().getSide());
 
-        currency.setCellValueFactory(cellData2 -> cellData2.getValue().getCurrency());
         effectiveTime.setCellValueFactory(cellData2 -> cellData2.getValue().getEffectiveTime());
         expireTime.setCellValueFactory(cellData2 -> cellData2.getValue().getExpireTime());
         exDestination.setCellValueFactory(cellData2 -> cellData2.getValue().getExDestination());
@@ -141,13 +130,11 @@ public class NyseRoutingController {
         clOrdLinkID.setVisible(true);
 
         execID.setVisible(true);
-        execRefID.setVisible(true);
         execType.setVisible(true);
         ordStatus.setVisible(true);
         account.setVisible(true);
         side.setVisible(true);
 
-        currency.setVisible(true);
         effectiveTime.setVisible(true);
         expireTime.setVisible(true);
         exDestination.setVisible(true);
