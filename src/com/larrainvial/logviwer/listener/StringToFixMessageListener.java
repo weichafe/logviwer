@@ -1,17 +1,17 @@
 package com.larrainvial.logviwer.listener;
 
 import com.larrainvial.logviwer.event.MarketDataMessageEvent;
-import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.logviwer.event.RoutingMessageEvent;
+import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import quickfix.DataDictionary;
-import quickfix.field.*;
-import quickfix.fix42.MarketDataSnapshotFullRefresh;
-import quickfix.fix44.*;
+import quickfix.field.MsgType;
+import quickfix.field.Symbol;
+import quickfix.fix44.Message;
 
 
 public class StringToFixMessageListener implements Listener {
@@ -42,9 +42,12 @@ public class StringToFixMessageListener implements Listener {
 
 
             mesage = ev.lineFromLog;
+            if(mesage.equals("")) return;
+
             String[] date = mesage.split("8=")[0].split("-");
             messageFix = stringToFix(mesage.split("FIX.4.4" + "\u0001")[1]);
-            if(mesage.equals("")) return;
+
+
 
             MsgType msgType = Message.identifyType(mesage);
 
@@ -54,11 +57,11 @@ public class StringToFixMessageListener implements Listener {
                 ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], msgType.getValue(), "", "", "", "", "", "", "", "", "", "", "","","","", 0d,0d,0d,0d,0d,0d,0d);
                 Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelRoutingData));
 
-            } else if(msgType.valueEquals(MarketDataSnapshotFullRefresh.MSGTYPE)){
+            } else {
 
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), messageFix.getString(Symbol.FIELD),  0d, 0d, 0d, 0d, 0d);
+                String symbol = (messageFix.isSetField(Symbol.FIELD) ? messageFix.getString(Symbol.FIELD) : "");
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), symbol,  0d, 0d, 0d, 0d, 0d);
                 Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
-
             }
 
         }catch (Exception e){
@@ -83,8 +86,5 @@ public class StringToFixMessageListener implements Listener {
 
         return fixMessage;
     }
-
-
-
 
 }

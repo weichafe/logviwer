@@ -16,19 +16,16 @@ public class Control {
 
     public static void initialize(){
 
-        Controller.addEventListener(ReadLogEvent.class, new ReadLogListener());
         Controller.addEventListener(StringToFixMessageEvent.class, new StringToFixMessageListener());
         Controller.addEventListener(SendToViewEvent.class, new SendToViewListener());
         Controller.addEventListener(RoutingMessageEvent.class, new RoutingMessageListener());
         Controller.addEventListener(MarketDataMessageEvent.class, new MarketDataMessageListener());
-
     }
 
 
     public  static void initializaAll(){
 
         initializeAdrArbitrageXSGO();
-
     }
 
 
@@ -45,15 +42,16 @@ public class Control {
             algo.setRouting_adr("ROUTING_ADR");
             algo.setRouting_local("ROUTING_LOCAL");
             algo.setTime(1);
-            algo.setMkd_dolar_file("C:\\Reporte\\Dolar.log");
-            algo.setMkd_local_file("C:\\Reporte\\MKD LOCAL.log");
-            algo.setMkd_adr_file("C:\\Reporte\\MKD NYSE.log");
-            algo.setRouting_adr_file("C:\\Reporte\\ROUTING NYSE.log");
-            algo.setRouting_local_file("C:\\Reporte\\routing XSGO.log");
+
+            algo.setMkd_dolar_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log");
+            algo.setMkd_local_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log");
+            algo.setMkd_adr_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log");
+            algo.setRouting_adr_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log");
+            algo.setRouting_local_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log");
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
 
-            Slider opacityLevel = new Slider(0, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -93,7 +91,7 @@ public class Control {
             XsgoRoutingController routing_local_loader = algo.getRouting_local_loader().getController();
             algo.setRouting_local_tableView(routing_local_loader.getType());
 
-            Thread.sleep(100);
+            algo.iniziale();
 
 
         }catch (Exception e){

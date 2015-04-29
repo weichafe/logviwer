@@ -62,7 +62,7 @@ public class RoutingMessageListener implements Listener {
             }
 
             if (messageFix.isSetField(OrdStatus.FIELD)) {
-                modelRoutingData.setOrdStatus(messageFix.getString(OrdStatus.FIELD));
+                modelRoutingData.setOrdStatus(this.ordStatus(messageFix.getString(OrdStatus.FIELD)));
             }
 
             if (messageFix.isSetField(Account.FIELD)) {
@@ -70,7 +70,7 @@ public class RoutingMessageListener implements Listener {
             }
 
             if (messageFix.isSetField(Side.FIELD)) {
-                modelRoutingData.setSide(messageFix.getString(Side.FIELD));
+                modelRoutingData.setSide(this.side(messageFix.getString(Side.FIELD)));
             }
 
             if (messageFix.isSetField(EffectiveTime.FIELD)) {
@@ -125,21 +125,52 @@ public class RoutingMessageListener implements Listener {
     }
 
     public String execType(String string){
+        if(string.equals("0")) return "New";
+        else if(string.equals("3")) return "Done for day";
+        else if(string.equals("4")) return "Canceled";
+        else if(string.equals("5")) return "Replaced";
+        else if(string.equals("6")) return "Pending Cancel";
+        else if(string.equals("7")) return "Stopped";
+        else if(string.equals("8")) return "Rejected";
+        else if(string.equals("9")) return "Suspended";
+        else if(string.equals("A")) return "Pending New";
+        else if(string.equals("B")) return "Calculated";
+        else if(string.equals("C")) return "Expired";
+        else if(string.equals("D")) return "Restated";
+        else if(string.equals("E")) return "Pending Replace";
+        else if(string.equals("F")) return "Trade";
+        else if(string.equals("G")) return "Trade Correct";
+        else if(string.equals("H")) return "Trade Cancel";
+        else if(string.equals("I")) return "Order Status";
+        else if(string.equals("J")) return "Trade in a Clearing Hold";
+        else if(string.equals("K")) return "Trade has been released to Clearing";
+        else if(string.equals("L")) return "Triggered or Activated by System";
+        else  return string;
+    }
+
+    public String ordStatus(String string){
         if(string.equals("0")) return "NEW";
         else if(string.equals("1")) return "PARTIAL FILL";
-        else if(string.equals("B")) return "CALCULATED";
-        else if(string.equals("4")) return "CANCELED";
-        else if(string.equals("3")) return "DONE FOR DAY";
-        else if(string.equals("C")) return "EXPIRED";
-        else if(string.equals("I")) return "ORDER STATUS";
-        else if(string.equals("6")) return "PENDING CANCEL";
-        else if(string.equals("A")) return "PENDING NEW";
         else if(string.equals("2")) return "FILL";
-        else if(string.equals("8")) return "REJECTED";
-        else if(string.equals("G")) return "TRADE CORRECT";
-        else if(string.equals("D")) return "RESTATED";
-        else if(string.equals("5")) return "REMPLACED";
-        else if(string.equals("E")) return "PENDING REPLACE";
+        else if(string.equals("3")) return "Done for day";
+        else if(string.equals("4")) return "Canceled";
+        else if(string.equals("5")) return "Replaced";
+        else if(string.equals("6")) return "Pending Cancel";
+        else if(string.equals("7")) return "Stopped";
+        else if(string.equals("8")) return "Rejected";
+        else if(string.equals("9")) return "Suspended";
+        else if(string.equals("A")) return "Pending New";
+        else if(string.equals("B")) return "Calculated";
+        else if(string.equals("C")) return "Expired";
+        else if(string.equals("D")) return "Accepted for Bidding";
+        else if(string.equals("E")) return "Pending Replace";
+        else  return string;
+    }
+
+    public String side(String string){
+        if(string.equals("1")) return "Buy";
+        else if(string.equals("2")) return "Sell";
+        else if(string.equals("5")) return "Sell Short";
         else  return string;
     }
 
