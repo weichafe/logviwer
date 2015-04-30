@@ -4,11 +4,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="620" prefHeight="174.0" prefWidth="1500" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.NyseRoutingController">
+<AnchorPane layoutX="7.0" layoutY="620" prefHeight="230" prefWidth="1500" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.NyseRoutingController">
   <children>
-    <TableView fx:id="routing_nyse" layoutX="14.0" layoutY="7.0" prefHeight="160.0" prefWidth="1400">
+    <TableView fx:id="routing_nyse" layoutX="14.0" layoutY="7.0" prefHeight="180" prefWidth="1550">
       <columns>
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Year" fx:id="year" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="ADR" fx:id="year" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Hour" fx:id="hour" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80" text="Type" fx:id="messageByType" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Symbol" fx:id="symbol" />

@@ -4,8 +4,16 @@ import com.larrainvial.logviwer.model.ModelMarketData;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class DolarController {
+
+    public DolarController(){
+
+    }
+
+    @FXML
+    private TextField filterField;
 
     @FXML
     private TableView<ModelMarketData> dolar;
@@ -72,6 +80,7 @@ public class DolarController {
     }
 
     public TableView<ModelMarketData> getType() {
+
         return dolar;
     }
 

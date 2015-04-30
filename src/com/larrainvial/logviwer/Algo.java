@@ -5,13 +5,16 @@ import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,7 +41,6 @@ public class Algo {
     private FXMLLoader routing_adr_loader = new FXMLLoader();
     private FXMLLoader routing_local_loader = new FXMLLoader();
 
-    private ObservableList<ModelMarketData> mkd_dolar_arrayList = FXCollections.observableArrayList();
     private ObservableList<ModelMarketData> mkd_local_arrayList = FXCollections.observableArrayList();
     private ObservableList<ModelMarketData> mkd_adr_arrayList = FXCollections.observableArrayList();
     private ObservableList<ModelMarketData> routing_local_arrayList = FXCollections.observableArrayList();
@@ -71,6 +73,62 @@ public class Algo {
     private BufferedReader file_mkd_localBufferedReader;
     private BufferedReader file_mkd_adrBufferedReader;
 
+
+    //ARRAY LIST DOLAR Y FILTROS
+
+    private ObservableList<ModelMarketData> mkd_dolar_arrayList = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> filter_dolar_by_symbol = FXCollections.observableArrayList();
+
+
+    private boolean matchesFilter(ModelMarketData person) {
+
+        String filterString = filterField.getText();
+
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }
+
+        String lowerCaseFilterString = filterString.toLowerCase();
+
+        if (person.getFirstName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+
+        } else if (person.getLastName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public void updateFilteredMarketData(){
+
+        filter_dolar_by_symbol.clear();
+
+        for (ModelMarketData p : mkd_dolar_arrayList) {
+            if (matchesFilter(p)) {
+                filter_dolar_by_symbol.add(p);
+            }
+        }
+
+        reapplyTableSortOrder();
+
+    }
+
+    private void reapplyTableSortOrder() {
+        ArrayList<TableColumn<ModelMarketData, ?>> sortOrder = new ArrayList<>(personTable.getSortOrder());
+        personTable.getSortOrder().clear();
+        personTable.getSortOrder().addAll(sortOrder);
+    }
+
+    private void reapplyTableSortOrder() {
+
+        ArrayList<TableColumn<Person, ?>> sortOrder = new ArrayList<>(personTable.getSortOrder());
+        personTable.getSortOrder().clear();
+        personTable.getSortOrder().addAll(sortOrder);
+
+    }
+
     public void fileReader() throws Exception {
 
         file_mkd_dolar_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_dolar));
@@ -79,16 +137,12 @@ public class Algo {
         file_routing_adrBufferedReader = new BufferedReader(new FileReader(file_routing_adr));
         file_routing_localBufferedReader = new BufferedReader(new FileReader(file_routing_local));
 
-
     }
 
     public void iniziale() throws Exception {
 
-
-
-        stopTimer();
-
         final double finalTimer_initial = this.getTime();
+        stopTimer();
 
         timerTask = new TimerTask(){
 
@@ -126,6 +180,20 @@ public class Algo {
         }
 
     }
+
+
+    public void addListenerFilter() {
+
+        this.dolarList.addListener(new ListChangeListener<ModelMarketData>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
+                updateFilteredMarketData();
+            }
+        });
+
+    }
+
+
 
     public File getFile_mkd_dolar() {
         return file_mkd_dolar;

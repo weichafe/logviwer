@@ -20,6 +20,7 @@ public class SendToViewListener implements Listener {
             algo = Repository.strategy.get(ev.nameAlgo);
 
             if(ev.typeMarket.equals(algo.getMkd_dolar())){
+
                 algo.getDolarList().add(ev.modelMarketData);
                 algo.getMkd_dolar_tableView().setItems(algo.getDolarList());
             }
