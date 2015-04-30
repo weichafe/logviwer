@@ -1,6 +1,6 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.event.StringToFixMessageEvent;
+import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
@@ -66,18 +66,19 @@ public class Algo {
     private File file_routing_adr;
 
     private BufferedReader file_routing_adrBufferedReader;
-    private BufferedReader bufferedReader_mkd_dolar;
+    private BufferedReader file_mkd_dolar_adrBufferedReader;
     private BufferedReader file_routing_localBufferedReader;
     private BufferedReader file_mkd_localBufferedReader;
     private BufferedReader file_mkd_adrBufferedReader;
 
     public void fileReader() throws Exception {
 
-        file_routing_adrBufferedReader = new BufferedReader(new FileReader(file_routing_adr));
-        bufferedReader_mkd_dolar = new BufferedReader(new FileReader(file_mkd_dolar));
-        file_routing_localBufferedReader = new BufferedReader(new FileReader(file_routing_local));
+        file_mkd_dolar_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_dolar));
         file_mkd_localBufferedReader = new BufferedReader(new FileReader(file_mkd_local));
         file_mkd_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_adr));
+        file_routing_adrBufferedReader = new BufferedReader(new FileReader(file_routing_adr));
+        file_routing_localBufferedReader = new BufferedReader(new FileReader(file_routing_local));
+
 
     }
 
@@ -101,63 +102,13 @@ public class Algo {
                     }
                 }
 
-                try {
 
-                    String lineFromLog;
-                    while ((lineFromLog = bufferedReader_mkd_dolar.readLine()) != null) {
-                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_dolar));
-                    }
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, file_mkd_dolar_adrBufferedReader));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, file_mkd_localBufferedReader));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, file_mkd_adrBufferedReader));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, file_routing_localBufferedReader));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, file_routing_adrBufferedReader));
 
-                    }catch (Exception e){
-                        e.printStackTrace();
-                    }
-
-
-                try {
-
-                    String lineFromLog;
-                    while ((lineFromLog = file_mkd_localBufferedReader.readLine()) != null) {
-                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_adr));
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                try {
-
-                    String lineFromLog;
-                    while ((lineFromLog = file_mkd_adrBufferedReader.readLine()) != null) {
-                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_local));
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
-                try {
-
-                    String lineFromLog;
-                    while ((lineFromLog = file_routing_localBufferedReader.readLine()) != null) {
-                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_local));
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-
-
-                try {
-
-                    String lineFromLog;
-                    while ((lineFromLog = file_routing_adrBufferedReader.readLine()) != null) {
-                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_adr));
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
             }
 
 

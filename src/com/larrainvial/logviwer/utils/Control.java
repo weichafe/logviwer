@@ -22,6 +22,7 @@ public class Control {
         Controller.addEventListener(SendToViewEvent.class, new SendToViewListener());
         Controller.addEventListener(RoutingMessageEvent.class, new RoutingMessageListener());
         Controller.addEventListener(MarketDataMessageEvent.class, new MarketDataMessageListener());
+        Controller.addEventListener(ReadLogEvent.class, new ReadLogListener());
     }
 
 
@@ -45,11 +46,19 @@ public class Control {
             algo.setRouting_local("ROUTING_LOCAL");
             algo.setTime(1);
 
-            algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
-            algo.setFile_mkd_local(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
-            algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log"));
-            algo.setFile_routing_local(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log"));
-            algo.setFile_routing_adr(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log"));
+
+            //algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
+            //algo.setFile_mkd_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
+            //algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log"));
+            //algo.setFile_routing_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log"));
+            //algo.setFile_routing_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log"));
+
+
+            algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-ALGOARBADR5-MDFHBLP.messages_20150430.log"));
+            algo.setFile_mkd_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_20150430.log"));
+            algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_20150430.log"));
+            algo.setFile_routing_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XSGO.messages_20150430.log"));
+            algo.setFile_routing_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_20150430.log"));
 
             algo.fileReader();
 
