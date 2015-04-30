@@ -12,6 +12,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.File;
+
 public class Control {
 
     public static void initialize(){
@@ -43,11 +45,13 @@ public class Control {
             algo.setRouting_local("ROUTING_LOCAL");
             algo.setTime(1);
 
-            algo.setMkd_dolar_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log");
-            algo.setMkd_local_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log");
-            algo.setMkd_adr_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log");
-            algo.setRouting_adr_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log");
-            algo.setRouting_local_file("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log");
+            algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
+            algo.setFile_mkd_local(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
+            algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log"));
+            algo.setFile_routing_local(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log"));
+            algo.setFile_routing_adr(new File("W:\\ADRArbitrageXTSEBeta\\connection\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log"));
+
+            algo.fileReader();
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
 

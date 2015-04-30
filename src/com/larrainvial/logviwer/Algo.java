@@ -59,35 +59,31 @@ public class Algo {
 
     private TimerTask timerTask;
 
-    private long lastfile_mkd_dolar = 0;
-    private long lastfile_mkd_local = 0l;
-    private long lastfile_mkd_adr = 0l;
-    private long lastfile_routing_local = 0l;
-    private long lastfile_routing_adr = 0l;
+    private File file_mkd_dolar;
+    private File file_mkd_local;
+    private File file_mkd_adr;
+    private File file_routing_local;
+    private File file_routing_adr;
 
+    private BufferedReader file_routing_adrBufferedReader;
+    private BufferedReader bufferedReader_mkd_dolar;
+    private BufferedReader file_routing_localBufferedReader;
+    private BufferedReader file_mkd_localBufferedReader;
+    private BufferedReader file_mkd_adrBufferedReader;
+
+    public void fileReader() throws Exception {
+
+        file_routing_adrBufferedReader = new BufferedReader(new FileReader(file_routing_adr));
+        bufferedReader_mkd_dolar = new BufferedReader(new FileReader(file_mkd_dolar));
+        file_routing_localBufferedReader = new BufferedReader(new FileReader(file_routing_local));
+        file_mkd_localBufferedReader = new BufferedReader(new FileReader(file_mkd_local));
+        file_mkd_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_adr));
+
+    }
 
     public void iniziale() throws Exception {
 
-        File file_mkd_dolar = new File(mkd_dolar_file);
-        File file_mkd_local = new File(mkd_local_file);
-        File file_mkd_adr = new File(mkd_adr_file);
-        File file_routing_local = new File(routing_local_file);
-        File file_routing_adr = new File(routing_adr_file);
 
-        FileReader file_routing_adrFileReader = new FileReader(file_routing_adr);
-        BufferedReader file_routing_adrBufferedReader = new BufferedReader(file_routing_adrFileReader);
-
-        FileReader fileReader_mkd_dolar = new FileReader(file_mkd_dolar);
-        BufferedReader bufferedReader_mkd_dolar = new BufferedReader(fileReader_mkd_dolar);
-
-        FileReader file_routing_localFileReader = new FileReader(file_routing_local);
-        BufferedReader file_routing_localBufferedReader = new BufferedReader(file_routing_localFileReader);
-
-        FileReader file_mkd_localFileReader = new FileReader(file_mkd_local);
-        BufferedReader file_mkd_localBufferedReader = new BufferedReader(file_mkd_localFileReader);
-
-        FileReader file_mkd_adrFileReader = new FileReader(file_mkd_adr);
-        BufferedReader file_mkd_adrBufferedReader = new BufferedReader(file_mkd_adrFileReader);
 
         stopTimer();
 
@@ -105,91 +101,66 @@ public class Algo {
                     }
                 }
 
-                if(lastfile_mkd_dolar != file_mkd_dolar.lastModified()) {
+                try {
 
-                    try {
-
-                        lastfile_mkd_dolar = file_mkd_dolar.lastModified();
-
-                        String lineFromLog;
-
-                        while ((lineFromLog = bufferedReader_mkd_dolar.readLine()) != null) {
-                            Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_dolar));
-                        }
+                    String lineFromLog;
+                    while ((lineFromLog = bufferedReader_mkd_dolar.readLine()) != null) {
+                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_dolar));
+                    }
 
                     }catch (Exception e){
                         e.printStackTrace();
                     }
 
-                }
 
-                if(lastfile_mkd_local != file_mkd_local.lastModified()) {
+                try {
 
-                    try {
-
-                        lastfile_mkd_local = file_mkd_local.lastModified();
-                        String lineFromLog;
-
-                        while ((lineFromLog = file_mkd_localBufferedReader.readLine()) != null) {
-                            Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_adr));
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    String lineFromLog;
+                    while ((lineFromLog = file_mkd_localBufferedReader.readLine()) != null) {
+                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_adr));
                     }
 
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
-                if(lastfile_mkd_adr != file_mkd_adr.lastModified()) {
+                try {
 
-                    try {
-
-                        lastfile_mkd_adr = file_mkd_adr.lastModified();
-                        String lineFromLog;
-
-                        while ((lineFromLog = file_mkd_adrBufferedReader.readLine()) != null) {
-                            Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_local));
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    String lineFromLog;
+                    while ((lineFromLog = file_mkd_adrBufferedReader.readLine()) != null) {
+                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, mkd_local));
                     }
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
-                if(lastfile_routing_local != file_routing_local.lastModified()) {
 
-                    try {
-                        System.out.println("cambio");
-                        lastfile_routing_local = file_routing_local.lastModified();
-                        String lineFromLog;
+                try {
 
-                        while ((lineFromLog = file_routing_localBufferedReader.readLine()) != null) {
-                            Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_local));
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    String lineFromLog;
+                    while ((lineFromLog = file_routing_localBufferedReader.readLine()) != null) {
+                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_local));
                     }
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
 
-                if(lastfile_routing_adr != file_routing_adr.lastModified()) {
+                try {
 
-                    try {
-
-                        lastfile_routing_adr = file_routing_adr.lastModified();
-                        String lineFromLog;
-
-                        while ((lineFromLog = file_routing_adrBufferedReader.readLine()) != null) {
-                            Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_adr));
-                        }
-
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    String lineFromLog;
+                    while ((lineFromLog = file_routing_adrBufferedReader.readLine()) != null) {
+                        Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, nameAlgo, routing_adr));
                     }
-                }
 
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+
+
         };
 
         Timer timer = new Timer();
@@ -205,8 +176,45 @@ public class Algo {
 
     }
 
+    public File getFile_mkd_dolar() {
+        return file_mkd_dolar;
+    }
 
+    public void setFile_mkd_dolar(File file_mkd_dolar) {
+        this.file_mkd_dolar = file_mkd_dolar;
+    }
 
+    public File getFile_mkd_local() {
+        return file_mkd_local;
+    }
+
+    public void setFile_mkd_local(File file_mkd_local) {
+        this.file_mkd_local = file_mkd_local;
+    }
+
+    public File getFile_mkd_adr() {
+        return file_mkd_adr;
+    }
+
+    public void setFile_mkd_adr(File file_mkd_adr) {
+        this.file_mkd_adr = file_mkd_adr;
+    }
+
+    public File getFile_routing_local() {
+        return file_routing_local;
+    }
+
+    public void setFile_routing_local(File file_routing_local) {
+        this.file_routing_local = file_routing_local;
+    }
+
+    public File getFile_routing_adr() {
+        return file_routing_adr;
+    }
+
+    public void setFile_routing_adr(File file_routing_adr) {
+        this.file_routing_adr = file_routing_adr;
+    }
 
     public TableView<ModelMarketData> getMkd_dolar_tableView() {
         return mkd_dolar_tableView;
