@@ -9,10 +9,8 @@ import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import quickfix.DataDictionary;
-import quickfix.FieldNotFound;
-import quickfix.field.*;
-import quickfix.fix44.MarketDataIncrementalRefresh;
-import quickfix.fix44.MarketDataSnapshotFullRefresh;
+import quickfix.field.NoMDEntries;
+import quickfix.field.Symbol;
 import quickfix.fix44.Message;
 
 
@@ -89,10 +87,16 @@ public class StringToFixMessageListener implements Listener {
 
         try {
 
+             if(messageFix.isSetField(Symbol.FIELD)){
+                 return messageFix.getString(Symbol.FIELD);
+             }
+
             for (int i = 0; i < messageFix.getGroups(NoMDEntries.FIELD).size(); i++) {
                 message.getGroup(i + 1, group);
+
                 return group.getString(Symbol.FIELD);
             }
+
 
         }catch (Exception e){
             e.printStackTrace();

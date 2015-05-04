@@ -70,6 +70,12 @@ public class Algo {
     private File file_routing_local;
     private File file_routing_adr;
 
+    private long file_mkd_dolarLast = 0;
+    private long file_mkd_localLast = 0;
+    private long file_mkd_adrLast = 0;
+    private long file_routing_localLast = 0;
+    private long file_routing_adrLast = 0;
+
     private BufferedReader file_routing_adrBufferedReader;
     private BufferedReader file_mkd_dolar_adrBufferedReader;
     private BufferedReader file_routing_localBufferedReader;
@@ -108,15 +114,37 @@ public class Algo {
                     }
                 }
 
+                if(file_mkd_dolarLast != file_mkd_dolar.lastModified()){
+                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, file_mkd_dolar_adrBufferedReader));
+                    file_mkd_dolarLast = file_mkd_dolar.lastModified();
+                    System.out.println("cambio " + nameAlgo + " " + mkd_dolar);
+                }
 
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, file_mkd_dolar_adrBufferedReader));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, file_mkd_localBufferedReader));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, file_mkd_adrBufferedReader));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, file_routing_localBufferedReader));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, file_routing_adrBufferedReader));
+                if(file_mkd_localLast != file_mkd_local.lastModified()){
+                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, file_mkd_localBufferedReader));
+                    file_mkd_localLast = file_mkd_local.lastModified();
+                    System.out.println("cambio " + nameAlgo + " " + mkd_local);
+                }
+
+                if(file_mkd_adrLast != file_mkd_adr.lastModified()) {
+                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, file_mkd_adrBufferedReader));
+                    file_mkd_adrLast = file_mkd_adr.lastModified();
+                    System.out.println("cambio " + nameAlgo + " " + mkd_adr);
+                }
+
+                if(file_routing_localLast != file_routing_local.lastModified()) {
+                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, file_routing_localBufferedReader));
+                    file_routing_localLast = file_routing_local.lastModified();
+                    System.out.println("cambio " + nameAlgo + " " + routing_local);
+                }
+
+                if(file_routing_adrLast != file_routing_adr.lastModified()) {
+                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, file_routing_adrBufferedReader));
+                    file_routing_adrLast = file_routing_adr.lastModified();
+                    System.out.println("cambio " + nameAlgo + " " + routing_adr);
+                }
 
             }
-
 
         };
 

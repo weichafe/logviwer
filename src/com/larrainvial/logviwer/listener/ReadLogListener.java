@@ -18,12 +18,15 @@ public class ReadLogListener implements Listener {
             ReadLogEvent ev = (ReadLogEvent) event;
 
             String lineFromLog;
+
+            System.out.println("read LOG " + ev.nameAlgo + " " + ev.typeMarket);
+
             while ((lineFromLog = ev.bufferedReader.readLine()) != null) {
                 Controller.dispatchEvent(new StringToFixMessageEvent(this, lineFromLog, ev.nameAlgo, ev.typeMarket));
             }
 
         }catch (Exception e){
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
