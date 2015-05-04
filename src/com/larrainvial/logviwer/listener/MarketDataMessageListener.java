@@ -64,7 +64,6 @@ public class MarketDataMessageListener implements Listener {
 
         } catch (Exception ex) {
             //System.out.println(mktDataInc);
-
         }
 
 

@@ -46,19 +46,11 @@ public class Control {
             algo.setRouting_local("ROUTING_LOCAL");
             algo.setTime(1);
 
-
-            //algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
-            //algo.setFile_mkd_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-BOGCURNCY-LVMDG.messages_20150429.log"));
-            //algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVMDG-BLODPENNA6.messages_20150429.log"));
-            //algo.setFile_routing_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-CL03.messages_20150429.log"));
-            //algo.setFile_routing_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-CL04.messages_20150429.log"));
-
-
-            algo.setFile_mkd_dolar(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-ALGOARBADR5-MDFHBLP.messages_20150430.log"));
-            algo.setFile_mkd_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_20150430.log"));
-            algo.setFile_mkd_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_20150430.log"));
-            algo.setFile_routing_local(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XSGO.messages_20150430.log"));
-            algo.setFile_routing_adr(new File("W:\\ADRArbitrageXSGOIB\\log\\FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_20150430.log"));
+            algo.setFile_mkd_dolar(new File("log\\Dolar.log"));
+            algo.setFile_mkd_local(new File("log\\MKD LOCAL.log"));
+            algo.setFile_mkd_adr(new File("log\\MKD NYSE.log"));
+            algo.setFile_routing_local(new File("log\\routing XSGO.log"));
+            algo.setFile_routing_adr(new File("log\\ROUTING NYSE.log"));
 
             algo.fileReader();
 
@@ -91,18 +83,29 @@ public class Control {
 
             DolarController controller = algo.getMkd_dolar_loader().getController();
             algo.setMkd_dolar_tableView(controller.getType());
+            algo.setDolarMasterList(controller.masterData);
+            algo.setDolarFilterList(controller.filteredData);
 
             NyseMKDController getMkd_adr_loader = algo.getMkd_adr_loader().getController();
             algo.setMkd_adr_tableView(getMkd_adr_loader.getType());
+            algo.setMkdAdrMasterList(getMkd_adr_loader.masterData);
+            algo.setMkdAdrFilterList(getMkd_adr_loader.filteredData);
 
             XsgoMKDController getMkd_local_loader = algo.getMkd_local_loader().getController();
             algo.setMkd_local_tableView(getMkd_local_loader.getType());
+            algo.setMkdLocalMasterList(getMkd_local_loader.masterData);
+            algo.setMkdLocalFilterList(getMkd_local_loader.filteredData);
 
             NyseRoutingController routing_adr_loader = algo.getRouting_adr_loader().getController();
             algo.setRouting_adr_tableView(routing_adr_loader.getType());
+            algo.setRoutingAdrMasterList(routing_adr_loader.masterData);
+            algo.setRoutingAdrFilterList(routing_adr_loader.filteredData);
 
             XsgoRoutingController routing_local_loader = algo.getRouting_local_loader().getController();
             algo.setRouting_local_tableView(routing_local_loader.getType());
+            algo.setRoutingLocalMasterList(routing_local_loader.masterData);
+            algo.setRoutingLocalFilterList(routing_local_loader.filteredData);
+
 
             algo.iniziale();
 

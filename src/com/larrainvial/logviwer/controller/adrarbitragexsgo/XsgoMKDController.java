@@ -1,11 +1,21 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class XsgoMKDController {
+
+
+    @FXML
+    private TextField filterField;
 
     @FXML
     private TableView<ModelMarketData> mkd_xsgo;
@@ -37,6 +47,24 @@ public class XsgoMKDController {
     @FXML
     private TableColumn<ModelMarketData, String> closePx;
 
+    public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
+
+    public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
+
+    private boolean filter = false;
+
+    public XsgoMKDController(){
+
+        masterData.addListener(new ListChangeListener<ModelMarketData>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
+
+                updateFilteredData();
+            }
+        });
+
+    }
+
     @FXML
     private void initialize() {
 
@@ -52,6 +80,18 @@ public class XsgoMKDController {
         sellPx.setCellValueFactory(cellData2 -> cellData2.getValue().getSellPx().asString());
 
         closePx.setCellValueFactory(cellData2 -> cellData2.getValue().getClosePx().asString());
+
+        mkd_xsgo.setItems(filteredData);
+
+        filterField.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                filter = true;
+                updateFilteredData();
+            }
+        });
 
     }
 
@@ -72,6 +112,45 @@ public class XsgoMKDController {
 
 
     public javafx.scene.control.TableView<ModelMarketData> getType() {
+
         return mkd_xsgo;
+    }
+
+    private void updateFilteredData() {
+
+        if(!filter) return;
+
+        filteredData.clear();
+
+        for (ModelMarketData p : masterData) {
+            if (matchesFilter(p)) {
+                filteredData.add(p);
+            }
+        }
+
+        reapplyTableSortOrder();
+    }
+
+    private boolean matchesFilter(ModelMarketData mkdLocal) {
+
+        String filterString = filterField.getText();
+
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }
+
+        String lowerCaseFilterString = filterString.toLowerCase();
+
+        if (mkdLocal.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+
+        }
+
+        return false;
+    }
+
+    private void reapplyTableSortOrder() {
+
+        mkd_xsgo.setItems(filteredData);
     }
 }

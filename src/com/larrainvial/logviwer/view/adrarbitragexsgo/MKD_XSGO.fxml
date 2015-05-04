@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="800" layoutY="200" prefHeight="174.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.XsgoMKDController">
+<AnchorPane layoutX="800.0" layoutY="230.0" prefHeight="174.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.XsgoMKDController">
   <children>
-    <TableView fx:id="mkd_xsgo" layoutX="18" layoutY="14" prefHeight="190" prefWidth="755.0">
+    <TableView fx:id="mkd_xsgo" layoutX="18.0" layoutY="14.0" prefHeight="190.0" prefWidth="755.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="MKD LOCAL" fx:id="anio" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Hour" fx:id="hour" />
@@ -19,5 +19,11 @@
         <TableColumn prefWidth="75.0" text="Close Px" fx:id="closePx" />
       </columns>
     </TableView>
+    <HBox id="HBox" alignment="CENTER" prefWidth="197.0" spacing="5.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="539.0" AnchorPane.topAnchor="203.0">
+      <children>
+        <Label prefWidth="95.0" text="Filter Symbol:" />
+        <TextField fx:id="filterField" prefWidth="102.0" HBox.hgrow="ALWAYS" />
+      </children>
+    </HBox>
   </children>
 </AnchorPane>

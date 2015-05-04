@@ -1,14 +1,31 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class DolarController {
 
     public DolarController(){
+
+        masterData.addListener(new ListChangeListener<ModelMarketData>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
+
+                updateFilteredData();
+            }
+        });
 
     }
 
@@ -45,6 +62,13 @@ public class DolarController {
     @FXML
     private TableColumn<ModelMarketData, String> closePx;
 
+    private boolean filter = false;
+
+
+    public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
+
+    public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
+
     @FXML
     private void initialize() {
 
@@ -52,14 +76,23 @@ public class DolarController {
         messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
         hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
         anio.setCellValueFactory(cellData -> cellData.getValue().getYear());
-
         buyQty.setCellValueFactory(cellData -> cellData.getValue().getBuyQty().asString());
         buyPx.setCellValueFactory(cellData -> cellData.getValue().getBuyPx().asString());
-
         sellQty.setCellValueFactory(cellData -> cellData.getValue().getSellQty().asString());
         sellPx.setCellValueFactory(cellData -> cellData.getValue().getSellPx().asString());
-
         closePx.setCellValueFactory(cellData -> cellData.getValue().getClosePx().asString());
+
+        dolar.setItems(filteredData);
+
+        filterField.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                filter = true;
+                updateFilteredData();
+            }
+        });
 
     }
 
@@ -82,6 +115,48 @@ public class DolarController {
     public TableView<ModelMarketData> getType() {
 
         return dolar;
+    }
+
+    private void updateFilteredData() {
+
+        if(!filter) return;
+
+        filteredData.clear();
+
+        for (ModelMarketData p : masterData) {
+            if (matchesFilter(p)) {
+                filteredData.add(p);
+            }
+        }
+
+        // Must re-sort table after items changed
+        reapplyTableSortOrder();
+    }
+
+    private boolean matchesFilter(ModelMarketData dolar) {
+
+        String filterString = filterField.getText();
+
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }
+
+        String lowerCaseFilterString = filterString.toLowerCase();
+
+        if (dolar.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+
+        }
+
+        return false;
+    }
+
+    private void reapplyTableSortOrder() {
+
+        //ArrayList<TableColumn<ModelMarketData, ?>> sortOrder = new ArrayList<>(dolar.getSortOrder());
+        //dolar.getSortOrder().clear();
+        //dolar.getSortOrder().addAll(sortOrder);
+        dolar.setItems(filteredData);
     }
 
 }

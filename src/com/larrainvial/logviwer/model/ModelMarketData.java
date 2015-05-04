@@ -18,18 +18,17 @@ public class ModelMarketData {
     private final DoubleProperty closePx;
 
 
-    public ModelMarketData(String anio, String hour, String messageByType, String symbol, Double buyPx, Double buyQty, Double sellPx,
-                           Double sellQty, Double closePx) {
+    public ModelMarketData(String anio, String hour, String messageByType, String symbol) {
 
         this.year = new SimpleStringProperty(anio);
         this.messageByType = new SimpleStringProperty(messageByType);
         this.symbol = new SimpleStringProperty(symbol);
         this.hour = new SimpleStringProperty(hour);
-        this.buyPx = new SimpleDoubleProperty(buyPx);
-        this.buyQty = new SimpleDoubleProperty(buyQty);
-        this.sellPx = new SimpleDoubleProperty(sellPx);
-        this.sellQty = new SimpleDoubleProperty(sellQty);
-        this.closePx = new SimpleDoubleProperty(closePx);
+        this.buyPx = new SimpleDoubleProperty(0);
+        this.buyQty = new SimpleDoubleProperty(0);
+        this.sellPx = new SimpleDoubleProperty(0);
+        this.sellQty = new SimpleDoubleProperty(0);
+        this.closePx = new SimpleDoubleProperty(0);
     }
 
     public StringProperty getSymbol() {

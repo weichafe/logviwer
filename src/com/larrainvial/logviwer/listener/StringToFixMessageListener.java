@@ -9,23 +9,25 @@ import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import quickfix.DataDictionary;
-import quickfix.field.MsgType;
-import quickfix.field.Symbol;
+import quickfix.FieldNotFound;
+import quickfix.field.*;
+import quickfix.fix44.MarketDataIncrementalRefresh;
+import quickfix.fix44.MarketDataSnapshotFullRefresh;
 import quickfix.fix44.Message;
 
 
 public class StringToFixMessageListener implements Listener {
 
     private DataDictionary dictionary;
-    private String symbol;
-    private String mesage;
     private Message messageFix;
+    private quickfix.fix44.MarketDataSnapshotFullRefresh.NoMDEntries group;
 
     public StringToFixMessageListener() {
 
         try {
+
             dictionary = new DataDictionary("resources/FIX44.xml");
-            symbol = "";
+            group = new quickfix.fix44.MarketDataSnapshotFullRefresh.NoMDEntries();
 
         }catch (Exception e){
             e.printStackTrace();
@@ -40,31 +42,24 @@ public class StringToFixMessageListener implements Listener {
 
             StringToFixMessageEvent ev = (StringToFixMessageEvent) event;
 
+            if(ev.lineFromLog.equals("")) return;
 
-            mesage = ev.lineFromLog;
-            if(mesage.equals("")) return;
-
-            String[] date = mesage.split("8=")[0].split("-");
-            messageFix = stringToFix(mesage.split("FIX.4.4" + "\u0001")[1]);
-
-
-
-            MsgType msgType = Message.identifyType(mesage);
+            String[] date = ev.lineFromLog.split("8=")[0].split("-");
+            messageFix = stringToFix(ev.lineFromLog.split("FIX.4.4" + "\u0001")[1]);
 
 
             if(ev.typeMarket.startsWith("ROUTING")){
 
-                ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], msgType.getValue(), "", "", "", "", "", "", "", "", "", "", "","","","", 0d,0d,0d,0d,0d,0d,0d);
+                ModelRoutingData modelRoutingData = new ModelRoutingData(date[0], date[1], Message.identifyType(ev.lineFromLog).getValue(), this.getSymbolRouting(messageFix));
                 Controller.dispatchEvent(new RoutingMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix, modelRoutingData));
 
             } else {
 
-                String symbol = (messageFix.isSetField(Symbol.FIELD) ? messageFix.getString(Symbol.FIELD) : "");
-                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], msgType.getValue(), symbol,  0d, 0d, 0d, 0d, 0d);
+                ModelMarketData modelMarketData = new ModelMarketData(date[0], date[1], Message.identifyType(ev.lineFromLog).getValue(), this.getSymbolMKD(messageFix));
                 Controller.dispatchEvent(new MarketDataMessageEvent(this, ev.nameAlgo, ev.typeMarket, messageFix , modelMarketData));
             }
 
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
             System.out.println(messageFix);
 
@@ -72,8 +67,43 @@ public class StringToFixMessageListener implements Listener {
 
     }
 
+    public String getSymbolRouting(Message message) {
 
-    public Message stringToFix(String fixMsg){
+        try {
+
+            for (int i = 0; i < messageFix.getGroups(NoMDEntries.FIELD).size(); i++) {
+                message.getGroup(i + 1, group);
+                return group.getString(Symbol.FIELD);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(message);
+        }
+
+        return "";
+    }
+
+
+    public String getSymbolMKD(Message message) {
+
+        try {
+
+            for (int i = 0; i < messageFix.getGroups(NoMDEntries.FIELD).size(); i++) {
+                message.getGroup(i + 1, group);
+                return group.getString(Symbol.FIELD);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(message);
+        }
+
+        return "";
+    }
+
+
+    private Message stringToFix(String fixMsg){
 
         Message fixMessage = new Message();
 
@@ -82,9 +112,11 @@ public class StringToFixMessageListener implements Listener {
 
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println(fixMsg);
         }
 
         return fixMessage;
     }
+
 
 }

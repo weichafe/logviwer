@@ -1,12 +1,23 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 
+import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class XsgoRoutingController {
+
+
+    @FXML
+    private TextField filterField;
 
     @FXML
     private TableView<ModelRoutingData> routing_xsgo;
@@ -83,6 +94,23 @@ public class XsgoRoutingController {
     @FXML
     private TableColumn<ModelRoutingData, String> maxFloor;
 
+    public ObservableList<ModelRoutingData> masterData = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredData = FXCollections.observableArrayList();
+
+    private boolean filter = false;
+
+    public XsgoRoutingController(){
+
+        masterData.addListener(new ListChangeListener<ModelRoutingData>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends ModelRoutingData> change) {
+                updateFilteredData();
+            }
+        });
+
+    }
+
     @FXML
     private void initialize() {
 
@@ -115,7 +143,19 @@ public class XsgoRoutingController {
         leavesQty.setCellValueFactory(cellData2 -> cellData2.getValue().getLeavesQty().asString());
         maxFloor.setCellValueFactory(cellData2 -> cellData2.getValue().getMaxFloor().asString());
 
+        routing_xsgo.setItems(filteredData);
+
+        filterField.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData();
+            }
+        });
+
     }
+
 
     @FXML
     private void refreshTableView() {
@@ -154,6 +194,43 @@ public class XsgoRoutingController {
 
     public TableView<ModelRoutingData> getType() {
         return routing_xsgo;
+    }
+
+    private void updateFilteredData() {
+
+        if(!filter) return;
+
+        filteredData.clear();
+
+        for (ModelRoutingData p : masterData) {
+            if (matchesFilter(p)) {
+                filteredData.add(p);
+            }
+        }
+
+        reapplyTableSortOrder();
+    }
+
+    private boolean matchesFilter(ModelRoutingData routingXsgo) {
+
+        String filterString = filterField.getText();
+
+        if (filterString == null || filterString.isEmpty()) {
+            return true;
+        }
+
+        String lowerCaseFilterString = filterString.toLowerCase();
+
+        if (routingXsgo.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+
+        }
+
+        return false;
+    }
+
+    private void reapplyTableSortOrder() {
+        routing_xsgo.setItems(filteredData);
     }
 
 }

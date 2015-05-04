@@ -38,35 +38,32 @@ public class ModelRoutingData {
 
 
 
-    public ModelRoutingData(String year, String hour, String messageByType, String execType, String symbol, String orderID, String clOrdID, String origClOrdID,
-                            String clOrdLinkID, String execID, String ordStatus, String account, String side,
-                            String exDestination, String securityExchange, String effectiveTime, String expireTime, Double lastQty,
-                            Double lastPx, Double cumQty, Double avgPx, Double leavesQty, Double maxFloor, Double price) {
+    public ModelRoutingData(String year, String hour, String messageByType, String symbol) {
 
         this.year = new SimpleStringProperty(year);
         this.messageByType = new SimpleStringProperty(messageByType);
         this.symbol = new SimpleStringProperty(symbol);
         this.hour = new SimpleStringProperty(hour);
-        this.orderID = new SimpleStringProperty(orderID);
-        this.clOrdID = new SimpleStringProperty(clOrdID);
-        this.origClOrdID = new SimpleStringProperty(origClOrdID);
-        this.clOrdLinkID = new SimpleStringProperty(clOrdLinkID);
-        this.execID = new SimpleStringProperty(execID);
-        this.execType = new SimpleStringProperty(execType);
-        this.ordStatus = new SimpleStringProperty(ordStatus);
-        this.account = new SimpleStringProperty(account);
-        this.side = new SimpleStringProperty(side);
-        this.effectiveTime = new SimpleStringProperty(effectiveTime);
-        this.expireTime = new SimpleStringProperty(expireTime);
-        this.exDestination = new SimpleStringProperty(exDestination);
-        this.securityExchange = new SimpleStringProperty(securityExchange);
-        this.price = new SimpleDoubleProperty(price);
-        this.lastQty = new SimpleDoubleProperty(lastQty);
-        this.lastPx = new SimpleDoubleProperty(lastPx);
-        this.cumQty = new SimpleDoubleProperty(cumQty);
-        this.avgPx = new SimpleDoubleProperty(avgPx);
-        this.leavesQty = new SimpleDoubleProperty(leavesQty);
-        this.maxFloor = new SimpleDoubleProperty(maxFloor);
+        this.orderID = new SimpleStringProperty("");
+        this.clOrdID = new SimpleStringProperty("");
+        this.origClOrdID = new SimpleStringProperty("");
+        this.clOrdLinkID = new SimpleStringProperty("");
+        this.execID = new SimpleStringProperty("");
+        this.execType = new SimpleStringProperty("");
+        this.ordStatus = new SimpleStringProperty("");
+        this.account = new SimpleStringProperty("");
+        this.side = new SimpleStringProperty("");
+        this.effectiveTime = new SimpleStringProperty("");
+        this.expireTime = new SimpleStringProperty("");
+        this.exDestination = new SimpleStringProperty("");
+        this.securityExchange = new SimpleStringProperty("");
+        this.price = new SimpleDoubleProperty(0d);
+        this.lastQty = new SimpleDoubleProperty(0d);
+        this.lastPx = new SimpleDoubleProperty(0d);
+        this.cumQty = new SimpleDoubleProperty(0d);
+        this.avgPx = new SimpleDoubleProperty(0d);
+        this.leavesQty = new SimpleDoubleProperty(0d);
+        this.maxFloor = new SimpleDoubleProperty(0d);
     }
 
 

@@ -5,16 +5,13 @@ import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,17 +38,23 @@ public class Algo {
     private FXMLLoader routing_adr_loader = new FXMLLoader();
     private FXMLLoader routing_local_loader = new FXMLLoader();
 
-    private ObservableList<ModelMarketData> mkd_local_arrayList = FXCollections.observableArrayList();
-    private ObservableList<ModelMarketData> mkd_adr_arrayList = FXCollections.observableArrayList();
-    private ObservableList<ModelMarketData> routing_local_arrayList = FXCollections.observableArrayList();
-    private ObservableList<ModelRoutingData> routing_adr_arrayList = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> dolarMasterList = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> dolarFilterList = FXCollections.observableArrayList();
 
-    private ObservableList<ModelMarketData> dolarList = FXCollections.observableArrayList();
-    private ObservableList<ModelMarketData> mkd_adr_list = FXCollections.observableArrayList();
-    private ObservableList<ModelMarketData> mkd_local_list = FXCollections.observableArrayList();
-    private ObservableList<ModelRoutingData> routing_local_list = FXCollections.observableArrayList();
-    private ObservableList<ModelRoutingData> routing_adr_list = FXCollections.observableArrayList();
-    private ObservableList<ModelRoutingData> routing_blotter_list = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> mkdAdrMasterList = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> mkdAdrFilterList = FXCollections.observableArrayList();
+
+    private ObservableList<ModelMarketData> mkdLocalMasterList = FXCollections.observableArrayList();
+    private ObservableList<ModelMarketData> mkdLocalFilterList = FXCollections.observableArrayList();
+
+    private ObservableList<ModelRoutingData> routingAdrMasterList = FXCollections.observableArrayList();
+    private ObservableList<ModelRoutingData> routingAdrFilterList = FXCollections.observableArrayList();
+
+    private ObservableList<ModelRoutingData> routingLocalMasterList = FXCollections.observableArrayList();
+    private ObservableList<ModelRoutingData> routingLocalFilterList = FXCollections.observableArrayList();
+
+    private ObservableList<ModelRoutingData> routingBlotterMasterLsit = FXCollections.observableArrayList();
+    private ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
     private TableView<ModelMarketData> mkd_dolar_tableView;
     private TableView<ModelMarketData> mkd_adr_tableView;
@@ -76,58 +79,7 @@ public class Algo {
 
     //ARRAY LIST DOLAR Y FILTROS
 
-    private ObservableList<ModelMarketData> mkd_dolar_arrayList = FXCollections.observableArrayList();
-    private ObservableList<ModelMarketData> filter_dolar_by_symbol = FXCollections.observableArrayList();
 
-
-    private boolean matchesFilter(ModelMarketData person) {
-
-        String filterString = filterField.getText();
-
-        if (filterString == null || filterString.isEmpty()) {
-            return true;
-        }
-
-        String lowerCaseFilterString = filterString.toLowerCase();
-
-        if (person.getFirstName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
-
-        } else if (person.getLastName().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    public void updateFilteredMarketData(){
-
-        filter_dolar_by_symbol.clear();
-
-        for (ModelMarketData p : mkd_dolar_arrayList) {
-            if (matchesFilter(p)) {
-                filter_dolar_by_symbol.add(p);
-            }
-        }
-
-        reapplyTableSortOrder();
-
-    }
-
-    private void reapplyTableSortOrder() {
-        ArrayList<TableColumn<ModelMarketData, ?>> sortOrder = new ArrayList<>(personTable.getSortOrder());
-        personTable.getSortOrder().clear();
-        personTable.getSortOrder().addAll(sortOrder);
-    }
-
-    private void reapplyTableSortOrder() {
-
-        ArrayList<TableColumn<Person, ?>> sortOrder = new ArrayList<>(personTable.getSortOrder());
-        personTable.getSortOrder().clear();
-        personTable.getSortOrder().addAll(sortOrder);
-
-    }
 
     public void fileReader() throws Exception {
 
@@ -182,17 +134,67 @@ public class Algo {
     }
 
 
-    public void addListenerFilter() {
 
-        this.dolarList.addListener(new ListChangeListener<ModelMarketData>() {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
-                updateFilteredMarketData();
-            }
-        });
+    /*
+    Getter and Setters
+     */
 
+
+    public ObservableList<ModelMarketData> getMkdAdrFilterList() {
+        return mkdAdrFilterList;
     }
 
+    public void setMkdAdrFilterList(ObservableList<ModelMarketData> mkdAdrFilterList) {
+        this.mkdAdrFilterList = mkdAdrFilterList;
+    }
+
+    public ObservableList<ModelMarketData> getMkdLocalFilterList() {
+        return mkdLocalFilterList;
+    }
+
+    public void setMkdLocalFilterList(ObservableList<ModelMarketData> mkdLocalFilterList) {
+        this.mkdLocalFilterList = mkdLocalFilterList;
+    }
+
+    public ObservableList<ModelRoutingData> getRoutingAdrFilterList() {
+        return routingAdrFilterList;
+    }
+
+    public void setRoutingAdrFilterList(ObservableList<ModelRoutingData> routingAdrFilterList) {
+        this.routingAdrFilterList = routingAdrFilterList;
+    }
+
+    public ObservableList<ModelRoutingData> getRoutingLocalFilterList() {
+        return routingLocalFilterList;
+    }
+
+    public void setRoutingLocalFilterList(ObservableList<ModelRoutingData> routingLocalFilterList) {
+        this.routingLocalFilterList = routingLocalFilterList;
+    }
+
+    public ObservableList<ModelRoutingData> getRoutingBlotterMasterLsit() {
+        return routingBlotterMasterLsit;
+    }
+
+    public void setRoutingBlotterMasterLsit(ObservableList<ModelRoutingData> routingBlotterMasterLsit) {
+        this.routingBlotterMasterLsit = routingBlotterMasterLsit;
+    }
+
+    public ObservableList<ModelRoutingData> getRoutingBlotterFilterLsit() {
+        return routingBlotterFilterLsit;
+    }
+
+    public void setRoutingBlotterFilterLsit(ObservableList<ModelRoutingData> routingBlotterFilterLsit) {
+        this.routingBlotterFilterLsit = routingBlotterFilterLsit;
+    }
+
+    public ObservableList<ModelMarketData> getDolarFilterList() {
+        return dolarFilterList;
+    }
+
+    public void setDolarFilterList(ObservableList<ModelMarketData> dolarFilterList) {
+        this.dolarFilterList = dolarFilterList;
+    }
 
 
     public File getFile_mkd_dolar() {
@@ -275,52 +277,44 @@ public class Algo {
         this.routing_local_tableView = routing_local_tableView;
     }
 
-    public ObservableList<ModelMarketData> getDolarList() {
-        return dolarList;
+    public ObservableList<ModelMarketData> getDolarMasterList() {
+        return dolarMasterList;
     }
 
-    public void setDolarList(ObservableList<ModelMarketData> dolarList) {
-        this.dolarList = dolarList;
+    public void setDolarMasterList(ObservableList<ModelMarketData> dolarMasterList) {
+        this.dolarMasterList = dolarMasterList;
     }
 
-    public ObservableList<ModelMarketData> getMkd_adr_list() {
-        return mkd_adr_list;
+    public ObservableList<ModelMarketData> getMkdAdrMasterList() {
+        return mkdAdrMasterList;
     }
 
-    public void setMkd_adr_list(ObservableList<ModelMarketData> mkd_adr_list) {
-        this.mkd_adr_list = mkd_adr_list;
+    public void setMkdAdrMasterList(ObservableList<ModelMarketData> mkdAdrMasterList) {
+        this.mkdAdrMasterList = mkdAdrMasterList;
     }
 
-    public ObservableList<ModelMarketData> getMkd_local_list() {
-        return mkd_local_list;
+    public ObservableList<ModelMarketData> getMkdLocalMasterList() {
+        return mkdLocalMasterList;
     }
 
-    public void setMkd_local_list(ObservableList<ModelMarketData> mkd_local_list) {
-        this.mkd_local_list = mkd_local_list;
+    public void setMkdLocalMasterList(ObservableList<ModelMarketData> mkdLocalMasterList) {
+        this.mkdLocalMasterList = mkdLocalMasterList;
     }
 
-    public ObservableList<ModelRoutingData> getRouting_local_list() {
-        return routing_local_list;
+    public ObservableList<ModelRoutingData> getRoutingAdrMasterList() {
+        return routingAdrMasterList;
     }
 
-    public void setRouting_local_list(ObservableList<ModelRoutingData> routing_local_list) {
-        this.routing_local_list = routing_local_list;
+    public void setRoutingAdrMasterList(ObservableList<ModelRoutingData> routingAdrMasterList) {
+        this.routingAdrMasterList = routingAdrMasterList;
     }
 
-    public ObservableList<ModelRoutingData> getRouting_adr_list() {
-        return routing_adr_list;
+    public ObservableList<ModelRoutingData> getRoutingLocalMasterList() {
+        return routingLocalMasterList;
     }
 
-    public void setRouting_adr_list(ObservableList<ModelRoutingData> routing_adr_list) {
-        this.routing_adr_list = routing_adr_list;
-    }
-
-    public ObservableList<ModelRoutingData> getRouting_blotter_list() {
-        return routing_blotter_list;
-    }
-
-    public void setRouting_blotter_list(ObservableList<ModelRoutingData> routing_blotter_list) {
-        this.routing_blotter_list = routing_blotter_list;
+    public void setRoutingLocalMasterList(ObservableList<ModelRoutingData> routingLocalMasterList) {
+        this.routingLocalMasterList = routingLocalMasterList;
     }
 
     public String getNameAlgo() {
@@ -459,43 +453,4 @@ public class Algo {
         this.routing_local_loader = routing_local_loader;
     }
 
-    public ObservableList<ModelMarketData> getMkd_dolar_arrayList() {
-        return mkd_dolar_arrayList;
-    }
-
-    public void setMkd_dolar_arrayList(ObservableList<ModelMarketData> mkd_dolar_arrayList) {
-        this.mkd_dolar_arrayList = mkd_dolar_arrayList;
-    }
-
-    public ObservableList<ModelMarketData> getMkd_local_arrayList() {
-        return mkd_local_arrayList;
-    }
-
-    public void setMkd_local_arrayList(ObservableList<ModelMarketData> mkd_local_arrayList) {
-        this.mkd_local_arrayList = mkd_local_arrayList;
-    }
-
-    public ObservableList<ModelMarketData> getMkd_adr_arrayList() {
-        return mkd_adr_arrayList;
-    }
-
-    public void setMkd_adr_arrayList(ObservableList<ModelMarketData> mkd_adr_arrayList) {
-        this.mkd_adr_arrayList = mkd_adr_arrayList;
-    }
-
-    public ObservableList<ModelMarketData> getRouting_local_arrayList() {
-        return routing_local_arrayList;
-    }
-
-    public void setRouting_local_arrayList(ObservableList<ModelMarketData> routing_local_arrayList) {
-        this.routing_local_arrayList = routing_local_arrayList;
-    }
-
-    public ObservableList<ModelRoutingData> getRouting_adr_arrayList() {
-        return routing_adr_arrayList;
-    }
-
-    public void setRouting_adr_arrayList(ObservableList<ModelRoutingData> routing_adr_arrayList) {
-        this.routing_adr_arrayList = routing_adr_arrayList;
-    }
 }

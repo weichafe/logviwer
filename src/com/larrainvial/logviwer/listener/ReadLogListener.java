@@ -23,7 +23,7 @@ public class ReadLogListener implements Listener {
             }
 
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
     }

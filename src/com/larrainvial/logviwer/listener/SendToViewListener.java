@@ -20,29 +20,28 @@ public class SendToViewListener implements Listener {
             algo = Repository.strategy.get(ev.nameAlgo);
 
             if(ev.typeMarket.equals(algo.getMkd_dolar())){
-
-                algo.getDolarList().add(ev.modelMarketData);
-                algo.getMkd_dolar_tableView().setItems(algo.getDolarList());
+                algo.getDolarMasterList().add(ev.modelMarketData);
+                algo.getMkd_dolar_tableView().setItems(algo.getDolarMasterList());
             }
 
             if(ev.typeMarket.equals(algo.getMkd_adr())){
-                algo.getMkd_adr_list().add(ev.modelMarketData);
-                algo.getMkd_adr_tableView().setItems(algo.getMkd_adr_list());
+                algo.getMkdAdrMasterList().add(ev.modelMarketData);
+                algo.getMkd_adr_tableView().setItems(algo.getMkdAdrMasterList());
             }
 
             if(ev.typeMarket.equals(algo.getMkd_local())){
-                algo.getMkd_local_list().add(ev.modelMarketData);
-                algo.getMkd_local_tableView().setItems(algo.getMkd_local_list());
+                algo.getMkdLocalMasterList().add(ev.modelMarketData);
+                algo.getMkd_local_tableView().setItems(algo.getMkdLocalMasterList());
             }
 
             if(ev.typeMarket.equals(algo.getRouting_adr())){
-                algo.getRouting_adr_list().add(ev.modelRoutingData);
-                algo.getRouting_adr_tableView().setItems(algo.getRouting_adr_list());
+                algo.getRoutingLocalMasterList().add(ev.modelRoutingData);
+                algo.getRouting_adr_tableView().setItems(algo.getRoutingLocalMasterList());
             }
 
             if(ev.typeMarket.equals(algo.getRouting_local())){
-                algo.getRouting_local_list().add(ev.modelRoutingData);
-                algo.getRouting_local_tableView().setItems(algo.getRouting_local_list());
+                algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
+                algo.getRouting_local_tableView().setItems(algo.getRoutingAdrMasterList());
             }
 
 
