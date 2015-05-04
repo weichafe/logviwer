@@ -125,7 +125,7 @@ public class RoutingMessageListener implements Listener {
     }
 
     public String execType(String string){
-        if(string.equals("0")) return "New";
+        if(string.equals("0"))      return "New";
         else if(string.equals("3")) return "Done for day";
         else if(string.equals("4")) return "Canceled";
         else if(string.equals("5")) return "Replaced";
@@ -149,7 +149,7 @@ public class RoutingMessageListener implements Listener {
     }
 
     public String ordStatus(String string){
-        if(string.equals("0")) return "New";
+        if(string.equals("0"))      return "New";
         else if(string.equals("1")) return "Partial Fill";
         else if(string.equals("2")) return "Fill";
         else if(string.equals("3")) return "Done for day";
@@ -168,7 +168,7 @@ public class RoutingMessageListener implements Listener {
     }
 
     public String side(String string){
-        if(string.equals("1")) return "Buy";
+        if(string.equals("1"))      return "Buy";
         else if(string.equals("2")) return "Sell";
         else if(string.equals("5")) return "Sell Short";
         else  return string;

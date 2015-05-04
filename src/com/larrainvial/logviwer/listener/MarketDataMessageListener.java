@@ -40,9 +40,9 @@ public class MarketDataMessageListener implements Listener {
 
     public void setMarketData(Message mktDataInc){
 
-        MarketDataIncrementalRefresh.NoMDEntries noMDEntries;
-
         try {
+
+            MarketDataIncrementalRefresh.NoMDEntries noMDEntries;
 
             for (int i = 1; i <= mktDataInc.getInt(NoMDEntries.FIELD); i++) {
                 noMDEntries = new MarketDataIncrementalRefresh.NoMDEntries();
@@ -62,8 +62,8 @@ public class MarketDataMessageListener implements Listener {
                 }
             }
 
-        } catch (Exception ex) {
-            //System.out.println(mktDataInc);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

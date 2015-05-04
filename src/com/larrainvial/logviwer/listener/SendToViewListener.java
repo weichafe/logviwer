@@ -3,8 +3,11 @@ package com.larrainvial.logviwer.listener;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.SendToViewEvent;
+import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class SendToViewListener implements Listener {
 

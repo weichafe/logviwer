@@ -107,6 +107,7 @@ public class Algo {
             public void run() {
 
                 if(finalTimer_initial != getTime()) {
+                    
                     try {
                         iniziale();
                     }catch (Exception e){

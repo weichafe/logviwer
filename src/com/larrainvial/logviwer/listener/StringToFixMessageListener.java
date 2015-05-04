@@ -69,7 +69,11 @@ public class StringToFixMessageListener implements Listener {
 
         try {
 
-            for (int i = 0; i < messageFix.getGroups(NoMDEntries.FIELD).size(); i++) {
+            if(message.isSetField(Symbol.FIELD)){
+                return message.getString(Symbol.FIELD);
+            }
+
+            for (int i = 0; i < message.getGroups(NoMDEntries.FIELD).size(); i++) {
                 message.getGroup(i + 1, group);
                 return group.getString(Symbol.FIELD);
             }
