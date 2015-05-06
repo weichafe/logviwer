@@ -19,11 +19,13 @@ public class StringToFixMessageListener implements Listener {
     private DataDictionary dictionary;
     private Message messageFix;
     private quickfix.fix44.MarketDataSnapshotFullRefresh.NoMDEntries group;
+    private Message fixMessage;
 
     public StringToFixMessageListener() {
 
         try {
 
+            fixMessage = new Message();
             dictionary = new DataDictionary("resources/FIX44.xml");
             group = new quickfix.fix44.MarketDataSnapshotFullRefresh.NoMDEntries();
 
@@ -113,9 +115,8 @@ public class StringToFixMessageListener implements Listener {
 
     private Message stringToFix(String fixMsg){
 
-        Message fixMessage = new Message();
-
         try {
+
             fixMessage.fromString(fixMsg, dictionary, false);
 
         }catch (Exception e){

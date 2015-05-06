@@ -9,9 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -70,30 +69,33 @@ public class Algo {
     private File file_routing_local;
     private File file_routing_adr;
 
-    private long file_mkd_dolarLast = 0;
-    private long file_mkd_localLast = 0;
-    private long file_mkd_adrLast = 0;
-    private long file_routing_localLast = 0;
-    private long file_routing_adrLast = 0;
+    private FileInputStream inputStream_mkd_dolar;
+    private FileInputStream inputStream_mkd_local;
+    private FileInputStream inputStream_mkd_adr;
+    private FileInputStream inputStream_routing_local;
+    private FileInputStream inputStream_routing_adr;
 
-    private BufferedReader file_routing_adrBufferedReader;
-    private BufferedReader file_mkd_dolar_adrBufferedReader;
-    private BufferedReader file_routing_localBufferedReader;
-    private BufferedReader file_mkd_localBufferedReader;
-    private BufferedReader file_mkd_adrBufferedReader;
+    private FileInputStream inputStream = null;
+    private Scanner sc = null;
 
 
     //ARRAY LIST DOLAR Y FILTROS
 
 
 
-    public void fileReader() throws Exception {
+    public void fileReader() {
 
-        file_mkd_dolar_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_dolar));
-        file_mkd_localBufferedReader = new BufferedReader(new FileReader(file_mkd_local));
-        file_mkd_adrBufferedReader = new BufferedReader(new FileReader(file_mkd_adr));
-        file_routing_adrBufferedReader = new BufferedReader(new FileReader(file_routing_adr));
-        file_routing_localBufferedReader = new BufferedReader(new FileReader(file_routing_local));
+        try {
+
+            inputStream_mkd_dolar = new FileInputStream(file_mkd_dolar);
+            inputStream_mkd_local = new FileInputStream(file_mkd_local);
+            inputStream_mkd_adr = new FileInputStream(file_mkd_adr);
+            inputStream_routing_local = new FileInputStream(file_routing_local);
+            inputStream_routing_adr = new FileInputStream(file_routing_adr);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -107,7 +109,7 @@ public class Algo {
             public void run() {
 
                 if(finalTimer_initial != getTime()) {
-                    
+
                     try {
                         iniziale();
                     }catch (Exception e){
@@ -115,35 +117,13 @@ public class Algo {
                     }
                 }
 
-                if(file_mkd_dolarLast != file_mkd_dolar.lastModified()){
-                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, file_mkd_dolar_adrBufferedReader));
-                    file_mkd_dolarLast = file_mkd_dolar.lastModified();
-                    System.out.println("cambio " + nameAlgo + " " + mkd_dolar);
-                }
 
-                if(file_mkd_localLast != file_mkd_local.lastModified()){
-                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, file_mkd_localBufferedReader));
-                    file_mkd_localLast = file_mkd_local.lastModified();
-                    System.out.println("cambio " + nameAlgo + " " + mkd_local);
-                }
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
 
-                if(file_mkd_adrLast != file_mkd_adr.lastModified()) {
-                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, file_mkd_adrBufferedReader));
-                    file_mkd_adrLast = file_mkd_adr.lastModified();
-                    System.out.println("cambio " + nameAlgo + " " + mkd_adr);
-                }
-
-                if(file_routing_localLast != file_routing_local.lastModified()) {
-                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, file_routing_localBufferedReader));
-                    file_routing_localLast = file_routing_local.lastModified();
-                    System.out.println("cambio " + nameAlgo + " " + routing_local);
-                }
-
-                if(file_routing_adrLast != file_routing_adr.lastModified()) {
-                    Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, file_routing_adrBufferedReader));
-                    file_routing_adrLast = file_routing_adr.lastModified();
-                    System.out.println("cambio " + nameAlgo + " " + routing_adr);
-                }
 
             }
 

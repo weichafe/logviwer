@@ -44,6 +44,10 @@ public class MarketDataMessageListener implements Listener {
 
             MarketDataIncrementalRefresh.NoMDEntries noMDEntries;
 
+            if(!mktDataInc.isSetField(NoMDEntries.FIELD)){
+                return;
+            }
+
             for (int i = 1; i <= mktDataInc.getInt(NoMDEntries.FIELD); i++) {
                 noMDEntries = new MarketDataIncrementalRefresh.NoMDEntries();
 

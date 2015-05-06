@@ -13,5 +13,13 @@
       </content>
     </Tab>
     <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+    <Tab content="$null" text="Untitled Tab 2" />
+
   </tabs>
 </TabPane>
