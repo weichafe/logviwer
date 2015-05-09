@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -68,19 +69,18 @@ public class LocalMKDController {
     @FXML
     private void initialize() {
 
-        symbol.setCellValueFactory(cellData -> cellData.getValue().getSymbol());
-        messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
-        hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
-        anio.setCellValueFactory(cellData -> cellData.getValue().getYear());
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
+        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
 
-        buyQty.setCellValueFactory(cellData2 -> cellData2.getValue().getBuyQty().asString());
-        buyPx.setCellValueFactory(cellData2 -> cellData2.getValue().getBuyPx().asString());
+        buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
+        buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
 
-        sellQty.setCellValueFactory(cellData2 -> cellData2.getValue().getSellQty().asString());
-        sellPx.setCellValueFactory(cellData2 -> cellData2.getValue().getSellPx().asString());
+        sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
+        sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
-        closePx.setCellValueFactory(cellData2 -> cellData2.getValue().getClosePx().asString());
-
+        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
         mkd_xsgo.setItems(filteredData);
 
         filterField.textProperty().addListener(new ChangeListener<String>() {

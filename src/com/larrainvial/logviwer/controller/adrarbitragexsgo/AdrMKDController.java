@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -48,10 +49,9 @@ public class AdrMKDController {
 
     public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
 
-    public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
+    public ObservableList<ModelMarketData> filteredDataSymbol = FXCollections.observableArrayList();
 
     private boolean filter = false;
-
 
     public AdrMKDController(){
 
@@ -67,20 +67,20 @@ public class AdrMKDController {
     @FXML
     private void initialize() {
 
-        symbol.setCellValueFactory(cellData -> cellData.getValue().getSymbol());
-        messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
-        hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
-        anio.setCellValueFactory(cellData -> cellData.getValue().getYear());
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
+        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
 
-        buyQty.setCellValueFactory(cellData2 -> cellData2.getValue().getBuyQty().asString());
-        buyPx.setCellValueFactory(cellData2 -> cellData2.getValue().getBuyPx().asString());
+        buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
+        buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
 
-        sellQty.setCellValueFactory(cellData2 -> cellData2.getValue().getSellQty().asString());
-        sellPx.setCellValueFactory(cellData2 -> cellData2.getValue().getSellPx().asString());
+        sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
+        sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
-        closePx.setCellValueFactory(cellData2 -> cellData2.getValue().getClosePx().asString());
+        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
 
-        mkd_nyse.setItems(filteredData);
+        mkd_nyse.setItems(filteredDataSymbol);
 
         filterField.textProperty().addListener(new ChangeListener<String>() {
 
@@ -118,11 +118,11 @@ public class AdrMKDController {
 
         if(!filter) return;
 
-        filteredData.clear();
+        filteredDataSymbol.clear();
 
         for (ModelMarketData p : masterData) {
             if (matchesFilter(p)) {
-                filteredData.add(p);
+                filteredDataSymbol.add(p);
             }
         }
 
@@ -147,7 +147,7 @@ public class AdrMKDController {
     }
 
     private void reapplyTableSortOrder() {
-        mkd_nyse.setItems(filteredData);
+        mkd_nyse.setItems(filteredDataSymbol);
     }
 
 }

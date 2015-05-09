@@ -1,141 +1,110 @@
 package com.larrainvial.logviwer.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
-public class ModelMarketData {
+public class ModelMarketData implements Serializable {
 
-    private final StringProperty symbol;
-    private final StringProperty hour;
-    private final StringProperty year;
-    private final StringProperty messageByType;
-    private final DoubleProperty buyPx;
-    private final DoubleProperty buyQty;
-    private final DoubleProperty sellPx;
-    private final DoubleProperty sellQty;
-    private final DoubleProperty closePx;
+    private static final long serialVersionUID = 666L;
+
+    public String symbol;
+    public String hour;
+    public String year;
+    public String messageByType;
+    public Double buyPx;
+    public Double buyQty;
+    public Double sellPx;
+    public Double sellQty;
+    public Double closePx;
 
 
-    public ModelMarketData(String anio, String hour, String messageByType, String symbol) {
+    public ModelMarketData(String anio, String hour, String messageByType) {
 
-        this.year = new SimpleStringProperty(anio);
-        this.messageByType = new SimpleStringProperty(messageByType);
-        this.symbol = new SimpleStringProperty(symbol);
-        this.hour = new SimpleStringProperty(hour);
-        this.buyPx = new SimpleDoubleProperty(0);
-        this.buyQty = new SimpleDoubleProperty(0);
-        this.sellPx = new SimpleDoubleProperty(0);
-        this.sellQty = new SimpleDoubleProperty(0);
-        this.closePx = new SimpleDoubleProperty(0);
+        this.year = anio;
+        this.messageByType = messageByType;
+        this.hour =  hour;
+        this.symbol =  "";
+        this.buyPx =  0d;
+        this.buyQty =  0d;
+        this.sellPx =  0d;
+        this.sellQty =  0d;
+        this.closePx =  0d;
     }
 
-    public StringProperty getSymbol() {
-        return symbol;
-    }
+    public ModelMarketData() {
 
-    public StringProperty symbolProperty() {
-        return symbol;
     }
 
     public void setSymbol(String symbol) {
-        this.symbol.set(symbol);
-    }
-
-    public StringProperty getHour() {
-        return hour;
-    }
-
-    public StringProperty hourProperty() {
-        return hour;
+        this.symbol = symbol;
     }
 
     public void setHour(String hour) {
-        this.hour.set(hour);
-    }
-
-    public StringProperty getYear() {
-        return year;
-    }
-
-    public StringProperty yearProperty() {
-        return year;
+        this.hour = hour;
     }
 
     public void setYear(String year) {
-        this.year.set(year);
-    }
-
-    public StringProperty getMessageByType() {
-        return messageByType;
-    }
-
-    public StringProperty messageByTypeProperty() {
-        return messageByType;
+        this.year = year;
     }
 
     public void setMessageByType(String messageByType) {
-        this.messageByType.set(messageByType);
+        this.messageByType = messageByType;
     }
 
-    public DoubleProperty getBuyPx() {
+    public void setBuyPx(Double buyPx) {
+        this.buyPx = buyPx;
+    }
+
+    public void setBuyQty(Double buyQty) {
+        this.buyQty = buyQty;
+    }
+
+    public void setSellPx(Double sellPx) {
+        this.sellPx = sellPx;
+    }
+
+    public void setSellQty(Double sellQty) {
+        this.sellQty = sellQty;
+    }
+
+    public void setClosePx(Double closePx) {
+        this.closePx = closePx;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getMessageByType() {
+        return messageByType;
+    }
+
+    public Double getBuyPx() {
         return buyPx;
     }
 
-    public DoubleProperty buyPxProperty() {
-        return buyPx;
-    }
-
-    public void setBuyPx(double buyPx) {
-        this.buyPx.set(buyPx);
-    }
-
-    public DoubleProperty getBuyQty() {
+    public Double getBuyQty() {
         return buyQty;
     }
 
-    public DoubleProperty buyQtyProperty() {
-        return buyQty;
-    }
-
-    public void setBuyQty(double buyQty) {
-        this.buyQty.set(buyQty);
-    }
-
-    public DoubleProperty getSellPx() {
+    public Double getSellPx() {
         return sellPx;
     }
 
-    public DoubleProperty sellPxProperty() {
-        return sellPx;
-    }
-
-    public void setSellPx(double sellPx) {
-        this.sellPx.set(sellPx);
-    }
-
-    public DoubleProperty getSellQty() {
+    public Double getSellQty() {
         return sellQty;
     }
 
-    public DoubleProperty sellQtyProperty() {
-        return sellQty;
-    }
-
-    public void setSellQty(double sellQty) {
-        this.sellQty.set(sellQty);
-    }
-
-    public DoubleProperty getClosePx() {
+    public Double getClosePx() {
         return closePx;
     }
 
-    public DoubleProperty closePxProperty() {
-        return closePx;
-    }
 
-    public void setClosePx(double closePx) {
-        this.closePx.set(closePx);
-    }
 }

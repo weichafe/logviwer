@@ -1,21 +1,19 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
-
 public class DolarController {
+
 
     public DolarController(){
 
@@ -29,8 +27,9 @@ public class DolarController {
 
     }
 
+
     @FXML
-    private TextField filterField;
+    public TextField filterField;
 
     @FXML
     private TableView<ModelMarketData> dolar;
@@ -45,7 +44,7 @@ public class DolarController {
     private TableColumn<ModelMarketData, String> messageByType;
 
     @FXML
-    private TableColumn<ModelMarketData, String> symbol;
+    public TableColumn<ModelMarketData, String> symbol;
 
     @FXML
     private TableColumn<ModelMarketData, String> buyPx;
@@ -72,15 +71,18 @@ public class DolarController {
     @FXML
     private void initialize() {
 
-        symbol.setCellValueFactory(cellData -> cellData.getValue().getSymbol());
-        messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
-        hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
-        anio.setCellValueFactory(cellData -> cellData.getValue().getYear());
-        buyQty.setCellValueFactory(cellData -> cellData.getValue().getBuyQty().asString());
-        buyPx.setCellValueFactory(cellData -> cellData.getValue().getBuyPx().asString());
-        sellQty.setCellValueFactory(cellData -> cellData.getValue().getSellQty().asString());
-        sellPx.setCellValueFactory(cellData -> cellData.getValue().getSellPx().asString());
-        closePx.setCellValueFactory(cellData -> cellData.getValue().getClosePx().asString());
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
+        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
+
+        buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
+        buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
+
+        sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
+        sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
+
+        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
 
         dolar.setItems(filteredData);
 
@@ -99,7 +101,7 @@ public class DolarController {
     @FXML
     private void refreshTableView() throws Exception{
 
-        dolar.setVisible(true);
+        dolar.setVisible(false);
         anio.setVisible(true);
         messageByType.setVisible(true);
         symbol.setVisible(true);
@@ -111,6 +113,7 @@ public class DolarController {
         closePx.setVisible(true);
 
     }
+
 
     public TableView<ModelMarketData> getType() {
 
@@ -133,6 +136,7 @@ public class DolarController {
         reapplyTableSortOrder();
     }
 
+
     private boolean matchesFilter(ModelMarketData dolar) {
 
         String filterString = filterField.getText();
@@ -150,6 +154,7 @@ public class DolarController {
 
         return false;
     }
+
 
     private void reapplyTableSortOrder() {
 

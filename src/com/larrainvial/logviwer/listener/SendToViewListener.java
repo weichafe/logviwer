@@ -3,11 +3,8 @@ package com.larrainvial.logviwer.listener;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.SendToViewEvent;
-import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class SendToViewListener implements Listener {
 
@@ -35,6 +32,7 @@ public class SendToViewListener implements Listener {
             if(ev.typeMarket.equals(algo.getMkd_local())){
                 algo.getMkdLocalMasterList().add(ev.modelMarketData);
                 algo.getMkd_local_tableView().setItems(algo.getMkdLocalMasterList());
+
             }
 
             if(ev.typeMarket.equals(algo.getRouting_adr())){
@@ -45,6 +43,7 @@ public class SendToViewListener implements Listener {
             if(ev.typeMarket.equals(algo.getRouting_local())){
                 algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
                 algo.getRouting_local_tableView().setItems(algo.getRoutingAdrMasterList());
+
             }
 
 

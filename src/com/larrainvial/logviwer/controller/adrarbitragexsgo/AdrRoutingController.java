@@ -1,7 +1,7 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
-import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -15,7 +15,31 @@ import javafx.scene.control.TextField;
 public class AdrRoutingController {
 
     @FXML
-    private TextField filterField;
+    private TextField filterFieldSymbol;
+
+    @FXML
+    private TextField filterFieldClOrdID;
+
+    @FXML
+    private TextField filterFieldOrderID;
+
+    @FXML
+    private TextField filterFieldOrigClOrdID;
+
+    @FXML
+    private TextField filterFieldExecType;
+
+    @FXML
+    private TextField filterFieldOrdStatus;
+
+    @FXML
+    private TextField filterFieldAccount;
+
+    @FXML
+    private TextField filterFieldSide;
+
+    @FXML
+    private TextField filterFieldClOrdLinkID;
 
     @FXML
     private TableView<ModelRoutingData> routing_nyse;
@@ -92,9 +116,30 @@ public class AdrRoutingController {
     @FXML
     private TableColumn<ModelRoutingData, String> maxFloor;
 
+
     public ObservableList<ModelRoutingData> masterData = FXCollections.observableArrayList();
 
-    public ObservableList<ModelRoutingData> filteredData = FXCollections.observableArrayList();
+    public ObservableList<ModelRoutingData> filteredDataSymbol = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataSide = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataAccount = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataOrdStatus = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataExecType = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataClOrdLinkID = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDatadOrigClOrdID = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataClOrdID = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> filteredDataOrderID = FXCollections.observableArrayList();
+
+    public ObservableList<ModelRoutingData> auxFilterData;
+    public TextField auxFilterField;
+
 
     private boolean filter = false;
 
@@ -103,52 +148,7 @@ public class AdrRoutingController {
         masterData.addListener(new ListChangeListener<ModelRoutingData>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends ModelRoutingData> change) {
-                updateFilteredData();
-            }
-        });
-
-    }
-
-    @FXML
-    private void initialize() {
-
-        symbol.setCellValueFactory(cellData -> cellData.getValue().getSymbol());
-        messageByType.setCellValueFactory(cellData -> cellData.getValue().getMessageByType());
-        hour.setCellValueFactory(cellData -> cellData.getValue().getHour());
-        year.setCellValueFactory(cellData -> cellData.getValue().getYear());
-
-        orderID.setCellValueFactory(cellData2 -> cellData2.getValue().getOrderID());
-        clOrdID.setCellValueFactory(cellData2 -> cellData2.getValue().getClOrdID());
-        origClOrdID.setCellValueFactory(cellData2 -> cellData2.getValue().getOrigClOrdID());
-        clOrdLinkID.setCellValueFactory(cellData2 -> cellData2.getValue().getClOrdLinkID());
-
-        execID.setCellValueFactory(cellData2 -> cellData2.getValue().getExecID());
-        execType.setCellValueFactory(cellData2 -> cellData2.getValue().getExecType());
-        ordStatus.setCellValueFactory(cellData2 -> cellData2.getValue().getOrdStatus());
-        account.setCellValueFactory(cellData2 -> cellData2.getValue().getAccount());
-        side.setCellValueFactory(cellData2 -> cellData2.getValue().getSide());
-
-        effectiveTime.setCellValueFactory(cellData2 -> cellData2.getValue().getEffectiveTime());
-        expireTime.setCellValueFactory(cellData2 -> cellData2.getValue().getExpireTime());
-        exDestination.setCellValueFactory(cellData2 -> cellData2.getValue().getExDestination());
-        securityExchange.setCellValueFactory(cellData2 -> cellData2.getValue().getSecurityExchange());
-
-        price.setCellValueFactory(cellData2 -> cellData2.getValue().getPrice().asString());
-        lastQty.setCellValueFactory(cellData2 -> cellData2.getValue().getLastQty().asString());
-        lastPx.setCellValueFactory(cellData2 -> cellData2.getValue().getLastPx().asString());
-        cumQty.setCellValueFactory(cellData2 -> cellData2.getValue().getCumQty().asString());
-        avgPx.setCellValueFactory(cellData2 -> cellData2.getValue().getAvgPx().asString());
-        leavesQty.setCellValueFactory(cellData2 -> cellData2.getValue().getLeavesQty().asString());
-        maxFloor.setCellValueFactory(cellData2 -> cellData2.getValue().getMaxFloor().asString());
-
-        routing_nyse.setItems(filteredData);
-
-        filterField.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData();
+                updateFilteredData(auxFilterData, auxFilterField);
             }
         });
 
@@ -189,27 +189,151 @@ public class AdrRoutingController {
 
     }
 
+    @FXML
+    private void initialize() {
+
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
+        year.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
+
+        orderID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrderID()));
+        clOrdID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClOrdID()));
+        origClOrdID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrigClOrdID()));
+        clOrdLinkID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClOrdLinkID()));
+
+        execID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExecID()));
+        execType.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExecType()));
+        ordStatus.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrdStatus()));
+        account.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getAccount()));
+        side.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSide()));
+
+        effectiveTime.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getEffectiveTime()));
+        expireTime.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExpireTime()));
+        exDestination.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExDestination()));
+        securityExchange.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSecurityExchange()));
+
+        price.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getPrice().toString()));
+        lastQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastQty().toString()));
+        lastPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastPx().toString()));
+        cumQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getCumQty().toString()));
+        avgPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getAvgPx().toString()));
+        leavesQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLeavesQty().toString()));
+        maxFloor.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getMaxFloor().toString()));
+
+        routing_nyse.setItems(filteredDataSymbol);
+
+        filterFieldSymbol.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataSymbol, filterFieldSymbol);
+            }
+        });
+
+        filterFieldClOrdID.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataClOrdID, filterFieldClOrdID);
+            }
+        });
+
+        filterFieldOrderID.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataOrderID, filterFieldOrderID);
+            }
+        });
+
+        filterFieldOrigClOrdID.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDatadOrigClOrdID, filterFieldOrigClOrdID);
+            }
+        });
+
+
+        filterFieldExecType.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataExecType, filterFieldExecType);
+            }
+        });
+
+        filterFieldOrdStatus.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataOrdStatus, filterFieldOrdStatus);
+            }
+        });
+
+        filterFieldAccount.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataAccount, filterFieldAccount);
+            }
+        });
+
+        filterFieldSide.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataSide, filterFieldSide);
+            }
+        });
+
+        filterFieldClOrdLinkID.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataClOrdLinkID, filterFieldClOrdLinkID);
+            }
+        });
+
+
+    }
+
+
+
     public TableView<ModelRoutingData> getType() {
+
         return routing_nyse;
     }
 
-    private void updateFilteredData() {
+    private void updateFilteredData(ObservableList<ModelRoutingData> filterData, TextField filterField) {
 
         if(!filter) return;
 
-        filteredData.clear();
+        auxFilterData = filterData;
+        auxFilterField = filterField;
+
+        filterData.clear();
 
         for (ModelRoutingData p : masterData) {
-            if (matchesFilter(p)) {
-                filteredData.add(p);
+            if (matchesFilter(p, filterField)) {
+                filterData.add(p);
             }
         }
 
-        // Must re-sort table after items changed
-        reapplyTableSortOrder();
+        reapplyTableSortOrder(filterData);
     }
 
-    private boolean matchesFilter(ModelRoutingData routingAdr) {
+    private boolean matchesFilter(ModelRoutingData routingAdr, TextField filterField) {
 
         String filterString = filterField.getText();
 
@@ -219,16 +343,67 @@ public class AdrRoutingController {
 
         String lowerCaseFilterString = filterString.toLowerCase();
 
-        if (routingAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
 
+        if(filterField.getId().equals("filterFieldClOrdLinkID")){
+            if (routingAdr.getClOrdLinkID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldSide")){
+            if (routingAdr.getSide().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldAccount")){
+            if (routingAdr.getAccount().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldOrdStatus")){
+            if (routingAdr.getOrdStatus().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldExecType")){
+            if (routingAdr.getExecType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldOrigClOrdID")){
+            if (routingAdr.getOrigClOrdID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldOrderID")){
+            if (routingAdr.getOrderID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldSymbol")){
+            if (routingAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterFieldClOrdID")){
+            if (routingAdr.getClOrdID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    private void reapplyTableSortOrder() {
-        routing_nyse.setItems(filteredData);
+    private void reapplyTableSortOrder(ObservableList<ModelRoutingData> filterData) {
+
+        routing_nyse.setItems(filterData);
     }
 
 }

@@ -1,357 +1,259 @@
 package com.larrainvial.logviwer.model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import java.io.Serializable;
 
+public class ModelRoutingData implements Serializable {
 
-public class ModelRoutingData {
+    private static final long serialVersionUID = 8799656478674716639L;
 
-    public final StringProperty hour;
-    public final StringProperty year;
-    public final StringProperty messageByType;
-    public final StringProperty symbol;
+    public String hour;
+    public String year;
+    public String messageByType;
+    public String symbol;
 
-    public final StringProperty orderID;
-    public final StringProperty clOrdID;
-    public final StringProperty origClOrdID;
-    public final StringProperty clOrdLinkID;
-    public final StringProperty execID;
-    public final StringProperty execType;
-    public final StringProperty ordStatus;
-    public final StringProperty account;
-    public final StringProperty side;
+    public String orderID;
+    public String clOrdID;
+    public String origClOrdID;
+    public String clOrdLinkID;
+    public String execID;
+    public String execType;
+    public String ordStatus;
+    public String account;
+    public String side;
 
-    public final StringProperty effectiveTime;
-    public final StringProperty expireTime;
-    public final StringProperty exDestination;
-    public final StringProperty securityExchange;
+    public String effectiveTime;
+    public String expireTime;
+    public String exDestination;
+    public String securityExchange;
 
-    public final DoubleProperty price;
-    public final DoubleProperty lastQty;
-    public final DoubleProperty lastPx;
-    public final DoubleProperty cumQty;
-    public final DoubleProperty avgPx;
-    public final DoubleProperty leavesQty;
-    public final DoubleProperty maxFloor;
+    public Double price;
+    public Double lastQty;
+    public Double lastPx;
+    public Double cumQty;
+    public Double avgPx;
+    public Double leavesQty;
+    public Double maxFloor;
 
 
 
-    public ModelRoutingData(String year, String hour, String messageByType, String symbol) {
+    public ModelRoutingData(String year, String hour, String messageByType) {
 
-        this.year = new SimpleStringProperty(year);
-        this.messageByType = new SimpleStringProperty(messageByType);
-        this.symbol = new SimpleStringProperty(symbol);
-        this.hour = new SimpleStringProperty(hour);
-        this.orderID = new SimpleStringProperty("");
-        this.clOrdID = new SimpleStringProperty("");
-        this.origClOrdID = new SimpleStringProperty("");
-        this.clOrdLinkID = new SimpleStringProperty("");
-        this.execID = new SimpleStringProperty("");
-        this.execType = new SimpleStringProperty("");
-        this.ordStatus = new SimpleStringProperty("");
-        this.account = new SimpleStringProperty("");
-        this.side = new SimpleStringProperty("");
-        this.effectiveTime = new SimpleStringProperty("");
-        this.expireTime = new SimpleStringProperty("");
-        this.exDestination = new SimpleStringProperty("");
-        this.securityExchange = new SimpleStringProperty("");
-        this.price = new SimpleDoubleProperty(0d);
-        this.lastQty = new SimpleDoubleProperty(0d);
-        this.lastPx = new SimpleDoubleProperty(0d);
-        this.cumQty = new SimpleDoubleProperty(0d);
-        this.avgPx = new SimpleDoubleProperty(0d);
-        this.leavesQty = new SimpleDoubleProperty(0d);
-        this.maxFloor = new SimpleDoubleProperty(0d);
+        this.year = year;
+        this.messageByType = messageByType;
+        this.symbol = "";
+        this.hour = hour;
+        this.orderID = "";
+        this.clOrdID = "";
+        this.origClOrdID = "";
+        this.clOrdLinkID = "";
+        this.execID = "";
+        this.execType = "";
+        this.ordStatus = "";
+        this.account = "";
+        this.side = "";
+        this.effectiveTime = "";
+        this.expireTime = "";
+        this.exDestination = "";
+        this.securityExchange = "";
+        this.price = 0d;
+        this.lastQty = 0d;
+        this.lastPx = 0d;
+        this.cumQty = 0d;
+        this.avgPx =  0d;
+        this.leavesQty = 0d;
+        this.maxFloor = 0d;
     }
 
 
-    public StringProperty getHour() {
-        return hour;
-    }
-
-    public StringProperty hourProperty() {
+    public String getHour() {
         return hour;
     }
 
     public void setHour(String hour) {
-        this.hour.set(hour);
+        this.hour = hour;
     }
 
-    public StringProperty getYear() {
-        return year;
-    }
-
-    public StringProperty yearProperty() {
+    public String getYear() {
         return year;
     }
 
     public void setYear(String year) {
-        this.year.set(year);
+        this.year = year;
     }
 
-    public StringProperty getMessageByType() {
-        return messageByType;
-    }
-
-    public StringProperty messageByTypeProperty() {
+    public String getMessageByType() {
         return messageByType;
     }
 
     public void setMessageByType(String messageByType) {
-        this.messageByType.set(messageByType);
+        this.messageByType = messageByType;
     }
 
-    public StringProperty getSymbol() {
-        return symbol;
-    }
-
-    public StringProperty symbolProperty() {
+    public String getSymbol() {
         return symbol;
     }
 
     public void setSymbol(String symbol) {
-        this.symbol.set(symbol);
+        this.symbol = symbol;
     }
 
-    public StringProperty getOrderID() {
-        return orderID;
-    }
-
-    public StringProperty orderIDProperty() {
+    public String getOrderID() {
         return orderID;
     }
 
     public void setOrderID(String orderID) {
-        this.orderID.set(orderID);
+        this.orderID = orderID;
     }
 
-    public StringProperty getClOrdID() {
-        return clOrdID;
-    }
-
-    public StringProperty clOrdIDProperty() {
+    public String getClOrdID() {
         return clOrdID;
     }
 
     public void setClOrdID(String clOrdID) {
-        this.clOrdID.set(clOrdID);
+        this.clOrdID = clOrdID;
     }
 
-    public StringProperty getOrigClOrdID() {
-        return origClOrdID;
-    }
-
-    public StringProperty origClOrdIDProperty() {
+    public String getOrigClOrdID() {
         return origClOrdID;
     }
 
     public void setOrigClOrdID(String origClOrdID) {
-        this.origClOrdID.set(origClOrdID);
+        this.origClOrdID = origClOrdID;
     }
 
-    public StringProperty getClOrdLinkID() {
-        return clOrdLinkID;
-    }
-
-    public StringProperty clOrdLinkIDProperty() {
+    public String getClOrdLinkID() {
         return clOrdLinkID;
     }
 
     public void setClOrdLinkID(String clOrdLinkID) {
-        this.clOrdLinkID.set(clOrdLinkID);
+        this.clOrdLinkID = clOrdLinkID;
     }
 
-    public StringProperty getExecID() {
-        return execID;
-    }
-
-    public StringProperty execIDProperty() {
+    public String getExecID() {
         return execID;
     }
 
     public void setExecID(String execID) {
-        this.execID.set(execID);
+        this.execID = execID;
     }
 
-    public StringProperty getExecType() {
-        return execType;
-    }
-
-    public StringProperty execTypeProperty() {
+    public String getExecType() {
         return execType;
     }
 
     public void setExecType(String execType) {
-        this.execType.set(execType);
+        this.execType = execType;
     }
 
-    public StringProperty getOrdStatus() {
-        return ordStatus;
-    }
-
-    public StringProperty ordStatusProperty() {
+    public String getOrdStatus() {
         return ordStatus;
     }
 
     public void setOrdStatus(String ordStatus) {
-        this.ordStatus.set(ordStatus);
+        this.ordStatus = ordStatus;
     }
 
-    public StringProperty getAccount() {
-        return account;
-    }
-
-    public StringProperty accountProperty() {
+    public String getAccount() {
         return account;
     }
 
     public void setAccount(String account) {
-        this.account.set(account);
+        this.account = account;
     }
 
-    public StringProperty getSide() {
-        return side;
-    }
-
-    public StringProperty sideProperty() {
+    public String getSide() {
         return side;
     }
 
     public void setSide(String side) {
-        this.side.set(side);
+        this.side = side;
     }
 
-    public StringProperty getEffectiveTime() {
-        return effectiveTime;
-    }
-
-    public StringProperty effectiveTimeProperty() {
+    public String getEffectiveTime() {
         return effectiveTime;
     }
 
     public void setEffectiveTime(String effectiveTime) {
-        this.effectiveTime.set(effectiveTime);
+        this.effectiveTime = effectiveTime;
     }
 
-    public StringProperty getExpireTime() {
-        return expireTime;
-    }
-
-    public StringProperty expireTimeProperty() {
+    public String getExpireTime() {
         return expireTime;
     }
 
     public void setExpireTime(String expireTime) {
-        this.expireTime.set(expireTime);
+        this.expireTime = expireTime;
     }
 
-    public StringProperty getExDestination() {
-        return exDestination;
-    }
-
-    public StringProperty exDestinationProperty() {
+    public String getExDestination() {
         return exDestination;
     }
 
     public void setExDestination(String exDestination) {
-        this.exDestination.set(exDestination);
+        this.exDestination = exDestination;
     }
 
-    public StringProperty getSecurityExchange() {
-        return securityExchange;
-    }
-
-    public StringProperty securityExchangeProperty() {
+    public String getSecurityExchange() {
         return securityExchange;
     }
 
     public void setSecurityExchange(String securityExchange) {
-        this.securityExchange.set(securityExchange);
+        this.securityExchange = securityExchange;
     }
 
-    public DoubleProperty getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public DoubleProperty priceProperty() {
-        return price;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public void setPrice(double price) {
-        this.price.set(price);
-    }
-
-    public DoubleProperty getLastQty() {
+    public Double getLastQty() {
         return lastQty;
     }
 
-    public DoubleProperty lastQtyProperty() {
-        return lastQty;
+    public void setLastQty(Double lastQty) {
+        this.lastQty = lastQty;
     }
 
-    public void setLastQty(double lastQty) {
-        this.lastQty.set(lastQty);
-    }
-
-    public DoubleProperty getLastPx() {
+    public Double getLastPx() {
         return lastPx;
     }
 
-    public DoubleProperty lastPxProperty() {
-        return lastPx;
+    public void setLastPx(Double lastPx) {
+        this.lastPx = lastPx;
     }
 
-    public void setLastPx(double lastPx) {
-        this.lastPx.set(lastPx);
-    }
-
-    public DoubleProperty getCumQty() {
+    public Double getCumQty() {
         return cumQty;
     }
 
-    public DoubleProperty cumQtyProperty() {
-        return cumQty;
+    public void setCumQty(Double cumQty) {
+        this.cumQty = cumQty;
     }
 
-    public void setCumQty(double cumQty) {
-        this.cumQty.set(cumQty);
-    }
-
-    public DoubleProperty getAvgPx() {
+    public Double getAvgPx() {
         return avgPx;
     }
 
-    public DoubleProperty avgPxProperty() {
-        return avgPx;
+    public void setAvgPx(Double avgPx) {
+        this.avgPx = avgPx;
     }
 
-    public void setAvgPx(double avgPx) {
-        this.avgPx.set(avgPx);
-    }
-
-    public DoubleProperty getLeavesQty() {
+    public Double getLeavesQty() {
         return leavesQty;
     }
 
-    public DoubleProperty leavesQtyProperty() {
-        return leavesQty;
+    public void setLeavesQty(Double leavesQty) {
+        this.leavesQty = leavesQty;
     }
 
-    public void setLeavesQty(double leavesQty) {
-        this.leavesQty.set(leavesQty);
-    }
-
-    public DoubleProperty getMaxFloor() {
+    public Double getMaxFloor() {
         return maxFloor;
     }
 
-    public DoubleProperty maxFloorProperty() {
-        return maxFloor;
-    }
-
-    public void setMaxFloor(double maxFloor) {
-        this.maxFloor.set(maxFloor);
+    public void setMaxFloor(Double maxFloor) {
+        this.maxFloor = maxFloor;
     }
 }

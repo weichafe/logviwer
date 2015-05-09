@@ -3,6 +3,7 @@ package com.larrainvial.logviwer;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import com.larrainvial.logviwer.utils.FileRepository;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,11 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Algo {
+public class Algo implements Serializable {
+
+    private static final long serialVersionUID = 8799656478674226639L;
 
     private String nameAlgo;
     private String mkd_dolar;
@@ -75,11 +78,11 @@ public class Algo {
     private FileInputStream inputStream_routing_local;
     private FileInputStream inputStream_routing_adr;
 
-    private FileInputStream inputStream = null;
-    private Scanner sc = null;
+    private FileRepository marketDataListOutput;
+    private ObjectOutputStream routingDataListOutput;
 
-
-    //ARRAY LIST DOLAR Y FILTROS
+    private ArrayList<ModelMarketData> marketDataListInput;
+    private ObjectInputStream routingDataListInput;
 
 
 
@@ -143,11 +146,38 @@ public class Algo {
     }
 
 
+    public ArrayList<ModelMarketData> getMarketDataListInput() {
+        return marketDataListInput;
+    }
 
-    /*
-    Getter and Setters
-     */
+    public void setMarketDataListInput(ArrayList<ModelMarketData> marketDataListInput) {
+        this.marketDataListInput = marketDataListInput;
+    }
 
+
+    public ObjectInputStream getRoutingDataListInput() {
+        return routingDataListInput;
+    }
+
+    public void setRoutingDataListInput(ObjectInputStream routingDataListInput) {
+        this.routingDataListInput = routingDataListInput;
+    }
+
+    public FileRepository getMarketDataListOutput() {
+        return marketDataListOutput;
+    }
+
+    public void setMarketDataListOutput(FileRepository marketDataListOutput) {
+        this.marketDataListOutput = marketDataListOutput;
+    }
+
+    public ObjectOutputStream getRoutingDataListOutput() {
+        return routingDataListOutput;
+    }
+
+    public void setRoutingDataListOutput(ObjectOutputStream routingDataListOutput) {
+        this.routingDataListOutput = routingDataListOutput;
+    }
 
     public ObservableList<ModelMarketData> getMkdAdrFilterList() {
         return mkdAdrFilterList;
@@ -204,6 +234,7 @@ public class Algo {
     public void setDolarFilterList(ObservableList<ModelMarketData> dolarFilterList) {
         this.dolarFilterList = dolarFilterList;
     }
+
 
 
     public File getFile_mkd_dolar() {
