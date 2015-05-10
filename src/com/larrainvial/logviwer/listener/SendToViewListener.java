@@ -3,8 +3,11 @@ package com.larrainvial.logviwer.listener;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.SendToViewEvent;
+import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+
+import java.util.Map;
 
 public class SendToViewListener implements Listener {
 
@@ -44,6 +47,11 @@ public class SendToViewListener implements Listener {
                 algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
                 algo.getRouting_local_tableView().setItems(algo.getRoutingAdrMasterList());
 
+            }
+
+            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterList().entrySet()) {
+                algo.getPositionsMasterList().add
+                algo.getPanel_positions_tableView().setItems( algo.positions.get(e.getKey()) );
             }
 
 

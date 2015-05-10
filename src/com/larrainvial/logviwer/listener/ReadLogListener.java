@@ -27,9 +27,6 @@ public class ReadLogListener implements Listener {
 
             ReadLogEvent ev = (ReadLogEvent) event;
 
-
-            System.out.println("read LOG " + ev.nameAlgo + " " + ev.typeMarket);
-
             this.scannerRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
             //this.byteBufferRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
 

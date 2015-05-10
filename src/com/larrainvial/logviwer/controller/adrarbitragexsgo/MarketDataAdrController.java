@@ -12,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class AdrMKDController {
+public class MarketDataAdrController {
 
     @FXML
     private TextField filterField;
@@ -53,7 +53,7 @@ public class AdrMKDController {
 
     private boolean filter = false;
 
-    public AdrMKDController(){
+    public MarketDataAdrController(){
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override

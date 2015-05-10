@@ -15,6 +15,7 @@ public class ModelMarketData implements Serializable {
     public Double sellPx;
     public Double sellQty;
     public Double closePx;
+    public Double composite;
 
 
     public ModelMarketData(String anio, String hour, String messageByType) {
@@ -28,6 +29,7 @@ public class ModelMarketData implements Serializable {
         this.sellPx =  0d;
         this.sellQty =  0d;
         this.closePx =  0d;
+        this.composite = 0d;
     }
 
     public ModelMarketData() {
@@ -106,5 +108,11 @@ public class ModelMarketData implements Serializable {
         return closePx;
     }
 
+    public Double getComposite() {
+        return composite;
+    }
 
+    public void setComposite(Double composite) {
+        this.composite = composite;
+    }
 }

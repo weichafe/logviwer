@@ -22,6 +22,7 @@ public class ModelRoutingData implements Serializable {
     public String side;
 
     public String effectiveTime;
+    public String text;
     public String expireTime;
     public String exDestination;
     public String securityExchange;
@@ -50,6 +51,7 @@ public class ModelRoutingData implements Serializable {
         this.execType = "";
         this.ordStatus = "";
         this.account = "";
+        this.text = "";
         this.side = "";
         this.effectiveTime = "";
         this.expireTime = "";
@@ -64,6 +66,13 @@ public class ModelRoutingData implements Serializable {
         this.maxFloor = 0d;
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public String getHour() {
         return hour;

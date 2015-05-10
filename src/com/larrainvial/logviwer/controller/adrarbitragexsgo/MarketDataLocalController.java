@@ -12,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class LocalMKDController {
+public class MarketDataLocalController {
 
 
     @FXML
@@ -54,7 +54,7 @@ public class LocalMKDController {
 
     private boolean filter = false;
 
-    public LocalMKDController(){
+    public MarketDataLocalController(){
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override
@@ -143,7 +143,6 @@ public class LocalMKDController {
 
         if (mkdLocal.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
             return true;
-
         }
 
         return false;

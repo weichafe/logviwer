@@ -13,8 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class LocalRoutingController {
-
+public class RoutingLocalController {
 
     @FXML
     private TextField filterFieldSymbol;
@@ -92,6 +91,9 @@ public class LocalRoutingController {
     private TableColumn<ModelRoutingData, String> expireTime;
 
     @FXML
+    private TableColumn<ModelRoutingData, String> text;
+
+    @FXML
     private TableColumn<ModelRoutingData, String> exDestination;
 
     @FXML
@@ -145,7 +147,7 @@ public class LocalRoutingController {
 
     private boolean filter = false;
 
-    public LocalRoutingController(){
+    public RoutingLocalController(){
 
         masterData.addListener(new ListChangeListener<ModelRoutingData>() {
             @Override
@@ -176,6 +178,7 @@ public class LocalRoutingController {
         side.setVisible(true);
 
         effectiveTime.setVisible(true);
+        text.setVisible(true);
         expireTime.setVisible(true);
         exDestination.setVisible(true);
         securityExchange.setVisible(true);
@@ -214,6 +217,7 @@ public class LocalRoutingController {
         expireTime.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExpireTime()));
         exDestination.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getExDestination()));
         securityExchange.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSecurityExchange()));
+        text.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getText()));
 
         price.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getPrice().toString()));
         lastQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastQty().toString()));

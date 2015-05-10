@@ -13,6 +13,4 @@ public class  Repository {
     public static FXMLLoader principalTabPanel_Loader = new FXMLLoader();
     public static HashMap<String, Algo> strategy = new HashMap<String, Algo>();
 
-    public static FileRepository workOrdersByOrdIDFile;
-
 }

@@ -3,6 +3,7 @@ package com.larrainvial.logviwer;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.utils.FileRepository;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableView;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,6 +41,7 @@ public class Algo implements Serializable {
     private FXMLLoader mkd_adr_loader = new FXMLLoader();
     private FXMLLoader routing_adr_loader = new FXMLLoader();
     private FXMLLoader routing_local_loader = new FXMLLoader();
+    private FXMLLoader panel_positions_loader = new FXMLLoader();
 
     private ObservableList<ModelMarketData> dolarMasterList = FXCollections.observableArrayList();
     private ObservableList<ModelMarketData> dolarFilterList = FXCollections.observableArrayList();
@@ -58,11 +61,16 @@ public class Algo implements Serializable {
     private ObservableList<ModelRoutingData> routingBlotterMasterLsit = FXCollections.observableArrayList();
     private ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
+    private ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
+    private HashMap<String,ModelPositions> positionsMasterListHash = new HashMap<String, ModelPositions>();
+
+
     private TableView<ModelMarketData> mkd_dolar_tableView;
     private TableView<ModelMarketData> mkd_adr_tableView;
     private TableView<ModelMarketData> mkd_local_tableView;
     private TableView<ModelRoutingData> routing_adr_tableView;
     private TableView<ModelRoutingData> routing_local_tableView;
+    private TableView<ModelPositions> panel_positions_tableView;
 
     private TimerTask timerTask;
 
@@ -145,6 +153,29 @@ public class Algo implements Serializable {
 
     }
 
+    public TableView<ModelPositions> getPanel_positions_tableView() {
+        return panel_positions_tableView;
+    }
+
+    public void setPanel_positions_tableView(TableView<ModelPositions> panel_positions_tableView) {
+        this.panel_positions_tableView = panel_positions_tableView;
+    }
+
+    public FXMLLoader getPanel_positions_loader() {
+        return panel_positions_loader;
+    }
+
+    public void setPanel_positions_loader(FXMLLoader panel_positions_loader) {
+        this.panel_positions_loader = panel_positions_loader;
+    }
+
+    public HashMap<String, ModelPositions> getPositionsMasterList() {
+        return positionsMasterList;
+    }
+
+    public void setPositionsMasterList(HashMap<String, ModelPositions> positionsMasterList) {
+        this.positionsMasterList = positionsMasterList;
+    }
 
     public ArrayList<ModelMarketData> getMarketDataListInput() {
         return marketDataListInput;
@@ -234,8 +265,6 @@ public class Algo implements Serializable {
     public void setDolarFilterList(ObservableList<ModelMarketData> dolarFilterList) {
         this.dolarFilterList = dolarFilterList;
     }
-
-
 
     public File getFile_mkd_dolar() {
         return file_mkd_dolar;
@@ -492,5 +521,4 @@ public class Algo implements Serializable {
     public void setRouting_local_loader(FXMLLoader routing_local_loader) {
         this.routing_local_loader = routing_local_loader;
     }
-
 }

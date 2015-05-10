@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane layoutX="800" layoutY="10" prefHeight="170" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.PanelPositionsController">
+  <children>
+    <TableView fx:id="positionTable" layoutX="18.0" layoutY="14.0" prefHeight="170" prefWidth="755.0" >
+      <columns>
+        <TableColumn prefWidth="131.0" fx:id="symbolLocal" text="Local Symbol" />
+        <TableColumn prefWidth="100.0" fx:id="symbolAdr" text="ADR Symbol" />
+        <TableColumn prefWidth="165.0" fx:id="qtySellLocalRatio" text="Traded Local Sell / Ratio" />
+        <TableColumn prefWidth="165.0" fx:id="qtyBuyAdr" text="Traded ADR Buy" />
+        <TableColumn prefWidth="165.0" fx:id="qtyBuyLocalRatio" text="Traded Local Buy / Ratio" />
+        <TableColumn prefWidth="165.0" fx:id="qtySellAdr" text="Traded ADR Sell" />
+        <TableColumn prefWidth="165.0" fx:id="qtyBuyLocal" text="Traded Local Buy" />
+        <TableColumn prefWidth="165.0" fx:id="qtySellLocal" text="Traded Local Sell" />
+        <TableColumn prefWidth="165.0" fx:id="ratio" text="Ratio" />
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>

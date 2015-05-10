@@ -12,10 +12,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class DolarController {
+public class MarketDataDolarController {
 
 
-    public DolarController(){
+    public MarketDataDolarController(){
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override
