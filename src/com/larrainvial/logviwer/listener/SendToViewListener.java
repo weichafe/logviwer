@@ -6,6 +6,8 @@ import com.larrainvial.logviwer.event.SendToViewEvent;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.Map;
 
@@ -49,10 +51,17 @@ public class SendToViewListener implements Listener {
 
             }
 
-            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterList().entrySet()) {
-                algo.getPositionsMasterList().add
-                algo.getPanel_positions_tableView().setItems( algo.positions.get(e.getKey()) );
+            ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
+            positionsMasterList.clear();
+
+            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
+
+                if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+                    positionsMasterList.add(algo.getPositionsMasterListHash().get(e.getKey()));
+                }
             }
+
+            algo.getPanel_positions_tableView().setItems(positionsMasterList);
 
 
         }catch (Exception e){

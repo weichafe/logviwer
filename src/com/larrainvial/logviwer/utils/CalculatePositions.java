@@ -23,18 +23,18 @@ public class CalculatePositions {
 
        String keyHashPositions = Helper.adrToLocal(modelRoutingData.symbol);
 
-       if (algo.positions.containsKey(keyHashPositions)) {
-           positions = algo.positions.get(keyHashPositions);
+       if (algo.getPositionsMasterListHash().containsKey(keyHashPositions)) {
+           positions = algo.getPositionsMasterListHash().get(keyHashPositions);
 
        } else {
-           algo.positions.put(keyHashPositions, new ModelPositions());
-           positions = algo.positions.get(keyHashPositions);
+           algo.getPositionsMasterListHash().put(keyHashPositions, new ModelPositions());
+           positions = algo.getPositionsMasterListHash().get(keyHashPositions);
            positions.ratio = Helper.ratio(keyHashPositions);
            positions.symbolLocal = keyHashPositions;
        }
 
 
-       if (modelRoutingData.side.equals("1")) {
+       if (modelRoutingData.side.equals("Buy")) {
 
            if (Helper.local(modelRoutingData.symbol)) {
                positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocal ;
@@ -48,7 +48,7 @@ public class CalculatePositions {
 
        }
 
-       if (modelRoutingData.side.equals("2") || modelRoutingData.side.equals("5")) {
+       if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
 
            if (Helper.local(modelRoutingData.symbol)) {
                positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocal;

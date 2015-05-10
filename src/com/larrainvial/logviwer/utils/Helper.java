@@ -73,7 +73,7 @@ public class Helper {
 
         if(side.equals("1")) return "Buy";
         if(side.equals("2")) return "Sell";
-        if(side.equals("5")) return "Sell short";
+        if(side.equals("5")) return "Sell Short";
 
         return side;
     }

@@ -61,7 +61,7 @@ public class Algo implements Serializable {
     private ObservableList<ModelRoutingData> routingBlotterMasterLsit = FXCollections.observableArrayList();
     private ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
-    private ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
+
     private HashMap<String,ModelPositions> positionsMasterListHash = new HashMap<String, ModelPositions>();
 
 
@@ -169,12 +169,12 @@ public class Algo implements Serializable {
         this.panel_positions_loader = panel_positions_loader;
     }
 
-    public HashMap<String, ModelPositions> getPositionsMasterList() {
-        return positionsMasterList;
+    public HashMap<String, ModelPositions> getPositionsMasterListHash() {
+        return positionsMasterListHash;
     }
 
-    public void setPositionsMasterList(HashMap<String, ModelPositions> positionsMasterList) {
-        this.positionsMasterList = positionsMasterList;
+    public void setPositionsMasterListHash(HashMap<String, ModelPositions> positionsMasterListHash) {
+        this.positionsMasterListHash = positionsMasterListHash;
     }
 
     public ArrayList<ModelMarketData> getMarketDataListInput() {

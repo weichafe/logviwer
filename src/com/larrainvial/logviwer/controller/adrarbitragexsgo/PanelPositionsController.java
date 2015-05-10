@@ -42,23 +42,6 @@ public class PanelPositionsController {
     private TableColumn<ModelPositions, String> ratio;
 
     @FXML
-    private void refreshTableView() {
-
-        positionTable.setVisible(true);
-        symbolLocal.setVisible(true);
-        symbolAdr.setVisible(true);
-        qtyBuyLocal.setVisible(true);
-        qtyBuyAdr.setVisible(true);
-        qtySellLocal.setVisible(true);
-        qtySellAdr.setVisible(true);
-        qtySellLocalRatio.setVisible(true);
-        qtyBuyLocalRatio.setVisible(true);
-        ratio.setVisible(true);
-
-    }
-
-
-    @FXML
     private void initialize() {
 
         symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolLocal()));
@@ -72,6 +55,22 @@ public class PanelPositionsController {
         qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtyBuyLocalRatio().toString()));
 
         ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getRatio().toString()));
+    }
+
+    @FXML
+    private void refreshTableView() {
+
+        positionTable.setVisible(true);
+        symbolLocal.setVisible(true);
+        symbolAdr.setVisible(true);
+        qtyBuyLocal.setVisible(true);
+        qtyBuyAdr.setVisible(true);
+        qtySellLocal.setVisible(true);
+        qtySellAdr.setVisible(true);
+        qtySellLocalRatio.setVisible(true);
+        qtyBuyLocalRatio.setVisible(true);
+        ratio.setVisible(true);
+
     }
 
     public TableView<ModelPositions> getType() {
