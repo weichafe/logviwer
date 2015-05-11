@@ -52,12 +52,12 @@ public class Control {
 
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
-            //String location = "W:\\ADRArbitrageXSGOIB\\log\\";
-            String location = "log\\";
+            String location = "W:\\ADRArbitrageXSGOIB\\log\\";
+            //String location = "log\\";
             String mkd_dolar = "FIX.4.4-ALGOARBADR5-MDFHBLP.messages_";
             String mkd_nyse = "FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_";
-            String routing_local = "FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XSGO.messages_";
+            String routing_local = "FIX.4.4-ARDARB_XSGO_IB-AMGTOBCS.messages_";
             String routing_nyse = "FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_";
             String log = ".log";
 
