@@ -2,11 +2,21 @@ package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import com.larrainvial.logviwer.model.ModelPositions;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.util.Callback;
+
+import java.math.RoundingMode;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 
 
 public class PanelPositionsController {
@@ -41,11 +51,13 @@ public class PanelPositionsController {
     @FXML
     private TableColumn<ModelPositions, String> ratio;
 
+
     @FXML
     private void initialize() {
 
         symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolLocal()));
         symbolAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolAdr()));
+
         qtyBuyLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQtyBuyLocal().toString()));
         qtyBuyAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQtyBuyAdr().toString()));
 
@@ -55,6 +67,7 @@ public class PanelPositionsController {
         qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtyBuyLocalRatio().toString()));
 
         ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getRatio().toString()));
+
     }
 
     @FXML
@@ -70,8 +83,9 @@ public class PanelPositionsController {
         qtySellLocalRatio.setVisible(true);
         qtyBuyLocalRatio.setVisible(true);
         ratio.setVisible(true);
-
     }
+
+
 
     public TableView<ModelPositions> getType() {
 

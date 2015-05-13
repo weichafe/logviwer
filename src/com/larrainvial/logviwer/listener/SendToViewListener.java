@@ -61,8 +61,9 @@ public class SendToViewListener implements Listener {
                 }
             }
 
-            algo.getPanel_positions_tableView().setItems(positionsMasterList);
-
+            if(!positionsMasterList.isEmpty()){
+                algo.getPanel_positions_tableView().setItems(positionsMasterList);
+            }
 
         }catch (Exception e){
             e.printStackTrace();
