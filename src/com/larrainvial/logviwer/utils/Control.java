@@ -24,7 +24,7 @@ public class Control {
         Controller.addEventListener(StringToFixMessageEvent.class, new StringToFixMessageListener());
         Controller.addEventListener(SendToViewEvent.class, new SendToViewListener());
         Controller.addEventListener(ReadLogEvent.class, new ReadLogListener());
-        Controller.addEventListener(AlertEvent.class, new ReadLogListener());
+        Controller.addEventListener(AlertEvent.class, new AlertListener());
     }
 
 
@@ -123,7 +123,6 @@ public class Control {
 
             PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
             algo.setPanel_positions_tableView(panel_local_loader.getType());
-            //algo.setPanel_positions_tableView(algo.positions.get(""));
 
             algo.iniziale();
 
