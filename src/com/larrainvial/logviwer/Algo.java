@@ -129,9 +129,9 @@ public class Algo implements Serializable {
                 }
 
 
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
+                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
+                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
+                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
                 Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
                 Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
 

@@ -9,14 +9,13 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    private Stage primaryStage;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Log Viwer");
-
+        Repository.primaryStage = primaryStage;
+        Repository.primaryStage.setTitle("Log Viwer");
 
         Repository.rootLayout_Loader.setLocation(MainApp.class.getResource("view/rootLayout.fxml"));
         BorderPane rootLayout_Loader = (BorderPane) Repository.rootLayout_Loader.load();
@@ -25,6 +24,7 @@ public class MainApp extends Application {
         Repository.tabPanePrincipalTabPanel = (TabPane) Repository.principalTabPanel_Loader.load();
 
         rootLayout_Loader.setCenter(Repository.tabPanePrincipalTabPanel);
+
 
         Scene scene = new Scene(rootLayout_Loader);
         primaryStage.setScene(scene);

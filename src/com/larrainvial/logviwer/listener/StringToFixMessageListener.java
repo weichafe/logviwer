@@ -2,6 +2,7 @@ package com.larrainvial.logviwer.listener;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.SendToViewEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
@@ -41,20 +42,14 @@ public class StringToFixMessageListener implements Listener {
                     new CalculatePositions(algo, modelRoutingData);
                 }
 
-                //ALERT
-
-
             } else {
 
                 StringToMarketData stringToMarketData = new StringToMarketData();
-
                 modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData));
-
-                //ALERT
             }
 
-
+            Controller.dispatchEvent(new AlertEvent(this, ev.lineFromLog, algo));
 
         } catch (Exception e){
             e.printStackTrace();

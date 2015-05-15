@@ -1,10 +1,13 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
+import com.larrainvial.logviwer.model.ModelPositions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import com.larrainvial.logviwer.model.ModelPositions;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+
+import java.text.DecimalFormat;
 
 
 public class PanelPositionsController {
@@ -39,6 +42,10 @@ public class PanelPositionsController {
     @FXML
     private TableColumn<ModelPositions, String> ratio;
 
+    private DecimalFormat numFormat = new DecimalFormat("###,###.##");
+
+    private boolean validator = false;
+
 
     @FXML
     private void initialize() {
@@ -55,6 +62,138 @@ public class PanelPositionsController {
         qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtyBuyLocalRatio().toString()));
 
         ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getRatio().toString()));
+
+        qtyBuyLocalRatio.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtySellLocalRatio.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtySellAdr.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtyBuyLocal.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtyBuyAdr.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtySellLocal.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
 
     }
 
@@ -73,10 +212,13 @@ public class PanelPositionsController {
         ratio.setVisible(true);
     }
 
-
     public TableView<ModelPositions> getType() {
 
         return positionTable;
+    }
+
+    public void formatingData(){
+
     }
 
 

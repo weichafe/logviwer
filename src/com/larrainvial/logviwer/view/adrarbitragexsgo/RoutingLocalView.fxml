@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="450" prefHeight="210.0" prefWidth="1500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.RoutingLocalController">
+<AnchorPane layoutX="7.0" layoutY="420" prefHeight="210.0" prefWidth="1500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.RoutingLocalController">
   <children>
 
     <TableView fx:id="routing_xsgo" layoutX="14.0" layoutY="7.0" prefHeight="180.0" prefWidth="1550.0">

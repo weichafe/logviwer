@@ -26,7 +26,7 @@ public class Helper {
         if(symbolLocal.equals("EOC")) return "ENDESA";
         if(symbolLocal.equals("ENI")) return "ENERSIS";
         if(symbolLocal.equals("SQM")) return "SQM-B";
-        if(symbolLocal.equals("VCO")) return "CONCHAYTORO";
+        if(symbolLocal.equals("VCO")) return "CONCHATORO";
 
         return symbolLocal;
     }
@@ -44,7 +44,7 @@ public class Helper {
         if(symbolLocal.equals("ENDESA"))      return 6d;
         if(symbolLocal.equals("ENERSIS"))     return 6d;
         if(symbolLocal.equals("SQM-B"))       return 30d;
-        if(symbolLocal.equals("CONCHAYTORO")) return 50d;
+        if(symbolLocal.equals("CONCHATORO")) return 50d;
 
         return 1d;
     }

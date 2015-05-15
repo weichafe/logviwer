@@ -22,7 +22,6 @@ public class StringToRoutingData {
             Map<Object, Object> messageMap = Helper.getFixMessageParties(message);
 
             if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1")){
-                //ALERT
                 return modelRoutingData;
             }
 
