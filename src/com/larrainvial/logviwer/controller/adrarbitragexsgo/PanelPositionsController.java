@@ -1,22 +1,10 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
-import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.model.ModelRoutingData;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import com.larrainvial.logviwer.model.ModelPositions;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
-
-import java.math.RoundingMode;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 
 
 public class PanelPositionsController {
@@ -84,7 +72,6 @@ public class PanelPositionsController {
         qtyBuyLocalRatio.setVisible(true);
         ratio.setVisible(true);
     }
-
 
 
     public TableView<ModelPositions> getType() {

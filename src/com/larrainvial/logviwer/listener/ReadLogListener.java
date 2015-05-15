@@ -53,7 +53,7 @@ public class ReadLogListener implements Listener {
         long endTime = System.nanoTime();
         long elapsedTimeInMillis = TimeUnit.MILLISECONDS.convert((endTime - startTime), TimeUnit.NANOSECONDS);
 
-        System.out.println("Total elapsed time: " + elapsedTimeInMillis + " ms"  );
+        //System.out.println("Total elapsed time: " + elapsedTimeInMillis + " ms"  );
 
     }
 
