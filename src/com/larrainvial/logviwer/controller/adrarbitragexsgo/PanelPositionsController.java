@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.ExecutionException;
 
 
 public class PanelPositionsController {
@@ -48,7 +49,7 @@ public class PanelPositionsController {
 
 
     @FXML
-    private void initialize() {
+    private void initialize() throws Exception {
 
         symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolLocal()));
         symbolAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolAdr()));

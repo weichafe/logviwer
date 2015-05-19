@@ -6,24 +6,29 @@ import com.larrainvial.logviwer.model.ModelRoutingData;
 
 public class CalculatePositions {
 
-    private static ModelPositions positions;
     private ModelRoutingData modelRoutingData;
     private Algo algo;
 
-
-
     public CalculatePositions(Algo algo, ModelRoutingData modelRoutingData) {
 
-        this.positions = new ModelPositions();
-        this.modelRoutingData = modelRoutingData;
-        this.algo = algo;
-        this.calculatePositions();
+        try {
+
+            this.modelRoutingData = modelRoutingData;
+            this.algo = algo;
+            this.calculatePositions();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
-   public void calculatePositions(){
+   public void calculatePositions() throws Exception {
+
+       ModelPositions positions;
 
        String keyHashPositions = Helper.adrToLocal(modelRoutingData.symbol);
+
 
        if (algo.getPositionsMasterListHash().containsKey(keyHashPositions)) {
            positions = algo.getPositionsMasterListHash().get(keyHashPositions);
@@ -40,7 +45,7 @@ public class CalculatePositions {
 
            if (Helper.local(modelRoutingData.symbol)) {
 
-               positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocal;
+               positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
                positions.symbolLocal = modelRoutingData.getSymbol();
 
@@ -56,13 +61,15 @@ public class CalculatePositions {
        if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
 
            if (Helper.local(modelRoutingData.symbol)) {
-               positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocal;
+               positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
-               positions.symbolLocal= modelRoutingData.getSymbol();
+               positions.symbolLocal = modelRoutingData.getSymbol();
+
 
            } else {
                positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;
                positions.symbolAdr = modelRoutingData.getSymbol();
+
            }
 
        }

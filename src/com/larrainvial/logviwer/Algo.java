@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Algo implements Serializable {
 
@@ -61,8 +62,9 @@ public class Algo implements Serializable {
     private ObservableList<ModelRoutingData> routingBlotterMasterLsit = FXCollections.observableArrayList();
     private ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
+    private ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
 
-    private HashMap<String,ModelPositions> positionsMasterListHash = new HashMap<String, ModelPositions>();
+    private ConcurrentHashMap<String,ModelPositions> positionsMasterListHash = new ConcurrentHashMap<String, ModelPositions>();
 
 
     private TableView<ModelMarketData> mkd_dolar_tableView;
@@ -129,11 +131,11 @@ public class Algo implements Serializable {
                 }
 
 
-                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
+                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
                 //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
                 //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
+                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
+                //Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
 
 
             }
@@ -153,6 +155,14 @@ public class Algo implements Serializable {
 
     }
 
+    public ObservableList<ModelPositions> getPositionsMasterList() {
+        return positionsMasterList;
+    }
+
+    public void setPositionsMasterList(ObservableList<ModelPositions> positionsMasterList) {
+        this.positionsMasterList = positionsMasterList;
+    }
+
     public TableView<ModelPositions> getPanel_positions_tableView() {
         return panel_positions_tableView;
     }
@@ -169,11 +179,11 @@ public class Algo implements Serializable {
         this.panel_positions_loader = panel_positions_loader;
     }
 
-    public HashMap<String, ModelPositions> getPositionsMasterListHash() {
+    public ConcurrentHashMap<String, ModelPositions> getPositionsMasterListHash() {
         return positionsMasterListHash;
     }
 
-    public void setPositionsMasterListHash(HashMap<String, ModelPositions> positionsMasterListHash) {
+    public void setPositionsMasterListHash(ConcurrentHashMap<String, ModelPositions> positionsMasterListHash) {
         this.positionsMasterListHash = positionsMasterListHash;
     }
 

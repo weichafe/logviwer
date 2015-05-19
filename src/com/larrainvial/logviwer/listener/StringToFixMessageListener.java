@@ -39,6 +39,7 @@ public class StringToFixMessageListener implements Listener {
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData));
 
                 if(modelRoutingData.execType.equals("Trade")){
+
                     new CalculatePositions(algo, modelRoutingData);
                 }
 
