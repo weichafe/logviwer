@@ -8,9 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 public class MarketDataDolarController {
 
@@ -69,7 +71,7 @@ public class MarketDataDolarController {
     public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
 
     @FXML
-    private void initialize() {
+    private void initialize() throws Exception {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
@@ -83,6 +85,64 @@ public class MarketDataDolarController {
         sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
         closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
+
+        messageByType.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+
+                        } else {
+
+                            if (item.equals("V")) {
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: darkgray");
+                                setText(item);
+
+                            } else if (item.equals("W")){
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: darkkhaki");
+                                setText(item);
+
+                            } else if (item.equals("X")){
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: gainsboro");
+                                setText(item);
+
+                            } else if (item.equals("5")){
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: red");
+                                setText(item);
+
+                            } else if (item.equals("1")){
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: red");
+                                setText(item);
+
+                            } else if (item.equals("A")){
+                                setTextFill(Color.BLACK);
+                                setStyle("-fx-background-color: red");
+                                setText(item);
+
+                            } else {
+                                setText(item);
+                            }
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+
 
         dolar.setItems(filteredData);
 
@@ -99,7 +159,7 @@ public class MarketDataDolarController {
     }
 
     @FXML
-    private void refreshTableView() throws Exception{
+    private void refreshTableView() throws Exception {
 
         dolar.setVisible(false);
         anio.setVisible(true);
@@ -132,7 +192,6 @@ public class MarketDataDolarController {
             }
         }
 
-        // Must re-sort table after items changed
         reapplyTableSortOrder();
     }
 
@@ -157,10 +216,6 @@ public class MarketDataDolarController {
 
 
     private void reapplyTableSortOrder() {
-
-        //ArrayList<TableColumn<ModelMarketData, ?>> sortOrder = new ArrayList<>(dolar.getSortOrder());
-        //dolar.getSortOrder().clear();
-        //dolar.getSortOrder().addAll(sortOrder);
         dolar.setItems(filteredData);
     }
 

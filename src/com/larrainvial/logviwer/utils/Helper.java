@@ -23,6 +23,8 @@ public class Helper {
         if(symbolLocal.equals("AKO/A")) return "ANDINA-A";
         if(symbolLocal.equals("AKO/B")) return "ANDINA-B";
         if(symbolLocal.equals("AKO.B")) return "ANDINA-B";
+        if(symbolLocal.equals("AKO A")) return "ANDINA-A";
+        if(symbolLocal.equals("AKO B")) return "ANDINA-B";
         if(symbolLocal.equals("EOC")) return "ENDESA";
         if(symbolLocal.equals("ENI")) return "ENERSIS";
         if(symbolLocal.equals("SQM")) return "SQM-B";

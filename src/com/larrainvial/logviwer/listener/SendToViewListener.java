@@ -4,10 +4,9 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.SendToViewEvent;
 import com.larrainvial.logviwer.model.ModelPositions;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.Map;
 
@@ -18,9 +17,11 @@ public class SendToViewListener implements Listener {
     @Override
     public void eventOccurred(Event event){
 
+        SendToViewEvent ev = (SendToViewEvent) event;
+
         try {
 
-            SendToViewEvent ev = (SendToViewEvent) event;
+
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
@@ -41,31 +42,31 @@ public class SendToViewListener implements Listener {
             }
 
             if(ev.typeMarket.equals(algo.getRouting_adr())){
-                algo.getRoutingLocalMasterList().add(ev.modelRoutingData);
-                algo.getRouting_adr_tableView().setItems(algo.getRoutingLocalMasterList());
+                algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
+                algo.getRouting_adr_tableView().setItems(algo.getRoutingAdrMasterList());
             }
 
             if(ev.typeMarket.equals(algo.getRouting_local())){
-                algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
-                algo.getRouting_local_tableView().setItems(algo.getRoutingAdrMasterList());
+                algo.getRoutingLocalMasterList().add(ev.modelRoutingData);
+                algo.getRouting_local_tableView().setItems(algo.getRoutingLocalMasterList());
 
             }
-
-            ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
-            positionsMasterList.clear();
 
             for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
 
+                String symbol = Helper.adrToLocal(ev.modelRoutingData.symbol);
+
                 if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
-                    positionsMasterList.add(algo.getPositionsMasterListHash().get(e.getKey()));
+                    if(e.getKey().equals(symbol)) {
+                        algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
+                        algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
+                        algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                    }
                 }
             }
 
-            if(!positionsMasterList.isEmpty()){
-                algo.getPanel_positions_tableView().setItems(positionsMasterList);
-            }
-
         }catch (Exception e){
+            System.out.println(ev.modelRoutingData.symbol);
             e.printStackTrace();
         }
 
