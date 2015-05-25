@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
@@ -84,9 +85,7 @@ public class StringToMarketData {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(message);
-
+            //new Algo().exception(e);
         }
 
         return modelMarketData;

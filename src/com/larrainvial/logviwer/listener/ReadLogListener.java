@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.listener;
 
-
+import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.trading.emp.Controller;
@@ -26,12 +27,12 @@ public class ReadLogListener implements Listener {
         try {
 
             ReadLogEvent ev = (ReadLogEvent) event;
-
             this.scannerRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
-            //this.byteBufferRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
+            Repository.strategy.get(ev.nameAlgo).alert("","","");
+
 
         }catch (Exception e){
-            e.printStackTrace();
+            //new Algo().exception(e);
         }
 
     }
@@ -46,7 +47,7 @@ public class ReadLogListener implements Listener {
             Controller.dispatchEvent(new StringToFixMessageEvent(this, sc.nextLine(), nameAlgo, typeMarket));
         }
 
-        if  (sc.ioException()  !=  null ) {
+        if (sc.ioException() != null ) {
             sc.ioException().printStackTrace();
         }
 
@@ -57,27 +58,5 @@ public class ReadLogListener implements Listener {
 
     }
 
-
-    public void byteBufferRead (String nameAlgo, String typeMarket, FileInputStream inputStream){
-
-        long startTime = System.nanoTime();
-        Path file = Paths.get("log\\FIX.4.4-ALGOARBADR5-MDFHBLP.messages_20150508.log");
-
-        try {
-
-            Stream<String> lines = Files.lines(file, StandardCharsets.UTF_8);
-
-            for( String line : (Iterable<String>) lines::iterator ) {
-               Controller.dispatchEvent(new StringToFixMessageEvent(this, line, nameAlgo, typeMarket));
-            }
-
-        } catch (IOException ioe){
-            ioe.printStackTrace();
-        }
-
-        long endTime = System.nanoTime();
-        long elapsedTimeInMillis = TimeUnit.MILLISECONDS.convert((endTime - startTime), TimeUnit.NANOSECONDS);
-        System.out.println("Total elapsed time: " + elapsedTimeInMillis + " ms");
-    }
 
 }

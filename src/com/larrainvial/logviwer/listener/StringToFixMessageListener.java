@@ -27,7 +27,7 @@ public class StringToFixMessageListener implements Listener {
 
             StringToFixMessageEvent ev = (StringToFixMessageEvent) event;
 
-            if(ev.lineFromLog.equals("")) return;
+            if (ev.lineFromLog.equals("")) return;
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
@@ -36,24 +36,30 @@ public class StringToFixMessageListener implements Listener {
                 StringToRoutingData stringToRoutingData = new StringToRoutingData();
 
                 modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
+
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData));
+                Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData, ev.lineFromLog));
 
-                if(modelRoutingData.execType.equals("Trade")){
 
+                if (modelRoutingData.execType.equals("Trade")) {
                     new CalculatePositions(algo, modelRoutingData);
+
                 }
 
             } else {
 
                 StringToMarketData stringToMarketData = new StringToMarketData();
                 modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
+
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData));
+                Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData, ev.lineFromLog));
+
             }
 
-            Controller.dispatchEvent(new AlertEvent(this, ev.lineFromLog, algo));
+
 
         } catch (Exception e){
-            e.printStackTrace();
+            //new Algo().exception(e);
         }
 
     }

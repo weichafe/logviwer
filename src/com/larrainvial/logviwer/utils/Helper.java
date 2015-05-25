@@ -3,6 +3,7 @@ package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
+import com.larrainvial.logviwer.Algo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,7 +184,7 @@ public class Helper {
             return orderedFixMessage;
 
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            //new Algo().exception(e);
         }
 
         return null;

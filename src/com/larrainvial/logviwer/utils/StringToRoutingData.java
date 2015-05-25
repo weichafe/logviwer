@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
@@ -46,7 +47,7 @@ public class StringToRoutingData {
             modelRoutingData.text = messageMap.containsKey(FixConstants.Text) ? messageMap.get(FixConstants.Text).toString() : "";
 
         }catch (Exception e){
-            e.printStackTrace();
+            //new Algo().exception(e);
         }
 
 

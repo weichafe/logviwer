@@ -9,10 +9,18 @@ import com.larrainvial.logviwer.listener.*;
 import com.larrainvial.trading.emp.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,7 +46,7 @@ public class Control {
 
         try {
 
-            final Algo algo = new Algo();
+            Algo algo = new Algo();
 
             algo.setNameAlgo("ADRArbitrageXSGO");
             algo.setMkd_dolar("MKD_DOLAR");
@@ -52,8 +60,9 @@ public class Control {
 
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
+
             //String location = "W:\\ADRArbitrageXSGOIB\\log\\";
-            String location = "log\\";
+            String location = "log\\AdrArbitrageIB\\";
             String mkd_dolar = "FIX.4.4-ALGOARBADR5-MDFHBLP.messages_";
             String mkd_nyse = "FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_";
@@ -70,7 +79,7 @@ public class Control {
 
             algo.fileReader();
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
 
@@ -124,11 +133,15 @@ public class Control {
             PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
             algo.setPanel_positions_tableView(panel_local_loader.getType());
 
+
+
+            Repository.strategy.put(algo.getNameAlgo(), algo);
+
             algo.iniziale();
 
 
         }catch (Exception e){
-            e.printStackTrace();
+            //new Algo().exception(e);
         }
     }
 

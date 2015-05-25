@@ -27,7 +27,6 @@ public class MarketDataDolarController {
                 updateFilteredData();
             }
         });
-
     }
 
 
@@ -65,7 +64,6 @@ public class MarketDataDolarController {
     private TableColumn<ModelMarketData, String> closePx;
 
     private boolean filter = false;
-
 
     public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
 
@@ -193,7 +191,6 @@ public class MarketDataDolarController {
             }
         }
 
-        // Must re-sort table after items changed
         reapplyTableSortOrder();
     }
 
@@ -219,9 +216,6 @@ public class MarketDataDolarController {
 
     private void reapplyTableSortOrder() {
 
-        //ArrayList<TableColumn<ModelMarketData, ?>> sortOrder = new ArrayList<>(dolar.getSortOrder());
-        //dolar.getSortOrder().clear();
-        //dolar.getSortOrder().addAll(sortOrder);
         dolar.setItems(filteredData);
     }
 
