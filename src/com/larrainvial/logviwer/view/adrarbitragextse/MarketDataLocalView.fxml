@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane layoutX="800" layoutY="200" prefHeight="174" prefWidth="932" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataLocalController">
+  <children>
+    <TableView fx:id="mkd_xsgo" layoutX="18" layoutY="14" prefHeight="190" prefWidth="755">
+      <columns>
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="MKD LOCAL" fx:id="anio" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="Hour" fx:id="hour" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="61.0" text="Type" fx:id="messageByType" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Symbol">
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="symbol">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterField" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Buy Px" fx:id="buyPx" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Buy Qty" fx:id="buyQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Px" fx:id="sellPx" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Qty" fx:id="sellQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Close Px" fx:id="closePx" />
+      </columns>
+    </TableView>
+
+  </children>
+</AnchorPane>

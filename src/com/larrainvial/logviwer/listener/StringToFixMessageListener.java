@@ -38,8 +38,8 @@ public class StringToFixMessageListener implements Listener {
                 modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData));
-                Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData, ev.lineFromLog));
 
+                Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelRoutingData, ev.lineFromLog));
 
                 if (modelRoutingData.execType.equals("Trade")) {
                     new CalculatePositions(algo, modelRoutingData);
@@ -52,6 +52,7 @@ public class StringToFixMessageListener implements Listener {
                 modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
                 Controller.dispatchEvent(new SendToViewEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData));
+
                 Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData, ev.lineFromLog));
 
             }

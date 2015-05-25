@@ -1,22 +1,15 @@
 package com.larrainvial.logviwer.listener;
 
-import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 public class ReadLogListener implements Listener {
 
@@ -28,11 +21,9 @@ public class ReadLogListener implements Listener {
 
             ReadLogEvent ev = (ReadLogEvent) event;
             this.scannerRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
-            Repository.strategy.get(ev.nameAlgo).alert("","","");
-
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
 
     }

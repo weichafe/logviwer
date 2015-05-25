@@ -9,12 +9,7 @@ import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -86,9 +81,6 @@ public class Algo implements Serializable {
     private File file_routing_local;
     private File file_routing_adr;
 
-    public Alert alertException = new Alert(Alert.AlertType.ERROR);
-    private Alert alert = new Alert(Alert.AlertType.ERROR);
-
     private FileInputStream inputStream_mkd_dolar;
     private FileInputStream inputStream_mkd_local;
     private FileInputStream inputStream_mkd_adr;
@@ -100,6 +92,7 @@ public class Algo implements Serializable {
 
     private ArrayList<ModelMarketData> marketDataListInput;
     private ObjectInputStream routingDataListInput;
+    private boolean startProgram = true;
 
 
 
@@ -145,6 +138,7 @@ public class Algo implements Serializable {
                 Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
                 Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
 
+                startProgram = false;
             }
 
         };
@@ -163,54 +157,13 @@ public class Algo implements Serializable {
 
     }
 
-    public void alert(String headerText, String contentText1, String contentText2){
 
-        alert.setTitle("Alert");
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText1);
-        alert.setContentText(contentText2);
-        alert.show();
+    public boolean isStartProgram() {
+        return startProgram;
     }
 
-    public void exception() {
-
-        try {
-
-            alertException.setTitle("Exception Dialog");
-            alertException.setHeaderText("Look, an Exception Dialog");
-            alertException.setContentText("");
-
-            Exception ex = new FileNotFoundException();
-
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            ex.printStackTrace(pw);
-            String exceptionText = sw.toString();
-
-            Label label = new Label("The exception stacktrace was:");
-
-            TextArea textArea = new TextArea(exceptionText);
-            textArea.setEditable(false);
-            textArea.setWrapText(true);
-
-            textArea.setMaxWidth(Double.MAX_VALUE);
-            textArea.setMaxHeight(Double.MAX_VALUE);
-            GridPane.setVgrow(textArea, Priority.ALWAYS);
-            GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-            GridPane expContent = new GridPane();
-            expContent.setMaxWidth(Double.MAX_VALUE);
-            expContent.add(label, 0, 0);
-            expContent.add(textArea, 0, 1);
-
-            alertException.getDialogPane().setExpandableContent(expContent);
-            alertException.hide();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-
-
+    public void setStartProgram(boolean startProgram) {
+        this.startProgram = startProgram;
     }
 
     public ObservableList<ModelPositions> getPositionsMasterList() {

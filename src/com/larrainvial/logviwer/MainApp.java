@@ -1,9 +1,9 @@
 package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.utils.Control;
+import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -35,7 +35,7 @@ public class MainApp extends Application {
             Control.initializaAll();
 
         } catch (Exception e){
-           //new Algo().exception(e);
+            Helper.exception(e);
         }
 
     }

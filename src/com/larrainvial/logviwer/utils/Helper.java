@@ -3,8 +3,16 @@ package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
-import com.larrainvial.logviwer.Algo;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +20,77 @@ import java.util.Map;
 
 public class Helper {
 
+    public static void exception(Exception e) {
+
+        try {
+
+            Platform.runLater(new Runnable() {
+
+                public void run() {
+
+                    Alert alertException = new Alert(Alert.AlertType.ERROR);
+                    alertException.setTitle("Exception Dialog");
+                    alertException.setHeaderText("Look, an Exception Dialog");
+                    alertException.setContentText(e.toString());
+
+                    Exception ex = new FileNotFoundException(e.toString());
+
+                    StringWriter sw = new StringWriter();
+                    PrintWriter pw = new PrintWriter(sw);
+                    ex.printStackTrace(pw);
+                    String exceptionText = sw.toString();
+
+                    Label label = new Label("The exception stacktrace was:");
+
+                    TextArea textArea = new TextArea(exceptionText);
+                    textArea.setEditable(false);
+                    textArea.setWrapText(true);
+
+                    textArea.setMaxWidth(Double.MAX_VALUE);
+                    textArea.setMaxHeight(Double.MAX_VALUE);
+                    GridPane.setVgrow(textArea, Priority.ALWAYS);
+                    GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+                    GridPane expContent = new GridPane();
+                    expContent.setMaxWidth(Double.MAX_VALUE);
+                    expContent.add(label, 0, 0);
+                    expContent.add(textArea, 0, 1);
+
+                    alertException.getDialogPane().setExpandableContent(expContent);
+                    alertException.showAndWait();
+
+                }
+            });
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+
+        }
+    }
+
+    public static void alert(String headerText, String contentText1){
+
+            Platform.runLater(new Runnable() {
+                public void run() {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Alert");
+                    alert.setHeaderText(headerText);
+                    alert.setContentText(contentText1);
+                    alert.showAndWait();
+                }
+            });
+    }
+
+
     public static String adrToLocal(String symbolLocal){
 
+        if(symbolLocal.equals("AVAL")) return "PFAVAL";
+        if(symbolLocal.equals("AVH")) return "PFAVH";
+        if(symbolLocal.equals("CIB")) return "PFBCOLOM";
+        if(symbolLocal.equals("EC")) return "ECOPETROL";
+        if(symbolLocal.equals("PRE")) return "PREC";
+        if(symbolLocal.equals("CNE")) return "CNEC";
         if(symbolLocal.equals("BCH")) return "CHILE";
         if(symbolLocal.equals("LFL")) return "LAN";
         if(symbolLocal.equals("BSAC")) return "BSANTANDER";
@@ -36,6 +113,12 @@ public class Helper {
 
     public static Double ratio(String symbolLocal){
 
+        if(symbolLocal.equals("AVAL"))        return 20d;
+        if(symbolLocal.equals("AVH"))         return 8d;
+        if(symbolLocal.equals("CIB"))         return 4d;
+        if(symbolLocal.equals("EC"))          return 20d;
+        if(symbolLocal.equals("PREC"))        return 1d;
+        if(symbolLocal.equals("CNEC"))        return 1d;
         if(symbolLocal.equals("CHILE"))       return 600d;
         if(symbolLocal.equals("LAN"))         return 1d;
         if(symbolLocal.equals("BSANTANDER"))  return 400d;
@@ -47,7 +130,7 @@ public class Helper {
         if(symbolLocal.equals("ENDESA"))      return 6d;
         if(symbolLocal.equals("ENERSIS"))     return 6d;
         if(symbolLocal.equals("SQM-B"))       return 30d;
-        if(symbolLocal.equals("CONCHATORO")) return 50d;
+        if(symbolLocal.equals("CONCHATORO"))  return 50d;
 
         return 1d;
     }
@@ -55,6 +138,12 @@ public class Helper {
 
     public static boolean local(String symbolLocal){
 
+        if(symbolLocal.equals("AVAL"))        return true;
+        if(symbolLocal.equals("AVH"))         return true;
+        if(symbolLocal.equals("CIB"))         return true;
+        if(symbolLocal.equals("EC"))          return true;
+        if(symbolLocal.equals("PREC"))        return true;
+        if(symbolLocal.equals("CNEC"))        return true;
         if(symbolLocal.equals("CHILE"))       return true;
         if(symbolLocal.equals("LAN"))         return true;
         if(symbolLocal.equals("BSANTANDER"))  return true;
