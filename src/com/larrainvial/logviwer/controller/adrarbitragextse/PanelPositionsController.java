@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.ExecutionException;
 
 
 public class PanelPositionsController {

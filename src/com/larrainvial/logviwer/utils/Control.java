@@ -59,8 +59,8 @@ public class Control {
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "W:\\ADRArbitrageXSGOIB\\log\\";
-            //String location = "log\\AdrArbitrageIB\\";
+            //String location = "W:\\ADRArbitrageXSGOIB\\log\\";
+            String location = "log\\AdrArbitrageIB\\";
             String mkd_dolar = "FIX.4.4-ALGOARBADR5-MDFHBLP.messages_";
             String mkd_nyse = "FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_";

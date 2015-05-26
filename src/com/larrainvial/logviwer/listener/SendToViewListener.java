@@ -66,6 +66,7 @@ public class SendToViewListener implements Listener {
 
         }catch (Exception e){
             //new Algo().exception(e);
+            e.printStackTrace();
         }
 
     }

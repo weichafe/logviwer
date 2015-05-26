@@ -114,8 +114,6 @@ public class Algo implements Serializable {
 
     public void iniziale() throws Exception {
 
-        
-
         final double finalTimer_initial = this.getTime();
         stopTimer();
         timerTask = new TimerTask(){

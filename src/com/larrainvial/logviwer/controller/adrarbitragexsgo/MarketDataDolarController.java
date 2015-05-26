@@ -24,14 +24,17 @@ public class MarketDataDolarController {
             @Override
             public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
 
-                updateFilteredData();
+                updateFilteredData(auxFilterData, auxFilterField);
             }
         });
     }
 
 
     @FXML
-    public TextField filterField;
+    private TextField filterField;
+
+    @FXML
+    private TextField filterType;
 
     @FXML
     private TableView<ModelMarketData> dolar;
@@ -65,9 +68,15 @@ public class MarketDataDolarController {
 
     private boolean filter = false;
 
+    private ObservableList<ModelMarketData> auxFilterData;
+
+    private TextField auxFilterField;
+
     public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
 
-    public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
+    public ObservableList<ModelMarketData> filteredDataSymbol = FXCollections.observableArrayList();
+
+    public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() throws Exception {
@@ -85,6 +94,7 @@ public class MarketDataDolarController {
 
         closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
 
+        /*
         messageByType.setCellFactory(column -> {
             return new TableCell<ModelMarketData, String>() {
                 @Override
@@ -140,18 +150,27 @@ public class MarketDataDolarController {
                 }
             };
         });
+        .*/
 
 
 
-        dolar.setItems(filteredData);
+        dolar.setItems(filteredDataSymbol);
 
         filterField.textProperty().addListener(new ChangeListener<String>() {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
                 filter = true;
-                updateFilteredData();
+                updateFilteredData(filteredDatafilterType, filterField);
+            }
+        });
+
+        filterType.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataSymbol, filterType);
             }
         });
 
@@ -179,23 +198,26 @@ public class MarketDataDolarController {
         return dolar;
     }
 
-    private void updateFilteredData() {
+    private void updateFilteredData(ObservableList<ModelMarketData> filterData, TextField filterField) {
 
         if(!filter) return;
 
-        filteredData.clear();
+        auxFilterData = filterData;
+        auxFilterField = filterField;
+
+        filterData.clear();
 
         for (ModelMarketData p : masterData) {
-            if (matchesFilter(p)) {
-                filteredData.add(p);
+            if (matchesFilter(p, filterField)) {
+                filterData.add(p);
             }
         }
 
-        reapplyTableSortOrder();
+        reapplyTableSortOrder(filterData);
     }
 
 
-    private boolean matchesFilter(ModelMarketData dolar) {
+    private boolean matchesFilter(ModelMarketData dolar, TextField filterField) {
 
         String filterString = filterField.getText();
 
@@ -205,18 +227,26 @@ public class MarketDataDolarController {
 
         String lowerCaseFilterString = filterString.toLowerCase();
 
-        if (dolar.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
 
+        if(filterField.getId().equals("filterField")){
+            if (dolar.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterType")){
+            if (dolar.getMessageByType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
         }
 
         return false;
     }
 
 
-    private void reapplyTableSortOrder() {
+    private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
 
-        dolar.setItems(filteredData);
+        dolar.setItems(filterData);
     }
 
 }

@@ -52,7 +52,8 @@ public class AlertListener implements Listener {
             }
 
         } catch (Exception e){
-            Helper.exception(e);
+            //Helper.exception(e);
+            e.printStackTrace();
         }
 
 

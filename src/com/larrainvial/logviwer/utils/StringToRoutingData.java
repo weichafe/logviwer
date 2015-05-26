@@ -48,6 +48,7 @@ public class StringToRoutingData {
 
         }catch (Exception e){
             //new Algo().exception(e);
+            e.printStackTrace();
         }
 
 

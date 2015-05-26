@@ -19,6 +19,9 @@ public class MarketDataLocalController {
     private TextField filterField;
 
     @FXML
+    private TextField filterType;
+
+    @FXML
     private TableView<ModelMarketData> mkd_xsgo;
 
     @FXML
@@ -50,9 +53,15 @@ public class MarketDataLocalController {
 
     public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
 
-    public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
+    public ObservableList<ModelMarketData> filteredDataSymbol = FXCollections.observableArrayList();
+
+    public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
 
     private boolean filter = false;
+
+    private ObservableList<ModelMarketData> auxFilterData;
+
+    private TextField auxFilterField;
 
     public MarketDataLocalController(){
 
@@ -60,7 +69,7 @@ public class MarketDataLocalController {
             @Override
             public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
 
-                updateFilteredData();
+                updateFilteredData(auxFilterData, auxFilterField);
             }
         });
 
@@ -81,15 +90,24 @@ public class MarketDataLocalController {
         sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
         closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
-        mkd_xsgo.setItems(filteredData);
+
+        mkd_xsgo.setItems(filteredDataSymbol);
 
         filterField.textProperty().addListener(new ChangeListener<String>() {
 
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-
                 filter = true;
-                updateFilteredData();
+                updateFilteredData(filteredDatafilterType, filterField);
+            }
+        });
+
+        filterType.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataSymbol, filterType);
             }
         });
 
@@ -116,22 +134,22 @@ public class MarketDataLocalController {
         return mkd_xsgo;
     }
 
-    private void updateFilteredData() {
+    private void updateFilteredData(ObservableList<ModelMarketData> filterData, TextField filterField) {
 
         if(!filter) return;
 
-        filteredData.clear();
+        filterData.clear();
 
         for (ModelMarketData p : masterData) {
-            if (matchesFilter(p)) {
-                filteredData.add(p);
+            if (matchesFilter(p, filterField)) {
+                filterData.add(p);
             }
         }
 
-        reapplyTableSortOrder();
+        reapplyTableSortOrder(filterData);
     }
 
-    private boolean matchesFilter(ModelMarketData mkdLocal) {
+    private boolean matchesFilter(ModelMarketData mkdLocal, TextField filterField) {
 
         String filterString = filterField.getText();
 
@@ -141,15 +159,24 @@ public class MarketDataLocalController {
 
         String lowerCaseFilterString = filterString.toLowerCase();
 
-        if (mkdLocal.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
+
+        if(filterField.getId().equals("filterField")){
+            if (mkdLocal.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterType")){
+            if (mkdLocal.getMessageByType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    private void reapplyTableSortOrder() {
+    private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
 
-        mkd_xsgo.setItems(filteredData);
+        mkd_xsgo.setItems(filterData);
     }
 }

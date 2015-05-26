@@ -61,6 +61,7 @@ public class StringToFixMessageListener implements Listener {
 
         } catch (Exception e){
             //new Algo().exception(e);
+            e.printStackTrace();
         }
 
     }

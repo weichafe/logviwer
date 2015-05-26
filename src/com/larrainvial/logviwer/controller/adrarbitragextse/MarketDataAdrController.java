@@ -18,6 +18,9 @@ public class MarketDataAdrController {
     private TextField filterField;
 
     @FXML
+    private TextField filterType;
+
+    @FXML
     private TableView<ModelMarketData> mkd_nyse;
 
     @FXML
@@ -51,14 +54,21 @@ public class MarketDataAdrController {
 
     public ObservableList<ModelMarketData> filteredDataSymbol = FXCollections.observableArrayList();
 
+    public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
+
     private boolean filter = false;
+
+    private ObservableList<ModelMarketData> auxFilterData;
+
+    private TextField auxFilterField;
 
     public MarketDataAdrController(){
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override
             public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
-                updateFilteredData();
+
+                updateFilteredData(auxFilterData, auxFilterField);
             }
         });
 
@@ -87,9 +97,19 @@ public class MarketDataAdrController {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 filter = true;
-                updateFilteredData();
+                updateFilteredData(filteredDatafilterType, filterField);
             }
         });
+
+        filterType.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                filter = true;
+                updateFilteredData(filteredDataSymbol, filterType);
+            }
+        });
+
 
     }
 
@@ -114,22 +134,25 @@ public class MarketDataAdrController {
         return mkd_nyse;
     }
 
-    private void updateFilteredData() {
+    private void updateFilteredData(ObservableList<ModelMarketData> filterData, TextField filterField) {
 
         if(!filter) return;
 
-        filteredDataSymbol.clear();
+        auxFilterData = filterData;
+        auxFilterField = filterField;
+
+        filterData.clear();
 
         for (ModelMarketData p : masterData) {
-            if (matchesFilter(p)) {
-                filteredDataSymbol.add(p);
+            if (matchesFilter(p, filterField)) {
+                filterData.add(p);
             }
         }
 
-        reapplyTableSortOrder();
+        reapplyTableSortOrder(filterData);
     }
 
-    private boolean matchesFilter(ModelMarketData mkdAdr) {
+    private boolean matchesFilter(ModelMarketData mkdAdr, TextField filterField) {
 
         String filterString = filterField.getText();
 
@@ -139,15 +162,25 @@ public class MarketDataAdrController {
 
         String lowerCaseFilterString = filterString.toLowerCase();
 
-        if (mkdAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
+
+        if(filterField.getId().equals("filterField")){
+            if (mkdAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
+        }
+
+        if(filterField.getId().equals("filterType")){
+            if (mkdAdr.getMessageByType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+                return true;
+            }
         }
 
         return false;
     }
 
-    private void reapplyTableSortOrder() {
-        mkd_nyse.setItems(filteredDataSymbol);
+    private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
+
+        mkd_nyse.setItems(filterData);
     }
 
 }

@@ -59,6 +59,7 @@ public class MarketDataAdrController {
     private boolean filter = false;
 
     private ObservableList<ModelMarketData> auxFilterData;
+
     private TextField auxFilterField;
 
     public MarketDataAdrController(){
@@ -162,26 +163,23 @@ public class MarketDataAdrController {
         String lowerCaseFilterString = filterString.toLowerCase();
 
 
-        if(filterField.getId().equals("filteredDataSymbol")){
+        if(filterField.getId().equals("filterField")){
             if (mkdAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
                 return true;
             }
         }
 
-        if(filterField.getId().equals("filteredDatafilterType")){
+        if(filterField.getId().equals("filterType")){
             if (mkdAdr.getMessageByType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
                 return true;
             }
-        }
-
-        if (mkdAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-            return true;
         }
 
         return false;
     }
 
     private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
+
         mkd_nyse.setItems(filterData);
     }
 

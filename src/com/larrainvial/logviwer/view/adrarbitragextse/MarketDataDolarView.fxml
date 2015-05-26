@@ -11,7 +11,20 @@
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="DOLAR" fx:id="anio" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="Hour" fx:id="hour" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="61" text="Type" fx:id="messageByType" />
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Type">
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="messageByType">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterType" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
 
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Symbol">
           <columns >

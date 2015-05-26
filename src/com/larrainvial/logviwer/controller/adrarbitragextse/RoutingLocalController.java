@@ -1,4 +1,4 @@
-package com.larrainvial.logviwer.controller.adrarbitragextse;
+package com.larrainvial.logviwer.controller.adrarbitragetse;
 
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
