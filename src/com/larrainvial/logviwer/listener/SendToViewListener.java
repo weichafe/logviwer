@@ -8,7 +8,6 @@ import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 
-import javax.swing.plaf.TableHeaderUI;
 import java.util.Map;
 
 public class SendToViewListener implements Listener {
@@ -53,6 +52,7 @@ public class SendToViewListener implements Listener {
 
             for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
 
+                //ERROR AKI
                 String symbol = Helper.adrToLocal(ev.modelRoutingData.symbol);
 
                 if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {

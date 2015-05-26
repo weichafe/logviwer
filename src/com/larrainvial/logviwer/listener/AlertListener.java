@@ -33,16 +33,19 @@ public class AlertListener implements Listener {
             }
 
             if (typeOfMessage.getValue().equals("A") && !algo.isStartProgram()){
-                Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + ev.modelRoutingData.text);
+                //Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + ev.modelRoutingData.text);
+                Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + "");
             }
 
             if (typeOfMessage.getValue().equals("1") && !algo.isStartProgram()){
-                Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " + ev.modelRoutingData.text);
+                //Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " + ev.modelRoutingData.text);
+                Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " +"");
 
             }
 
             if(typeOfMessage.getValue().equals("5") && !algo.isStartProgram()){
-                Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + ev.modelRoutingData.text );
+                //Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + ev.modelRoutingData.text );
+                Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + "");
 
             }
 

@@ -1,4 +1,4 @@
-package com.larrainvial.logviwer.controller.adrarbitragextse;
+package com.larrainvial.logviwer.controller.adrarbitragexbog;
 
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
@@ -151,7 +151,7 @@ public class RoutingLocalController {
 
         masterData.addListener(new ListChangeListener<ModelRoutingData>() {
             @Override
-            public void onChanged(ListChangeListener.Change<? extends ModelRoutingData> change) {
+            public void onChanged(Change<? extends ModelRoutingData> change) {
                 updateFilteredData(auxFilterData, auxFilterField);
             }
         });

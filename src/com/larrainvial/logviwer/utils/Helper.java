@@ -113,10 +113,10 @@ public class Helper {
 
     public static Double ratio(String symbolLocal){
 
-        if(symbolLocal.equals("AVAL"))        return 20d;
-        if(symbolLocal.equals("AVH"))         return 8d;
-        if(symbolLocal.equals("CIB"))         return 4d;
-        if(symbolLocal.equals("EC"))          return 20d;
+        if(symbolLocal.equals("PFAVAL"))      return 20d;
+        if(symbolLocal.equals("PFAVH"))       return 8d;
+        if(symbolLocal.equals("PFBCOLOM"))    return 4d;
+        if(symbolLocal.equals("ECOPETROL"))   return 20d;
         if(symbolLocal.equals("PREC"))        return 1d;
         if(symbolLocal.equals("CNEC"))        return 1d;
         if(symbolLocal.equals("CHILE"))       return 600d;
@@ -127,9 +127,9 @@ public class Helper {
         if(symbolLocal.equals("CORPBANCA"))   return 1500d;
         if(symbolLocal.equals("ANDINA-A"))    return 6d;
         if(symbolLocal.equals("ANDINA-B"))    return 6d;
-        if(symbolLocal.equals("ENDESA"))      return 6d;
-        if(symbolLocal.equals("ENERSIS"))     return 6d;
-        if(symbolLocal.equals("SQM-B"))       return 30d;
+        if(symbolLocal.equals("ENDESA"))      return 30d;
+        if(symbolLocal.equals("ENERSIS"))     return 50d;
+        if(symbolLocal.equals("SQM-B"))       return 1d;
         if(symbolLocal.equals("CONCHATORO"))  return 50d;
 
         return 1d;

@@ -1,5 +1,4 @@
-package com.larrainvial.logviwer.controller.adrarbitragextse;
-
+package com.larrainvial.logviwer.controller.adrarbitragexbog;
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class RoutingLocalController {
+public class RoutingAdrController {
 
     @FXML
     private TextField filterFieldSymbol;
@@ -43,7 +42,7 @@ public class RoutingLocalController {
     private TextField filterFieldClOrdLinkID;
 
     @FXML
-    private TableView<ModelRoutingData> routing_xsgo;
+    private TableView<ModelRoutingData> routing_nyse;
 
     @FXML
     private TableColumn<ModelRoutingData, String> year;
@@ -147,11 +146,11 @@ public class RoutingLocalController {
 
     private boolean filter = false;
 
-    public RoutingLocalController(){
+    public RoutingAdrController(){
 
         masterData.addListener(new ListChangeListener<ModelRoutingData>() {
             @Override
-            public void onChanged(ListChangeListener.Change<? extends ModelRoutingData> change) {
+            public void onChanged(Change<? extends ModelRoutingData> change) {
                 updateFilteredData(auxFilterData, auxFilterField);
             }
         });
@@ -161,7 +160,7 @@ public class RoutingLocalController {
     @FXML
     private void refreshTableView() {
 
-        routing_xsgo.setVisible(true);
+        routing_nyse.setVisible(true);
         hour.setVisible(true);
         year.setVisible(true);
         messageByType.setVisible(true);
@@ -178,8 +177,8 @@ public class RoutingLocalController {
         side.setVisible(true);
 
         effectiveTime.setVisible(true);
-        text.setVisible(true);
         expireTime.setVisible(true);
+        text.setVisible(true);
         exDestination.setVisible(true);
         securityExchange.setVisible(true);
 
@@ -227,7 +226,7 @@ public class RoutingLocalController {
         leavesQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLeavesQty().toString()));
         maxFloor.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getMaxFloor().toString()));
 
-        routing_xsgo.setItems(filteredDataSymbol);
+        routing_nyse.setItems(filteredDataSymbol);
 
         filterFieldSymbol.textProperty().addListener(new ChangeListener<String>() {
 
@@ -318,7 +317,7 @@ public class RoutingLocalController {
 
     public TableView<ModelRoutingData> getType() {
 
-        return routing_xsgo;
+        return routing_nyse;
     }
 
     private void updateFilteredData(ObservableList<ModelRoutingData> filterData, TextField filterField) {
@@ -409,6 +408,7 @@ public class RoutingLocalController {
 
     private void reapplyTableSortOrder(ObservableList<ModelRoutingData> filterData) {
 
-        routing_xsgo.setItems(filterData);
+        routing_nyse.setItems(filterData);
     }
+
 }
