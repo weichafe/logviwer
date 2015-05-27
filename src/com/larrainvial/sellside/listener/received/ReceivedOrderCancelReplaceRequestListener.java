@@ -1,6 +1,5 @@
 package com.larrainvial.sellside.listener.received;
 
-
 import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelReplaceRequestEvent;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
@@ -49,7 +48,8 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
 
                 Repository.executionWorkOrderBuy.put(orderCancelReplaceRequest.getClOrdID().getValue(), orders);
-                Repository.executionWorkOrderBuy.put(orders.workOrders.getOrderID().getValue(), orders);
+                Repository.executionWorkOrderBuy.remove(orderCancelReplaceRequest.getOrigClOrdID().getValue(), orders);
+
 
                 Controller.dispatchEvent(new TradeEvent(this, orders));
 
@@ -61,7 +61,7 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
 
                 Repository.executionWorkOrderSell.put(orderCancelReplaceRequest.getClOrdID().getValue(), orders);
-                Repository.executionWorkOrderSell.put(orders.workOrders.getOrderID().getValue(), orders);
+                Repository.executionWorkOrderSell.remove(orderCancelReplaceRequest.getOrigClOrdID().getValue(), orders);
 
                 Controller.dispatchEvent(new TradeEvent(this, orders));
 
@@ -76,6 +76,9 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
     public synchronized void setValuesWorkOrders(ExecutionReport workOrders) throws Exception {
 
         try {
+
+            workOrders.set(orderCancelReplaceRequest.getClOrdID());
+            workOrders.set(orderCancelReplaceRequest.getOrigClOrdID());
             workOrders.set(new ExecID(IDGenerator.getID()));
             workOrders.set(new TransactTime(new Date()));
             workOrders.set(orderCancelReplaceRequest.getPrice());

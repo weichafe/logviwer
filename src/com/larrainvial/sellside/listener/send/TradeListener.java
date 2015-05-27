@@ -12,6 +12,7 @@ import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
 import java.util.Map;
 
+
 public class TradeListener implements Listener {
 
     private Orders receivedOrder;
@@ -65,8 +66,6 @@ public class TradeListener implements Listener {
                     }
 
                 }
-
-
 
             }
 

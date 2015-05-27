@@ -44,12 +44,9 @@ public class ReceivedNewOrderSingleListener implements Listener {
 
             if (orders.workOrders.getSide().valueEquals(Side.BUY)) {
                 Repository.executionWorkOrderBuy.put(orders.workOrders.getString(ClOrdID.FIELD), orders);
-                Repository.executionWorkOrderBuy.put(orders.workOrders.getString(OrderID.FIELD), orders);
 
             } else if (orders.workOrders.getSide().valueEquals(Side.SELL) || orders.workOrders.getSide().valueEquals(Side.SELL_SHORT)) {
                 Repository.executionWorkOrderSell.put(orders.workOrders.getString(ClOrdID.FIELD), orders);
-                Repository.executionWorkOrderSell.put(orders.workOrders.getString(OrderID.FIELD), orders);
-
             }
 
             Controller.dispatchEvent(new TradeEvent(this, orders));

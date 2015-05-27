@@ -52,8 +52,7 @@ public class ReceivedOrderCancelRequestListener implements Listener {
 
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
 
-                Repository.executionWorkOrderBuy.put(orderCancelRequest.getClOrdID().getValue(), orders);
-                Repository.executionWorkOrderBuy.put(orders.workOrders.getOrderID().getValue(), orders);
+                Repository.executionWorkOrderBuy.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
             } else {
 
@@ -65,6 +64,8 @@ public class ReceivedOrderCancelRequestListener implements Listener {
 
                 Repository.executionWorkOrderSell.put(orderCancelRequest.getClOrdID().getValue(), orders);
                 Repository.executionWorkOrderSell.put(orders.workOrders.getOrderID().getValue(), orders);
+
+                Repository.executionWorkOrderSell.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
             }
 
