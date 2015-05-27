@@ -1,6 +1,5 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.utils.Control;
 import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -10,12 +9,11 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-
-
     @Override
     public void start(Stage primaryStage) {
 
         try {
+
 
             Repository.primaryStage = primaryStage;
             Repository.primaryStage.setTitle("Log Viwer");
@@ -31,8 +29,10 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            Control.initialize();
-            Control.initializaAll();
+            //Control.initialize();
+            //Control.initializaAll();
+
+            com.larrainvial.sellside.MainApp.sellside();
 
         } catch (Exception e){
             Helper.exception(e);

@@ -1,0 +1,22 @@
+20150527-19:16:27.812: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150527-19:16:27.813: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150527-19:16:28.002: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58026
+20150527-19:16:28.002: Acceptor heartbeat set to 60 seconds
+20150527-19:16:28.004: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150527-19:16:28.016: Received logon
+20150527-19:16:28.020: Responding to logon request
+20150527-19:16:52.734: Disconnecting: Socket exception (/127.0.0.1:58026): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150527-19:17:00.072: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58050
+20150527-19:17:00.072: Acceptor heartbeat set to 60 seconds
+20150527-19:17:00.073: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150527-19:17:00.073: Received logon
+20150527-19:17:00.075: Responding to logon request
+20150527-19:26:19.894: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150527-19:26:19.895: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150527-19:26:20.131: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58164
+20150527-19:26:20.131: Acceptor heartbeat set to 60 seconds
+20150527-19:26:20.133: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150527-19:26:20.143: Received logon
+20150527-19:26:20.150: Responding to logon request
+20150527-19:34:31.405: Rejecting invalid message: quickfix.FieldException: Tag not defined for this message type, field=111: 8=FIX.4.49=30235=F34=6049=LVARB50=default52=20150527-19:34:31.39556=LVSSG_ARB57=XPUS1=QXP01928411=759a43fe55574d5637=61f99f92a7164a8a38=10041=a624491dd34470c54=255=BSAC58=New Sell BSAC 100.0 @ 21.2560=20150527-19:34:31.636111=100583=-4a42cd4ee29cbab5453=2448=XPUS447=D452=1448=XPUS447=D452=110=190
+20150527-19:34:31.407: Reject sent for Message 60: Tag not defined for this message type:111
