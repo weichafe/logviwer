@@ -18,10 +18,12 @@ public class SendToViewListener implements Listener {
     public void eventOccurred(Event event){
 
         SendToViewEvent ev = (SendToViewEvent) event;
+        long time = 0;
 
         try {
 
             algo = Repository.strategy.get(ev.nameAlgo);
+
 
             if (ev.typeMarket.equals(algo.getMkd_dolar())) {
                 algo.getDolarMasterList().add(ev.modelMarketData);
@@ -50,21 +52,29 @@ public class SendToViewListener implements Listener {
 
             }
 
-            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
+            if(!ev.marketData) return;
 
-                //ERROR AKI
-                String symbol = Helper.adrToLocal(ev.modelRoutingData.symbol);
+                    for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
 
-                if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
-                    if (e.getKey().equals(symbol)) {
-                        algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
-                        algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
-                        algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                        try {
+
+                            if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+                                if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
+                                    algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
+                                    algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
+                                    algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                                }
+                            }
+
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                            System.out.println(ev.modelRoutingData.symbol + "ddd");
+                        }
                     }
-                }
-            }
 
-        }catch (Exception e){
+
+
+        } catch (Exception e){
             //new Algo().exception(e);
             e.printStackTrace();
         }

@@ -1,8 +1,9 @@
 package com.larrainvial.logviwer.listener;
 
+import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.event.StringToFixMessageEvent;
-import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ReadLogListener implements Listener {
 
+    private Algo algo;
 
     @Override
     public void eventOccurred(Event event){
@@ -20,10 +22,15 @@ public class ReadLogListener implements Listener {
         try {
 
             ReadLogEvent ev = (ReadLogEvent) event;
+
+            algo = Repository.strategy.get(ev.nameAlgo);
+
+            //if(algo.getNameAlgo().equals("ADRArbitrageXTSE") && ev.typeMarket.equals(algo.getMkd_dolar())) return;
+
             this.scannerRead(ev.nameAlgo, ev.typeMarket, ev.inputStream);
 
         }catch (Exception e){
-            Helper.exception(e);
+            //Helper.exception(e);
         }
 
     }

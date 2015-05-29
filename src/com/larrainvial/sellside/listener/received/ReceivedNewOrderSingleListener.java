@@ -127,15 +127,16 @@ public class ReceivedNewOrderSingleListener implements Listener {
             executionReport.getHeader().setString(SenderSubID.FIELD, newOrderSingle.getHeader().getString(TargetSubID.FIELD));
         }
 
-        /*
-        for(int i=0; i < newOrderSingle.getGroups(NoPartyIDs.FIELD).size(); i++){
-            executionReport.addGroup(newOrderSingle.getGroups(NoPartyIDs.FIELD).get(i));
+
+        for(int i=1; i <= newOrderSingle.getGroups(NoPartyIDs.FIELD).size(); i++){
+            executionReport.addGroup(newOrderSingle.getGroup(i, NoPartyIDs.FIELD));
         }
 
-        for(int i=0; i < newOrderSingle.getGroups(NoStrategyParameters.FIELD).size(); i++){
-            executionReport.addGroup(newOrderSingle.getGroups(NoStrategyParameters.FIELD).get(i));
+
+        for(int i=1; i <= newOrderSingle.getGroups(NoStrategyParameters.FIELD).size(); i++){
+            executionReport.addGroup(newOrderSingle.getGroup(i, NoStrategyParameters.FIELD));
         }
-        */
+
 
         executionReport.set(new Text("New " + (executionReport.getSide().valueEquals(Side.BUY) ? "Buy " : "Sell ") + executionReport.getSymbol().getValue() + " " + executionReport.getDouble(OrderQty.FIELD) + " @ " + (executionReport.isSetField(Price.FIELD) ? executionReport.getDouble(Price.FIELD) : "MARKET")));
 

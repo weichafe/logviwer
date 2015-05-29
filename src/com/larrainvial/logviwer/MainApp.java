@@ -1,6 +1,6 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Control;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
@@ -29,13 +29,13 @@ public class MainApp extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-            //Control.initialize();
-            //Control.initializaAll();
+            Control.initialize();
+            Control.initializaAll();
 
             com.larrainvial.sellside.MainApp.sellside();
 
         } catch (Exception e){
-            Helper.exception(e);
+            //Helper.exception(e);
             e.printStackTrace();
         }
 

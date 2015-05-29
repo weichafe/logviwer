@@ -40,9 +40,7 @@ public class TradeListener implements Listener {
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
-                    if (receivedOrder.workOrders.getPrice().getValue() >= repositoryOrders.workOrders.getPrice().getValue() &&
-                            receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
-
+                    if ( /*receivedOrder.workOrders.getPrice().getValue() >= repositoryOrders.workOrders.getPrice().getValue() && */receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
                     }
 
@@ -59,10 +57,9 @@ public class TradeListener implements Listener {
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
-                    if (receivedOrder.workOrders.getPrice().getValue() <= repositoryOrders.workOrders.getPrice().getValue() &&
-                            receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
-
+                    if (/*receivedOrder.workOrders.getPrice().getValue() <= repositoryOrders.workOrders.getPrice().getValue() && */receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
+
                     }
 
                 }

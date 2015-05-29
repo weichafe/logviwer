@@ -11,6 +11,7 @@ public class SendToViewEvent extends Event {
     public String typeMarket;
     public ModelMarketData modelMarketData;
     public ModelRoutingData modelRoutingData;
+    public boolean marketData = false;
 
     public SendToViewEvent(Object source, String nameAlgo, String typeMarket, ModelMarketData modelMarketData) {
         super(source);
@@ -24,6 +25,7 @@ public class SendToViewEvent extends Event {
         this.typeMarket = typeMarket;
         this.nameAlgo = nameAlgo;
         this.modelRoutingData = modelRoutingData;
+        this.marketData = true;
     }
 
 }

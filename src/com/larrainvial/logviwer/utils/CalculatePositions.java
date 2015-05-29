@@ -26,8 +26,9 @@ public class CalculatePositions {
     public void calculatePositions() throws Exception {
 
         ModelPositions positions;
+        Helper helper = new Helper();
 
-        String keyHashPositions = Helper.adrToLocal(modelRoutingData.symbol);
+        String keyHashPositions = helper.adrToLocal(modelRoutingData.symbol);
 
 
         if (algo.getPositionsMasterListHash().containsKey(keyHashPositions)) {
@@ -37,13 +38,13 @@ public class CalculatePositions {
 
             algo.getPositionsMasterListHash().put(keyHashPositions, new ModelPositions());
             positions = algo.getPositionsMasterListHash().get(keyHashPositions);
-            positions.ratio = Helper.ratio(keyHashPositions);
+            positions.ratio = helper.ratio(keyHashPositions);
             positions.symbolLocal = keyHashPositions;
         }
 
         if (modelRoutingData.side.equals("Buy")) {
 
-            if (Helper.local(modelRoutingData.symbol)) {
+            if (helper.local(modelRoutingData.symbol)) {
 
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
@@ -60,7 +61,7 @@ public class CalculatePositions {
 
         if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
 
-            if (Helper.local(modelRoutingData.symbol)) {
+            if (helper.local(modelRoutingData.symbol)) {
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();

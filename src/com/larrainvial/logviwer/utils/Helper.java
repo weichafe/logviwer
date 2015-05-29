@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class Helper {
 
-    public static void exception(Exception e) {
+    public synchronized void exception(Exception e) {
 
         try {
 
@@ -57,7 +57,7 @@ public class Helper {
                     expContent.add(textArea, 0, 1);
 
                     alertException.getDialogPane().setExpandableContent(expContent);
-                    alertException.showAndWait();
+                    //alertException.showAndWait();
 
                 }
             });
@@ -68,7 +68,8 @@ public class Helper {
         }
     }
 
-    public static void alert(String headerText, String contentText1){
+    public synchronized void  alert(String headerText, String contentText1){
+
 
             Platform.runLater(new Runnable() {
                 public void run() {
@@ -77,13 +78,14 @@ public class Helper {
                     alert.setTitle("Alert");
                     alert.setHeaderText(headerText);
                     alert.setContentText(contentText1);
-                    alert.showAndWait();
+                    //alert.showAndWait();
                 }
             });
+
     }
 
 
-    public static String adrToLocal(String symbolLocal){
+    public synchronized static String adrToLocal(String symbolLocal){
 
         if(symbolLocal.equals("AVAL")) return "PFAVAL";
         if(symbolLocal.equals("AVH")) return "PFAVH";
@@ -111,12 +113,13 @@ public class Helper {
         return symbolLocal;
     }
 
-    public static Double ratio(String symbolLocal){
+    public synchronized Double ratio(String symbolLocal){
 
         if(symbolLocal.equals("PFAVAL"))      return 20d;
         if(symbolLocal.equals("PFAVH"))       return 8d;
         if(symbolLocal.equals("PFBCOLOM"))    return 4d;
         if(symbolLocal.equals("ECOPETROL"))   return 20d;
+
         if(symbolLocal.equals("PREC"))        return 1d;
         if(symbolLocal.equals("CNEC"))        return 1d;
         if(symbolLocal.equals("CHILE"))       return 600d;
@@ -136,12 +139,13 @@ public class Helper {
     }
 
 
-    public static boolean local(String symbolLocal){
+    public synchronized boolean local(String symbolLocal){
 
-        if(symbolLocal.equals("AVAL"))        return true;
-        if(symbolLocal.equals("AVH"))         return true;
-        if(symbolLocal.equals("CIB"))         return true;
-        if(symbolLocal.equals("EC"))          return true;
+        if(symbolLocal.equals("PFAVAL"))      return true;
+        if(symbolLocal.equals("PFAVH"))       return true;
+        if(symbolLocal.equals("PFBCOLOM"))    return true;
+        if(symbolLocal.equals("ECOPETROL"))   return true;
+
         if(symbolLocal.equals("PREC"))        return true;
         if(symbolLocal.equals("CNEC"))        return true;
         if(symbolLocal.equals("CHILE"))       return true;
@@ -161,7 +165,7 @@ public class Helper {
     }
 
 
-    public static String side(String side){
+    public static synchronized String side(String side){
 
         if(side.equals("1")) return "Buy";
         if(side.equals("2")) return "Sell";
@@ -170,7 +174,7 @@ public class Helper {
         return side;
     }
 
-    public static String orderStatus(String orderStatus){
+    public static synchronized String orderStatus(String orderStatus){
 
         if(orderStatus.equals("0")) return "New";
         if(orderStatus.equals("1")) return "Partially filled";
@@ -192,7 +196,7 @@ public class Helper {
     }
 
 
-    public static String execType(String execType){
+    public static synchronized String execType(String execType){
 
         if(execType.equals("0")) return "New";
         if(execType.equals("3")) return "Done for day";
@@ -219,7 +223,7 @@ public class Helper {
     }
 
 
-    public static Map<Object, Object> getFixMessageParties(String fixMessageString) {
+    public synchronized static Map<Object, Object> getFixMessageParties(String fixMessageString) {
 
         try {
 
@@ -279,7 +283,7 @@ public class Helper {
         return null;
     }
 
-    public static HashMap getHashWithAttribute() {
+    public static synchronized HashMap getHashWithAttribute() {
 
         HashMap attributes = new HashMap();
 
@@ -291,7 +295,7 @@ public class Helper {
         return attributes;
     }
 
-    public static Map<Object, Object> getFixMessageAttributeFull(String fixMessageString)throws Exception {
+    public static synchronized Map<Object, Object> getFixMessageAttributeFull(String fixMessageString)throws Exception {
 
         Map<Object, Object> orderedFixMessage = new HashMap<Object, Object>();
 

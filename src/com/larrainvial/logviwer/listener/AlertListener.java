@@ -18,6 +18,7 @@ public class AlertListener implements Listener {
 
         AlertEvent ev = (AlertEvent) event;
         algo = Repository.strategy.get(ev.nameAlgo);
+        Helper helper = new Helper();
 
         try {
 
@@ -27,30 +28,31 @@ public class AlertListener implements Listener {
             if (typeOfMessage.valueEquals("9")){
 
                 if(ev.modelRoutingData.text.equals("Routing Failure") && !algo.isStartProgram()) {
-                    Helper.alert(algo.getNameAlgo(), "Rejected, there was an error! " + ev.modelRoutingData.text );
+                    helper.alert(algo.getNameAlgo(), "Rejected, there was an error! " + ev.modelRoutingData.text );
                 }
 
             }
 
             if (typeOfMessage.getValue().equals("A") && !algo.isStartProgram()){
                 //Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + ev.modelRoutingData.text);
-                Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + "");
+                helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + "");
             }
 
             if (typeOfMessage.getValue().equals("1") && !algo.isStartProgram()){
                 //Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " + ev.modelRoutingData.text);
-                Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " +"");
+                helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " +"");
 
             }
 
             if(typeOfMessage.getValue().equals("5") && !algo.isStartProgram()){
                 //Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + ev.modelRoutingData.text );
-                Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + "");
+                helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + "");
 
             }
 
             if(typeOfMessage.getValue().equals("3") && !algo.isStartProgram()){
-                Helper.alert(algo.getNameAlgo(), "Protocol, there was an error! " + ev.modelRoutingData.text );
+                System.out.println(algo.getNameAlgo());
+                helper.alert(algo.getNameAlgo(), "Protocol, there was an error! " + ev.modelRoutingData.text);
 
             }
 
