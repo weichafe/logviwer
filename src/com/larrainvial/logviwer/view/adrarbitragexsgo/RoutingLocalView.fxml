@@ -4,10 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="420" prefHeight="210.0" prefWidth="1500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.RoutingLocalController">
+<AnchorPane layoutX="7.0" layoutY="423" prefHeight="210.0" prefWidth="1505" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.RoutingLocalController">
   <children>
 
-    <TableView fx:id="routing_xsgo" layoutX="14.0" layoutY="7.0" prefHeight="180.0" prefWidth="1550.0">
+    <TableView fx:id="routing_xsgo" layoutX="14.0" layoutY="7.0" prefHeight="180.0" prefWidth="1553">
 
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="110" text="LOCAL" fx:id="year" />
@@ -144,6 +144,7 @@
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ExDestination" fx:id="exDestination" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="SecurityExchange" fx:id="securityExchange" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="Price" fx:id="price" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="OrderQty" fx:id="orderQty" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LastQty" fx:id="lastQty" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LastPx" fx:id="lastPx" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LeavesQty" fx:id="leavesQty" />

@@ -85,8 +85,7 @@ public class StringToMarketData {
             }
 
         } catch (Exception e) {
-            //new Algo().exception(e);
-            e.printStackTrace();
+            Helper.exception(e);
         }
 
         return modelMarketData;

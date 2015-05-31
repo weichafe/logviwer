@@ -3,7 +3,8 @@ package com.larrainvial.sellside;
 import com.larrainvial.logviwer.utils.FileRepository;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.orders.Orders;
-import com.larrainvial.trading.utils.PropertiesFile;
+import com.larrainvial.sellside.utils.PropertiesFile;
+
 
 import java.util.HashMap;
 import java.util.Map;

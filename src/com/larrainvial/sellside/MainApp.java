@@ -1,6 +1,7 @@
 package com.larrainvial.sellside;
 
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
+import com.larrainvial.sellside.utils.PropertiesFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +12,7 @@ public class MainApp {
 
         try {
 
-            Repository.buySide  = new com.larrainvial.trading.utils.PropertiesFile("src/resources/SellSide.properties");
+            Repository.buySide  = new PropertiesFile("src/resources/SellSide.properties");
 
             Repository.qFixFile = Repository.buySide.getPropertiesString("qFixFile");
 

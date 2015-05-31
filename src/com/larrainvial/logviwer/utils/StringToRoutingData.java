@@ -39,6 +39,7 @@ public class StringToRoutingData {
             modelRoutingData.leavesQty = messageMap.containsKey(FixConstants.LeavesQty) ? Double.valueOf(messageMap.get(FixConstants.LeavesQty).toString()) : 0d;
             modelRoutingData.cumQty = messageMap.containsKey(FixConstants.CumQty) ? Double.valueOf(messageMap.get(FixConstants.CumQty).toString()) : 0d;
             modelRoutingData.price = messageMap.containsKey(FixConstants.Price) ? Double.valueOf(messageMap.get(FixConstants.Price).toString()) : 0d;
+            modelRoutingData.orderQty = messageMap.containsKey(FixConstants.OrderQty) ? Double.valueOf(messageMap.get(FixConstants.OrderQty).toString()) : 0d;
             modelRoutingData.lastQty = messageMap.containsKey(FixConstants.LastQty) ? Double.valueOf(messageMap.get(FixConstants.LastQty).toString().replace(".0", "")) : 0d;
             modelRoutingData.lastPx = messageMap.containsKey(FixConstants.LastPx) ? Double.valueOf(messageMap.get(FixConstants.LastPx).toString()) : 0d;
             modelRoutingData.avgPx = messageMap.containsKey(FixConstants.AvgPx) ? Double.valueOf(messageMap.get(FixConstants.AvgPx).toString()) : 0d;
@@ -47,7 +48,7 @@ public class StringToRoutingData {
             modelRoutingData.text = messageMap.containsKey(FixConstants.Text) ? messageMap.get(FixConstants.Text).toString() : "";
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
             e.printStackTrace();
         }
 

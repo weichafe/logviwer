@@ -1,10 +1,12 @@
 package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.event.ReadLogEvent;
+import com.larrainvial.logviwer.event.TriggerReadFileEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.FileRepository;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,6 +75,13 @@ public class Algo implements Serializable {
     private TableView<ModelRoutingData> routing_local_tableView;
     private TableView<ModelPositions> panel_positions_tableView;
 
+    private boolean mkd_dolar_toggle = false;
+    private boolean mkd_local_toggle = false;
+    private boolean mkd_adr_toggle = false;
+    private boolean routing_local_toggle = false;
+    private boolean routing_adr_toggle = false;
+    private boolean alert = false;
+
     private TimerTask timerTask;
 
     private File file_mkd_dolar;
@@ -92,8 +101,6 @@ public class Algo implements Serializable {
 
     private ArrayList<ModelMarketData> marketDataListInput;
     private ObjectInputStream routingDataListInput;
-    private boolean startProgram = true;
-
 
 
     public void fileReader() {
@@ -107,7 +114,7 @@ public class Algo implements Serializable {
             inputStream_routing_adr = new FileInputStream(file_routing_adr);
 
         }catch (Exception e){
-            e.printStackTrace();
+            Helper.exception(e);
         }
 
     }
@@ -116,6 +123,25 @@ public class Algo implements Serializable {
 
         final double finalTimer_initial = this.getTime();
         stopTimer();
+
+        ArrayList<String> typeMarket = new ArrayList<String>();
+        ArrayList<FileInputStream> typeFile = new ArrayList<FileInputStream>();
+
+        typeMarket.add(0, mkd_dolar);
+        typeMarket.add(1, mkd_local);
+        typeMarket.add(2, mkd_adr);
+        typeMarket.add(3, routing_local);
+        typeMarket.add(4, routing_adr);
+
+        typeFile.add(0, inputStream_mkd_dolar);
+        typeFile.add(1, inputStream_mkd_local);
+        typeFile.add(2, inputStream_mkd_adr);
+        typeFile.add(3, inputStream_routing_local);
+        typeFile.add(4, inputStream_routing_adr);
+
+
+
+
         timerTask = new TimerTask(){
 
             public void run() {
@@ -125,18 +151,12 @@ public class Algo implements Serializable {
                     try {
                         iniziale();
                     }catch (Exception e){
-                        e.printStackTrace();
+                        Helper.exception(e);
                     }
                 }
 
+                Controller.dispatchEvent(new TriggerReadFileEvent(this, nameAlgo, typeMarket, typeFile));
 
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_local, inputStream_routing_local));
-                Controller.dispatchEvent(new ReadLogEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
-
-                startProgram = false;
             }
 
         };
@@ -155,14 +175,6 @@ public class Algo implements Serializable {
 
     }
 
-
-    public boolean isStartProgram() {
-        return startProgram;
-    }
-
-    public void setStartProgram(boolean startProgram) {
-        this.startProgram = startProgram;
-    }
 
     public ObservableList<ModelPositions> getPositionsMasterList() {
         return positionsMasterList;
@@ -539,5 +551,53 @@ public class Algo implements Serializable {
 
     public void setRouting_local_loader(FXMLLoader routing_local_loader) {
         this.routing_local_loader = routing_local_loader;
+    }
+
+    public boolean isMkd_dolar_toggle() {
+        return mkd_dolar_toggle;
+    }
+
+    public void setMkd_dolar_toggle(boolean mkd_dolar_toggle) {
+        this.mkd_dolar_toggle = mkd_dolar_toggle;
+    }
+
+    public boolean isMkd_local_toggle() {
+        return mkd_local_toggle;
+    }
+
+    public void setMkd_local_toggle(boolean mkd_local_toggle) {
+        this.mkd_local_toggle = mkd_local_toggle;
+    }
+
+    public boolean isMkd_adr_toggle() {
+        return mkd_adr_toggle;
+    }
+
+    public void setMkd_adr_toggle(boolean mkd_adr_toggle) {
+        this.mkd_adr_toggle = mkd_adr_toggle;
+    }
+
+    public boolean isRouting_local_toggle() {
+        return routing_local_toggle;
+    }
+
+    public void setRouting_local_toggle(boolean routing_local_toggle) {
+        this.routing_local_toggle = routing_local_toggle;
+    }
+
+    public boolean isRouting_adr_toggle() {
+        return routing_adr_toggle;
+    }
+
+    public void setRouting_adr_toggle(boolean routing_adr_toggle) {
+        this.routing_adr_toggle = routing_adr_toggle;
+    }
+
+    public boolean isAlert() {
+        return alert;
+    }
+
+    public void setAlert(boolean alert) {
+        this.alert = alert;
     }
 }

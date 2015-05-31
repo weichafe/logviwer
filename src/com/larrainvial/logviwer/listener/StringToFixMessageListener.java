@@ -8,6 +8,7 @@ import com.larrainvial.logviwer.event.StringToFixMessageEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.CalculatePositions;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.StringToMarketData;
 import com.larrainvial.logviwer.utils.StringToRoutingData;
 import com.larrainvial.trading.emp.Controller;
@@ -60,8 +61,7 @@ public class StringToFixMessageListener implements Listener {
 
 
         } catch (Exception e){
-            //new Algo().exception(e);
-            e.printStackTrace();
+            Helper.exception(e);
         }
 
     }

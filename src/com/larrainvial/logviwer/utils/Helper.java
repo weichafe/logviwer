@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class Helper {
 
-    public synchronized void exception(Exception e) {
+    public static synchronized void exception(Exception e) {
 
         try {
 
@@ -57,7 +57,7 @@ public class Helper {
                     expContent.add(textArea, 0, 1);
 
                     alertException.getDialogPane().setExpandableContent(expContent);
-                    //alertException.showAndWait();
+                    alertException.showAndWait();
 
                 }
             });
@@ -68,7 +68,7 @@ public class Helper {
         }
     }
 
-    public synchronized void  alert(String headerText, String contentText1){
+    public static synchronized void  alert(String headerText, String contentText1){
 
 
             Platform.runLater(new Runnable() {
@@ -78,7 +78,7 @@ public class Helper {
                     alert.setTitle("Alert");
                     alert.setHeaderText(headerText);
                     alert.setContentText(contentText1);
-                    //alert.showAndWait();
+                    alert.showAndWait();
                 }
             });
 

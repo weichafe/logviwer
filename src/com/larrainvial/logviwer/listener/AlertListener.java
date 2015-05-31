@@ -25,40 +25,35 @@ public class AlertListener implements Listener {
             MsgType typeOfMessage = Message.identifyType(ev.lineFromLog);
 
 
-            if (typeOfMessage.valueEquals("9")){
+            if (typeOfMessage.valueEquals("9") && algo.isAlert()){
 
-                if(ev.modelRoutingData.text.equals("Routing Failure") && !algo.isStartProgram()) {
-                    helper.alert(algo.getNameAlgo(), "Rejected, there was an error! " + ev.modelRoutingData.text );
+                if(ev.modelRoutingData.text.equals("Routing Failure")) {
+                    Helper.alert(algo.getNameAlgo(), "Rejected, there was an error! " + ev.modelRoutingData.text );
                 }
 
             }
 
-            if (typeOfMessage.getValue().equals("A") && !algo.isStartProgram()){
-                //Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + ev.modelRoutingData.text);
-                helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + "");
+            if (typeOfMessage.getValue().equals("A") && algo.isAlert()){
+                Helper.alert(algo.getNameAlgo(), "Logon, there was an error! " + "");
             }
 
-            if (typeOfMessage.getValue().equals("1") && !algo.isStartProgram()){
-                //Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " + ev.modelRoutingData.text);
-                helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " +"");
-
-            }
-
-            if(typeOfMessage.getValue().equals("5") && !algo.isStartProgram()){
-                //Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + ev.modelRoutingData.text );
-                helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + "");
+            if (typeOfMessage.getValue().equals("1") && algo.isAlert()){
+                Helper.alert(algo.getNameAlgo(), "TestRequest, there was an error! " +"");
 
             }
 
-            if(typeOfMessage.getValue().equals("3") && !algo.isStartProgram()){
-                System.out.println(algo.getNameAlgo());
-                helper.alert(algo.getNameAlgo(), "Protocol, there was an error! " + ev.modelRoutingData.text);
+            if(typeOfMessage.getValue().equals("5") && algo.isAlert()){
+                Helper.alert(algo.getNameAlgo(), "Logout, there was an error! " + "");
+
+            }
+
+            if(typeOfMessage.getValue().equals("3") && algo.isAlert()){
+                Helper.alert(algo.getNameAlgo(), "Protocol, there was an error! " + ev.modelRoutingData.text);
 
             }
 
         } catch (Exception e){
-            //Helper.exception(e);
-            e.printStackTrace();
+            Helper.exception(e);
         }
 
 

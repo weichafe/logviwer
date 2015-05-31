@@ -18,7 +18,7 @@ public class CalculatePositions {
             this.calculatePositions();
 
         } catch (Exception e){
-            e.printStackTrace();
+            Helper.exception(e);
         }
     }
 

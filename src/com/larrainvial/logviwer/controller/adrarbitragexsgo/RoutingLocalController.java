@@ -94,6 +94,9 @@ public class RoutingLocalController {
     private TableColumn<ModelRoutingData, String> text;
 
     @FXML
+    private TableColumn<ModelRoutingData, String> orderQty;
+
+    @FXML
     private TableColumn<ModelRoutingData, String> exDestination;
 
     @FXML
@@ -219,6 +222,7 @@ public class RoutingLocalController {
         securityExchange.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSecurityExchange()));
         text.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getText()));
 
+        orderQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrderQty().toString()));
         price.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getPrice().toString()));
         lastQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastQty().toString()));
         lastPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastPx().toString()));

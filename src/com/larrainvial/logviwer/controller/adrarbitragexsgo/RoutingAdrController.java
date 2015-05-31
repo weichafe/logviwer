@@ -81,6 +81,9 @@ public class RoutingAdrController {
     private TableColumn<ModelRoutingData, String> side;
 
     @FXML
+    private TableColumn<ModelRoutingData, String> orderQty;
+
+    @FXML
     private TableColumn<ModelRoutingData, String> clOrdLinkID;
 
     @FXML
@@ -184,6 +187,7 @@ public class RoutingAdrController {
 
         securityExchange.setVisible(true);
         price.setVisible(true);
+        orderQty.setVisible(true);
         lastQty.setVisible(true);
         lastPx.setVisible(true);
         cumQty.setVisible(true);
@@ -219,6 +223,7 @@ public class RoutingAdrController {
         text.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getText()));
 
         price.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getPrice().toString()));
+        orderQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrderQty().toString()));
         lastQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastQty().toString()));
         lastPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastPx().toString()));
         cumQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getCumQty().toString()));

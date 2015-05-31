@@ -4,19 +4,18 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.MainApp;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.controller.adrarbitragexsgo.*;
-import com.larrainvial.logviwer.event.AlertEvent;
-import com.larrainvial.logviwer.event.ReadLogEvent;
-import com.larrainvial.logviwer.event.SendToViewEvent;
-import com.larrainvial.logviwer.event.StringToFixMessageEvent;
-import com.larrainvial.logviwer.listener.AlertListener;
-import com.larrainvial.logviwer.listener.ReadLogListener;
-import com.larrainvial.logviwer.listener.SendToViewListener;
-import com.larrainvial.logviwer.listener.StringToFixMessageListener;
+import com.larrainvial.logviwer.event.*;
+import com.larrainvial.logviwer.listener.*;
 import com.larrainvial.trading.emp.Controller;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Slider;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,14 +29,17 @@ public class Control {
         Controller.addEventListener(SendToViewEvent.class, new SendToViewListener());
         Controller.addEventListener(ReadLogEvent.class, new ReadLogListener());
         Controller.addEventListener(AlertEvent.class, new AlertListener());
+        Controller.addEventListener(TriggerReadFileEvent.class, new TriggerReadFileListener());
+
+
     }
 
 
     public  static void initializaAll() throws InterruptedException {
 
-        //initializeAdrArbitrageXSGO();
-        initializeAdrArbitrageXTSE();
-        initializeAdrArbitrageXBOG();
+        initializeAdrArbitrageXSGO();
+        //initializeAdrArbitrageXTSE();
+        //initializeAdrArbitrageXBOG();
         //initializeAdrArbitrageTest();
     }
 
@@ -61,15 +63,14 @@ public class Control {
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "W:\\ADRArbitrageXSGOIB\\log\\";
-            //String location = "log\\AdrArbitrageIB\\";
+            //String location = "W:\\ADRArbitrageXSGOIB\\log\\";
+            String location = "src\\resources\\log\\AdrArbitrageIB\\";
             String mkd_dolar = "FIX.4.4-ALGOARBADR5-MDFHBLP.messages_";
             String mkd_nyse = "FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_";
             String routing_local = "FIX.4.4-ARDARB_XSGO_IB-AMGTOBCS.messages_";
             String routing_nyse = "FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_";
             String log = ".log";
-
 
             algo.setFile_mkd_dolar(new File(location + mkd_dolar + year + log));
             algo.setFile_mkd_local(new File(location + mkd_local + year + log));
@@ -79,15 +80,46 @@ public class Control {
 
             algo.fileReader();
 
-
-
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            opacityLevel.setLayoutX(25);
+            opacityLevel.setLayoutY(13);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
                     algo.setTime(new_val.doubleValue());
                 }
             });
+
+
+            SwitchButton switchButtonDolar = new SwitchButton("Dolar", algo);
+            Button switchBtn1 = switchButtonDolar.returnButton();
+            switchBtn1.setLayoutX(177);
+            switchBtn1.setLayoutY(10);
+
+            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", algo);
+            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
+            switchBtn2.setLayoutX(295);
+            switchBtn2.setLayoutY(10);
+
+            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", algo);
+            Button switchBtn3 = switchButtonMkd_Local.returnButton();
+            switchBtn3.setLayoutX(415);
+            switchBtn3.setLayoutY(10);
+
+            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", algo);
+            Button switchBtn4 = switchButtonRouting_Local.returnButton();
+            switchBtn4.setLayoutX(535);
+            switchBtn4.setLayoutY(10);
+
+            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", algo);
+            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
+            switchBtn5.setLayoutX(655);
+            switchBtn5.setLayoutY(10);
+
+            SwitchButton switchButtonAlert = new SwitchButton("Alert", algo);
+            Button switchBtn6 = switchButtonAlert.returnButton();
+            switchBtn6.setLayoutX(775);
+            switchBtn6.setLayoutY(10);
 
 
             algo.getMkd_dolar_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/MarketDataDolarView.fxml"));
@@ -106,6 +138,13 @@ public class Control {
             anchorPane.getChildren().add((AnchorPane) algo.getRouting_local_loader().load());
             anchorPane.getChildren().add((AnchorPane) algo.getPanel_positions_loader().load());
             anchorPane.getChildren().add(opacityLevel);
+            anchorPane.getChildren().add(switchBtn1);
+            anchorPane.getChildren().add(switchBtn2);
+            anchorPane.getChildren().add(switchBtn3);
+            anchorPane.getChildren().add(switchBtn4);
+            anchorPane.getChildren().add(switchBtn5);
+            anchorPane.getChildren().add(switchBtn6);
+
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(0).setContent(anchorPane);
             Repository.tabPanePrincipalTabPanel.getTabs().get(0).setText(algo.getNameAlgo());
@@ -141,7 +180,7 @@ public class Control {
 
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
     }
 
@@ -243,7 +282,7 @@ public class Control {
 
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
     }
 
@@ -342,7 +381,7 @@ public class Control {
 
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
     }
 
@@ -441,7 +480,7 @@ public class Control {
 
 
         }catch (Exception e){
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
     }
 

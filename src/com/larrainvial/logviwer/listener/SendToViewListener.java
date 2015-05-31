@@ -18,12 +18,10 @@ public class SendToViewListener implements Listener {
     public void eventOccurred(Event event){
 
         SendToViewEvent ev = (SendToViewEvent) event;
-        long time = 0;
 
         try {
 
             algo = Repository.strategy.get(ev.nameAlgo);
-
 
             if (ev.typeMarket.equals(algo.getMkd_dolar())) {
                 algo.getDolarMasterList().add(ev.modelMarketData);
@@ -67,16 +65,14 @@ public class SendToViewListener implements Listener {
                             }
 
                         } catch (Exception ex){
-                            ex.printStackTrace();
-                            System.out.println(ev.modelRoutingData.symbol + "ddd");
+                            Helper.exception(ex);
                         }
                     }
 
 
 
         } catch (Exception e){
-            //new Algo().exception(e);
-            e.printStackTrace();
+            Helper.exception(e);
         }
 
     }

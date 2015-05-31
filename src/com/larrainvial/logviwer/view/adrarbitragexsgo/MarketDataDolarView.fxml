@@ -4,10 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="10" prefHeight="339.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.MarketDataDolarController">
+<AnchorPane layoutX="14" layoutY="40" prefHeight="339" prefWidth="963" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexsgo.MarketDataDolarController">
   <children>
-    <TableView fx:id="dolar" layoutX="10" layoutY="8.0" prefHeight="180.0" prefWidth="755.0">
-
+    <TableView fx:id="dolar" layoutX="10" layoutY="8" prefHeight="180" prefWidth="770">
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="DOLAR" fx:id="anio" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="Hour" fx:id="hour" />

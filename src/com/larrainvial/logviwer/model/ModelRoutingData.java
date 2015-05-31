@@ -28,6 +28,7 @@ public class ModelRoutingData implements Serializable {
     public String securityExchange;
 
     public Double price;
+    public Double orderQty;
     public Double lastQty;
     public Double lastPx;
     public Double cumQty;
@@ -64,6 +65,15 @@ public class ModelRoutingData implements Serializable {
         this.avgPx =  0d;
         this.leavesQty = 0d;
         this.maxFloor = 0d;
+        this.orderQty = 0d;
+    }
+
+    public Double getOrderQty() {
+        return orderQty;
+    }
+
+    public void setOrderQty(Double orderQty) {
+        this.orderQty = orderQty;
     }
 
     public String getText() {
