@@ -1,6 +1,5 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.event.ReadLogEvent;
 import com.larrainvial.logviwer.event.TriggerReadFileEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
@@ -14,10 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
 public class Algo implements Serializable {
 
@@ -65,7 +61,7 @@ public class Algo implements Serializable {
 
     private ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
 
-    private ConcurrentHashMap<String,ModelPositions> positionsMasterListHash = new ConcurrentHashMap<String, ModelPositions>();
+    private Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
 
 
     private TableView<ModelMarketData> mkd_dolar_tableView;
@@ -200,11 +196,11 @@ public class Algo implements Serializable {
         this.panel_positions_loader = panel_positions_loader;
     }
 
-    public ConcurrentHashMap<String, ModelPositions> getPositionsMasterListHash() {
+    public Map<String, ModelPositions> getPositionsMasterListHash() {
         return positionsMasterListHash;
     }
 
-    public void setPositionsMasterListHash(ConcurrentHashMap<String, ModelPositions> positionsMasterListHash) {
+    public void setPositionsMasterListHash(LinkedHashMap<String, ModelPositions> positionsMasterListHash) {
         this.positionsMasterListHash = positionsMasterListHash;
     }
 

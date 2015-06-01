@@ -15,7 +15,7 @@ public class SendToViewListener implements Listener {
     private Algo algo;
 
     @Override
-    public void eventOccurred(Event event){
+    public void eventOccurred(Event event) {
 
         SendToViewEvent ev = (SendToViewEvent) event;
 
@@ -52,26 +52,27 @@ public class SendToViewListener implements Listener {
 
             if(!ev.marketData) return;
 
-                    for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
 
-                        try {
+            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
 
-                            if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
-                                if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
-                                    algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
-                                    algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
-                                    algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
-                                }
-                            }
+                try {
 
-                        } catch (Exception ex){
-                            Helper.exception(ex);
+                    if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+
+                        if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
+                            algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
+                            algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
+                            algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
                         }
                     }
 
+                } catch (Exception ex) {
+                    Helper.exception(ex);
+                }
+            }
 
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Helper.exception(e);
         }
 

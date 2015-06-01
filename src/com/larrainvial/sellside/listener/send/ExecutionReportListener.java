@@ -15,7 +15,8 @@ public class ExecutionReportListener implements Listener {
         try {
 
             ExecutionReportEvent ev = (ExecutionReportEvent)event;
-            Thread.sleep(400);
+
+            Thread.sleep(50);
             Session.sendToTarget(ev.workOrdersToBuySide, Configuration.Buyside.SenderCompID, Configuration.Buyside.TargetCompID);
 
         } catch (Exception e) {

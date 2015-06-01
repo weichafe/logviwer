@@ -5,8 +5,6 @@ import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -36,7 +34,7 @@ public class MainApp extends Application {
             Control.initializaAll();
 
 
-            //com.larrainvial.sellside.MainApp.sellside();
+            com.larrainvial.sellside.MainApp.sellside();
 
         } catch (Exception e){
             Helper.exception(e);

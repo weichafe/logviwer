@@ -265,3 +265,130 @@
 20150530-19:46:18.569: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
 20150530-19:46:18.572: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
 20150530-19:46:18.574: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:49:57.219: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-13:49:57.236: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:49:57.239: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:53:49.043: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-13:53:49.044: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:53:49.044: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:00:20.893: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:00:20.894: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:00:20.895: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:18.950: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:28:18.950: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:18.951: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:48.259: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:28:48.259: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:48.260: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:00.997: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:31:00.998: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:00.998: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:26.059: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:31:26.063: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:26.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:33:16.392: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:33:16.392: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:33:16.393: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:34:03.698: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:34:03.699: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:34:03.700: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:06:47.674: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55554
+20150601-15:06:47.674: Acceptor heartbeat set to 60 seconds
+20150601-15:06:48.658: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55569
+20150601-15:06:48.658: Acceptor heartbeat set to 60 seconds
+20150601-15:06:48.659: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:06:48.660: Received logon
+20150601-15:06:48.662: Responding to logon request
+20150601-15:13:02.873: Disconnecting: Socket exception (/127.0.0.1:55569): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:13:18.587: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55852
+20150601-15:13:18.587: Acceptor heartbeat set to 60 seconds
+20150601-15:13:18.587: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:13:18.588: Received logon
+20150601-15:13:18.589: Responding to logon request
+20150601-15:32:30.121: Disconnecting: Socket exception (/127.0.0.1:55852): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:32:41.398: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55250
+20150601-15:32:41.398: Acceptor heartbeat set to 60 seconds
+20150601-15:32:41.398: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:32:41.398: Received logon
+20150601-15:32:41.399: Responding to logon request
+20150601-15:35:52.306: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:35:52.307: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:35:53.376: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55364
+20150601-15:35:53.376: Acceptor heartbeat set to 60 seconds
+20150601-15:35:53.378: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:35:53.398: Received logon
+20150601-15:35:53.409: Responding to logon request
+20150601-15:37:42.543: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:37:42.544: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:37:43.403: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55394
+20150601-15:37:43.403: Acceptor heartbeat set to 60 seconds
+20150601-15:37:43.405: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:37:43.493: Received logon
+20150601-15:37:43.506: Responding to logon request
+20150601-15:39:40.183: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:39:40.184: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:39:40.564: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55421
+20150601-15:39:40.565: Acceptor heartbeat set to 60 seconds
+20150601-15:39:40.631: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:39:40.640: Received logon
+20150601-15:39:40.646: Responding to logon request
+20150601-15:42:57.083: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:42:57.084: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:42:57.432: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55485
+20150601-15:42:57.432: Acceptor heartbeat set to 60 seconds
+20150601-15:42:57.434: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:42:57.503: Received logon
+20150601-15:42:57.511: Responding to logon request
+20150601-15:53:36.059: Disconnecting: Socket exception (/127.0.0.1:55485): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:58:23.142: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:58:23.143: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:59:11.875: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:59:11.876: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:59:36.472: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:59:36.473: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:00:34.066: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:00:34.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:02:44.065: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:56090
+20150601-16:02:44.066: Acceptor heartbeat set to 60 seconds
+20150601-16:02:44.071: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:02:44.072: Received logon
+20150601-16:02:44.083: Responding to logon request
+20150601-16:04:34.767: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:04:34.768: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:04:36.026: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:56134
+20150601-16:04:36.026: Acceptor heartbeat set to 60 seconds
+20150601-16:04:36.029: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:04:36.057: Received logon
+20150601-16:04:36.063: Responding to logon request
+20150601-16:16:49.762: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:16:49.763: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:16:51.003: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62051
+20150601-16:16:51.003: Acceptor heartbeat set to 60 seconds
+20150601-16:16:51.006: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:16:51.043: Received logon
+20150601-16:16:51.050: Responding to logon request
+20150601-16:21:10.892: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:21:10.892: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:21:11.052: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62209
+20150601-16:21:11.052: Acceptor heartbeat set to 60 seconds
+20150601-16:21:11.053: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:21:11.070: Received logon
+20150601-16:21:11.082: Responding to logon request
+20150601-16:30:23.655: Disconnecting: Socket exception (/127.0.0.1:62209): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-16:37:27.997: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:37:27.999: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:41:31.978: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:41:31.979: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:41:32.652: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63422
+20150601-16:41:32.652: Acceptor heartbeat set to 60 seconds
+20150601-16:41:32.654: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:41:32.654: Received logon
+20150601-16:41:32.660: Responding to logon request
+20150601-17:14:08.719: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-17:14:08.720: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-17:14:09.101: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63861
+20150601-17:14:09.101: Acceptor heartbeat set to 60 seconds
+20150601-17:14:09.106: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-17:14:09.119: Received logon
+20150601-17:14:09.127: Responding to logon request
+20150601-17:19:34.228: Disconnecting: Socket exception (/127.0.0.1:63861): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto

@@ -30,6 +30,7 @@ public class TradeListener implements Listener {
             if(receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) return;
 
 
+            Thread.sleep(100);
             if (receivedOrder.workOrders.getSide().valueEquals(Side.BUY)) {
 
                 for (Map.Entry<String, Orders> e: Repository.executionWorkOrderSell.entrySet()) {

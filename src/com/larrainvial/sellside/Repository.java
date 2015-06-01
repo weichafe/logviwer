@@ -5,8 +5,9 @@ import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.orders.Orders;
 import com.larrainvial.sellside.utils.PropertiesFile;
 
-
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Repository {
@@ -22,8 +23,8 @@ public class Repository {
 
     public static HashMap<String, String> UUID = new HashMap<String, String>();
 
-    public static Map<String, Orders> executionWorkOrderBuy = new HashMap<String, Orders>();
-    public static Map<String, Orders> executionWorkOrderSell = new HashMap<String, Orders>();
+    public static Map<String, Orders> executionWorkOrderBuy = Collections.synchronizedMap(new LinkedHashMap<String, Orders>());
+    public static Map<String, Orders> executionWorkOrderSell = Collections.synchronizedMap(new LinkedHashMap<String, Orders>());
 
     public static FileRepository executionWorkOrderClOrdIDFile;
 

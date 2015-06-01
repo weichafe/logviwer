@@ -4,9 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="200" prefHeight="174.0" prefWidth="932.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataAdrController">
+<AnchorPane layoutX="7.0" layoutY="220" prefHeight="174.0" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataAdrController">
   <children>
-    <TableView fx:id="mkd_nyse" layoutX="16.0" layoutY="14.0" prefHeight="190.0" prefWidth="760.0">
+
+    <TableView fx:id="mkd_nyse" layoutX="16" layoutY="14" prefHeight="190" prefWidth="772">
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="MKD ADR" fx:id="anio" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="Hour" fx:id="hour" />
