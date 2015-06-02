@@ -35,7 +35,7 @@ public class Control {
         initializeAdrArbitrageXSGO();
         initializeAdrArbitrageXTSE();
         initializeAdrArbitrageXBOG();
-        initializeAdrArbitrageTest();
+        //initializeAdrArbitrageTest();
     }
 
 

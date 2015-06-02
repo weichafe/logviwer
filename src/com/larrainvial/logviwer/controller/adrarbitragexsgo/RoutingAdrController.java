@@ -231,6 +231,7 @@ public class RoutingAdrController {
         leavesQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLeavesQty().toString()));
         maxFloor.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getMaxFloor().toString()));
 
+
         routing_nyse.setItems(filteredDataSymbol);
 
         filterFieldSymbol.textProperty().addListener(new ChangeListener<String>() {

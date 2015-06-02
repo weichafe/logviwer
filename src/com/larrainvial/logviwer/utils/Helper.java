@@ -24,6 +24,8 @@ public class Helper {
 
         try {
 
+            e.printStackTrace();
+
             Platform.runLater(new Runnable() {
 
                 public void run() {
@@ -61,6 +63,7 @@ public class Helper {
 
                 }
             });
+
 
         }catch (Exception ex){
             ex.printStackTrace();

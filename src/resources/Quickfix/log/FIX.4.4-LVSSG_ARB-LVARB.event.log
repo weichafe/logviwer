@@ -392,3 +392,18 @@
 20150601-17:14:09.119: Received logon
 20150601-17:14:09.127: Responding to logon request
 20150601-17:19:34.228: Disconnecting: Socket exception (/127.0.0.1:63861): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150602-12:49:43.896: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:49:43.902: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:49:43.902: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:02.208: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:50:02.209: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:02.210: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:35.745: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:50:35.746: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:35.747: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:51:21.339: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:51:21.340: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:51:21.341: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:53:02.065: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:53:02.066: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:53:02.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
