@@ -98,18 +98,12 @@ public class MarketDataDolarController {
                         } else {
 
                             if (item.equals("V")) {
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkgray");
                                 setText(item);
 
                             } else if (item.equals("W")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkkhaki");
                                 setText(item);
 
                             } else if (item.equals("X")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: gainsboro");
                                 setText(item);
 
                             } else if (item.equals("5")){

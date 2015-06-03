@@ -8,14 +8,15 @@
   <children>
 
     <TableView fx:id="mkd_nyse" layoutX="16" layoutY="14" prefHeight="190" prefWidth="772">
+
       <columns>
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="MKD ADR" fx:id="anio" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="90" text="Hour" fx:id="hour" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="MKD ADR" fx:id="anio" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="Hour" fx:id="hour" />
 
 
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Type">
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="130" text="Type">
           <columns >
-            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="messageByType">
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="130" fx:id="messageByType">
               <graphic>
                 <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
                   <children>
@@ -28,9 +29,9 @@
         </TableColumn>
 
 
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Symbol">
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="140" text="Symbol">
           <columns >
-            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="symbol">
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="140" fx:id="symbol">
               <graphic>
                 <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
                   <children>

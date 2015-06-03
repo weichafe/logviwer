@@ -15,7 +15,6 @@ public class MainApp extends Application {
 
         try {
 
-
             Repository.primaryStage = primaryStage;
             Repository.primaryStage.setTitle("Log Viwer");
 
@@ -28,13 +27,17 @@ public class MainApp extends Application {
 
             Scene scene = new Scene(rootLayout_Loader);
             primaryStage.setScene(scene);
+
+            //Image image = new Image("batman.png");  //pass in the image path
+            //scene.setCursor(new ImageCursor(image));
+
             primaryStage.show();
 
             Control.initialize();
             Control.initializaAll();
 
 
-            com.larrainvial.sellside.MainApp.sellside();
+            //com.larrainvial.sellside.MainApp.sellside();
 
         } catch (Exception e){
             Helper.exception(e);

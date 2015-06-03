@@ -32,20 +32,81 @@ public class Control {
 
     public  static void initializaAll() throws InterruptedException {
 
-        initializeAdrArbitrageXSGO();
-        initializeAdrArbitrageXTSE();
-        initializeAdrArbitrageXBOG();
+        initializeSellSide(0);
+        initializeAdrArbitrageXSGO(2);
+        //initializeAdrArbitrageXTSE(3);
+        //initializeAdrArbitrageXBOG(4);
         //initializeAdrArbitrageTest();
     }
 
-
-    private static void initializeAdrArbitrageXSGO(){
+    private static  void initializeSellSide(int tab){
 
         try {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrageXSGO");
+            algo.setNameAlgo("Sell Sides");
+            algo.setRouting_adr("ROUTING_ADR");
+            algo.setRouting_local("ROUTING_LOCAL");
+
+            Date fechaActual = new Date();
+            DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
+            String year = formatoFecha.format(fechaActual).replace("/", "");
+
+            String location = "src\\resources\\Quickfix\\log\\";
+            String routing_nyse = "FIX.4.4-LVSSG_ARB-LVARB.messages_";
+            String log = ".log";
+
+            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.fileReader();
+
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            opacityLevel.setLayoutX(25);
+            opacityLevel.setLayoutY(13);
+
+            opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
+                public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+                    algo.setTime(new_val.doubleValue());
+                }
+            });
+
+            SwitchButton switchButtonDolar = new SwitchButton("Sell Side", algo);
+            Button switchBtn1 = switchButtonDolar.returnButton();
+            switchBtn1.setLayoutX(177);
+            switchBtn1.setLayoutY(10);
+
+            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/sellside/RoutingAdrView.fxml"));
+
+            AnchorPane anchorPane = new AnchorPane();
+            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
+            anchorPane.getChildren().add(opacityLevel);
+            anchorPane.getChildren().add(anchorPane);
+
+
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+
+            MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
+            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
+            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+
+            Repository.strategy.put(algo.getNameAlgo(), algo);
+            algo.iniziale();
+
+        } catch (Exception e){
+            Helper.exception(e);
+        }
+
+    }
+
+
+    private static void initializeAdrArbitrageXSGO(int tab){
+
+        try {
+
+            Algo algo = new Algo();
+
+            algo.setNameAlgo("ADRArbitrage XSGO");
             algo.setMkd_dolar("MKD_DOLAR");
             algo.setMkd_adr("MKD_NYSE");
             algo.setMkd_local("MKD_XSGO");
@@ -141,8 +202,8 @@ public class Control {
             anchorPane.getChildren().add(switchBtn6);
 
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(0).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(0).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
             MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
             algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
@@ -174,18 +235,18 @@ public class Control {
             algo.iniziale();
 
 
-        }catch (Exception e){
+        } catch (Exception e){
             Helper.exception(e);
         }
     }
 
-    private static void initializeAdrArbitrageXTSE(){
+    private static void initializeAdrArbitrageXTSE(int tab){
 
         try {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrageXTSE");
+            algo.setNameAlgo("ADRArbitrage XTSE");
             algo.setMkd_dolar("MKD_DOLAR");
             algo.setMkd_adr("MKD_NYSE");
             algo.setMkd_local("MKD_XSGO");
@@ -280,8 +341,8 @@ public class Control {
             anchorPane.getChildren().add(switchBtn5);
             anchorPane.getChildren().add(switchBtn6);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(1).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(1).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
 
             com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
@@ -319,13 +380,13 @@ public class Control {
         }
     }
 
-    private static void initializeAdrArbitrageXBOG(){
+    private static void initializeAdrArbitrageXBOG(int tab){
 
         try {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrageXBOG");
+            algo.setNameAlgo("ADRArbitrage XBOG");
             algo.setMkd_dolar("MKD_DOLAR");
             algo.setMkd_adr("MKD_NYSE");
             algo.setMkd_local("MKD_XSGO");
@@ -420,8 +481,8 @@ public class Control {
             anchorPane.getChildren().add(switchBtn5);
             anchorPane.getChildren().add(switchBtn6);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(2).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(2).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
             com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
             algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
@@ -456,13 +517,13 @@ public class Control {
         }
     }
 
-    private static void initializeAdrArbitrageTest(){
+    private static void initializeAdrArbitrageTest(int tab){
 
         try {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrageTEST");
+            algo.setNameAlgo("ADRArbitrage TEST");
             algo.setMkd_dolar("MKD_DOLAR");
             algo.setMkd_adr("MKD_NYSE");
             algo.setMkd_local("MKD_XSGO");
@@ -557,8 +618,8 @@ public class Control {
             anchorPane.getChildren().add(switchBtn5);
             anchorPane.getChildren().add(switchBtn6);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(3).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(3).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
             com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
             algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());

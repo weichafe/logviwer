@@ -20,11 +20,14 @@ import java.util.Map;
 
 public class Helper {
 
+    private static boolean exception = true;
+    private static boolean alertBloolean = true;
+
     public static synchronized void exception(Exception e) {
 
         try {
 
-            e.printStackTrace();
+            if(!exception) return;
 
             Platform.runLater(new Runnable() {
 
@@ -59,11 +62,22 @@ public class Helper {
                     expContent.add(textArea, 0, 1);
 
                     alertException.getDialogPane().setExpandableContent(expContent);
+                    exception = false;
                     alertException.showAndWait();
+
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    alertException.hide();
+                    exception = true;
 
                 }
             });
 
+            e.printStackTrace();
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -73,18 +87,31 @@ public class Helper {
 
     public static synchronized void  alert(String headerText, String contentText1){
 
+        if(!alertBloolean) return;
 
-            Platform.runLater(new Runnable() {
-                public void run() {
+        Platform.runLater(new Runnable() {
+            public void run() {
 
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Alert");
-                    alert.setHeaderText(headerText);
-                    alert.setContentText(contentText1);
-                    alert.showAndWait();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Alert");
+                alert.setHeaderText(headerText);
+                alert.setContentText(contentText1);
+
+                alert.show();
+                alertBloolean = false;
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                alert.hide();
+                alertBloolean = true;
+
+
                 }
             });
-
     }
 
 

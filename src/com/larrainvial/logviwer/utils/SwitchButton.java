@@ -21,6 +21,7 @@ public class SwitchButton extends Label {
         switchBtn.setId(nameType);
         switchBtn.setPrefWidth(110);
 
+
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
@@ -61,13 +62,13 @@ public class SwitchButton extends Label {
                         algo.setAlert(false);
 
                         switchBtn.setText(nameType + " OFF");
-                        switchBtn.setStyle("-fx-background-color: red;-fx-text-fill:black;");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                     } else {
 
                         switchBtn.setText(nameType + " ON");
-                        switchBtn.setStyle("-fx-background-color: green;-fx-text-fill:white;");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.RIGHT);
 
                     }
@@ -95,21 +96,19 @@ public class SwitchButton extends Label {
                     }
 
                     if(switchBtn.getId().equals("Alert")){
-                        algo.setAlert(true);
 
+                        algo.setAlert(true);
                         switchBtn.setText(nameType + " ON");
-                        switchBtn.setStyle("-fx-background-color: green;-fx-text-fill:white;");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.RIGHT);
 
                     } else {
 
                         switchBtn.setText(nameType + " OFF");
-                        switchBtn.setStyle("-fx-background-color: red;-fx-text-fill:black;");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                     }
-
-
 
                 }
             }

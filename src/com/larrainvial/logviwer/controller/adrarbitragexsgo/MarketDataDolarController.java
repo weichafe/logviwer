@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer.controller.adrarbitragexsgo;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.model.ModelPositions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,13 +17,13 @@ import javafx.scene.paint.Color;
 public class MarketDataDolarController {
 
     @FXML
+    private TableView<ModelMarketData> dolar;
+
+    @FXML
     private TextField filterField;
 
     @FXML
     private TextField filterType;
-
-    @FXML
-    private TableView<ModelMarketData> dolar;
 
     @FXML
     private TableColumn<ModelMarketData, String> anio;
@@ -83,19 +82,14 @@ public class MarketDataDolarController {
     @FXML
     private void initialize() throws Exception {
 
-
-
-        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
         anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
-
         buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
         buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
-
         sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
         sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
-
         closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
 
 
@@ -116,38 +110,31 @@ public class MarketDataDolarController {
                             items = item;
 
                             if (item.equals("V")) {
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkgray; -fx-alignment: CENTER; -fx-font-weight: bold;");
                                 setText(item);
 
-                            } else if (item.equals("W")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkkhaki; -fx-alignment: CENTER; -fx-font-weight: bold;");
+                            } else if (item.equals("W")) {
                                 setText(item);
 
-                            } else if (item.equals("X")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: gainsboro; -fx-alignment: CENTER; -fx-font-weight: bold;");
+                            } else if (item.equals("X")) {
                                 setText(item);
 
-                            } else if (item.equals("5")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
+                            } else if (item.equals("5")) {
+                                setTextFill(Color.RED);
+                                //setStyle();
                                 setText(item);
 
-                            } else if (item.equals("1")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
+                            } else if (item.equals("1")) {
+                                setTextFill(Color.AQUA);
+                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
                                 setText(item);
 
-                            } else if (item.equals("A")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
+                            } else if (item.equals("A")) {
+                                setTextFill(Color.RED);
+                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
                                 setText(item);
 
                             } else {
                                 setText(item);
-                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
                             }
                         }
 
@@ -158,66 +145,6 @@ public class MarketDataDolarController {
                 }
             };
         });
-
-
-        closePx.setCellFactory(column -> {
-            return new TableCell<ModelMarketData, String>() {
-
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-
-                        } else {
-
-                            if (items.equals("V")) {
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkgray; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (items.equals("W")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkkhaki; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (items.equals("X")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: gainsboro; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (items.equals("5")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (items.equals("1")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (items.equals("A")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red; -fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else {
-                                setText(item);
-                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-        });
-
 
 
         dolar.setItems(filteredDataSymbol);
