@@ -12,7 +12,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
-
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,12 +31,16 @@ public class Control {
 
     public  static void initializaAll() throws InterruptedException {
 
-        initializeSellSide(0);
+        //initializeSellSide(0);
+        //initializeSellSide(1);
         initializeAdrArbitrageXSGO(2);
-        //initializeAdrArbitrageXTSE(3);
-        //initializeAdrArbitrageXBOG(4);
+        initializeAdrArbitrageXTSE(3);
+        initializeAdrArbitrageXBOG(4);
+        //initializeAdrArbitrageTest();
         //initializeAdrArbitrageTest();
     }
+
+
 
     private static  void initializeSellSide(int tab){
 
@@ -86,9 +89,9 @@ public class Control {
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
-            MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            //RoutingAdrController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
+            //algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
+            //algo.setDolarMasterList(getMkd_dolar_loader.masterData);
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
             algo.iniziale();
@@ -98,7 +101,6 @@ public class Control {
         }
 
     }
-
 
     private static void initializeAdrArbitrageXSGO(int tab){
 

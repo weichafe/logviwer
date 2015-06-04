@@ -7,8 +7,12 @@
     <groupId>com.larrainvial.etrading</groupId>
     <artifactId>logviwer</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>report</module>
+        <module>sellside</module>
+    </modules>
     <name>logviwer</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
 	<build>
         <finalName>lvblottercore</finalName>
