@@ -1,0 +1,280 @@
+20150529-15:00:46.849: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:00:46.850: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:00:47.061: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63673
+20150529-15:00:47.062: Acceptor heartbeat set to 60 seconds
+20150529-15:00:47.063: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:00:47.080: Received logon
+20150529-15:00:47.089: Responding to logon request
+20150529-15:24:54.929: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:24:54.930: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:24:55.525: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62074
+20150529-15:24:55.525: Acceptor heartbeat set to 60 seconds
+20150529-15:24:55.526: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:24:55.537: Received logon
+20150529-15:24:55.543: Responding to logon request
+20150529-15:25:23.211: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:25:23.212: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:25:23.997: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62098
+20150529-15:25:23.997: Acceptor heartbeat set to 60 seconds
+20150529-15:25:24.001: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:25:24.016: Received logon
+20150529-15:25:24.023: Responding to logon request
+20150529-15:25:45.058: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:25:45.059: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:25:45.658: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62112
+20150529-15:25:45.658: Acceptor heartbeat set to 60 seconds
+20150529-15:25:45.661: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:25:45.680: Received logon
+20150529-15:25:45.691: Responding to logon request
+20150529-15:26:37.641: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:26:37.642: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:26:38.190: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62135
+20150529-15:26:38.190: Acceptor heartbeat set to 60 seconds
+20150529-15:26:38.191: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:26:38.199: Received logon
+20150529-15:26:38.204: Responding to logon request
+20150529-15:27:27.142: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:27:27.143: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:27:27.459: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62175
+20150529-15:27:27.460: Acceptor heartbeat set to 60 seconds
+20150529-15:27:27.461: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:27:27.475: Received logon
+20150529-15:27:27.488: Responding to logon request
+20150529-15:29:02.770: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:29:02.771: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:29:03.073: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62235
+20150529-15:29:03.073: Acceptor heartbeat set to 60 seconds
+20150529-15:29:03.074: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:29:03.087: Received logon
+20150529-15:29:03.092: Responding to logon request
+20150529-15:29:45.265: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:29:45.266: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:29:47.007: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62272
+20150529-15:29:47.007: Acceptor heartbeat set to 60 seconds
+20150529-15:29:47.009: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:29:47.020: Received logon
+20150529-15:29:47.026: Responding to logon request
+20150529-15:30:31.895: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:30:31.896: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:30:32.109: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62290
+20150529-15:30:32.109: Acceptor heartbeat set to 60 seconds
+20150529-15:30:32.111: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:30:32.123: Received logon
+20150529-15:30:32.132: Responding to logon request
+20150529-15:31:35.250: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:31:35.251: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:31:37.004: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62322
+20150529-15:31:37.004: Acceptor heartbeat set to 60 seconds
+20150529-15:31:37.007: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:31:37.028: Received logon
+20150529-15:31:37.043: Responding to logon request
+20150529-15:32:11.600: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:32:11.601: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:32:13.003: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62341
+20150529-15:32:13.004: Acceptor heartbeat set to 60 seconds
+20150529-15:32:13.006: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:32:13.027: Received logon
+20150529-15:32:13.036: Responding to logon request
+20150529-15:33:19.235: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:33:19.236: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:33:19.419: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62362
+20150529-15:33:19.419: Acceptor heartbeat set to 60 seconds
+20150529-15:33:19.423: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:33:19.447: Received logon
+20150529-15:33:19.457: Responding to logon request
+20150529-15:33:45.891: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:33:45.892: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:33:46.990: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62438
+20150529-15:33:46.990: Acceptor heartbeat set to 60 seconds
+20150529-15:33:46.992: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:33:47.002: Received logon
+20150529-15:33:47.010: Responding to logon request
+20150529-15:36:10.384: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:36:10.385: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:36:10.953: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62536
+20150529-15:36:10.953: Acceptor heartbeat set to 60 seconds
+20150529-15:36:10.962: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:36:10.975: Received logon
+20150529-15:36:10.991: Responding to logon request
+20150529-15:38:23.853: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:38:23.854: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:38:25.005: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62575
+20150529-15:38:25.005: Acceptor heartbeat set to 60 seconds
+20150529-15:38:25.007: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:38:25.017: Received logon
+20150529-15:38:25.030: Responding to logon request
+20150529-15:39:30.581: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:39:30.582: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:39:32.004: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62597
+20150529-15:39:32.004: Acceptor heartbeat set to 60 seconds
+20150529-15:39:32.006: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:39:32.025: Received logon
+20150529-15:39:32.039: Responding to logon request
+20150529-15:40:39.120: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:40:39.121: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:40:40.006: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62622
+20150529-15:40:40.006: Acceptor heartbeat set to 60 seconds
+20150529-15:40:40.008: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:40:40.049: Received logon
+20150529-15:40:40.073: Responding to logon request
+20150529-15:45:27.042: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:45:27.043: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:45:27.697: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62760
+20150529-15:45:27.697: Acceptor heartbeat set to 60 seconds
+20150529-15:45:27.699: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:45:27.714: Received logon
+20150529-15:45:27.730: Responding to logon request
+20150529-15:56:44.786: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:56:44.787: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:56:46.167: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63285
+20150529-15:56:46.167: Acceptor heartbeat set to 60 seconds
+20150529-15:56:46.169: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:56:46.185: Received logon
+20150529-15:56:46.195: Responding to logon request
+20150529-15:58:20.815: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-15:58:20.816: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-15:58:22.174: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63345
+20150529-15:58:22.175: Acceptor heartbeat set to 60 seconds
+20150529-15:58:22.177: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-15:58:22.201: Received logon
+20150529-15:58:22.213: Responding to logon request
+20150529-16:02:41.402: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:02:41.403: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:02:42.185: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63447
+20150529-16:02:42.185: Acceptor heartbeat set to 60 seconds
+20150529-16:02:42.187: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:02:42.257: Received logon
+20150529-16:02:42.268: Responding to logon request
+20150529-16:03:31.957: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:03:31.958: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:03:32.567: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63467
+20150529-16:03:32.567: Acceptor heartbeat set to 60 seconds
+20150529-16:03:32.569: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:03:32.583: Received logon
+20150529-16:03:32.599: Responding to logon request
+20150529-16:07:28.422: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:07:28.423: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:07:29.170: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58869
+20150529-16:07:29.170: Acceptor heartbeat set to 60 seconds
+20150529-16:07:29.183: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:07:29.198: Received logon
+20150529-16:07:29.214: Responding to logon request
+20150529-16:07:54.814: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:07:54.816: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:07:55.292: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58885
+20150529-16:07:55.292: Acceptor heartbeat set to 60 seconds
+20150529-16:07:55.294: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:07:55.307: Received logon
+20150529-16:07:55.313: Responding to logon request
+20150529-16:08:06.693: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:08:06.699: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:08:08.179: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58908
+20150529-16:08:08.179: Acceptor heartbeat set to 60 seconds
+20150529-16:08:08.181: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:08:08.198: Received logon
+20150529-16:08:08.210: Responding to logon request
+20150529-16:17:58.038: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:17:58.039: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:17:59.191: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59012
+20150529-16:17:59.191: Acceptor heartbeat set to 60 seconds
+20150529-16:17:59.194: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:17:59.219: Received logon
+20150529-16:17:59.228: Responding to logon request
+20150529-16:25:47.572: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:25:47.573: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:25:48.178: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59094
+20150529-16:25:48.178: Acceptor heartbeat set to 60 seconds
+20150529-16:25:48.191: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:25:48.209: Received logon
+20150529-16:25:48.229: Responding to logon request
+20150529-16:26:07.696: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:26:07.697: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:26:08.172: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59114
+20150529-16:26:08.172: Acceptor heartbeat set to 60 seconds
+20150529-16:26:08.180: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:26:08.193: Received logon
+20150529-16:26:08.200: Responding to logon request
+20150529-16:29:13.818: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:29:13.819: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:29:14.245: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59153
+20150529-16:29:14.245: Acceptor heartbeat set to 60 seconds
+20150529-16:29:14.247: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:29:14.272: Received logon
+20150529-16:29:14.286: Responding to logon request
+20150529-16:29:35.347: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:29:35.348: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:29:36.175: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59171
+20150529-16:29:36.175: Acceptor heartbeat set to 60 seconds
+20150529-16:29:36.186: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:29:36.259: Received logon
+20150529-16:29:36.266: Responding to logon request
+20150529-16:29:52.913: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:29:52.917: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:29:54.188: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59193
+20150529-16:29:54.188: Acceptor heartbeat set to 60 seconds
+20150529-16:29:54.189: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:29:54.206: Received logon
+20150529-16:29:54.223: Responding to logon request
+20150529-16:31:42.347: Sent test request TEST
+20150529-16:35:51.325: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:35:51.326: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:37:00.150: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-16:37:00.151: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-16:39:16.275: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59523
+20150529-16:39:16.275: Acceptor heartbeat set to 60 seconds
+20150529-16:39:16.276: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:39:16.286: Received logon
+20150529-16:39:16.291: Responding to logon request
+20150529-16:39:51.473: Disconnecting: Socket exception (/127.0.0.1:59523): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150529-16:40:52.508: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:59591
+20150529-16:40:52.508: Acceptor heartbeat set to 60 seconds
+20150529-16:40:52.509: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-16:40:52.509: Received logon
+20150529-16:40:52.510: Responding to logon request
+20150529-17:56:22.741: Disconnecting: Socket exception (/127.0.0.1:59591): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150529-17:56:31.282: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:58198
+20150529-17:56:31.282: Acceptor heartbeat set to 60 seconds
+20150529-17:56:31.283: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150529-17:56:31.283: Received logon
+20150529-17:56:31.286: Responding to logon request
+20150529-18:02:40.491: Disconnecting: Socket exception (/127.0.0.1:58198): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150529-18:06:13.153: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:06:13.154: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:07:32.483: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:07:32.484: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:08:21.047: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:08:21.048: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:10:06.863: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:10:06.864: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:11:17.169: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:11:17.169: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:11:47.994: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:11:47.995: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:12:07.871: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:12:07.871: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:13:13.750: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:13:13.751: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:14:25.162: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:14:25.163: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:17:15.342: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:17:15.343: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:21:11.515: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:21:11.516: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:21:44.531: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:21:44.532: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:23:27.730: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:23:27.731: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:24:11.475: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:24:11.476: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-18:25:59.079: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-18:25:59.080: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-19:25:50.753: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-19:25:50.754: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-19:26:25.359: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-19:26:25.363: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-19:32:17.536: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-19:32:17.537: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-19:33:46.545: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-19:33:46.546: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150529-19:34:27.409: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150529-19:34:27.410: Created session: FIX.4.4:LVSSG_ARB->LVARB

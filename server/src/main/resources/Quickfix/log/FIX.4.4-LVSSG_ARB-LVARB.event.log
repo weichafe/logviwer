@@ -1,0 +1,442 @@
+20150530-15:06:13.280: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:06:13.282: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:06:13.284: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:10:01.967: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:10:01.969: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:10:01.971: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:19:17.408: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:19:17.410: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:19:17.411: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:22:57.238: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:22:57.239: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:22:57.240: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:25:30.276: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:25:30.278: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:25:30.279: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:26:39.312: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:26:39.314: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:26:39.315: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:26:59.581: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:26:59.582: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:26:59.583: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:27:23.244: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:27:23.246: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:27:23.247: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:27:59.202: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:27:59.203: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:27:59.204: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:40:11.480: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:40:11.481: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:40:11.482: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:45:22.574: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:45:22.577: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:45:22.577: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:46:13.518: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:46:13.519: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:46:13.520: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:48:02.913: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:48:02.914: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:48:02.915: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:50:26.179: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:50:26.180: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:50:26.249: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:50:56.362: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:50:56.363: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:50:56.431: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:51:26.834: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-15:51:26.835: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-15:51:26.836: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:10:42.903: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:10:42.905: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:10:42.906: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:11:13.854: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:11:13.856: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:11:13.857: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:12:24.721: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:12:24.723: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:12:24.724: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:13:00.271: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:13:00.273: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:13:00.274: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:13:51.465: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:13:51.466: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:13:51.468: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:14:42.384: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:14:42.385: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:14:42.386: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:05.597: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:15:05.599: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:05.600: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:25.506: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:15:25.508: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:25.509: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:42.990: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:15:42.991: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:15:42.992: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:16:15.573: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:16:15.575: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:16:15.576: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:16:54.645: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:16:54.647: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:16:54.648: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:17:22.715: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:17:22.717: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:17:22.718: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:17:55.496: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:17:55.497: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:17:55.498: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:18:40.024: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:18:40.025: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:18:40.026: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:18:57.914: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:18:57.915: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:18:57.916: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:19:16.745: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:19:16.747: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:19:16.748: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:19:32.564: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:19:32.565: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:19:32.566: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:20:36.534: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:20:36.536: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:20:36.537: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:21:15.955: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:21:15.957: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:21:15.958: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:24:30.636: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:24:30.638: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:24:30.640: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:26:07.173: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:26:07.178: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:26:07.185: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:26:23.124: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:26:23.126: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:26:23.127: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:41:27.409: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:41:27.421: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:41:27.423: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:45:50.567: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:45:50.569: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:45:50.570: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:47:36.936: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:47:36.938: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:47:36.938: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:49:51.209: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:49:51.211: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:49:51.212: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:50:30.951: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:50:30.953: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:50:30.954: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:51:48.140: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:51:48.142: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:51:48.143: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:52:43.058: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:52:43.061: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:52:43.062: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:54:42.521: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:54:42.523: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:54:42.525: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:55:43.820: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-16:55:43.822: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-16:55:43.823: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:00:36.201: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-17:00:36.204: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:00:36.206: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:07:53.854: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-17:07:53.856: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:07:53.857: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:08:43.643: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-17:08:43.653: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:08:43.654: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:09:43.161: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-17:09:43.163: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-17:09:43.164: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:12:51.633: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:12:51.635: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:12:51.636: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:22:42.485: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:22:42.487: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:22:42.489: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:23:22.027: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:23:22.029: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:23:22.038: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:23:49.710: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:23:49.712: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:23:49.713: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:24:43.279: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:24:43.281: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:24:43.282: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:25:41.020: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:25:41.022: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:25:41.024: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:26:26.532: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:26:26.534: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:26:26.535: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:27:12.629: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:27:12.631: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:27:12.632: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:27:49.845: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:27:49.847: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:27:49.848: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:28:10.699: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:28:10.701: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:28:10.702: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:28:47.319: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:28:47.322: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:28:47.323: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:30:38.215: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:30:38.218: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:30:38.219: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:31:50.501: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:31:50.503: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:31:50.504: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:33:37.916: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:33:37.918: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:33:37.919: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:35:33.166: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:35:33.171: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:35:33.176: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:36:01.104: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:36:01.106: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:36:01.107: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:36:35.262: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:36:35.264: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:36:35.265: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:38:45.444: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:38:45.446: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:38:45.448: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:41:10.059: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:41:10.069: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:41:10.070: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:41:28.810: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:41:28.811: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:41:28.812: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:44:02.712: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:44:02.714: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:44:02.715: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:44:58.421: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:44:58.427: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:44:58.428: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:51:47.808: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:51:47.810: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:51:47.811: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:08.758: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:52:08.760: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:08.761: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:33.603: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:52:33.605: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:33.607: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:54.927: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:52:54.937: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:52:54.938: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:53:39.938: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:53:39.940: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:53:39.949: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:54:15.088: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:54:15.094: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:54:15.096: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:54:42.032: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:54:42.034: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:54:42.044: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:55:07.185: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:55:07.187: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:55:07.188: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:57:05.802: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:57:05.804: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:57:05.806: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:57:36.990: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-18:57:36.992: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-18:57:36.993: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:21:37.953: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:21:37.954: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:21:37.955: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:24:36.054: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:24:36.055: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:24:36.056: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:43:26.512: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:43:26.514: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:43:26.516: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:44:33.441: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:44:33.443: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:44:33.445: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:45:58.765: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:45:58.767: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:45:58.769: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:46:18.569: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150530-19:46:18.572: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150530-19:46:18.574: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:49:57.219: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-13:49:57.236: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:49:57.239: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:53:49.043: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-13:53:49.044: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-13:53:49.044: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:00:20.893: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:00:20.894: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:00:20.895: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:18.950: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:28:18.950: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:18.951: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:48.259: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:28:48.259: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:28:48.260: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:00.997: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:31:00.998: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:00.998: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:26.059: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:31:26.063: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:31:26.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:33:16.392: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:33:16.392: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:33:16.393: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:34:03.698: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-14:34:03.699: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150601-14:34:03.700: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:06:47.674: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55554
+20150601-15:06:47.674: Acceptor heartbeat set to 60 seconds
+20150601-15:06:48.658: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55569
+20150601-15:06:48.658: Acceptor heartbeat set to 60 seconds
+20150601-15:06:48.659: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:06:48.660: Received logon
+20150601-15:06:48.662: Responding to logon request
+20150601-15:13:02.873: Disconnecting: Socket exception (/127.0.0.1:55569): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:13:18.587: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55852
+20150601-15:13:18.587: Acceptor heartbeat set to 60 seconds
+20150601-15:13:18.587: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:13:18.588: Received logon
+20150601-15:13:18.589: Responding to logon request
+20150601-15:32:30.121: Disconnecting: Socket exception (/127.0.0.1:55852): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:32:41.398: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55250
+20150601-15:32:41.398: Acceptor heartbeat set to 60 seconds
+20150601-15:32:41.398: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:32:41.398: Received logon
+20150601-15:32:41.399: Responding to logon request
+20150601-15:35:52.306: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:35:52.307: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:35:53.376: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55364
+20150601-15:35:53.376: Acceptor heartbeat set to 60 seconds
+20150601-15:35:53.378: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:35:53.398: Received logon
+20150601-15:35:53.409: Responding to logon request
+20150601-15:37:42.543: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:37:42.544: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:37:43.403: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55394
+20150601-15:37:43.403: Acceptor heartbeat set to 60 seconds
+20150601-15:37:43.405: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:37:43.493: Received logon
+20150601-15:37:43.506: Responding to logon request
+20150601-15:39:40.183: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:39:40.184: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:39:40.564: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55421
+20150601-15:39:40.565: Acceptor heartbeat set to 60 seconds
+20150601-15:39:40.631: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:39:40.640: Received logon
+20150601-15:39:40.646: Responding to logon request
+20150601-15:42:57.083: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:42:57.084: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:42:57.432: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:55485
+20150601-15:42:57.432: Acceptor heartbeat set to 60 seconds
+20150601-15:42:57.434: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-15:42:57.503: Received logon
+20150601-15:42:57.511: Responding to logon request
+20150601-15:53:36.059: Disconnecting: Socket exception (/127.0.0.1:55485): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-15:58:23.142: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:58:23.143: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:59:11.875: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:59:11.876: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-15:59:36.472: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-15:59:36.473: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:00:34.066: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:00:34.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:02:44.065: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:56090
+20150601-16:02:44.066: Acceptor heartbeat set to 60 seconds
+20150601-16:02:44.071: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:02:44.072: Received logon
+20150601-16:02:44.083: Responding to logon request
+20150601-16:04:34.767: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:04:34.768: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:04:36.026: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:56134
+20150601-16:04:36.026: Acceptor heartbeat set to 60 seconds
+20150601-16:04:36.029: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:04:36.057: Received logon
+20150601-16:04:36.063: Responding to logon request
+20150601-16:16:49.762: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:16:49.763: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:16:51.003: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62051
+20150601-16:16:51.003: Acceptor heartbeat set to 60 seconds
+20150601-16:16:51.006: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:16:51.043: Received logon
+20150601-16:16:51.050: Responding to logon request
+20150601-16:21:10.892: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:21:10.892: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:21:11.052: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:62209
+20150601-16:21:11.052: Acceptor heartbeat set to 60 seconds
+20150601-16:21:11.053: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:21:11.070: Received logon
+20150601-16:21:11.082: Responding to logon request
+20150601-16:30:23.655: Disconnecting: Socket exception (/127.0.0.1:62209): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150601-16:37:27.997: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:37:27.999: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:41:31.978: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-16:41:31.979: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-16:41:32.652: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63422
+20150601-16:41:32.652: Acceptor heartbeat set to 60 seconds
+20150601-16:41:32.654: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-16:41:32.654: Received logon
+20150601-16:41:32.660: Responding to logon request
+20150601-17:14:08.719: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150601-17:14:08.720: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150601-17:14:09.101: Accepting session FIX.4.4:LVSSG_ARB->LVARB from /127.0.0.1:63861
+20150601-17:14:09.101: Acceptor heartbeat set to 60 seconds
+20150601-17:14:09.106: Logon contains ResetSeqNumFlag=Y, resetting sequence numbers to 1
+20150601-17:14:09.119: Received logon
+20150601-17:14:09.127: Responding to logon request
+20150601-17:19:34.228: Disconnecting: Socket exception (/127.0.0.1:63861): java.io.IOException: Se ha forzado la interrupción de una conexión existente por el host remoto
+20150602-12:49:43.896: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:49:43.902: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:49:43.902: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:02.208: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:50:02.209: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:02.210: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:35.745: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:50:35.746: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:50:35.747: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:51:21.339: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:51:21.340: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:51:21.341: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:53:02.065: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150602-12:53:02.066: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150602-12:53:02.067: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-12:47:10.147: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-12:47:10.148: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-12:47:10.148: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:04:29.030: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:04:29.031: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:04:29.031: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:05:52.393: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:05:52.394: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:05:52.394: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:08:28.090: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:08:28.091: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:08:28.094: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:13:48.679: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:13:48.679: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:13:48.680: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:14:21.375: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:14:21.376: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:14:21.377: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:44:01.254: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:44:01.254: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:44:01.255: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:49:25.632: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:49:25.633: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:49:25.634: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:55:01.581: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:55:01.582: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:55:01.583: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:56:09.882: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:56:09.883: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:56:09.883: Created session: FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:56:49.021: Session FIX.4.4:LVSSG_ARB->LVARB schedule is daily, 00:01:00-UTC - 23:59:00-UTC
+20150603-13:56:49.022: Session state is not current; resetting FIX.4.4:LVSSG_ARB->LVARB
+20150603-13:56:49.022: Created session: FIX.4.4:LVSSG_ARB->LVARB

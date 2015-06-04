@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane layoutX="7.0" layoutY="423" prefHeight="210.0" prefWidth="1505" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.adrarbitragextse.RoutingLocalController">
+  <children>
+
+    <TableView fx:id="routing_xsgo" layoutX="14.0" layoutY="7.0" prefHeight="180.0" prefWidth="1553">
+
+      <columns>
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="110" text="LOCAL" fx:id="year" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="110" text="Hour" fx:id="hour" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80.0" text="Type" fx:id="messageByType" />
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" text="Symbol">
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="symbol">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;"  alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldSymbol" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ClOrdID" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="clOrdID">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;"  alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldClOrdID" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="OrderID" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="orderID">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldOrderID" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="OrigClOrdID" >
+          <columns>
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="origClOrdID">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldOrigClOrdID" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ExecType" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="execType">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldExecType" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="OrdStatus" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="ordStatus">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldOrdStatus" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="Account" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="account">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldAccount" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="Side" >
+          <columns >
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="side">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldSide" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ClOrdLinkID" >
+          <columns>
+            <TableColumn style="-fx-alignment: CENTER;" prefWidth="150" fx:id="clOrdLinkID">
+              <graphic>
+                <HBox id="HBox" style="-fx-alignment: CENTER;" alignment="CENTER" prefWidth="140.0">
+                  <children>
+                    <TextField fx:id="filterFieldClOrdLinkID" prefWidth="90.0" />
+                  </children>
+                </HBox>
+              </graphic>
+            </TableColumn>
+          </columns>
+        </TableColumn>
+
+
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ExDestination" fx:id="exDestination" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="SecurityExchange" fx:id="securityExchange" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="Price" fx:id="price" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="OrderQty" fx:id="orderQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LastQty" fx:id="lastQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LastPx" fx:id="lastPx" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="LeavesQty" fx:id="leavesQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="CumQty" fx:id="cumQty" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="AvgPx" fx:id="avgPx" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ExecID" fx:id="execID" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="MaxFloor" fx:id="maxFloor" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="150.0" text="Text" fx:id="text" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="EffectiveTime" fx:id="effectiveTime" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="112.0" text="ExpireTime" fx:id="expireTime" />
+      </columns>
+
+    </TableView>
+  </children>
+</AnchorPane>
