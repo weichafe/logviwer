@@ -136,8 +136,6 @@ public class Algo implements Serializable {
         typeFile.add(4, inputStream_routing_adr);
 
 
-
-
         timerTask = new TimerTask(){
 
             public void run() {
