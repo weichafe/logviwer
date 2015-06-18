@@ -26,6 +26,10 @@ public class SendToViewListener implements Listener {
             if (ev.typeMarket.equals(algo.getMkd_dolar())) {
                 algo.getDolarMasterList().add(ev.modelMarketData);
                 algo.getMkd_dolar_tableView().setItems(algo.getDolarMasterList());
+
+                if(algo.getDolarMasterList().size() >= 10000){
+                    algo.getDolarMasterList().clear();
+                }
             }
 
             if (ev.typeMarket.equals(algo.getMkd_adr())) {
@@ -53,21 +57,19 @@ public class SendToViewListener implements Listener {
             if(!ev.marketData) return;
 
 
-            for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
+            synchronized(algo.getPositionsMasterListHash()) {
 
-                try {
+                for (Map.Entry<String, ModelPositions> e : algo.getPositionsMasterListHash().entrySet()) {
 
-                    if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+                    if (algo.getPositionsMasterListHash().containsKey(e.getKey()))
 
                         if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
+
                             algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
                             algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
                             algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
-                        }
-                    }
 
-                } catch (Exception ex) {
-                    Helper.exception(ex);
+                        }
                 }
             }
 

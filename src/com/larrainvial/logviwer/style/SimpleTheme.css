@@ -58,30 +58,4 @@
     -fx-text-fill: orange;
 }
 
-/*
-.table-view .column-header-background {
-    -fx-background-color: transparent;
-}
-*/
-
-/*
-.table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: -fx-focus-color;
-}
-
-.table-row-cell:selected .text {
-    -fx-fill: #d8d8d8;
-}
-*/
-
-/*
-.button {
-    -fx-background-color: transparent;
-}
-
-.button:hover {
-    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
-    -fx-color: -fx-hover-base;
-}
-*/
 

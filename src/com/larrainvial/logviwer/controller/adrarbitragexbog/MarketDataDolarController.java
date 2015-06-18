@@ -8,11 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
 public class MarketDataDolarController {
 
@@ -83,57 +81,6 @@ public class MarketDataDolarController {
         sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
         closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
-
-        messageByType.setCellFactory(column -> {
-            return new TableCell<ModelMarketData, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-
-                        } else {
-
-                            if (item.equals("V")) {
-                                setText(item);
-
-                            } else if (item.equals("W")){
-                                setText(item);
-
-                            } else if (item.equals("X")){
-                                setText(item);
-
-                            } else if (item.equals("5")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else if (item.equals("1")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else if (item.equals("A")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else {
-                                setText(item);
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-        });
-
 
 
         dolar.setItems(filteredData);

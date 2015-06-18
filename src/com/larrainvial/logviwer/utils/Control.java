@@ -4,14 +4,24 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.MainApp;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.controller.adrarbitragexsgo.*;
-import com.larrainvial.logviwer.event.*;
-import com.larrainvial.logviwer.listener.*;
+import com.larrainvial.logviwer.event.AlertEvent;
+import com.larrainvial.logviwer.event.SendToViewEvent;
+import com.larrainvial.logviwer.event.readlog.*;
+import com.larrainvial.logviwer.event.sendtoview.*;
+import com.larrainvial.logviwer.event.stringtofix.*;
+import com.larrainvial.logviwer.listener.AlertListener;
+import com.larrainvial.logviwer.listener.SendToViewListener;
+import com.larrainvial.logviwer.listener.readlog.*;
+import com.larrainvial.logviwer.listener.sendtoview.*;
+import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.trading.emp.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,11 +31,30 @@ public class Control {
 
     public static void initialize(){
 
-        Controller.addEventListener(StringToFixMessageEvent.class, new StringToFixMessageListener());
         Controller.addEventListener(SendToViewEvent.class, new SendToViewListener());
-        Controller.addEventListener(ReadLogEvent.class, new ReadLogListener());
         Controller.addEventListener(AlertEvent.class, new AlertListener());
-        Controller.addEventListener(TriggerReadFileEvent.class, new TriggerReadFileListener());
+
+        Controller.addEventListener(ReadFromDolarEvent.class, new ReadFromDolarListener());
+        Controller.addEventListener(ReadLogMkdAdrEvent.class, new ReadLogMkdAdrListener());
+        Controller.addEventListener(ReadLogMkdLocalEvent.class, new ReadLogMkdLocalListener());
+        Controller.addEventListener(ReadlogRoutingAdrEvent.class, new ReadlogRoutingAdrListener());
+        Controller.addEventListener(ReadLogRoutingLocalEvent.class, new ReadLogRoutingLocalListener());
+
+        Controller.addEventListener(DolarEvent.class, new DolarListener());
+        Controller.addEventListener(MarketDataADREvent.class, new MarketDataAdrListener());
+        Controller.addEventListener(MarketDataLocalEvent.class, new MarketDataLocalListener());
+        Controller.addEventListener(RoutingAdrEvent.class, new RoutingAdrListener());
+        Controller.addEventListener(RoutingLocalEvent.class, new RoutingLocalListener());
+
+        Controller.addEventListener(DolarViewEvent.class, new DolarViewListener());
+        Controller.addEventListener(MarketDataAdrViewEvent.class, new MarketDataAdrViewListener());
+        Controller.addEventListener(MarketDataLocalViewEvent.class, new MarketDataLocalViewListener());
+        Controller.addEventListener(PositionViewEvent.class, new PositionViewListener());
+        Controller.addEventListener(RoutingAdrViewEvent.class, new RoutingAdrViewListener());
+        Controller.addEventListener(RoutingLocalViewEvent.class, new RoutingLocalViewListener());
+
+
+
     }
 
 
@@ -202,6 +231,13 @@ public class Control {
             anchorPane.getChildren().add(switchBtn4);
             anchorPane.getChildren().add(switchBtn5);
             anchorPane.getChildren().add(switchBtn6);
+
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setPrefSize(1000, 800);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setContent(anchorPane);
+
 
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);

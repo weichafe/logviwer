@@ -1,10 +1,9 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.event.TriggerReadFileEvent;
+import com.larrainvial.logviwer.event.readlog.*;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.utils.FileRepository;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Controller;
 import javafx.collections.FXCollections;
@@ -12,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableView;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.Serializable;
 import java.util.*;
 
 public class Algo implements Serializable {
@@ -26,11 +27,6 @@ public class Algo implements Serializable {
     private String routing_local;
     private String routing_adr;
 
-    private String mkd_dolar_file = null;
-    private String mkd_local_file = null;
-    private String mkd_adr_file = null;
-    private String routing_local_file = null;
-    private String routing_adr_file = null;
 
     private double time;
 
@@ -60,9 +56,9 @@ public class Algo implements Serializable {
     private ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
     private ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
-
-    private Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
-
+    public  Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
+    public  Map<String,Integer> positionsMap = Collections.synchronizedMap(new LinkedHashMap<String,Integer>());
+    public int contPositions = 0;
 
     private TableView<ModelMarketData> mkd_dolar_tableView;
     private TableView<ModelMarketData> mkd_adr_tableView;
@@ -92,12 +88,6 @@ public class Algo implements Serializable {
     private FileInputStream inputStream_routing_local;
     private FileInputStream inputStream_routing_adr;
 
-    private FileRepository marketDataListOutput;
-    private ObjectOutputStream routingDataListOutput;
-
-    private ArrayList<ModelMarketData> marketDataListInput;
-    private ObjectInputStream routingDataListInput;
-
 
     public void fileReader() {
 
@@ -120,24 +110,6 @@ public class Algo implements Serializable {
         final double finalTimer_initial = this.getTime();
         stopTimer();
 
-        ArrayList<String> typeMarket = new ArrayList<String>();
-        ArrayList<FileInputStream> typeFile = new ArrayList<FileInputStream>();
-
-        typeMarket.add(0, mkd_dolar);
-        typeMarket.add(1, mkd_local);
-        typeMarket.add(2, mkd_adr);
-        typeMarket.add(3, routing_local);
-        typeMarket.add(4, routing_adr);
-
-        typeFile.add(0, inputStream_mkd_dolar);
-        typeFile.add(1, inputStream_mkd_local);
-        typeFile.add(2, inputStream_mkd_adr);
-        typeFile.add(3, inputStream_routing_local);
-        typeFile.add(4, inputStream_routing_adr);
-
-
-
-
         timerTask = new TimerTask(){
 
             public void run() {
@@ -151,7 +123,25 @@ public class Algo implements Serializable {
                     }
                 }
 
-                Controller.dispatchEvent(new TriggerReadFileEvent(this, nameAlgo, typeMarket, typeFile));
+                if (isMkd_dolar_toggle()) {
+                    Controller.dispatchEvent(new ReadFromDolarEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
+                }
+
+                if (isMkd_local_toggle()) {
+                    Controller.dispatchEvent(new ReadLogMkdLocalEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
+                }
+
+                if (isMkd_adr_toggle()) {
+                    Controller.dispatchEvent(new ReadLogMkdAdrEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
+                }
+
+                if (isRouting_local_toggle()) {
+                    Controller.dispatchEvent(new ReadLogRoutingLocalEvent(this, nameAlgo, routing_local, inputStream_routing_local));
+                }
+
+                if (isRouting_adr_toggle()) {
+                    Controller.dispatchEvent(new ReadlogRoutingAdrEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
+                }
 
             }
 
@@ -171,13 +161,8 @@ public class Algo implements Serializable {
 
     }
 
-
     public ObservableList<ModelPositions> getPositionsMasterList() {
         return positionsMasterList;
-    }
-
-    public void setPositionsMasterList(ObservableList<ModelPositions> positionsMasterList) {
-        this.positionsMasterList = positionsMasterList;
     }
 
     public TableView<ModelPositions> getPanel_positions_tableView() {
@@ -192,141 +177,24 @@ public class Algo implements Serializable {
         return panel_positions_loader;
     }
 
-    public void setPanel_positions_loader(FXMLLoader panel_positions_loader) {
-        this.panel_positions_loader = panel_positions_loader;
-    }
-
     public Map<String, ModelPositions> getPositionsMasterListHash() {
         return positionsMasterListHash;
-    }
-
-    public void setPositionsMasterListHash(LinkedHashMap<String, ModelPositions> positionsMasterListHash) {
-        this.positionsMasterListHash = positionsMasterListHash;
-    }
-
-    public ArrayList<ModelMarketData> getMarketDataListInput() {
-        return marketDataListInput;
-    }
-
-    public void setMarketDataListInput(ArrayList<ModelMarketData> marketDataListInput) {
-        this.marketDataListInput = marketDataListInput;
-    }
-
-
-    public ObjectInputStream getRoutingDataListInput() {
-        return routingDataListInput;
-    }
-
-    public void setRoutingDataListInput(ObjectInputStream routingDataListInput) {
-        this.routingDataListInput = routingDataListInput;
-    }
-
-    public FileRepository getMarketDataListOutput() {
-        return marketDataListOutput;
-    }
-
-    public void setMarketDataListOutput(FileRepository marketDataListOutput) {
-        this.marketDataListOutput = marketDataListOutput;
-    }
-
-    public ObjectOutputStream getRoutingDataListOutput() {
-        return routingDataListOutput;
-    }
-
-    public void setRoutingDataListOutput(ObjectOutputStream routingDataListOutput) {
-        this.routingDataListOutput = routingDataListOutput;
-    }
-
-    public ObservableList<ModelMarketData> getMkdAdrFilterList() {
-        return mkdAdrFilterList;
-    }
-
-    public void setMkdAdrFilterList(ObservableList<ModelMarketData> mkdAdrFilterList) {
-        this.mkdAdrFilterList = mkdAdrFilterList;
-    }
-
-    public ObservableList<ModelMarketData> getMkdLocalFilterList() {
-        return mkdLocalFilterList;
-    }
-
-    public void setMkdLocalFilterList(ObservableList<ModelMarketData> mkdLocalFilterList) {
-        this.mkdLocalFilterList = mkdLocalFilterList;
-    }
-
-    public ObservableList<ModelRoutingData> getRoutingAdrFilterList() {
-        return routingAdrFilterList;
-    }
-
-    public void setRoutingAdrFilterList(ObservableList<ModelRoutingData> routingAdrFilterList) {
-        this.routingAdrFilterList = routingAdrFilterList;
-    }
-
-    public ObservableList<ModelRoutingData> getRoutingLocalFilterList() {
-        return routingLocalFilterList;
-    }
-
-    public void setRoutingLocalFilterList(ObservableList<ModelRoutingData> routingLocalFilterList) {
-        this.routingLocalFilterList = routingLocalFilterList;
-    }
-
-    public ObservableList<ModelRoutingData> getRoutingBlotterMasterLsit() {
-        return routingBlotterMasterLsit;
-    }
-
-    public void setRoutingBlotterMasterLsit(ObservableList<ModelRoutingData> routingBlotterMasterLsit) {
-        this.routingBlotterMasterLsit = routingBlotterMasterLsit;
-    }
-
-    public ObservableList<ModelRoutingData> getRoutingBlotterFilterLsit() {
-        return routingBlotterFilterLsit;
-    }
-
-    public void setRoutingBlotterFilterLsit(ObservableList<ModelRoutingData> routingBlotterFilterLsit) {
-        this.routingBlotterFilterLsit = routingBlotterFilterLsit;
-    }
-
-    public ObservableList<ModelMarketData> getDolarFilterList() {
-        return dolarFilterList;
-    }
-
-    public void setDolarFilterList(ObservableList<ModelMarketData> dolarFilterList) {
-        this.dolarFilterList = dolarFilterList;
-    }
-
-    public File getFile_mkd_dolar() {
-        return file_mkd_dolar;
     }
 
     public void setFile_mkd_dolar(File file_mkd_dolar) {
         this.file_mkd_dolar = file_mkd_dolar;
     }
 
-    public File getFile_mkd_local() {
-        return file_mkd_local;
-    }
-
     public void setFile_mkd_local(File file_mkd_local) {
         this.file_mkd_local = file_mkd_local;
-    }
-
-    public File getFile_mkd_adr() {
-        return file_mkd_adr;
     }
 
     public void setFile_mkd_adr(File file_mkd_adr) {
         this.file_mkd_adr = file_mkd_adr;
     }
 
-    public File getFile_routing_local() {
-        return file_routing_local;
-    }
-
     public void setFile_routing_local(File file_routing_local) {
         this.file_routing_local = file_routing_local;
-    }
-
-    public File getFile_routing_adr() {
-        return file_routing_adr;
     }
 
     public void setFile_routing_adr(File file_routing_adr) {
@@ -461,46 +329,6 @@ public class Algo implements Serializable {
         this.routing_adr = routing_adr;
     }
 
-    public String getMkd_dolar_file() {
-        return mkd_dolar_file;
-    }
-
-    public void setMkd_dolar_file(String mkd_dolar_file) {
-        this.mkd_dolar_file = mkd_dolar_file;
-    }
-
-    public String getMkd_local_file() {
-        return mkd_local_file;
-    }
-
-    public void setMkd_local_file(String mkd_local_file) {
-        this.mkd_local_file = mkd_local_file;
-    }
-
-    public String getMkd_adr_file() {
-        return mkd_adr_file;
-    }
-
-    public void setMkd_adr_file(String mkd_adr_file) {
-        this.mkd_adr_file = mkd_adr_file;
-    }
-
-    public String getRouting_local_file() {
-        return routing_local_file;
-    }
-
-    public void setRouting_local_file(String routing_local_file) {
-        this.routing_local_file = routing_local_file;
-    }
-
-    public String getRouting_adr_file() {
-        return routing_adr_file;
-    }
-
-    public void setRouting_adr_file(String routing_adr_file) {
-        this.routing_adr_file = routing_adr_file;
-    }
-
     public double getTime() {
         return time;
     }
@@ -513,40 +341,20 @@ public class Algo implements Serializable {
         return mkd_dolar_loader;
     }
 
-    public void setMkd_dolar_loader(FXMLLoader mkd_dolar_loader) {
-        this.mkd_dolar_loader = mkd_dolar_loader;
-    }
-
     public FXMLLoader getMkd_local_loader() {
         return mkd_local_loader;
-    }
-
-    public void setMkd_local_loader(FXMLLoader mkd_local_loader) {
-        this.mkd_local_loader = mkd_local_loader;
     }
 
     public FXMLLoader getMkd_adr_loader() {
         return mkd_adr_loader;
     }
 
-    public void setMkd_adr_loader(FXMLLoader mkd_adr_loader) {
-        this.mkd_adr_loader = mkd_adr_loader;
-    }
-
     public FXMLLoader getRouting_adr_loader() {
         return routing_adr_loader;
     }
 
-    public void setRouting_adr_loader(FXMLLoader routing_adr_loader) {
-        this.routing_adr_loader = routing_adr_loader;
-    }
-
     public FXMLLoader getRouting_local_loader() {
         return routing_local_loader;
-    }
-
-    public void setRouting_local_loader(FXMLLoader routing_local_loader) {
-        this.routing_local_loader = routing_local_loader;
     }
 
     public boolean isMkd_dolar_toggle() {

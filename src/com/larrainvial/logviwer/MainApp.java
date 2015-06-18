@@ -1,14 +1,8 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.server.ServidorHilo;
 import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MainApp extends Application {
 
@@ -17,37 +11,9 @@ public class MainApp extends Application {
 
         try {
 
-            ServerSocket ss;
+            /*
             System.out.print("Inicializando servidor... ");
 
-            try {
-
-                ss = new ServerSocket(10578);
-
-                System.out.println("\t[OK]");
-                int idSession = 0;
-
-                while (true) {
-
-                    Socket socket;
-                    socket = ss.accept();
-                    System.out.println("Nueva conexión entrante: "+socket);
-                    ((ServidorHilo) new ServidorHilo(socket, idSession)).start();
-                    idSession++;
-                }
-
-            } catch (IOException ex) {
-                Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-
-
-
-
-
-
-
-            /*
             Repository.primaryStage = primaryStage;
             Repository.primaryStage.setTitle("Log Viwer");
 
@@ -61,18 +27,19 @@ public class MainApp extends Application {
             Scene scene = new Scene(rootLayout_Loader);
             primaryStage.setScene(scene);
 
-            //Image image = new Image("batman.png");  //pass in the image path
-            //scene.setCursor(new ImageCursor(image));
-
             primaryStage.show();
+
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            Dimension tamano = tk.getScreenSize();
+            System.out.println("La pantalla es de " + tamano.getWidth() + " x " + tamano.getHeight());
 
             Control.initialize();
             Control.initializaAll();
 
+                 */
+            com.larrainvial.sellside.MainApp.sellside();
 
-            //com.larrainvial.sellside.MainApp.sellside();
 
-            */
 
         } catch (Exception e){
             Helper.exception(e);
@@ -82,6 +49,7 @@ public class MainApp extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
     }
 

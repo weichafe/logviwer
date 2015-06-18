@@ -109,7 +109,6 @@ public class Helper {
                 alert.hide();
                 alertBloolean = true;
 
-
                 }
             });
     }
@@ -117,79 +116,103 @@ public class Helper {
 
     public synchronized static String adrToLocal(String symbolLocal){
 
-        if(symbolLocal.equals("AVAL")) return "PFAVAL";
-        if(symbolLocal.equals("AVH")) return "PFAVH";
-        if(symbolLocal.equals("CIB")) return "PFBCOLOM";
-        if(symbolLocal.equals("EC")) return "ECOPETROL";
-        if(symbolLocal.equals("PRE")) return "PREC";
-        if(symbolLocal.equals("CNE")) return "CNEC";
-        if(symbolLocal.equals("BCH")) return "CHILE";
-        if(symbolLocal.equals("LFL")) return "LAN";
-        if(symbolLocal.equals("BSAC")) return "BSANTANDER";
-        if(symbolLocal.equals("CNCO")) return "CENCOSUD";
-        if(symbolLocal.equals("CCU")) return "CCU";
-        if(symbolLocal.equals("BCA")) return "CORPBANCA";
-        if(symbolLocal.equals("AKO.A")) return "ANDINA-A";
-        if(symbolLocal.equals("AKO/A")) return "ANDINA-A";
-        if(symbolLocal.equals("AKO/B")) return "ANDINA-B";
-        if(symbolLocal.equals("AKO.B")) return "ANDINA-B";
-        if(symbolLocal.equals("AKO A")) return "ANDINA-A";
-        if(symbolLocal.equals("AKO B")) return "ANDINA-B";
-        if(symbolLocal.equals("EOC")) return "ENDESA";
-        if(symbolLocal.equals("ENI")) return "ENERSIS";
-        if(symbolLocal.equals("SQM")) return "SQM-B";
-        if(symbolLocal.equals("VCO")) return "CONCHATORO";
+        if (symbolLocal.equals("AVAL")) return "PFAVAL";
+        if (symbolLocal.equals("AVH")) return "PFAVH";
+        if (symbolLocal.equals("CIB")) return "PFBCOLOM";
+        if (symbolLocal.equals("EC")) return "ECOPETROL";
+        if (symbolLocal.equals("PRE")) return "PREC";
+        if (symbolLocal.equals("CNE")) return "CNEC";
+        if (symbolLocal.equals("BCH")) return "CHILE";
+        if (symbolLocal.equals("LFL")) return "LAN";
+        if (symbolLocal.equals("BSAC")) return "BSANTANDER";
+        if (symbolLocal.equals("CNCO")) return "CENCOSUD";
+        if (symbolLocal.equals("CCU")) return "CCU";
+        if (symbolLocal.equals("BCA")) return "CORPBANCA";
+        if (symbolLocal.equals("AKO.A")) return "ANDINA-A";
+        if (symbolLocal.equals("AKO/A")) return "ANDINA-A";
+        if (symbolLocal.equals("AKO/B")) return "ANDINA-B";
+        if (symbolLocal.equals("AKO.B")) return "ANDINA-B";
+        if (symbolLocal.equals("AKO A")) return "ANDINA-A";
+        if (symbolLocal.equals("AKO B")) return "ANDINA-B";
+        if (symbolLocal.equals("EOC")) return "ENDESA";
+        if (symbolLocal.equals("ENI")) return "ENERSIS";
+        if (symbolLocal.equals("SQM")) return "SQM-B";
+        if (symbolLocal.equals("VCO")) return "CONCHATORO";
 
         return symbolLocal;
     }
 
     public synchronized Double ratio(String symbolLocal){
 
-        if(symbolLocal.equals("PFAVAL"))      return 20d;
-        if(symbolLocal.equals("PFAVH"))       return 8d;
-        if(symbolLocal.equals("PFBCOLOM"))    return 4d;
-        if(symbolLocal.equals("ECOPETROL"))   return 20d;
-
-        if(symbolLocal.equals("PREC"))        return 1d;
-        if(symbolLocal.equals("CNEC"))        return 1d;
-        if(symbolLocal.equals("CHILE"))       return 600d;
-        if(symbolLocal.equals("LAN"))         return 1d;
-        if(symbolLocal.equals("BSANTANDER"))  return 400d;
-        if(symbolLocal.equals("CENCOSUD"))    return 3d;
-        if(symbolLocal.equals("CCU"))         return 2d;
-        if(symbolLocal.equals("CORPBANCA"))   return 1500d;
-        if(symbolLocal.equals("ANDINA-A"))    return 6d;
-        if(symbolLocal.equals("ANDINA-B"))    return 6d;
-        if(symbolLocal.equals("ENDESA"))      return 30d;
-        if(symbolLocal.equals("ENERSIS"))     return 50d;
-        if(symbolLocal.equals("SQM-B"))       return 1d;
-        if(symbolLocal.equals("CONCHATORO"))  return 50d;
+        if (symbolLocal.equals("PFAVAL"))      return 20d;
+        if (symbolLocal.equals("PFAVH"))       return 8d;
+        if (symbolLocal.equals("PFBCOLOM"))    return 4d;
+        if (symbolLocal.equals("ECOPETROL"))   return 20d;
+        if (symbolLocal.equals("PREC"))        return 1d;
+        if (symbolLocal.equals("CNEC"))        return 1d;
+        if (symbolLocal.equals("CHILE"))       return 600d;
+        if (symbolLocal.equals("LAN"))         return 1d;
+        if (symbolLocal.equals("BSANTANDER"))  return 400d;
+        if (symbolLocal.equals("CENCOSUD"))    return 3d;
+        if (symbolLocal.equals("CCU"))         return 2d;
+        if (symbolLocal.equals("CORPBANCA"))   return 1500d;
+        if (symbolLocal.equals("ANDINA-A"))    return 6d;
+        if (symbolLocal.equals("ANDINA-B"))    return 6d;
+        if (symbolLocal.equals("ENDESA"))      return 30d;
+        if (symbolLocal.equals("ENERSIS"))     return 50d;
+        if (symbolLocal.equals("SQM-B"))       return 1d;
+        if (symbolLocal.equals("CONCHATORO"))  return 50d;
 
         return 1d;
+    }
+
+    public synchronized static Integer position(String symbolLocal){
+
+        if (symbolLocal.equals("PFAVAL"))      return 1;
+        if (symbolLocal.equals("PFAVH"))       return 2;
+        if (symbolLocal.equals("PFBCOLOM"))    return 3;
+        if (symbolLocal.equals("ECOPETROL"))   return 4;
+
+        if (symbolLocal.equals("PREC"))        return 1;
+        if (symbolLocal.equals("CNEC"))        return 2;
+
+        if (symbolLocal.equals("CHILE"))       return 1;
+        if (symbolLocal.equals("LAN"))         return 2;
+        if (symbolLocal.equals("BSANTANDER"))  return 3;
+        if (symbolLocal.equals("CENCOSUD"))    return 4;
+        if (symbolLocal.equals("CCU"))         return 5;
+        if (symbolLocal.equals("CORPBANCA"))   return 6;
+        if (symbolLocal.equals("ANDINA-A"))    return 7;
+        if (symbolLocal.equals("ANDINA-B"))    return 8;
+        if (symbolLocal.equals("ENDESA"))      return 9;
+        if (symbolLocal.equals("ENERSIS"))     return 10;
+        if (symbolLocal.equals("SQM-B"))       return 11;
+        if (symbolLocal.equals("CONCHATORO"))  return 12;
+
+        return 1;
     }
 
 
     public synchronized boolean local(String symbolLocal){
 
-        if(symbolLocal.equals("PFAVAL"))      return true;
-        if(symbolLocal.equals("PFAVH"))       return true;
-        if(symbolLocal.equals("PFBCOLOM"))    return true;
-        if(symbolLocal.equals("ECOPETROL"))   return true;
-
-        if(symbolLocal.equals("PREC"))        return true;
-        if(symbolLocal.equals("CNEC"))        return true;
-        if(symbolLocal.equals("CHILE"))       return true;
-        if(symbolLocal.equals("LAN"))         return true;
-        if(symbolLocal.equals("BSANTANDER"))  return true;
-        if(symbolLocal.equals("CENCOSUD"))    return true;
-        if(symbolLocal.equals("CCU"))         return true;
-        if(symbolLocal.equals("CORPBANCA"))   return true;
-        if(symbolLocal.equals("ANDINA-A"))    return true;
-        if(symbolLocal.equals("ANDINA-B"))    return true;
-        if(symbolLocal.equals("ENDESA"))      return true;
-        if(symbolLocal.equals("ENERSIS"))     return true;
-        if(symbolLocal.equals("SQM-B"))       return true;
-        if(symbolLocal.equals("CONCHAYTORO")) return true;
+        if (symbolLocal.equals("PFAVAL"))      return true;
+        if (symbolLocal.equals("PFAVH"))       return true;
+        if (symbolLocal.equals("PFBCOLOM"))    return true;
+        if (symbolLocal.equals("ECOPETROL"))   return true;
+        if (symbolLocal.equals("PREC"))        return true;
+        if (symbolLocal.equals("CNEC"))        return true;
+        if (symbolLocal.equals("CHILE"))       return true;
+        if (symbolLocal.equals("LAN"))         return true;
+        if (symbolLocal.equals("BSANTANDER"))  return true;
+        if (symbolLocal.equals("CENCOSUD"))    return true;
+        if (symbolLocal.equals("CCU"))         return true;
+        if (symbolLocal.equals("CORPBANCA"))   return true;
+        if (symbolLocal.equals("ANDINA-A"))    return true;
+        if (symbolLocal.equals("ANDINA-B"))    return true;
+        if (symbolLocal.equals("ENDESA"))      return true;
+        if (symbolLocal.equals("ENERSIS"))     return true;
+        if (symbolLocal.equals("SQM-B"))       return true;
+        if (symbolLocal.equals("CONCHAYTORO")) return true;
 
         return false;
     }

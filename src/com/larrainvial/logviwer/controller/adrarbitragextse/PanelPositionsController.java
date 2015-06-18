@@ -6,9 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 
 import java.text.DecimalFormat;
-import java.util.concurrent.ExecutionException;
 
 
 public class PanelPositionsController {
@@ -75,6 +75,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.GREENYELLOW);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -97,6 +98,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.RED);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -119,6 +121,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.GREENYELLOW);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -141,6 +144,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.GREENYELLOW);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -163,6 +167,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.RED);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -185,6 +190,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.RED);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -195,6 +201,7 @@ public class PanelPositionsController {
                 }
             };
         });
+
 
     }
 
