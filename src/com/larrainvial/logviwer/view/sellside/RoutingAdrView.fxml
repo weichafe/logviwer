@@ -4,12 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane layoutX="7.0" layoutY="610.0" prefHeight="230.0" prefWidth="1500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.sellside.RoutingAdrController">
+<AnchorPane layoutX="7.0" layoutY="200.0" prefHeight="230.0" prefWidth="1500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.sellside.RoutingAdrController">
   <children>
-    <TableView fx:id="routing_nyse" layoutX="14" layoutY="7" prefHeight="180" prefWidth="1553">
+    <TableView fx:id="routing_nyse" layoutX="14" layoutY="7" prefHeight="400" prefWidth="1553">
 
       <columns>
-        <TableColumn prefWidth="112.0" style="-fx-alignment: CENTER;" text="ADR" fx:id="year" />
+        <TableColumn prefWidth="112.0" style="-fx-alignment: CENTER;" text="Routing" fx:id="year" />
         <TableColumn prefWidth="112.0" style="-fx-alignment: CENTER;" text="Hour" fx:id="hour" />
         <TableColumn prefWidth="80.0"  style="-fx-alignment: CENTER;" text="Type" fx:id="messageByType" />
         <TableColumn prefWidth="150.0" style="-fx-alignment: CENTER;" text="Symbol">

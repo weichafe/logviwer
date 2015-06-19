@@ -205,7 +205,7 @@ public class PanelPositionsController {
     }
 
     @FXML
-    private void refreshTableView() {
+    private synchronized void refreshTableView() {
 
         positionTable.setVisible(true);
         symbolLocal.setVisible(true);

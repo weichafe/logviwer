@@ -7,8 +7,6 @@ public class MainApp {
 
         try {
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
 

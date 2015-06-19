@@ -49,7 +49,7 @@ public class PanelPositionsController {
 
 
     @FXML
-    private void initialize() throws Exception {
+    private synchronized void initialize() throws Exception {
 
         symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolLocal()));
         symbolAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolAdr()));

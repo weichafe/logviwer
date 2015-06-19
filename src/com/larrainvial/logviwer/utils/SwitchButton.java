@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import quickfix.ConfigError;
 
 public class SwitchButton extends Label {
 
@@ -38,27 +40,40 @@ public class SwitchButton extends Label {
 
                 if (t) {
 
-                    if(switchBtn.getId().equals("Dolar")){
+                    if (switchBtn.getId().equals("Dolar")) {
                         algo.setMkd_dolar_toggle(true);
                     }
 
-                    if(switchBtn.getId().equals("MKD ADR")){
+                    if (switchBtn.getId().equals("MKD ADR")) {
                         algo.setMkd_adr_toggle(true);
                     }
 
-                    if(switchBtn.getId().equals("MKD Local")){
+                    if (switchBtn.getId().equals("MKD Local")) {
                         algo.setMkd_local_toggle(true);
                     }
 
-                    if(switchBtn.getId().equals("Routing Local")){
+                    if (switchBtn.getId().equals("Routing Local")) {
                         algo.setRouting_local_toggle(true);
                     }
 
-                    if(switchBtn.getId().equals("Routing ADR")){
+                    if (switchBtn.getId().equals("Routing ADR")) {
                         algo.setRouting_adr_toggle(true);
                     }
 
-                    if(switchBtn.getId().equals("Alert")){
+                    if (switchBtn.getId().equals("Routing")) {
+
+                        try {
+
+                            algo.setRouting_adr_toggle(true);
+                            QuickFixAdapter.start();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    if (switchBtn.getId().equals("Alert")) {
                         algo.setAlert(false);
 
                         switchBtn.setText(nameType + " OFF");
@@ -75,27 +90,39 @@ public class SwitchButton extends Label {
 
                 } else {
 
-                    if(switchBtn.getId().equals("Dolar")){
+                    if (switchBtn.getId().equals("Dolar")) {
                         algo.setMkd_dolar_toggle(false);
                     }
 
-                    if(switchBtn.getId().equals("MKD ADR")){
+                    if (switchBtn.getId().equals("MKD ADR")) {
                         algo.setMkd_adr_toggle(false);
                     }
 
-                    if(switchBtn.getId().equals("MKD Local")){
+                    if (switchBtn.getId().equals("MKD Local")) {
                         algo.setMkd_local_toggle(false);
                     }
 
-                    if(switchBtn.getId().equals("Routing Local")){
+                    if (switchBtn.getId().equals("Routing Local")) {
                         algo.setRouting_local_toggle(false);
                     }
 
-                    if(switchBtn.getId().equals("Routing ADR")){
+                    if (switchBtn.getId().equals("Routing ADR")) {
                         algo.setRouting_adr_toggle(false);
                     }
 
-                    if(switchBtn.getId().equals("Alert")){
+                    if (switchBtn.getId().equals("Routing")) {
+
+                        algo.setRouting_adr_toggle(false);
+
+                        try {
+                            QuickFixAdapter.strop();
+                        } catch (ConfigError configError) {
+                            configError.printStackTrace();
+                        }
+
+                    }
+
+                    if (switchBtn.getId().equals("Alert")) {
 
                         algo.setAlert(true);
                         switchBtn.setText(nameType + " ON");

@@ -158,7 +158,7 @@ public class RoutingAdrController {
     }
 
     @FXML
-    private void refreshTableView() {
+    private synchronized void refreshTableView() {
 
         routing_nyse.setVisible(true);
         hour.setVisible(true);
@@ -194,7 +194,7 @@ public class RoutingAdrController {
     }
 
     @FXML
-    private void initialize() throws Exception {
+    private synchronized void initialize() throws Exception {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));

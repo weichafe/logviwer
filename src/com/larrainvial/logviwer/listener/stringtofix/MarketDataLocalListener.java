@@ -29,6 +29,7 @@ public class MarketDataLocalListener implements Listener {
 
             if (ev.lineFromLog.equals("")) return;
 
+
             algo = Repository.strategy.get(ev.nameAlgo);
 
             StringToMarketData stringToMarketData = new StringToMarketData();

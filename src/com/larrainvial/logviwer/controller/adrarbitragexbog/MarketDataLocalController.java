@@ -67,7 +67,7 @@ public class MarketDataLocalController {
     }
 
     @FXML
-    private void initialize() {
+    private synchronized void initialize() {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));

@@ -63,7 +63,7 @@ public class MarketDataLocalController {
 
     private TextField auxFilterField;
 
-    public MarketDataLocalController(){
+    public  MarketDataLocalController(){
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override
@@ -76,7 +76,7 @@ public class MarketDataLocalController {
     }
 
     @FXML
-    private void initialize() {
+    private synchronized void initialize() {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));

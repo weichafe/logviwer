@@ -80,7 +80,7 @@ public class MarketDataDolarController {
     }
 
     @FXML
-    private void initialize() throws Exception {
+    private synchronized void initialize() throws Exception {
 
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));

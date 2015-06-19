@@ -114,7 +114,7 @@ public class MarketDataAdrController {
     }
 
     @FXML
-    private void refreshTableView() {
+    private synchronized void refreshTableView() {
 
         mkd_nyse.setVisible(true);
         anio.setVisible(true);

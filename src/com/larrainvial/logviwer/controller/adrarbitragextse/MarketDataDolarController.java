@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer.controller.adrarbitragextse;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.model.ModelPositions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,11 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 
 public class MarketDataDolarController {
 
@@ -79,80 +76,26 @@ public class MarketDataDolarController {
     public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
 
     @FXML
-    private void initialize() throws Exception {
+    private synchronized void initialize() throws Exception {
 
-        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
-        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        synchronized (symbol){
+            symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
+        }
+
+        synchronized (messageByType){
+            messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
+        }
+
         hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
         anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
-
         buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
         buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
-
         sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
         sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
 
-        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
-
-        /*
-        messageByType.setCellFactory(column -> {
-            return new TableCell<ModelMarketData, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-
-                        } else {
-
-                            if (item.equals("V")) {
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkgray");
-                                setText(item);
-
-                            } else if (item.equals("W")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: darkkhaki");
-                                setText(item);
-
-                            } else if (item.equals("X")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: gainsboro");
-                                setText(item);
-
-                            } else if (item.equals("5")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else if (item.equals("1")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else if (item.equals("A")){
-                                setTextFill(Color.BLACK);
-                                setStyle("-fx-background-color: red");
-                                setText(item);
-
-                            } else {
-                                setText(item);
-                            }
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-        });
-        .*/
-
-
+        synchronized (closePx){
+            closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
+        }
 
         dolar.setItems(filteredDataSymbol);
 

@@ -162,7 +162,7 @@ public class RoutingLocalController {
     }
 
     @FXML
-    private void refreshTableView() {
+    private synchronized void refreshTableView() {
 
         routing_xsgo.setVisible(true);
         hour.setVisible(true);

@@ -9,10 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import quickfix.SessionID;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,7 +115,6 @@ public class Helper {
             });
     }
 
-
     public synchronized static String adrToLocal(String symbolLocal){
 
         if (symbolLocal.equals("AVAL")) return "PFAVAL";
@@ -192,7 +193,6 @@ public class Helper {
         return 1;
     }
 
-
     public synchronized boolean local(String symbolLocal){
 
         if (symbolLocal.equals("PFAVAL"))      return true;
@@ -216,7 +216,6 @@ public class Helper {
 
         return false;
     }
-
 
     public static synchronized String side(String side){
 
@@ -248,7 +247,6 @@ public class Helper {
         return orderStatus;
     }
 
-
     public static synchronized String execType(String execType){
 
         if(execType.equals("0")) return "New";
@@ -274,7 +272,6 @@ public class Helper {
 
         return execType;
     }
-
 
     public synchronized static Map<Object, Object> getFixMessageParties(String fixMessageString) {
 
@@ -403,4 +400,11 @@ public class Helper {
 
     }
 
+    public static String getIp() throws Exception {
+        return InetAddress.getLocalHost().getHostAddress();
+    }
+
+    public static SessionID getSesion() throws Exception {
+        return InetAddress.getLocalHost().getHostAddress();
+    }
 }

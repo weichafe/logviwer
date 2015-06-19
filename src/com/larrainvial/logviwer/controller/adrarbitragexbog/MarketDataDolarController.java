@@ -67,7 +67,7 @@ public class MarketDataDolarController {
     public ObservableList<ModelMarketData> filteredData = FXCollections.observableArrayList();
 
     @FXML
-    private void initialize() throws Exception {
+    private synchronized void initialize() throws Exception {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));

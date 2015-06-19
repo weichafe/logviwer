@@ -25,6 +25,7 @@ public class DolarListener implements Listener {
             DolarEvent ev = (DolarEvent) event;
 
             if (ev.lineFromLog.equals("")) return;
+            if(true) return;
 
             algo = Repository.strategy.get(ev.nameAlgo);
 

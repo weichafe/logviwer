@@ -1,7 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.MainApp;
+import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.controller.adrarbitragexsgo.*;
 import com.larrainvial.logviwer.event.AlertEvent;
@@ -18,9 +18,11 @@ import com.larrainvial.trading.emp.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -53,48 +55,55 @@ public class Control {
         Controller.addEventListener(RoutingAdrViewEvent.class, new RoutingAdrViewListener());
         Controller.addEventListener(RoutingLocalViewEvent.class, new RoutingLocalViewListener());
 
-
-
     }
 
 
     public  static void initializaAll() throws InterruptedException {
 
         //initializeSellSide(0);
-        //initializeSellSide(1);
+        initializeSellSide(1);
         initializeAdrArbitrageXSGO(2);
         initializeAdrArbitrageXTSE(3);
         initializeAdrArbitrageXBOG(4);
-        //initializeAdrArbitrageTest();
-        //initializeAdrArbitrageTest();
+
     }
 
 
 
-    private static  void initializeSellSide(int tab){
+    private static void initializeSellSide(int tab){
 
         try {
 
             Algo algo = new Algo();
 
             algo.setNameAlgo("Sell Sides");
-            algo.setRouting_adr("ROUTING_ADR");
             algo.setRouting_local("ROUTING_LOCAL");
+            algo.setTime(1);
 
             Date fechaActual = new Date();
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "src\\resources\\Quickfix\\log\\";
+            String location = "C:\\workspaceGit\\logviwer\\logs\\log\\";
             String routing_nyse = "FIX.4.4-LVSSG_ARB-LVARB.messages_";
             String log = ".log";
 
             algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
-            algo.fileReader();
+            algo.fileReader(false, false, false, false, true);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
             opacityLevel.setLayoutX(25);
-            opacityLevel.setLayoutY(13);
+            opacityLevel.setLayoutY(33);
+
+            Label labelMinTimer = new Label("0 s");
+            labelMinTimer.setTextFill(Color.web("#0076a3"));
+            labelMinTimer.setLayoutX(28);
+            labelMinTimer.setLayoutY(50);
+
+            Label labelMaxTimer = new Label("10 s");
+            labelMaxTimer.setTextFill(Color.web("#0076a3"));
+            labelMaxTimer.setLayoutX(140);
+            labelMaxTimer.setLayoutY(50);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -102,28 +111,44 @@ public class Control {
                 }
             });
 
-            SwitchButton switchButtonDolar = new SwitchButton("Sell Side", algo);
-            Button switchBtn1 = switchButtonDolar.returnButton();
-            switchBtn1.setLayoutX(177);
-            switchBtn1.setLayoutY(10);
+            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing", algo);
+            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
+            switchBtn5.setLayoutX(190);
+            switchBtn5.setLayoutY(30);
 
-            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/sellside/RoutingAdrView.fxml"));
+
+            SwitchButton switchButtonAlert = new SwitchButton("Alert", algo);
+            Button switchBtn6 = switchButtonAlert.returnButton();
+            switchBtn6.setLayoutX(320);
+            switchBtn6.setLayoutY(30);
+
+            Label labelIP = new Label(Helper.getIp());
+            labelIP.setTextFill(Color.web("#0076a3"));
+            labelIP.setLayoutX(500);
+            labelIP.setLayoutY(30);
+
+
+            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/sellside/RoutingAdrView.fxml"));
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
             anchorPane.getChildren().add(opacityLevel);
-            anchorPane.getChildren().add(anchorPane);
+            anchorPane.getChildren().add(switchBtn5);
+            anchorPane.getChildren().add(switchBtn6);
+            anchorPane.getChildren().add(labelIP);
+            anchorPane.getChildren().add(labelMinTimer);
+            anchorPane.getChildren().add(labelMaxTimer);
 
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
 
-            //RoutingAdrController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            //algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            //algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            com.larrainvial.logviwer.controller.sellside.RoutingAdrController getSellside_loader = algo.getRouting_adr_loader().getController();
+            algo.setRouting_adr_tableView(getSellside_loader.getType());
+            algo.setRoutingAdrMasterList(getSellside_loader.masterData);
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
-            algo.iniziale();
+            algo.iniziale(false, false, false, false, true);
 
         } catch (Exception e){
             Helper.exception(e);
@@ -165,7 +190,7 @@ public class Control {
             algo.setFile_routing_local(new File(location + routing_local + year + log));
             algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
 
-            algo.fileReader();
+            algo.fileReader(true, true, true, true, true);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
             opacityLevel.setLayoutX(25);
@@ -209,12 +234,12 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainApp.class.getResource("view/adrarbitragexsgo/PanelPositionsView.fxml"));
+            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataDolarView.fxml"));
+            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataAdrView.fxml"));
+            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataLocalView.fxml"));
+            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingAdrView.fxml"));
+            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingLocalView.fxml"));
+            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
@@ -237,7 +262,6 @@ public class Control {
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             scrollPane.setContent(anchorPane);
-
 
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
@@ -266,11 +290,9 @@ public class Control {
             PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
             algo.setPanel_positions_tableView(panel_local_loader.getType());
 
-
-
             Repository.strategy.put(algo.getNameAlgo(), algo);
 
-            algo.iniziale();
+            algo.iniziale(true, true, true, true, true);
 
 
         } catch (Exception e){
@@ -313,7 +335,7 @@ public class Control {
             algo.setFile_routing_local(new File(location + routing_local + year + log));
             algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
 
-            algo.fileReader();
+            algo.fileReader(true, true, true, true, true);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
             opacityLevel.setLayoutX(25);
@@ -356,12 +378,12 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainApp.class.getResource("view/adrarbitragextse/PanelPositionsView.fxml"));
+            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataDolarView.fxml"));
+            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataAdrView.fxml"));
+            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataLocalView.fxml"));
+            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingAdrView.fxml"));
+            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingLocalView.fxml"));
+            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
@@ -410,7 +432,7 @@ public class Control {
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
 
-            algo.iniziale();
+            algo.iniziale(true, true, true, true, true);
 
 
         }catch (Exception e){
@@ -453,7 +475,7 @@ public class Control {
             algo.setFile_routing_local(new File(location + routing_local + year + log));
             algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
 
-            algo.fileReader();
+            algo.fileReader(true, true, true, true, true);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
             opacityLevel.setLayoutX(25);
@@ -496,12 +518,12 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainApp.class.getResource("view/adrarbitragexbog/PanelPositionsView.fxml"));
+            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataDolarView.fxml"));
+            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataAdrView.fxml"));
+            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataLocalView.fxml"));
+            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingAdrView.fxml"));
+            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingLocalView.fxml"));
+            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
@@ -547,7 +569,7 @@ public class Control {
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
 
-            algo.iniziale();
+            algo.iniziale(true, true, true, true, true);
 
 
         }catch (Exception e){
@@ -590,7 +612,7 @@ public class Control {
             algo.setFile_routing_local(new File(location + routing_local + year + log));
             algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
 
-            algo.fileReader();
+            algo.fileReader(true, true, true, true, true);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
             opacityLevel.setLayoutX(25);
@@ -633,12 +655,12 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainApp.class.getResource("view/adrarbitragetest/PanelPositionsView.fxml"));
+            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataDolarView.fxml"));
+            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataAdrView.fxml"));
+            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataLocalView.fxml"));
+            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingAdrView.fxml"));
+            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingLocalView.fxml"));
+            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
@@ -684,7 +706,7 @@ public class Control {
 
             Repository.strategy.put(algo.getNameAlgo(), algo);
 
-            algo.iniziale();
+            algo.iniziale(true, true, true, true, true);
 
 
         }catch (Exception e){

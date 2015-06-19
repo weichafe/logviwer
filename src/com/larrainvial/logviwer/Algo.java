@@ -27,7 +27,6 @@ public class Algo implements Serializable {
     private String routing_local;
     private String routing_adr;
 
-
     private double time;
 
     private FXMLLoader mkd_dolar_loader = new FXMLLoader();
@@ -89,15 +88,29 @@ public class Algo implements Serializable {
     private FileInputStream inputStream_routing_adr;
 
 
-    public void fileReader() {
+    public void fileReader(boolean dolar, boolean mLocal, boolean mAdr, boolean rLocal, boolean rAdr) {
 
         try {
 
-            inputStream_mkd_dolar = new FileInputStream(file_mkd_dolar);
-            inputStream_mkd_local = new FileInputStream(file_mkd_local);
-            inputStream_mkd_adr = new FileInputStream(file_mkd_adr);
-            inputStream_routing_local = new FileInputStream(file_routing_local);
-            inputStream_routing_adr = new FileInputStream(file_routing_adr);
+            if(dolar) {
+                inputStream_mkd_dolar = new FileInputStream(file_mkd_dolar);
+            }
+
+            if(mLocal) {
+                inputStream_mkd_local = new FileInputStream(file_mkd_local);
+            }
+
+            if(mAdr) {
+                inputStream_mkd_adr = new FileInputStream(file_mkd_adr);
+            }
+
+            if(rLocal) {
+                inputStream_routing_local = new FileInputStream(file_routing_local);
+            }
+
+            if(rAdr) {
+                inputStream_routing_adr = new FileInputStream(file_routing_adr);
+            }
 
         }catch (Exception e){
             Helper.exception(e);
@@ -105,7 +118,7 @@ public class Algo implements Serializable {
 
     }
 
-    public void iniziale() throws Exception {
+    public void iniziale(boolean dolar, boolean mLocal, boolean mAdr, boolean rLocal, boolean rAdr) throws Exception {
 
         final double finalTimer_initial = this.getTime();
         stopTimer();
@@ -117,29 +130,29 @@ public class Algo implements Serializable {
                 if(finalTimer_initial != getTime()) {
 
                     try {
-                        iniziale();
+                        iniziale(dolar, mLocal, mAdr, rLocal, rAdr);
                     }catch (Exception e){
                         Helper.exception(e);
                     }
                 }
 
-                if (isMkd_dolar_toggle()) {
+                if (isMkd_dolar_toggle() && dolar) {
                     Controller.dispatchEvent(new ReadFromDolarEvent(this, nameAlgo, mkd_dolar, inputStream_mkd_dolar));
                 }
 
-                if (isMkd_local_toggle()) {
+                if (isMkd_local_toggle() && mLocal) {
                     Controller.dispatchEvent(new ReadLogMkdLocalEvent(this, nameAlgo, mkd_local, inputStream_mkd_local));
                 }
 
-                if (isMkd_adr_toggle()) {
+                if (isMkd_adr_toggle() && mAdr) {
                     Controller.dispatchEvent(new ReadLogMkdAdrEvent(this, nameAlgo, mkd_adr, inputStream_mkd_adr));
                 }
 
-                if (isRouting_local_toggle()) {
+                if (isRouting_local_toggle() && rLocal) {
                     Controller.dispatchEvent(new ReadLogRoutingLocalEvent(this, nameAlgo, routing_local, inputStream_routing_local));
                 }
 
-                if (isRouting_adr_toggle()) {
+                if (isRouting_adr_toggle() && rAdr) {
                     Controller.dispatchEvent(new ReadlogRoutingAdrEvent(this, nameAlgo, routing_adr, inputStream_routing_adr));
                 }
 

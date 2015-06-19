@@ -7,6 +7,7 @@ import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+
 import java.util.Map;
 
 public class PositionViewListener implements Listener {
@@ -24,7 +25,25 @@ public class PositionViewListener implements Listener {
 
             synchronized(algo.positionsMasterListHash) {
 
-                for (Map.Entry<String, ModelPositions> e : algo.getPositionsMasterListHash().entrySet()) {
+                for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
+
+                    try {
+
+                        if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+
+                            if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
+                                algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
+                                algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
+                                algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                            }
+                        }
+
+                    } catch (Exception ex) {
+                        Helper.exception(ex);
+                    }
+                }
+
+                /*for (Map.Entry<String, ModelPositions> e : algo.getPositionsMasterListHash().entrySet()) {
 
 
 
@@ -51,6 +70,7 @@ public class PositionViewListener implements Listener {
                 }
 
                 algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                */
 
             }
 

@@ -1,5 +1,6 @@
 package com.larrainvial.sellside.adaptador;
 
+import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedNewOrderSingleEvent;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelReplaceRequestEvent;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelRequestEvent;
@@ -17,14 +18,13 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
         try {
 
+
             SessionSettings sessionSettings = new SessionSettings(quickFixIniFile);
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
-            FileLogFactory fileLogFactory = new FileLogFactory(sessionSettings);
+            com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
-
             this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
-            this.socketAcceptor.start();
-
+            Repository.socketAcceptor = this.socketAcceptor;
 
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -32,7 +32,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
     }
 
     public void onCreate(SessionID sessionID) {
-        // nothing
+        Repository.sessionID = sessionID;
     }
 
     public void onLogon(SessionID sessionID) {
@@ -97,6 +97,14 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
         Controller.dispatchEvent(new ReceivedOrderCancelRequestEvent(this, orderCancelRequest));
 
+    }
+
+    public static void strop() throws ConfigError {
+        Repository.socketAcceptor.stop();
+    }
+
+    public static void start() throws ConfigError {
+        Repository.socketAcceptor.stop();
     }
 
 

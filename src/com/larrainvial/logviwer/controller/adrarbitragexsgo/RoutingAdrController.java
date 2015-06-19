@@ -161,7 +161,7 @@ public class RoutingAdrController {
     }
 
     @FXML
-    private void refreshTableView() {
+    private synchronized void refreshTableView() {
 
         routing_nyse.setVisible(true);
         hour.setVisible(true);
