@@ -21,7 +21,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
             SessionSettings sessionSettings = new SessionSettings(quickFixIniFile);
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
-            com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
+            FileLogFactory fileLogFactory = new FileLogFactory(sessionSettings);
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
             this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;

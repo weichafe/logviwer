@@ -28,27 +28,27 @@ public class AlertListener implements Listener {
             if (typeOfMessage.valueEquals("9") && algo.isAlert()){
 
                 if(ev.modelRoutingData.text.equals("Routing Failure")) {
-                    Helper.alert(algo.getNameAlgo(), "Rejected, check log files! " + ev.modelRoutingData.text );
+                    Helper.alert(algo.nameAlgo, "Rejected, check log files! " + ev.modelRoutingData.text );
                 }
 
             }
 
             if (typeOfMessage.getValue().equals("A") && algo.isAlert()){
-                Helper.alert(algo.getNameAlgo(), "Logon, check log files! " + "");
+                Helper.alert(algo.nameAlgo, "Logon, check log files! " + "");
             }
 
             if (typeOfMessage.getValue().equals("1") && algo.isAlert()){
-                Helper.alert(algo.getNameAlgo(), "TestRequest, check log files! " +"");
+                Helper.alert(algo.nameAlgo, "TestRequest, check log files! " +"");
 
             }
 
             if(typeOfMessage.getValue().equals("5") && algo.isAlert()){
-                Helper.alert(algo.getNameAlgo(), "Logout, check log files! " + "");
+                Helper.alert(algo.nameAlgo, "Logout, check log files! " + "");
 
             }
 
             if(typeOfMessage.getValue().equals("3") && algo.isAlert()){
-                Helper.alert(algo.getNameAlgo(), "Protocol, check log files! " + ev.modelRoutingData.text);
+                Helper.alert(algo.nameAlgo, "Protocol, check log files! " + ev.modelRoutingData.text);
 
             }
 

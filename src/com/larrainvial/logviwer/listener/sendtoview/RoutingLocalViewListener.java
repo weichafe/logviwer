@@ -21,8 +21,8 @@ public class RoutingLocalViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            algo.getRoutingLocalMasterList().add(ev.modelRoutingData);
-            algo.getRouting_local_tableView().setItems(algo.getRoutingLocalMasterList());
+            algo.routingLocalMasterList.add(ev.modelRoutingData);
+            algo.routing_local_tableView.setItems(algo.routingLocalMasterList);
 
         } catch (Exception e) {
             Helper.exception(e);

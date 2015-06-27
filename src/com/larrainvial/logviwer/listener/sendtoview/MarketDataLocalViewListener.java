@@ -20,9 +20,9 @@ public class MarketDataLocalViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            synchronized (algo.getMkdLocalMasterList()){
-                algo.getMkdLocalMasterList().add(ev.modelMarketData);
-                algo.getMkd_local_tableView().setItems(algo.getMkdLocalMasterList());
+            synchronized (algo.mkdLocalMasterList){
+                algo.mkdLocalMasterList.add(ev.modelMarketData);
+                algo.mkd_local_tableView.setItems(algo.mkdLocalMasterList);
             }
 
         } catch (Exception e) {

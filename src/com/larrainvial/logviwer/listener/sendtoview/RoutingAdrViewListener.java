@@ -21,8 +21,8 @@ public class RoutingAdrViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
-            algo.getRouting_adr_tableView().setItems(algo.getRoutingAdrMasterList());
+            algo.routingAdrMasterList.add(ev.modelRoutingData);
+            algo.routing_adr_tableView.setItems(algo.routingAdrMasterList);
 
         } catch (Exception e) {
             Helper.exception(e);

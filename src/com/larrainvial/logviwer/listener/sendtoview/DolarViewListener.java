@@ -21,11 +21,11 @@ public class DolarViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            algo.getDolarMasterList().add(ev.modelMarketData);
-            algo.getMkd_dolar_tableView().setItems(algo.getDolarMasterList());
+            algo.dolarMasterList.add(ev.modelMarketData);
+            algo.mkd_dolar_tableView.setItems(algo.dolarMasterList);
 
-            if(algo.getDolarMasterList().size() >= 10000){
-                   algo.getDolarMasterList().clear();
+            if(algo.dolarMasterList.size() >= 10000){
+                   algo.dolarMasterList.clear();
             }
 
         } catch (Exception e) {

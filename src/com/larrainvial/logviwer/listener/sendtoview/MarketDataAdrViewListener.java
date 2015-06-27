@@ -21,8 +21,8 @@ public class MarketDataAdrViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            algo.getMkdAdrMasterList().add(ev.modelMarketData);
-            algo.getMkd_adr_tableView().setItems(algo.getMkdAdrMasterList());
+            algo.mkdAdrMasterList.add(ev.modelMarketData);
+            algo.mkd_adr_tableView.setItems(algo.mkdAdrMasterList);
 
         } catch (Exception e) {
             Helper.exception(e);

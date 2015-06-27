@@ -61,7 +61,7 @@ public class Control {
     public  static void initializaAll() throws InterruptedException {
 
         //initializeSellSide(0);
-        initializeSellSide(1);
+        //initializeSellSide(1);
         initializeAdrArbitrageXSGO(2);
         initializeAdrArbitrageXTSE(3);
         initializeAdrArbitrageXBOG(4);
@@ -76,9 +76,9 @@ public class Control {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("Sell Sides");
-            algo.setRouting_local("ROUTING_LOCAL");
-            algo.setTime(1);
+            algo.nameAlgo =("Sell Sides");
+            algo.routing_local =("ROUTING_LOCAL");
+            algo.time = (1);
 
             Date fechaActual = new Date();
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
@@ -88,10 +88,10 @@ public class Control {
             String routing_nyse = "FIX.4.4-LVSSG_ARB-LVARB.messages_";
             String log = ".log";
 
-            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.file_routing_adr =(new File(location + routing_nyse + year + log));
             algo.fileReader(false, false, false, false, true);
 
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.time));
             opacityLevel.setLayoutX(25);
             opacityLevel.setLayoutY(33);
 
@@ -107,7 +107,7 @@ public class Control {
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    algo.setTime(new_val.doubleValue());
+                    algo.time = (new_val.doubleValue());
                 }
             });
 
@@ -128,10 +128,10 @@ public class Control {
             labelIP.setLayoutY(30);
 
 
-            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/sellside/RoutingAdrView.fxml"));
+            algo.routing_adr_loader.setLocation(MainLogViwer.class.getResource("view/sellside/RoutingAdrView.fxml"));
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_adr_loader.load());
             anchorPane.getChildren().add(opacityLevel);
             anchorPane.getChildren().add(switchBtn5);
             anchorPane.getChildren().add(switchBtn6);
@@ -141,13 +141,13 @@ public class Control {
 
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.nameAlgo);
 
-            com.larrainvial.logviwer.controller.sellside.RoutingAdrController getSellside_loader = algo.getRouting_adr_loader().getController();
-            algo.setRouting_adr_tableView(getSellside_loader.getType());
-            algo.setRoutingAdrMasterList(getSellside_loader.masterData);
+            com.larrainvial.logviwer.controller.sellside.RoutingAdrController getSellside_loader = algo.routing_adr_loader.getController();
+            algo.routing_adr_tableView =(getSellside_loader.getType());
+            algo.routingAdrMasterList = (getSellside_loader.masterData);
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+            Repository.strategy.put(algo.nameAlgo, algo);
             algo.iniziale(false, false, false, false, true);
 
         } catch (Exception e){
@@ -162,21 +162,21 @@ public class Control {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrage XSGO");
-            algo.setMkd_dolar("MKD_DOLAR");
-            algo.setMkd_adr("MKD_NYSE");
-            algo.setMkd_local("MKD_XSGO");
-            algo.setRouting_adr("ROUTING_ADR");
-            algo.setRouting_local("ROUTING_LOCAL");
-            algo.setTime(1);
+            algo.nameAlgo =("ADRArbitrage XSGO");
+            algo.mkd_dolar =("MKD_DOLAR");
+            algo.mkd_adr =("MKD_NYSE");
+            algo.mkd_local =("MKD_XSGO");
+            algo.routing_adr = ("ROUTING_ADR");
+            algo.routing_local =("ROUTING_LOCAL");
+            algo.time = (1);
 
             Date fechaActual = new Date();
 
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "W:\\ADRArbitrageXSGOIB\\log\\";
-            //String location = "src\\resources\\log\\AdrArbitrageIB\\";
+            //String location = "W:\\ADRArbitrageXSGOIB\\log\\";
+            String location = "src\\resources\\log\\AdrArbitrageIB\\";
             String mkd_dolar = "FIX.4.4-ALGOARBADR5-MDFHBLP.messages_";
             String mkd_nyse = "FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_";
@@ -184,21 +184,21 @@ public class Control {
             String routing_nyse = "FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_";
             String log = ".log";
 
-            algo.setFile_mkd_dolar(new File(location + mkd_dolar + year + log));
-            algo.setFile_mkd_local(new File(location + mkd_local + year + log));
-            algo.setFile_mkd_adr(new File(location + mkd_nyse + year + log));
-            algo.setFile_routing_local(new File(location + routing_local + year + log));
-            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.file_mkd_dolar =(new File(location + mkd_dolar + year + log));
+            algo.file_mkd_local =(new File(location + mkd_local + year + log));
+            algo.file_mkd_adr = (new File(location + mkd_nyse + year + log));
+            algo.file_routing_local =(new File(location + routing_local + year + log));
+            algo.file_routing_adr =(new File(location + routing_nyse + year + log));
 
             algo.fileReader(true, true, true, true, true);
 
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.time));
             opacityLevel.setLayoutX(25);
             opacityLevel.setLayoutY(13);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    algo.setTime(new_val.doubleValue());
+                    algo.time = (new_val.doubleValue());
                 }
             });
 
@@ -234,21 +234,21 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/PanelPositionsView.fxml"));
+            algo.mkd_dolar_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataDolarView.fxml"));
+            algo.mkd_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataAdrView.fxml"));
+            algo.mkd_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/MarketDataLocalView.fxml"));
+            algo.routing_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingAdrView.fxml"));
+            algo.routing_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/RoutingLocalView.fxml"));
+            algo.panel_positions_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexsgo/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getPanel_positions_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_dolar_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.panel_positions_loader.load());
             anchorPane.getChildren().add(opacityLevel);
             anchorPane.getChildren().add(switchBtn1);
             anchorPane.getChildren().add(switchBtn2);
@@ -265,32 +265,32 @@ public class Control {
 
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.nameAlgo);
 
-            MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            MarketDataDolarController getMkd_dolar_loader = algo.mkd_dolar_loader.getController();
+            algo.mkd_dolar_tableView = (getMkd_dolar_loader.getType());
+            algo.dolarMasterList =(getMkd_dolar_loader.masterData);
 
-            MarketDataAdrController getMkd_adr_loader = algo.getMkd_adr_loader().getController();
-            algo.setMkd_adr_tableView(getMkd_adr_loader.getType());
-            algo.setMkdAdrMasterList(getMkd_adr_loader.masterData);
+            MarketDataAdrController getMkd_adr_loader = algo.mkd_adr_loader.getController();
+            algo.mkd_adr_tableView = (getMkd_adr_loader.getType());
+            algo.mkdAdrMasterList = (getMkd_adr_loader.masterData);
 
-            MarketDataLocalController getMkd_local_loader = algo.getMkd_local_loader().getController();
-            algo.setMkd_local_tableView(getMkd_local_loader.getType());
-            algo.setMkdLocalMasterList(getMkd_local_loader.masterData);
+            MarketDataLocalController getMkd_local_loader = algo.mkd_local_loader.getController();
+            algo.mkd_local_tableView = getMkd_local_loader.getType();
+            algo.mkdLocalMasterList = getMkd_local_loader.masterData;
 
-            RoutingAdrController routing_adr_loader = algo.getRouting_adr_loader().getController();
-            algo.setRouting_adr_tableView(routing_adr_loader.getType());
-            algo.setRoutingAdrMasterList(routing_adr_loader.masterData);
+            RoutingAdrController routing_adr_loader = algo.routing_adr_loader.getController();
+            algo.routing_adr_tableView =(routing_adr_loader.getType());
+            algo.routingAdrMasterList = (routing_adr_loader.masterData);
 
-            RoutingLocalController routing_local_loader = algo.getRouting_local_loader().getController();
-            algo.setRouting_local_tableView(routing_local_loader.getType());
-            algo.setRoutingLocalMasterList(routing_local_loader.masterData);
+            RoutingLocalController routing_local_loader = algo.routing_local_loader.getController();
+            algo.routing_local_tableView = (routing_local_loader.getType());
+            algo.routingLocalMasterList =(routing_local_loader.masterData);
 
-            PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
-            algo.setPanel_positions_tableView(panel_local_loader.getType());
+            PanelPositionsController panel_local_loader = algo.panel_positions_loader.getController();
+            algo.panel_positions_tableView = (panel_local_loader.getType());
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+            Repository.strategy.put(algo.nameAlgo, algo);
 
             algo.iniziale(true, true, true, true, true);
 
@@ -306,21 +306,21 @@ public class Control {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrage XTSE");
-            algo.setMkd_dolar("MKD_DOLAR");
-            algo.setMkd_adr("MKD_NYSE");
-            algo.setMkd_local("MKD_XSGO");
-            algo.setRouting_adr("ROUTING_ADR");
-            algo.setRouting_local("ROUTING_LOCAL");
-            algo.setTime(1);
+            algo.nameAlgo =("ADRArbitrage XTSE");
+            algo.mkd_dolar =("MKD_DOLAR");
+            algo.mkd_adr =("MKD_NYSE");
+            algo.mkd_local =("MKD_XSGO");
+            algo.routing_adr = ("ROUTING_ADR");
+            algo.routing_local =("ROUTING_LOCAL");
+            algo.time = (1);
 
             Date fechaActual = new Date();
 
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "W:\\ADRArbitrageXTSEBeta\\connection\\log\\";
-            //String location = "log\\AdrArbitrageIB\\";
+            //String location = "W:\\ADRArbitrageXTSEBeta\\connection\\log\\";
+            String location = "src\\resources\\log\\AdrArbitrageXTSE\\";
             String mkd_dolar = "FIX.4.4-LVMDG-BLODPENNA7.messages_";
             String mkd_nyse = "FIX.4.4-LVMDG-BLODPENNA6.messages_";
             String mkd_local = "FIX.4.4-BOGCURNCY-LVMDG.messages_";
@@ -329,21 +329,21 @@ public class Control {
             String log = ".log";
 
 
-            algo.setFile_mkd_dolar(new File(location + mkd_dolar + year + log));
-            algo.setFile_mkd_local(new File(location + mkd_local + year + log));
-            algo.setFile_mkd_adr(new File(location + mkd_nyse + year + log));
-            algo.setFile_routing_local(new File(location + routing_local + year + log));
-            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.file_mkd_dolar =(new File(location + mkd_dolar + year + log));
+            algo.file_mkd_local =(new File(location + mkd_local + year + log));
+            algo.file_mkd_adr = (new File(location + mkd_nyse + year + log));
+            algo.file_routing_local =(new File(location + routing_local + year + log));
+            algo.file_routing_adr =(new File(location + routing_nyse + year + log));
 
             algo.fileReader(true, true, true, true, true);
 
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.time));
             opacityLevel.setLayoutX(25);
             opacityLevel.setLayoutY(13);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    algo.setTime(new_val.doubleValue());
+                    algo.time = (new_val.doubleValue());
                 }
             });
 
@@ -378,21 +378,21 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/PanelPositionsView.fxml"));
+            algo.mkd_dolar_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataDolarView.fxml"));
+            algo.mkd_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataAdrView.fxml"));
+            algo.mkd_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/MarketDataLocalView.fxml"));
+            algo.routing_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingAdrView.fxml"));
+            algo.routing_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/RoutingLocalView.fxml"));
+            algo.panel_positions_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragextse/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getPanel_positions_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_dolar_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.panel_positions_loader.load());
             anchorPane.getChildren().add(opacityLevel);
             anchorPane.getChildren().add(switchBtn1);
             anchorPane.getChildren().add(switchBtn2);
@@ -402,35 +402,35 @@ public class Control {
             anchorPane.getChildren().add(switchBtn6);
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.nameAlgo);
 
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataDolarController getMkd_dolar_loader = algo.mkd_dolar_loader.getController();
+            algo.mkd_dolar_tableView = (getMkd_dolar_loader.getType());
+            algo.dolarMasterList =(getMkd_dolar_loader.masterData);
 
 
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataAdrController getMkd_adr_loader = algo.getMkd_adr_loader().getController();
-            algo.setMkd_adr_tableView(getMkd_adr_loader.getType());
-            algo.setMkdAdrMasterList(getMkd_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataAdrController getMkd_adr_loader = algo.mkd_adr_loader.getController();
+            algo.mkd_adr_tableView = (getMkd_adr_loader.getType());
+            algo.mkdAdrMasterList = (getMkd_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataLocalController getMkd_local_loader = algo.getMkd_local_loader().getController();
-            algo.setMkd_local_tableView(getMkd_local_loader.getType());
-            algo.setMkdLocalMasterList(getMkd_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragextse.MarketDataLocalController getMkd_local_loader = algo.mkd_local_loader.getController();
+            algo.mkd_local_tableView = (getMkd_local_loader.getType());
+            algo.mkdLocalMasterList = (getMkd_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.RoutingAdrController routing_adr_loader = algo.getRouting_adr_loader().getController();
-            algo.setRouting_adr_tableView(routing_adr_loader.getType());
-            algo.setRoutingAdrMasterList(routing_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragextse.RoutingAdrController routing_adr_loader = algo.routing_adr_loader.getController();
+            algo.routing_adr_tableView =(routing_adr_loader.getType());
+            algo.routingAdrMasterList = (routing_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.RoutingLocalController routing_local_loader = algo.getRouting_local_loader().getController();
-            algo.setRouting_local_tableView(routing_local_loader.getType());
-            algo.setRoutingLocalMasterList(routing_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragextse.RoutingLocalController routing_local_loader = algo.routing_local_loader.getController();
+            algo.routing_local_tableView = (routing_local_loader.getType());
+            algo.routingLocalMasterList =(routing_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragextse.PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
-            algo.setPanel_positions_tableView(panel_local_loader.getType());
+            com.larrainvial.logviwer.controller.adrarbitragextse.PanelPositionsController panel_local_loader = algo.panel_positions_loader.getController();
+            algo.panel_positions_tableView = (panel_local_loader.getType());
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+            Repository.strategy.put(algo.nameAlgo, algo);
 
             algo.iniziale(true, true, true, true, true);
 
@@ -446,21 +446,21 @@ public class Control {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrage XBOG");
-            algo.setMkd_dolar("MKD_DOLAR");
-            algo.setMkd_adr("MKD_NYSE");
-            algo.setMkd_local("MKD_XSGO");
-            algo.setRouting_adr("ROUTING_ADR");
-            algo.setRouting_local("ROUTING_LOCAL");
-            algo.setTime(1);
+            algo.nameAlgo =("ADRArbitrage XBOG");
+            algo.mkd_dolar =("MKD_DOLAR");
+            algo.mkd_adr =("MKD_NYSE");
+            algo.mkd_local =("MKD_XSGO");
+            algo.routing_adr = ("ROUTING_ADR");
+            algo.routing_local =("ROUTING_LOCAL");
+            algo.time = (1);
 
             Date fechaActual = new Date();
 
             DateFormat formatoFecha = new SimpleDateFormat("yyyy/MM/dd");
             String year = formatoFecha.format(fechaActual).replace("/", "");
 
-            String location = "W:\\ADRArbitrageXBOGBeta\\connection\\log\\";
-            //String location = "log\\AdrArbitrageIB\\";
+            //String location = "W:\\ADRArbitrageXBOGBeta\\connection\\log\\";
+            String location = "src\\resources\\log\\AdrArbitrageXBOG\\";
             String mkd_dolar = "FIX.4.4-LVMDG-BLODPENNA5.messages_";
             String mkd_nyse = "FIX.4.4-ARBv7_EQUITY_NYS_BCS-MAMA_NYSE.messages_";
             String mkd_local = "FIX.4.4-STOPLOSSBEC-LVMDG.messages_";
@@ -469,21 +469,21 @@ public class Control {
             String log = ".log";
 
 
-            algo.setFile_mkd_dolar(new File(location + mkd_dolar + year + log));
-            algo.setFile_mkd_local(new File(location + mkd_local + year + log));
-            algo.setFile_mkd_adr(new File(location + mkd_nyse + year + log));
-            algo.setFile_routing_local(new File(location + routing_local + year + log));
-            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.file_mkd_dolar =(new File(location + mkd_dolar + year + log));
+            algo.file_mkd_local =(new File(location + mkd_local + year + log));
+            algo.file_mkd_adr = (new File(location + mkd_nyse + year + log));
+            algo.file_routing_local =(new File(location + routing_local + year + log));
+            algo.file_routing_adr =(new File(location + routing_nyse + year + log));
 
             algo.fileReader(true, true, true, true, true);
 
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.time));
             opacityLevel.setLayoutX(25);
             opacityLevel.setLayoutY(13);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    algo.setTime(new_val.doubleValue());
+                    algo.time = (new_val.doubleValue());
                 }
             });
 
@@ -518,21 +518,21 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/PanelPositionsView.fxml"));
+            algo.mkd_dolar_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataDolarView.fxml"));
+            algo.mkd_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataAdrView.fxml"));
+            algo.mkd_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/MarketDataLocalView.fxml"));
+            algo.routing_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingAdrView.fxml"));
+            algo.routing_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/RoutingLocalView.fxml"));
+            algo.panel_positions_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragexbog/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getPanel_positions_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_dolar_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.panel_positions_loader.load());
             anchorPane.getChildren().add(opacityLevel);
             anchorPane.getChildren().add(switchBtn1);
             anchorPane.getChildren().add(switchBtn2);
@@ -542,32 +542,32 @@ public class Control {
             anchorPane.getChildren().add(switchBtn6);
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.nameAlgo);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataDolarController getMkd_dolar_loader = algo.mkd_dolar_loader.getController();
+            algo.mkd_dolar_tableView = (getMkd_dolar_loader.getType());
+            algo.dolarMasterList =(getMkd_dolar_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataAdrController getMkd_adr_loader = algo.getMkd_adr_loader().getController();
-            algo.setMkd_adr_tableView(getMkd_adr_loader.getType());
-            algo.setMkdAdrMasterList(getMkd_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataAdrController getMkd_adr_loader = algo.mkd_adr_loader.getController();
+            algo.mkd_adr_tableView = (getMkd_adr_loader.getType());
+            algo.mkdAdrMasterList = (getMkd_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataLocalController getMkd_local_loader = algo.getMkd_local_loader().getController();
-            algo.setMkd_local_tableView(getMkd_local_loader.getType());
-            algo.setMkdLocalMasterList(getMkd_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragexbog.MarketDataLocalController getMkd_local_loader = algo.mkd_local_loader.getController();
+            algo.mkd_local_tableView = (getMkd_local_loader.getType());
+            algo.mkdLocalMasterList = (getMkd_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.RoutingAdrController routing_adr_loader = algo.getRouting_adr_loader().getController();
-            algo.setRouting_adr_tableView(routing_adr_loader.getType());
-            algo.setRoutingAdrMasterList(routing_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragexbog.RoutingAdrController routing_adr_loader = algo.routing_adr_loader.getController();
+            algo.routing_adr_tableView =(routing_adr_loader.getType());
+            algo.routingAdrMasterList = (routing_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.RoutingLocalController routing_local_loader = algo.getRouting_local_loader().getController();
-            algo.setRouting_local_tableView(routing_local_loader.getType());
-            algo.setRoutingLocalMasterList(routing_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragexbog.RoutingLocalController routing_local_loader = algo.routing_local_loader.getController();
+            algo.routing_local_tableView = (routing_local_loader.getType());
+            algo.routingLocalMasterList =(routing_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragexbog.PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
-            algo.setPanel_positions_tableView(panel_local_loader.getType());
+            com.larrainvial.logviwer.controller.adrarbitragexbog.PanelPositionsController panel_local_loader = algo.panel_positions_loader.getController();
+            algo.panel_positions_tableView = (panel_local_loader.getType());
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+            Repository.strategy.put(algo.nameAlgo, algo);
 
             algo.iniziale(true, true, true, true, true);
 
@@ -583,13 +583,13 @@ public class Control {
 
             Algo algo = new Algo();
 
-            algo.setNameAlgo("ADRArbitrage TEST");
-            algo.setMkd_dolar("MKD_DOLAR");
-            algo.setMkd_adr("MKD_NYSE");
-            algo.setMkd_local("MKD_XSGO");
-            algo.setRouting_adr("ROUTING_ADR");
-            algo.setRouting_local("ROUTING_LOCAL");
-            algo.setTime(1);
+            algo.nameAlgo =("ADRArbitrage TEST");
+            algo.mkd_dolar =("MKD_DOLAR");
+            algo.mkd_adr =("MKD_NYSE");
+            algo.mkd_local =("MKD_XSGO");
+            algo.routing_adr = ("ROUTING_ADR");
+            algo.routing_local =("ROUTING_LOCAL");
+            algo.time = (1);
 
             Date fechaActual = new Date();
 
@@ -606,21 +606,21 @@ public class Control {
             String log = ".log";
 
 
-            algo.setFile_mkd_dolar(new File(location + mkd_dolar + year + log));
-            algo.setFile_mkd_local(new File(location + mkd_local + year + log));
-            algo.setFile_mkd_adr(new File(location + mkd_nyse + year + log));
-            algo.setFile_routing_local(new File(location + routing_local + year + log));
-            algo.setFile_routing_adr(new File(location + routing_nyse + year + log));
+            algo.file_mkd_dolar =(new File(location + mkd_dolar + year + log));
+            algo.file_mkd_local =(new File(location + mkd_local + year + log));
+            algo.file_mkd_adr = (new File(location + mkd_nyse + year + log));
+            algo.file_routing_local =(new File(location + routing_local + year + log));
+            algo.file_routing_adr =(new File(location + routing_nyse + year + log));
 
             algo.fileReader(true, true, true, true, true);
 
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.getTime()));
+            Slider opacityLevel = new Slider(1, 10, Double.valueOf(algo.time));
             opacityLevel.setLayoutX(25);
             opacityLevel.setLayoutY(13);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    algo.setTime(new_val.doubleValue());
+                    algo.time = (new_val.doubleValue());
                 }
             });
 
@@ -655,21 +655,21 @@ public class Control {
             switchBtn6.setLayoutY(10);
 
 
-            algo.getMkd_dolar_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataDolarView.fxml"));
-            algo.getMkd_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataAdrView.fxml"));
-            algo.getMkd_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataLocalView.fxml"));
-            algo.getRouting_adr_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingAdrView.fxml"));
-            algo.getRouting_local_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingLocalView.fxml"));
-            algo.getPanel_positions_loader().setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/PanelPositionsView.fxml"));
+            algo.mkd_dolar_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataDolarView.fxml"));
+            algo.mkd_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataAdrView.fxml"));
+            algo.mkd_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/MarketDataLocalView.fxml"));
+            algo.routing_adr_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingAdrView.fxml"));
+            algo.routing_local_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/RoutingLocalView.fxml"));
+            algo.panel_positions_loader.setLocation(MainLogViwer.class.getResource("view/adrarbitragetest/PanelPositionsView.fxml"));
 
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_dolar_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getMkd_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_adr_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getRouting_local_loader().load());
-            anchorPane.getChildren().add((AnchorPane) algo.getPanel_positions_loader().load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_dolar_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.mkd_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_adr_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.routing_local_loader.load());
+            anchorPane.getChildren().add((AnchorPane) algo.panel_positions_loader.load());
             anchorPane.getChildren().add(opacityLevel);
             anchorPane.getChildren().add(switchBtn1);
             anchorPane.getChildren().add(switchBtn2);
@@ -679,32 +679,32 @@ public class Control {
             anchorPane.getChildren().add(switchBtn6);
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(anchorPane);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.getNameAlgo());
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(algo.nameAlgo);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataDolarController getMkd_dolar_loader = algo.getMkd_dolar_loader().getController();
-            algo.setMkd_dolar_tableView(getMkd_dolar_loader.getType());
-            algo.setDolarMasterList(getMkd_dolar_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataDolarController getMkd_dolar_loader = algo.mkd_dolar_loader.getController();
+            algo.mkd_dolar_tableView = (getMkd_dolar_loader.getType());
+            algo.dolarMasterList =(getMkd_dolar_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataAdrController getMkd_adr_loader = algo.getMkd_adr_loader().getController();
-            algo.setMkd_adr_tableView(getMkd_adr_loader.getType());
-            algo.setMkdAdrMasterList(getMkd_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataAdrController getMkd_adr_loader = algo.mkd_adr_loader.getController();
+            algo.mkd_adr_tableView = (getMkd_adr_loader.getType());
+            algo.mkdAdrMasterList = (getMkd_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataLocalController getMkd_local_loader = algo.getMkd_local_loader().getController();
-            algo.setMkd_local_tableView(getMkd_local_loader.getType());
-            algo.setMkdLocalMasterList(getMkd_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragetest.MarketDataLocalController getMkd_local_loader = algo.mkd_local_loader.getController();
+            algo.mkd_local_tableView = (getMkd_local_loader.getType());
+            algo.mkdLocalMasterList = (getMkd_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.RoutingAdrController routing_adr_loader = algo.getRouting_adr_loader().getController();
-            algo.setRouting_adr_tableView(routing_adr_loader.getType());
-            algo.setRoutingAdrMasterList(routing_adr_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragetest.RoutingAdrController routing_adr_loader = algo.routing_adr_loader.getController();
+            algo.routing_adr_tableView =(routing_adr_loader.getType());
+            algo.routingAdrMasterList = (routing_adr_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.RoutingLocalController routing_local_loader = algo.getRouting_local_loader().getController();
-            algo.setRouting_local_tableView(routing_local_loader.getType());
-            algo.setRoutingLocalMasterList(routing_local_loader.masterData);
+            com.larrainvial.logviwer.controller.adrarbitragetest.RoutingLocalController routing_local_loader = algo.routing_local_loader.getController();
+            algo.routing_local_tableView = (routing_local_loader.getType());
+            algo.routingLocalMasterList =(routing_local_loader.masterData);
 
-            com.larrainvial.logviwer.controller.adrarbitragetest.PanelPositionsController panel_local_loader = algo.getPanel_positions_loader().getController();
-            algo.setPanel_positions_tableView(panel_local_loader.getType());
+            com.larrainvial.logviwer.controller.adrarbitragetest.PanelPositionsController panel_local_loader = algo.panel_positions_loader.getController();
+            algo.panel_positions_tableView = (panel_local_loader.getType());
 
-            Repository.strategy.put(algo.getNameAlgo(), algo);
+            Repository.strategy.put(algo.nameAlgo, algo);
 
             algo.iniziale(true, true, true, true, true);
 

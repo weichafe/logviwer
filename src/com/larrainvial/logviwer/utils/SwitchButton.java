@@ -41,30 +41,30 @@ public class SwitchButton extends Label {
                 if (t) {
 
                     if (switchBtn.getId().equals("Dolar")) {
-                        algo.setMkd_dolar_toggle(true);
+                        algo.mkd_dolar_toggle = true;
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
-                        algo.setMkd_adr_toggle(true);
+                        algo.mkd_adr_toggle = true;
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
-                        algo.setMkd_local_toggle(true);
+                        algo.mkd_local_toggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
-                        algo.setRouting_local_toggle(true);
+                        algo.routing_local_toggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
-                        algo.setRouting_adr_toggle(true);
+                        algo.routing_adr_toggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing")) {
 
                         try {
 
-                            algo.setRouting_adr_toggle(true);
+                            algo.routing_adr_toggle = true;
                             QuickFixAdapter.start();
 
                         } catch (Exception e) {
@@ -91,28 +91,28 @@ public class SwitchButton extends Label {
                 } else {
 
                     if (switchBtn.getId().equals("Dolar")) {
-                        algo.setMkd_dolar_toggle(false);
+                        algo.mkd_dolar_toggle = false;
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
-                        algo.setMkd_adr_toggle(false);
+                        algo.mkd_adr_toggle = false;
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
-                        algo.setMkd_local_toggle(false);
+                        algo.mkd_local_toggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
-                        algo.setRouting_local_toggle(false);
+                        algo.routing_local_toggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
-                        algo.setRouting_adr_toggle(false);
+                        algo.routing_adr_toggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing")) {
 
-                        algo.setRouting_adr_toggle(false);
+                        algo.routing_adr_toggle = false;
 
                         try {
                             QuickFixAdapter.strop();

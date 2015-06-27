@@ -23,51 +23,51 @@ public class SendToViewListener implements Listener {
 
             algo = Repository.strategy.get(ev.nameAlgo);
 
-            if (ev.typeMarket.equals(algo.getMkd_dolar())) {
-                algo.getDolarMasterList().add(ev.modelMarketData);
-                algo.getMkd_dolar_tableView().setItems(algo.getDolarMasterList());
+            if (ev.typeMarket.equals(algo.mkd_dolar)) {
+                algo.dolarMasterList.add(ev.modelMarketData);
+                algo.mkd_dolar_tableView.setItems(algo.dolarMasterList);
 
-                if(algo.getDolarMasterList().size() >= 10000){
-                    algo.getDolarMasterList().clear();
+                if(algo.dolarMasterList.size() >= 10000){
+                    algo.dolarMasterList.clear();
                 }
             }
 
-            if (ev.typeMarket.equals(algo.getMkd_adr())) {
-                algo.getMkdAdrMasterList().add(ev.modelMarketData);
-                algo.getMkd_adr_tableView().setItems(algo.getMkdAdrMasterList());
+            if (ev.typeMarket.equals(algo.mkd_adr)) {
+                algo.mkdAdrMasterList.add(ev.modelMarketData);
+                algo.mkd_adr_tableView.setItems(algo.mkdAdrMasterList);
             }
 
-            if (ev.typeMarket.equals(algo.getMkd_local())) {
-                algo.getMkdLocalMasterList().add(ev.modelMarketData);
-                algo.getMkd_local_tableView().setItems(algo.getMkdLocalMasterList());
+            if (ev.typeMarket.equals(algo.mkd_local)) {
+                algo.mkdLocalMasterList.add(ev.modelMarketData);
+                algo.mkd_local_tableView.setItems(algo.mkdLocalMasterList);
 
             }
 
-            if (ev.typeMarket.equals(algo.getRouting_adr())) {
-                algo.getRoutingAdrMasterList().add(ev.modelRoutingData);
-                algo.getRouting_adr_tableView().setItems(algo.getRoutingAdrMasterList());
+            if (ev.typeMarket.equals(algo.routing_adr)) {
+                algo.routingAdrMasterList.add(ev.modelRoutingData);
+                algo.routing_adr_tableView.setItems(algo.routingAdrMasterList);
             }
 
-            if (ev.typeMarket.equals(algo.getRouting_local())) {
-                algo.getRoutingLocalMasterList().add(ev.modelRoutingData);
-                algo.getRouting_local_tableView().setItems(algo.getRoutingLocalMasterList());
+            if (ev.typeMarket.equals(algo.routing_local)) {
+                algo.routingLocalMasterList.add(ev.modelRoutingData);
+                algo.routing_local_tableView.setItems(algo.routingLocalMasterList);
 
             }
 
             if(!ev.marketData) return;
 
 
-            synchronized(algo.getPositionsMasterListHash()) {
+            synchronized(algo.positionsMasterListHash) {
 
-                for (Map.Entry<String, ModelPositions> e : algo.getPositionsMasterListHash().entrySet()) {
+                for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
 
-                    if (algo.getPositionsMasterListHash().containsKey(e.getKey()))
+                    if (algo.positionsMasterListHash.containsKey(e.getKey()))
 
                         if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
 
-                            algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
-                            algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
-                            algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                            algo.positionsMasterList.remove(algo.positionsMasterListHash.get(e.getKey()));
+                            algo.positionsMasterList.add(algo.positionsMasterListHash.get(e.getKey()));
+                            algo.panel_positions_tableView.setItems(algo.positionsMasterList);
 
                         }
                 }

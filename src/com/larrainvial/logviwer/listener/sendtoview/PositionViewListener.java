@@ -25,16 +25,16 @@ public class PositionViewListener implements Listener {
 
             synchronized(algo.positionsMasterListHash) {
 
-                for (Map.Entry<String, ModelPositions> e: algo.getPositionsMasterListHash().entrySet()) {
+                for (Map.Entry<String, ModelPositions> e: algo.positionsMasterListHash.entrySet()) {
 
                     try {
 
-                        if (algo.getPositionsMasterListHash().containsKey(e.getKey())) {
+                        if (algo.positionsMasterListHash.containsKey(e.getKey())) {
 
                             if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
-                                algo.getPositionsMasterList().remove(algo.getPositionsMasterListHash().get(e.getKey()));
-                                algo.getPositionsMasterList().add(algo.getPositionsMasterListHash().get(e.getKey()));
-                                algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                                algo.positionsMasterList.remove(algo.positionsMasterListHash.get(e.getKey()));
+                                algo.positionsMasterList.add(algo.positionsMasterListHash.get(e.getKey()));
+                                algo.panel_positions_tableView.setItems(algo.positionsMasterList);
                             }
                         }
 
@@ -43,15 +43,15 @@ public class PositionViewListener implements Listener {
                     }
                 }
 
-                /*for (Map.Entry<String, ModelPositions> e : algo.getPositionsMasterListHash().entrySet()) {
+                /*for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
 
 
 
-                    ModelPositions modelPositions = algo.getPositionsMasterListHash().get(e.getKey());
+                    ModelPositions modelPositions = algo.positionsMasterListHash.get(e.getKey());
 
                     if(algo.positionsMap.containsKey(e.getKey())){
 
-                        ModelPositions modelPositionsMasterLis = algo.getPositionsMasterList().get(algo.positionsMap.get(e.getKey()));
+                        ModelPositions modelPositionsMasterLis = algo.positionsMasterList.get(algo.positionsMap.get(e.getKey()));
 
                         modelPositionsMasterLis.qtyBuyLocal       = modelPositions.qtyBuyLocal;
                         modelPositionsMasterLis.qtyBuyAdr         = modelPositions.qtyBuyAdr;
@@ -62,14 +62,14 @@ public class PositionViewListener implements Listener {
 
                     } else {
 
-                        algo.getPositionsMasterList().add(algo.positionsMasterListHash.get(e.getKey()));
+                        algo.positionsMasterList.add(algo.positionsMasterListHash.get(e.getKey()));
                         algo.positionsMap.put(e.getKey(), algo.contPositions);
                         algo.contPositions++;
                     }
 
                 }
 
-                algo.getPanel_positions_tableView().setItems(algo.getPositionsMasterList());
+                algo.panel_positions_tableView.setItems(algo.positionsMasterList);
                 */
 
             }

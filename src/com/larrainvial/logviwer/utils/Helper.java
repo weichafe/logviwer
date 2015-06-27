@@ -1,10 +1,11 @@
 package com.larrainvial.logviwer.utils;
 
-
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
+import com.larrainvial.logviwer.Repository;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -15,25 +16,20 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Helper {
 
-    private static boolean exception = true;
-    private static boolean alertBloolean = true;
 
     public static synchronized void exception(Exception e) {
 
         try {
 
-            if(!exception) return;
-
             Platform.runLater(new Runnable() {
 
                 public void run() {
+
+                    if(!Repository.exception) return;
 
                     Alert alertException = new Alert(Alert.AlertType.ERROR);
                     alertException.setTitle("Exception Dialog");
@@ -64,17 +60,14 @@ public class Helper {
                     expContent.add(textArea, 0, 1);
 
                     alertException.getDialogPane().setExpandableContent(expContent);
-                    exception = false;
-                    alertException.showAndWait();
 
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
+                    Repository.exception = false;
+                    Optional<ButtonType> result = alertException.showAndWait();
+
+                    if (result.get() == ButtonType.OK){
+                        Repository.exception = true;
                     }
 
-                    alertException.hide();
-                    exception = true;
 
                 }
             });
@@ -89,30 +82,26 @@ public class Helper {
 
     public static synchronized void  alert(String headerText, String contentText1){
 
-        if(!alertBloolean) return;
+
 
         Platform.runLater(new Runnable() {
             public void run() {
+
+                if(!Repository.alertBloolean) return;
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Alert");
                 alert.setHeaderText(headerText);
                 alert.setContentText(contentText1);
 
-                alert.show();
-                alertBloolean = false;
+                Repository.alertBloolean = false;
+                Optional<ButtonType> result = alert.showAndWait();
 
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (result.get() == ButtonType.OK){
+                    Repository.alertBloolean = true;
                 }
-
-                alert.hide();
-                alertBloolean = true;
-
-                }
-            });
+            }
+        });
     }
 
     public synchronized static String adrToLocal(String symbolLocal){
@@ -404,7 +393,7 @@ public class Helper {
         return InetAddress.getLocalHost().getHostAddress();
     }
 
-    public static SessionID getSesion() throws Exception {
+    public static String getSesion() throws Exception {
         return InetAddress.getLocalHost().getHostAddress();
     }
 }
