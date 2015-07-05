@@ -1,28 +1,35 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
-
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.sendtoview.RoutingLocalViewEvent;
+import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 
 public class RoutingLocalViewListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+    public ModelRoutingData modelRoutingData;
+
+    public RoutingLocalViewListener(Algo algo) {
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event) {
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
             RoutingLocalViewEvent ev = (RoutingLocalViewEvent) event;
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-            algo.routingLocalMasterList.add(ev.modelRoutingData);
-            algo.routing_local_tableView.setItems(algo.routingLocalMasterList);
+            synchronized (algo.routingLocalMasterList) {
+                algo.routingLocalMasterList.add(ev.modelRoutingData);
+                algo.routingLocalTableView.setItems(algo.routingLocalMasterList);
+            }
 
         } catch (Exception e) {
             Helper.exception(e);

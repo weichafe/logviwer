@@ -1,8 +1,6 @@
 package com.larrainvial.sellside.utils;
 
 import com.larrainvial.sellside.Repository;
-import com.larrainvial.sellside.orders.Orders;
-import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.StringField;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;

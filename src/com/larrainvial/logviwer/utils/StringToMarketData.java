@@ -1,10 +1,10 @@
 package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
-import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -13,9 +13,7 @@ public class StringToMarketData {
 
     private ModelMarketData modelMarketData;
 
-    public ModelMarketData marketData(String message) {
-
-        try {
+    public ModelMarketData marketData(String message) throws Exception {
 
             ArrayList<Map> mDEntryType;
             MsgType typeOfMessage = Message.identifyType(message);
@@ -23,7 +21,7 @@ public class StringToMarketData {
 
             modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
 
-            Map<Object, Object> messageMap = Helper.getFixMessageAttributeFull(message);
+            Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
 
             modelMarketData.symbol = messageMap.containsKey(FixConstants.Symbol) ? messageMap.get(FixConstants.Symbol).toString() : "";
 
@@ -83,10 +81,6 @@ public class StringToMarketData {
 
                 }
             }
-
-        } catch (Exception e) {
-            Helper.exception(e);
-        }
 
         return modelMarketData;
     }

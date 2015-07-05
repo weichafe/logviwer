@@ -21,7 +21,7 @@ public class SwitchButton extends Label {
 
         switchBtn = new Button();
         switchBtn.setId(nameType);
-        switchBtn.setPrefWidth(110);
+        switchBtn.setPrefWidth(120);
 
 
         switchBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -41,30 +41,30 @@ public class SwitchButton extends Label {
                 if (t) {
 
                     if (switchBtn.getId().equals("Dolar")) {
-                        algo.mkd_dolar_toggle = true;
+                        algo.mkdDolarToggle = true;
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
-                        algo.mkd_adr_toggle = true;
+                        algo.mkdAdrToggle = true;
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
-                        algo.mkd_local_toggle = true;
+                        algo.mkdLocalToggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
-                        algo.routing_local_toggle = true;
+                        algo.routingLocalToggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
-                        algo.routing_adr_toggle = true;
+                        algo.routingAdrToggle = true;
                     }
 
                     if (switchBtn.getId().equals("Routing")) {
 
                         try {
 
-                            algo.routing_adr_toggle = true;
+                            algo.routingAdrToggle = true;
                             QuickFixAdapter.start();
 
                         } catch (Exception e) {
@@ -91,28 +91,28 @@ public class SwitchButton extends Label {
                 } else {
 
                     if (switchBtn.getId().equals("Dolar")) {
-                        algo.mkd_dolar_toggle = false;
+                        algo.mkdDolarToggle = false;
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
-                        algo.mkd_adr_toggle = false;
+                        algo.mkdAdrToggle = false;
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
-                        algo.mkd_local_toggle = false;
+                        algo.mkdLocalToggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
-                        algo.routing_local_toggle = false;
+                        algo.routingLocalToggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
-                        algo.routing_adr_toggle = false;
+                        algo.routingAdrToggle = false;
                     }
 
                     if (switchBtn.getId().equals("Routing")) {
 
-                        algo.routing_adr_toggle = false;
+                        algo.routingAdrToggle = false;
 
                         try {
                             QuickFixAdapter.strop();

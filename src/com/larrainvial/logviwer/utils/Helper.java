@@ -2,6 +2,7 @@ package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -10,16 +11,39 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import quickfix.SessionID;
-
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
 import java.net.InetAddress;
 import java.util.*;
 
 public class Helper {
 
+    public static void createStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new File("C:\\Workspace\\logviwer\\src\\resources\\strategy.xml"));
+
+        NodeList nodeList = document.getDocumentElement().getChildNodes();
+        int tab = 0;
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                new Algo((Element) node, tab);
+                tab++;
+            }
+        }
+
+    }
 
     public static synchronized void exception(Exception e) {
 
@@ -130,6 +154,30 @@ public class Helper {
         if (symbolLocal.equals("VCO")) return "CONCHATORO";
 
         return symbolLocal;
+    }
+
+    public synchronized int positions(String symbolLocal){
+
+        if (symbolLocal.equals("PFAVAL"))      return 0;
+        if (symbolLocal.equals("PFAVH"))       return 2;
+        if (symbolLocal.equals("PFBCOLOM"))    return 3;
+        if (symbolLocal.equals("ECOPETROL"))   return 1;
+        if (symbolLocal.equals("PREC"))        return 0;
+        if (symbolLocal.equals("CNEC"))        return 1;
+        if (symbolLocal.equals("CHILE"))       return 0;
+        if (symbolLocal.equals("LAN"))         return 2;
+        if (symbolLocal.equals("BSANTANDER"))  return 3;
+        if (symbolLocal.equals("CENCOSUD"))    return 4;
+        if (symbolLocal.equals("CCU"))         return 5;
+        if (symbolLocal.equals("CORPBANCA"))   return 6;
+        if (symbolLocal.equals("ANDINA-A"))    return 7;
+        if (symbolLocal.equals("ANDINA-B"))    return 8;
+        if (symbolLocal.equals("ENDESA"))      return 9;
+        if (symbolLocal.equals("ENERSIS"))     return 10;
+        if (symbolLocal.equals("SQM-B"))       return 11;
+        if (symbolLocal.equals("CONCHATORO"))  return 1;
+
+        return 0;
     }
 
     public synchronized Double ratio(String symbolLocal){
@@ -262,7 +310,7 @@ public class Helper {
         return execType;
     }
 
-    public synchronized static Map<Object, Object> getFixMessageParties(String fixMessageString) {
+    public Map<Object, Object> getFixMessageParties(String fixMessageString) {
 
         try {
 
@@ -316,13 +364,13 @@ public class Helper {
             return orderedFixMessage;
 
         } catch (Exception e) {
-            //new Algo().exception(e);
+            Helper.exception(e);
         }
 
         return null;
     }
 
-    public static synchronized HashMap getHashWithAttribute() {
+    public HashMap getHashWithAttribute() {
 
         HashMap attributes = new HashMap();
 
@@ -334,7 +382,7 @@ public class Helper {
         return attributes;
     }
 
-    public static synchronized Map<Object, Object> getFixMessageAttributeFull(String fixMessageString)throws Exception {
+    public Map<Object, Object> getFixMessageAttributeFull(String fixMessageString) throws Exception {
 
         Map<Object, Object> orderedFixMessage = new HashMap<Object, Object>();
 

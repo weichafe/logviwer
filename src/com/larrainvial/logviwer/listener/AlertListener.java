@@ -1,55 +1,48 @@
 package com.larrainvial.logviwer.listener;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import quickfix.field.MsgType;
-import quickfix.fix44.Message;
 
 public class AlertListener implements Listener {
 
-    private  Algo algo;
+    public Algo algo;
+
+    public AlertListener(Algo algo) {
+        this.algo = algo;
+    }
+
 
     @Override
     public void eventOccurred(Event event) {
 
-        AlertEvent ev = (AlertEvent) event;
-        algo = Repository.strategy.get(ev.nameAlgo);
-        Helper helper = new Helper();
-
         try {
 
-            MsgType typeOfMessage = Message.identifyType(ev.lineFromLog);
+            AlertEvent ev = (AlertEvent) event;
 
-
-            if (typeOfMessage.valueEquals("9") && algo.isAlert()){
+            if (ev.execType.equals("9") && algo.isAlert()) {
 
                 if(ev.modelRoutingData.text.equals("Routing Failure")) {
                     Helper.alert(algo.nameAlgo, "Rejected, check log files! " + ev.modelRoutingData.text );
                 }
-
             }
 
-            if (typeOfMessage.getValue().equals("A") && algo.isAlert()){
+            if (ev.execType.equals("A") && algo.isAlert()) {
                 Helper.alert(algo.nameAlgo, "Logon, check log files! " + "");
             }
 
-            if (typeOfMessage.getValue().equals("1") && algo.isAlert()){
+            if (ev.execType.equals("1") && algo.isAlert()) {
                 Helper.alert(algo.nameAlgo, "TestRequest, check log files! " +"");
-
             }
 
-            if(typeOfMessage.getValue().equals("5") && algo.isAlert()){
+            if (ev.execType.equals("5") && algo.isAlert()) {
                 Helper.alert(algo.nameAlgo, "Logout, check log files! " + "");
-
             }
 
-            if(typeOfMessage.getValue().equals("3") && algo.isAlert()){
+            if (ev.execType.equals("3") && algo.isAlert()) {
                 Helper.alert(algo.nameAlgo, "Protocol, check log files! " + ev.modelRoutingData.text);
-
             }
 
         } catch (Exception e){
@@ -58,7 +51,6 @@ public class AlertListener implements Listener {
 
 
     }
-
 
 
 

@@ -40,6 +40,7 @@ public class CalculatePositions {
             positions = algo.positionsMasterListHash.get(keyHashPositions);
             positions.ratio = helper.ratio(keyHashPositions);
             positions.symbolLocal = keyHashPositions;
+            positions.positions = helper.positions(keyHashPositions);
         }
 
         if (modelRoutingData.side.equals("Buy")) {
@@ -62,12 +63,14 @@ public class CalculatePositions {
         if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
 
             if (helper.local(modelRoutingData.symbol)) {
+
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
 
 
             } else {
+
                 positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;
                 positions.symbolAdr = modelRoutingData.getSymbol();
 

@@ -2,7 +2,7 @@ package com.larrainvial.logviwer.model;
 
 import java.io.Serializable;
 
-public class ModelRoutingData implements Serializable {
+public class ModelRoutingData extends ModelPositions implements Serializable {
 
     private static final long serialVersionUID = 8799656478674716639L;
 

@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer.listener.readlog;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.readlog.ReadFromDolarEvent;
 import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
 import com.larrainvial.logviwer.utils.Helper;
@@ -13,21 +12,25 @@ import java.util.Scanner;
 
 public class ReadFromDolarListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+    public ReadFromDolarListener(Algo algo){
+        this.algo = algo;
+    }
 
     @Override
-    public void eventOccurred(Event event){
+    public synchronized void eventOccurred(Event event){
 
         try {
 
             ReadFromDolarEvent ev = (ReadFromDolarEvent) event;
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-            Scanner sc = new Scanner(ev.inputStream, "UTF-8");
+            Scanner sc = new Scanner(algo.inputStreamMkdDolar, "UTF-8");
 
             while (sc.hasNextLine()) {
-                Controller.dispatchEvent(new DolarEvent(this, sc.nextLine(), ev.nameAlgo, ev.typeMarket));
+                Controller.dispatchEvent(new DolarEvent(algo, sc.nextLine()));
             }
 
 
@@ -36,4 +39,5 @@ public class ReadFromDolarListener implements Listener {
         }
 
     }
+
 }

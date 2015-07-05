@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.sendtoview.MarketDataLocalViewEvent;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
@@ -9,25 +8,31 @@ import com.larrainvial.trading.emp.Listener;
 
 public class MarketDataLocalViewListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+    public MarketDataLocalViewListener(Algo algo) {
+        this.algo = algo;
+    }
 
     @Override
-    public void eventOccurred(Event event) {
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
             MarketDataLocalViewEvent ev = (MarketDataLocalViewEvent) event;
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             synchronized (algo.mkdLocalMasterList){
                 algo.mkdLocalMasterList.add(ev.modelMarketData);
-                algo.mkd_local_tableView.setItems(algo.mkdLocalMasterList);
+                algo.mkdLocalTableView.setItems(algo.mkdLocalMasterList);
             }
+
 
         } catch (Exception e) {
             Helper.exception(e);
         }
 
     }
+
 }

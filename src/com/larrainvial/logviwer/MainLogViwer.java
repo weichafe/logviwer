@@ -3,12 +3,13 @@ package com.larrainvial.logviwer;
 import com.larrainvial.logviwer.utils.Control;
 import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-import java.awt.*;
 
 public class MainLogViwer extends Application {
 
@@ -16,7 +17,6 @@ public class MainLogViwer extends Application {
     public void start(Stage primaryStage) {
 
         try {
-
 
             System.out.print("Inicializando servidor... ");
 
@@ -30,24 +30,27 @@ public class MainLogViwer extends Application {
             Repository.tabPanePrincipalTabPanel = (TabPane) Repository.principalTabPanel_Loader.load();
             rootLayout_Loader.setCenter(Repository.tabPanePrincipalTabPanel);
 
-            Scene scene = new Scene(rootLayout_Loader);
-            primaryStage.setScene(scene);
+            Repository.scene = new Scene(rootLayout_Loader);
+            primaryStage.setScene(Repository.scene);
 
             primaryStage.show();
 
-            Toolkit tk = Toolkit.getDefaultToolkit();
-            Dimension tamano = tk.getScreenSize();
-            System.out.println("La pantalla es de " + tamano.getWidth() + " x " + tamano.getHeight());
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    System.exit(0);
+                }
+            });
 
             Control.initialize();
-            Control.initializaAll();
-
+            Helper.createStrategy();
 
         } catch (Exception e){
             Helper.exception(e);
+            System.exit(0);
         }
 
-    }
 
+
+    }
 
 }

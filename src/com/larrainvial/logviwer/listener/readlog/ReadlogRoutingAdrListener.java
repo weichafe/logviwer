@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer.listener.readlog;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.readlog.ReadlogRoutingAdrEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
 import com.larrainvial.logviwer.utils.Helper;
@@ -13,21 +12,26 @@ import java.util.Scanner;
 
 public class ReadlogRoutingAdrListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+    public ReadlogRoutingAdrListener(Algo algo){
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event){
+    public synchronized void eventOccurred(Event event){
 
         try {
 
             ReadlogRoutingAdrEvent ev = (ReadlogRoutingAdrEvent) event;
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-            Scanner sc = new Scanner(ev.inputStream, "UTF-8");
+            Scanner sc = new Scanner(algo.inputStreamRoutingAdr, "UTF-8");
 
             while (sc.hasNextLine()) {
-                Controller.dispatchEvent(new RoutingAdrEvent(this, sc.nextLine(), ev.nameAlgo, ev.typeMarket));
+                Controller.dispatchEvent(new RoutingAdrEvent(algo, sc.nextLine()));
             }
 
 
@@ -36,4 +40,5 @@ public class ReadlogRoutingAdrListener implements Listener {
         }
 
     }
+
 }

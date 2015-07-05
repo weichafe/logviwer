@@ -1,83 +1,69 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
+import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import javafx.beans.property.Property;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableView;
 
-import java.util.Map;
+import java.util.*;
 
 public class PositionViewListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+
+    public PositionViewListener(Algo algo) {
+
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event) {
-
-        PositionViewEvent ev = (PositionViewEvent) event;
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            PositionViewEvent ev = (PositionViewEvent) event;
 
-            synchronized(algo.positionsMasterListHash) {
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-                for (Map.Entry<String, ModelPositions> e: algo.positionsMasterListHash.entrySet()) {
+            synchronized (algo.positionsMasterListHash) {
 
-                    try {
-
-                        if (algo.positionsMasterListHash.containsKey(e.getKey())) {
-
-                            if (e.getKey().equals(Helper.adrToLocal(ev.modelRoutingData.symbol))) {
-                                algo.positionsMasterList.remove(algo.positionsMasterListHash.get(e.getKey()));
-                                algo.positionsMasterList.add(algo.positionsMasterListHash.get(e.getKey()));
-                                algo.panel_positions_tableView.setItems(algo.positionsMasterList);
-                            }
-                        }
-
-                    } catch (Exception ex) {
-                        Helper.exception(ex);
-                    }
-                }
-
-                /*for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
-
-
+                for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
 
                     ModelPositions modelPositions = algo.positionsMasterListHash.get(e.getKey());
 
-                    if(algo.positionsMap.containsKey(e.getKey())){
+                    if (!algo.positions.containsKey(e.getKey())) {
 
-                        ModelPositions modelPositionsMasterLis = algo.positionsMasterList.get(algo.positionsMap.get(e.getKey()));
+                        algo.panelPositionsTableView.getItems().add(algo.countPositions, modelPositions);
 
-                        modelPositionsMasterLis.qtyBuyLocal       = modelPositions.qtyBuyLocal;
-                        modelPositionsMasterLis.qtyBuyAdr         = modelPositions.qtyBuyAdr;
-                        modelPositionsMasterLis.qtySellLocal      = modelPositions.qtySellLocal;
-                        modelPositionsMasterLis.qtySellAdr        = modelPositions.qtySellAdr;
-                        modelPositionsMasterLis.qtySellLocalRatio = modelPositions.qtySellLocalRatio;
-                        modelPositionsMasterLis.qtyBuyLocalRatio  = modelPositions.qtyBuyLocalRatio;
+                        algo.positions.put(e.getKey(), algo.countPositions);
+                        algo.countPositions++;
 
                     } else {
 
-                        algo.positionsMasterList.add(algo.positionsMasterListHash.get(e.getKey()));
-                        algo.positionsMap.put(e.getKey(), algo.contPositions);
-                        algo.contPositions++;
+                        algo.panelPositionsTableView.getItems().set(algo.positions.get(e.getKey()), modelPositions);
+
                     }
 
                 }
 
-                algo.panel_positions_tableView.setItems(algo.positionsMasterList);
-                */
-
             }
-
 
         } catch (Exception e) {
             Helper.exception(e);
         }
+  }
 
-    }
 }
+
+
+

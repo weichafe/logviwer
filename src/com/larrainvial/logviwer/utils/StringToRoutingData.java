@@ -1,10 +1,10 @@
 package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
-import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
+
 import java.util.Map;
 
 public class StringToRoutingData {
@@ -20,7 +20,7 @@ public class StringToRoutingData {
 
             modelRoutingData = new ModelRoutingData(date[0], date[1], typeOfMessage.getValue());
 
-            Map<Object, Object> messageMap = Helper.getFixMessageParties(message);
+            Map<Object, Object> messageMap = new Helper().getFixMessageParties(message);
 
             if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1")){
                 return modelRoutingData;

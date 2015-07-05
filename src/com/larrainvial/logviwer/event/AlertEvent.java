@@ -8,26 +8,24 @@ import com.larrainvial.trading.emp.Event;
 
 public class AlertEvent extends Event {
 
-    public String nameAlgo;
-    public String typeMarket;
     public ModelMarketData modelMarketData;
     public ModelRoutingData modelRoutingData;
-    public String lineFromLog;
+    public String execType;
+    public Algo algo;
 
-    public AlertEvent(Object source, String nameAlgo, String typeMarket, ModelMarketData modelMarketData, String lineFromLog) {
+    public AlertEvent(Object source, ModelMarketData modelMarketData) {
         super(source);
-        this.typeMarket = typeMarket;
-        this.nameAlgo = nameAlgo;
+        this.algo = (Algo) source;
         this.modelMarketData = modelMarketData;
-        this.lineFromLog = lineFromLog;
+        this.execType = modelMarketData.messageByType;
     }
 
-    public AlertEvent(Object source, String nameAlgo, String typeMarket, ModelRoutingData modelRoutingData, String lineFromLog) {
+    public AlertEvent(Object source, ModelRoutingData modelRoutingData) {
         super(source);
-        this.typeMarket = typeMarket;
-        this.nameAlgo = nameAlgo;
+        this.algo = (Algo) source;
         this.modelRoutingData = modelRoutingData;
-        this.lineFromLog = lineFromLog;
+        this.execType = modelRoutingData.execType;
+
     }
 
 }

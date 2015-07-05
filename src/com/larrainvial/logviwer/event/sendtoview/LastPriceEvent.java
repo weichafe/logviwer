@@ -1,7 +1,18 @@
 package com.larrainvial.logviwer.event.sendtoview;
 
-/**
- * Created by vnazar on 6/22/2015.
- */
-public class LastPriceEvent {
+
+import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.model.ModelMarketData;
+import com.larrainvial.trading.emp.Event;
+
+public class LastPriceEvent  extends Event {
+
+    public Algo algo;
+    public ModelMarketData modelMarketData;
+
+    public LastPriceEvent(Object source, ModelMarketData modelMarketData) {
+        super(source);
+        this.algo = (Algo) source;
+        this.modelMarketData = modelMarketData;
+    }
 }

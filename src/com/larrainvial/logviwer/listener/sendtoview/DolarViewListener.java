@@ -1,8 +1,6 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
-
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.sendtoview.DolarViewEvent;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
@@ -10,29 +8,34 @@ import com.larrainvial.trading.emp.Listener;
 
 public class DolarViewListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+    public DolarViewListener(Algo algo) {
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event) {
-
-        DolarViewEvent ev = (DolarViewEvent) event;
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            DolarViewEvent ev = (DolarViewEvent) event;
 
-            algo.dolarMasterList.add(ev.modelMarketData);
-            algo.mkd_dolar_tableView.setItems(algo.dolarMasterList);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-            if(algo.dolarMasterList.size() >= 10000){
-                   algo.dolarMasterList.clear();
+            synchronized (algo.dolarMasterList) {
+                algo.dolarMasterList.add(ev.modelMarketData);
+                algo.mkdDolarTableView.setItems(algo.dolarMasterList);
             }
+
 
         } catch (Exception e) {
             Helper.exception(e);
         }
 
     }
+
 
 
 }

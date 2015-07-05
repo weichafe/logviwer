@@ -1,11 +1,12 @@
 package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.DolarViewEvent;
+import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
+import com.larrainvial.logviwer.utils.CalculateLastPrice;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.StringToMarketData;
 import com.larrainvial.trading.emp.Controller;
@@ -14,26 +15,30 @@ import com.larrainvial.trading.emp.Listener;
 
 public class DolarListener implements Listener {
 
-    private ModelMarketData modelMarketData;
-    private Algo algo;
+    public Algo algo;
+
+    public DolarListener(Algo algo) {
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event) {
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
             DolarEvent ev = (DolarEvent) event;
 
             if (ev.lineFromLog.equals("")) return;
-            if(true) return;
-
-            algo = Repository.strategy.get(ev.nameAlgo);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToMarketData stringToMarketData = new StringToMarketData();
-            modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
+            ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
-            Controller.dispatchEvent(new DolarViewEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData));
-            Controller.dispatchEvent(new AlertEvent(this, ev.nameAlgo, ev.typeMarket, modelMarketData, ev.lineFromLog));
+            Controller.dispatchEvent(new DolarViewEvent(algo, modelMarketData));
+            Controller.dispatchEvent(new AlertEvent(algo, modelMarketData));
+
+            new CalculateLastPrice(algo, modelMarketData);
 
 
         } catch (Exception e){
@@ -41,4 +46,5 @@ public class DolarListener implements Listener {
         }
 
     }
+
 }

@@ -12,6 +12,7 @@ public class ModelPositions {
     public Double qtySellLocalRatio = 0d;
     public Double qtyBuyLocalRatio = 0d;
     public Double ratio = 1d;
+    public int positions = 1;
 
     public String getSymbolLocal() {
         return symbolLocal;

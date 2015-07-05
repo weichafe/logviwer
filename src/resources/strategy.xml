@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<strategys>
+
+    <strategy>
+
+        <nameAlgo>ADRArbitrage XSGO</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>src\\resources\\log\\AdrArbitrageIB\\</location>
+        <mkd_dolar>FIX.4.4-ALGOARBADR5-MDFHBLP.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-MKDATACL2-MKDATAFHBCS2.messages_</mkd_local>
+        <routing_local>FIX.4.4-ARDARB_XSGO_IB-AMGTOBCS.messages_</routing_local>
+        <routing_nyse>FIX.4.4-LVBSG-ADR_ARBITRAGE_IB_XNYS.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+    <!--strategy>
+
+        <nameAlgo>ADRArbitrage XTSE</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>src\\resources\\log\\AdrArbitrageXTSE\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA7.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA6.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-BOGCURNCY-LVMDG.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XTSE_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-LVBSG-CL04.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy-->
+
+
+</strategys>

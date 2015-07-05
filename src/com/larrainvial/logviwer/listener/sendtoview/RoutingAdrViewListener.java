@@ -1,8 +1,6 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
-
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.sendtoview.RoutingAdrViewEvent;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.trading.emp.Event;
@@ -10,23 +8,33 @@ import com.larrainvial.trading.emp.Listener;
 
 public class RoutingAdrViewListener implements Listener {
 
-    private Algo algo;
+    public Algo algo;
+
+    public RoutingAdrViewListener(Algo algo) {
+        this.algo = algo;
+    }
+
 
     @Override
-    public void eventOccurred(Event event) {
-
-        RoutingAdrViewEvent ev = (RoutingAdrViewEvent) event;
+    public synchronized void eventOccurred(Event event) {
 
         try {
 
-            algo = Repository.strategy.get(ev.nameAlgo);
+            RoutingAdrViewEvent ev = (RoutingAdrViewEvent) event;
 
-            algo.routingAdrMasterList.add(ev.modelRoutingData);
-            algo.routing_adr_tableView.setItems(algo.routingAdrMasterList);
+            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+
+            synchronized (algo.routingAdrMasterList) {
+                algo.routingAdrMasterList.add(ev.modelRoutingData);
+                algo.routingAdrTableView.setItems(algo.routingAdrMasterList);
+            }
 
         } catch (Exception e) {
             Helper.exception(e);
         }
 
     }
+
+
+
 }
