@@ -4,7 +4,6 @@ import com.javtech.javatoolkit.fix.FixConstants;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
-
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -27,7 +26,6 @@ public class StringToMarketData {
 
 
             if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
-                //ALERT
                 return modelMarketData;
             }
 
@@ -46,8 +44,10 @@ public class StringToMarketData {
 
                 if (map.get(FixConstants.MDEntryType).equals("0")) {
 
-                    if (map.get(FixConstants.MDEntrySize).toString() != null) {
-                        modelMarketData.buyQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+                    if(map.containsKey(FixConstants.MDEntrySize)){
+                        if (map.get(FixConstants.MDEntrySize).toString() != null) {
+                            modelMarketData.buyQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+                        }
                     }
 
                     if (map.get(FixConstants.MDEntryPx).toString() != null) {
@@ -57,8 +57,11 @@ public class StringToMarketData {
 
                 if (map.get(FixConstants.MDEntryType).equals("1")) {
 
-                    if (map.get(FixConstants.MDEntrySize).toString() != null) {
-                        modelMarketData.sellQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+
+                    if(map.containsKey(FixConstants.MDEntrySize)){
+                        if (map.get(FixConstants.MDEntrySize).toString() != null) {
+                            modelMarketData.sellQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+                        }
                     }
 
                     if (map.get(FixConstants.MDEntryPx).toString() != null) {

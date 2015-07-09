@@ -29,7 +29,7 @@ public class Helper {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("C:\\Workspace\\logviwer\\src\\resources\\strategy.xml"));
+        Document document = builder.parse(new File("C:\\WorkspaceGit\\logviwer\\src\\resources\\strategy.xml"));
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         int tab = 0;

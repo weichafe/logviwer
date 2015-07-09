@@ -53,5 +53,35 @@
       </content>
     </Tab>
 
+    <Tab text="indefinido">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
+    <Tab text="indefinido">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
+    <Tab text="indefinido">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
+    <Tab text="indefinido">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
+    <Tab text="indefinido">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
   </tabs>
 </TabPane>

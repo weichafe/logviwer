@@ -3,7 +3,6 @@ package com.larrainvial.logviwer.listener.stringtofix;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.DolarViewEvent;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.CalculateLastPrice;
@@ -30,7 +29,7 @@ public class DolarListener implements Listener {
             DolarEvent ev = (DolarEvent) event;
 
             if (ev.lineFromLog.equals("")) return;
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToMarketData stringToMarketData = new StringToMarketData();
             ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
