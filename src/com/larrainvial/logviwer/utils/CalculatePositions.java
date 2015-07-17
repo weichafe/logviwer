@@ -18,7 +18,7 @@ public class CalculatePositions {
             this.calculatePositions();
 
         } catch (Exception e){
-            Helper.exception(e);
+            Dialog.exception(e);
         }
     }
 
@@ -29,7 +29,6 @@ public class CalculatePositions {
         Helper helper = new Helper();
 
         String keyHashPositions = helper.adrToLocal(modelRoutingData.symbol);
-
 
         if (algo.positionsMasterListHash.containsKey(keyHashPositions)) {
             positions = algo.positionsMasterListHash.get(keyHashPositions);
@@ -67,7 +66,6 @@ public class CalculatePositions {
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-
 
             } else {
 

@@ -4,7 +4,6 @@ package com.larrainvial.logviwer.utils;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Controller;
 
 public class CalculateLastPrice {
@@ -21,7 +20,7 @@ public class CalculateLastPrice {
             this.calculateLastPrice();
 
         } catch (Exception e) {
-            Helper.exception(e);
+            Dialog.exception(e);
         }
     }
 
@@ -62,9 +61,9 @@ public class CalculateLastPrice {
                     algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx = modelMarketData.closePx;
                 }
 
-                if (modelMarketData.composite != 0.0) {
+                if (modelMarketData.tradeAmount != 0.0) {
                     algo.lastPriceMasterListHash.get(modelMarketData.symbol).messageByType = modelMarketData.messageByType;
-                    algo.lastPriceMasterListHash.get(modelMarketData.symbol).composite = modelMarketData.composite;
+                    algo.lastPriceMasterListHash.get(modelMarketData.symbol).tradeAmount = modelMarketData.tradeAmount;
                 }
 
             }

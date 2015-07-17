@@ -3,7 +3,7 @@ package com.larrainvial.logviwer.listener.readlog;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.readlog.ReadLogMkdLocalEvent;
 import com.larrainvial.logviwer.event.stringtofix.MarketDataLocalEvent;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
@@ -36,7 +36,7 @@ public class ReadLogMkdLocalListener implements Listener {
 
 
         } catch (Exception e) {
-            Helper.exception(e);
+            Dialog.exception(e);
         }
 
     }

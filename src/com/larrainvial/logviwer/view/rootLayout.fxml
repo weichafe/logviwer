@@ -1,31 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.input.*?>
+<?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<BorderPane center="$null" prefHeight="516.0" prefWidth="945.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+
+<BorderPane prefHeight="400.0" prefWidth="700.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.larrainvial.logviwer.controller.RootLayoutController">
   <stylesheets>
     <URL value="@../style/SimpleTheme.css" />
   </stylesheets>
-  <top>
-    <MenuBar BorderPane.alignment="CENTER">
+  <top><MenuBar BorderPane.alignment="CENTER">
+
       <menus>
+
         <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Delete" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-  </top>
-</BorderPane>
+
+          <items><MenuItem mnemonicParsing="false" onAction="#handleNew" text="New">
+            <accelerator>
+              <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+            </accelerator></MenuItem><MenuItem mnemonicParsing="false" onAction="#handleOpen" text="Open...">
+            <accelerator>
+            <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+          </accelerator></MenuItem>
+          <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save">
+            <accelerator>
+              <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+            </accelerator></MenuItem>
+          <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As..." /><MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+        </items>
+
+      </Menu>
+
+      <Menu mnemonicParsing="false" text="Edit">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#editStrategy" text="Strategy" />
+        </items>
+      </Menu>
+
+      <Menu mnemonicParsing="false" text="Help">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
+        </items>
+      </Menu>
+
+    </menus>
+
+  </MenuBar>
+  </top></BorderPane>

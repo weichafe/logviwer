@@ -4,24 +4,21 @@ import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
-import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
+import java.io.IOException;
 import java.net.InetAddress;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Helper {
 
@@ -29,7 +26,8 @@ public class Helper {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("C:\\WorkspaceGit\\logviwer\\src\\resources\\strategy.xml"));
+
+        Document document = builder.parse(Repository.strategyLocation);
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         int tab = 0;
@@ -45,97 +43,42 @@ public class Helper {
 
     }
 
-    public static synchronized void exception(Exception e) {
+    public static void readStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
 
-        try {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Platform.runLater(new Runnable() {
+        Document document = builder.parse(Repository.strategyLocation);
 
-                public void run() {
+        NodeList nodeList = document.getDocumentElement().getChildNodes();
+        int tab = 0;
 
-                    if(!Repository.exception) return;
+        for (int i = 0; i < nodeList.getLength(); i++) {
 
-                    Alert alertException = new Alert(Alert.AlertType.ERROR);
-                    alertException.setTitle("Exception Dialog");
-                    alertException.setHeaderText("Look, an Exception Dialog");
-                    alertException.setContentText(e.toString());
-
-                    Exception ex = new FileNotFoundException(e.toString());
-
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    ex.printStackTrace(pw);
-                    String exceptionText = sw.toString();
-
-                    Label label = new Label("The exception stacktrace was:");
-
-                    TextArea textArea = new TextArea(exceptionText);
-                    textArea.setEditable(false);
-                    textArea.setWrapText(true);
-
-                    textArea.setMaxWidth(Double.MAX_VALUE);
-                    textArea.setMaxHeight(Double.MAX_VALUE);
-                    GridPane.setVgrow(textArea, Priority.ALWAYS);
-                    GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-                    GridPane expContent = new GridPane();
-                    expContent.setMaxWidth(Double.MAX_VALUE);
-                    expContent.add(label, 0, 0);
-                    expContent.add(textArea, 0, 1);
-
-                    alertException.getDialogPane().setExpandableContent(expContent);
-
-                    Repository.exception = false;
-                    Optional<ButtonType> result = alertException.showAndWait();
-
-                    if (result.get() == ButtonType.OK){
-                        Repository.exception = true;
-                    }
-
-
-                }
-            });
-
-            e.printStackTrace();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-
-        }
-    }
-
-    public static synchronized void  alert(String headerText, String contentText1){
-
-
-
-        Platform.runLater(new Runnable() {
-            public void run() {
-
-                if(!Repository.alertBloolean) return;
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setHeaderText(headerText);
-                alert.setContentText(contentText1);
-
-                Repository.alertBloolean = false;
-                Optional<ButtonType> result = alert.showAndWait();
-
-                if (result.get() == ButtonType.OK){
-                    Repository.alertBloolean = true;
-                }
+            Node node = nodeList.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                new Algo((Element) node, tab);
+                tab++;
             }
-        });
+        }
+
     }
+
+
 
     public synchronized static String adrToLocal(String symbolLocal){
 
+        //XBOG
         if (symbolLocal.equals("AVAL")) return "PFAVAL";
         if (symbolLocal.equals("AVH")) return "PFAVH";
         if (symbolLocal.equals("CIB")) return "PFBCOLOM";
         if (symbolLocal.equals("EC")) return "ECOPETROL";
+
+        //XTSE
         if (symbolLocal.equals("PRE")) return "PREC";
         if (symbolLocal.equals("CNE")) return "CNEC";
+
+        //XSGO
         if (symbolLocal.equals("BCH")) return "CHILE";
         if (symbolLocal.equals("LFL")) return "LAN";
         if (symbolLocal.equals("BSAC")) return "BSANTANDER";
@@ -158,12 +101,17 @@ public class Helper {
 
     public synchronized int positions(String symbolLocal){
 
+        //XBOG
         if (symbolLocal.equals("PFAVAL"))      return 0;
         if (symbolLocal.equals("PFAVH"))       return 2;
         if (symbolLocal.equals("PFBCOLOM"))    return 3;
         if (symbolLocal.equals("ECOPETROL"))   return 1;
+
+        //XTSE
         if (symbolLocal.equals("PREC"))        return 0;
         if (symbolLocal.equals("CNEC"))        return 1;
+
+        //XSGO
         if (symbolLocal.equals("CHILE"))       return 0;
         if (symbolLocal.equals("LAN"))         return 2;
         if (symbolLocal.equals("BSANTANDER"))  return 3;
@@ -182,12 +130,17 @@ public class Helper {
 
     public synchronized Double ratio(String symbolLocal){
 
+        //XBOG
         if (symbolLocal.equals("PFAVAL"))      return 20d;
         if (symbolLocal.equals("PFAVH"))       return 8d;
         if (symbolLocal.equals("PFBCOLOM"))    return 4d;
         if (symbolLocal.equals("ECOPETROL"))   return 20d;
+
+        //XTSE
         if (symbolLocal.equals("PREC"))        return 1d;
         if (symbolLocal.equals("CNEC"))        return 1d;
+
+        //XSGO
         if (symbolLocal.equals("CHILE"))       return 600d;
         if (symbolLocal.equals("LAN"))         return 1d;
         if (symbolLocal.equals("BSANTANDER"))  return 400d;
@@ -206,14 +159,17 @@ public class Helper {
 
     public synchronized static Integer position(String symbolLocal){
 
+        //XBOG
         if (symbolLocal.equals("PFAVAL"))      return 1;
         if (symbolLocal.equals("PFAVH"))       return 2;
         if (symbolLocal.equals("PFBCOLOM"))    return 3;
         if (symbolLocal.equals("ECOPETROL"))   return 4;
 
+        //XTSE
         if (symbolLocal.equals("PREC"))        return 1;
         if (symbolLocal.equals("CNEC"))        return 2;
 
+        //XSGO
         if (symbolLocal.equals("CHILE"))       return 1;
         if (symbolLocal.equals("LAN"))         return 2;
         if (symbolLocal.equals("BSANTANDER"))  return 3;
@@ -232,12 +188,17 @@ public class Helper {
 
     public synchronized boolean local(String symbolLocal){
 
+        //XBOG
         if (symbolLocal.equals("PFAVAL"))      return true;
         if (symbolLocal.equals("PFAVH"))       return true;
         if (symbolLocal.equals("PFBCOLOM"))    return true;
         if (symbolLocal.equals("ECOPETROL"))   return true;
+
+        //XTSE
         if (symbolLocal.equals("PREC"))        return true;
         if (symbolLocal.equals("CNEC"))        return true;
+
+        //XSGO
         if (symbolLocal.equals("CHILE"))       return true;
         if (symbolLocal.equals("LAN"))         return true;
         if (symbolLocal.equals("BSANTANDER"))  return true;
@@ -364,7 +325,7 @@ public class Helper {
             return orderedFixMessage;
 
         } catch (Exception e) {
-            Helper.exception(e);
+            Dialog.exception(e);
         }
 
         return null;

@@ -2,12 +2,10 @@ package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.AlertEvent;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
-import com.larrainvial.logviwer.event.sendtoview.MarketDataLocalViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.MarketDataLocalEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.CalculateLastPrice;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.logviwer.utils.StringToMarketData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
@@ -35,13 +33,12 @@ public class MarketDataLocalListener implements Listener {
             StringToMarketData stringToMarketData = new StringToMarketData();
             ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
-            Controller.dispatchEvent(new MarketDataLocalViewEvent(algo, modelMarketData));
             Controller.dispatchEvent(new AlertEvent(algo, modelMarketData));
 
             new CalculateLastPrice(algo, modelMarketData);
 
         } catch (Exception e){
-            Helper.exception(e);
+            Dialog.exception(e);
         }
 
     }

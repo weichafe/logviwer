@@ -1,18 +1,20 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.controller.algos.*;
+import com.larrainvial.logviwer.controller.algos.LastPriceController;
+import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
 import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.readlog.*;
-import com.larrainvial.logviwer.event.sendtoview.*;
+import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
+import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.*;
 import com.larrainvial.logviwer.listener.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
-import com.larrainvial.logviwer.listener.sendtoview.*;
+import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
+import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
-import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.logviwer.utils.SwitchButton;
 import com.larrainvial.trading.emp.Controller;
 import javafx.beans.value.ChangeListener;
@@ -41,31 +43,9 @@ public class Algo {
     public String routingAdr;
     public double time;
 
-    public FXMLLoader mkdDolarLoader = new FXMLLoader();
-    public FXMLLoader mkdLocalLoader = new FXMLLoader();
-    public FXMLLoader mkdAdrLoader = new FXMLLoader();
-    public FXMLLoader routingAdrLoader = new FXMLLoader();
-    public FXMLLoader routingLocalLoader = new FXMLLoader();
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
     public FXMLLoader lastPriceLoader = new FXMLLoader();
 
-    public ObservableList<ModelMarketData> dolarMasterList = FXCollections.observableArrayList();
-    public ObservableList<ModelMarketData> dolarFilterList = FXCollections.observableArrayList();
-
-    public ObservableList<ModelMarketData> mkdAdrMasterList = FXCollections.observableArrayList();
-    public ObservableList<ModelMarketData> mkdAdrFilterList = FXCollections.observableArrayList();
-
-    public ObservableList<ModelMarketData> mkdLocalMasterList = FXCollections.observableArrayList();
-    public ObservableList<ModelMarketData> mkdLocalFilterList = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> routingAdrMasterList = FXCollections.observableArrayList();
-    public ObservableList<ModelRoutingData> routingAdrFilterList = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> routingLocalMasterList = FXCollections.observableArrayList();
-    public ObservableList<ModelRoutingData> routingLocalFilterList = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> routingBlotterMasterLsit = FXCollections.observableArrayList();
-    public ObservableList<ModelRoutingData> routingBlotterFilterLsit = FXCollections.observableArrayList();
 
     public ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
     public Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
@@ -77,11 +57,6 @@ public class Algo {
     public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
     public int countLastPrice = 0;
 
-    public TableView<ModelMarketData> mkdDolarTableView;
-    public TableView<ModelMarketData> mkdAdrTableView;
-    public TableView<ModelMarketData> mkdLocalTableView;
-    public TableView<ModelRoutingData> routingAdrTableView;
-    public TableView<ModelRoutingData> routingLocalTableView;
     public TableView<ModelPositions> panelPositionsTableView;
     public TableView<ModelMarketData> lastPriceTableView;
 
@@ -111,13 +86,9 @@ public class Algo {
     public ReadLogMkdLocalListener readLogMkdLocalListener;
     public ReadlogRoutingAdrListener readlogRoutingAdrListener;
     public ReadLogRoutingLocalListener readLogRoutingLocalListener;
-    public DolarViewListener dolarViewListener;
+
     public LastPriceListener lastPriceListener;
-    public MarketDataAdrViewListener marketDataAdrViewListener;
-    public MarketDataLocalViewListener marketDataLocalViewListener;
     public PositionViewListener positionViewListener;
-    public RoutingAdrViewListener routingAdrViewListener;
-    public RoutingLocalViewListener routingLocalViewListener;
     public DolarListener dolarListener;
     public MarketDataAdrListener marketDataAdrListener;
     public MarketDataLocalListener marketDataLocalListener;
@@ -131,7 +102,6 @@ public class Algo {
         try {
 
             this.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
-            System.out.println(this.nameAlgo);
             this.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
             this.mkdLocal =  elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
             this.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
@@ -200,20 +170,10 @@ public class Algo {
             switchBtn6.setLayoutX(825);
             switchBtn6.setLayoutY(35);
 
-            mkdDolarLoader.setLocation(MainLogViwer.class.getResource("view/algos/MarketDataDolarView.fxml"));
-            mkdAdrLoader.setLocation(MainLogViwer.class.getResource("view/algos/MarketDataAdrView.fxml"));
-            mkdLocalLoader.setLocation(MainLogViwer.class.getResource("view/algos/MarketDataLocalView.fxml"));
-            routingAdrLoader.setLocation(MainLogViwer.class.getResource("view/algos/RoutingAdrView.fxml"));
-            routingLocalLoader.setLocation(MainLogViwer.class.getResource("view/algos/RoutingLocalView.fxml"));
             panelPositionsLoader.setLocation(MainLogViwer.class.getResource("view/algos/PanelPositionsView.fxml"));
             lastPriceLoader.setLocation(MainLogViwer.class.getResource("view/algos/LastPriceView.fxml"));
 
             AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) mkdDolarLoader.load());
-            anchorPane.getChildren().add((AnchorPane) mkdAdrLoader.load());
-            anchorPane.getChildren().add((AnchorPane) mkdLocalLoader.load());
-            anchorPane.getChildren().add((AnchorPane) routingAdrLoader.load());
-            anchorPane.getChildren().add((AnchorPane) routingLocalLoader.load());
             anchorPane.getChildren().add((AnchorPane) panelPositionsLoader.load());
             anchorPane.getChildren().add((AnchorPane) lastPriceLoader.load());
             anchorPane.getChildren().add(opacityLevel);
@@ -232,26 +192,6 @@ public class Algo {
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab+2).setContent(scrollBar);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab+2).setText(this.nameAlgo);
-
-            MarketDataDolarController mkdDolarLoader = this.mkdDolarLoader.getController();
-            mkdDolarTableView = (mkdDolarLoader.getType());
-            dolarMasterList = (mkdDolarLoader.masterData);
-
-            MarketDataAdrController mkdAdrLoader = this.mkdAdrLoader.getController();
-            mkdAdrTableView = mkdAdrLoader.getType();
-            mkdAdrMasterList = mkdAdrLoader.masterData;
-
-            MarketDataLocalController mkdLocalLoader = this.mkdLocalLoader.getController();
-            mkdLocalTableView = mkdLocalLoader.getType();
-            mkdLocalMasterList = mkdLocalLoader.masterData;
-
-            RoutingAdrController routingAdrLoader = this.routingAdrLoader.getController();
-            routingAdrTableView = routingAdrLoader.getType();
-            routingAdrMasterList = routingAdrLoader.masterData;
-
-            RoutingLocalController routingLocalLoader = this.routingLocalLoader.getController();
-            routingLocalTableView = routingLocalLoader.getType();
-            routingLocalMasterList = routingLocalLoader.masterData;
 
             PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();
             panelPositionsTableView = panelLocalLoader.getType();
@@ -273,12 +213,7 @@ public class Algo {
             alertListener = new AlertListener(this);
 
             lastPriceListener = new LastPriceListener(this);
-            dolarViewListener = new DolarViewListener(this);
-            marketDataAdrViewListener = new MarketDataAdrViewListener(this);
-            marketDataLocalViewListener = new MarketDataLocalViewListener(this);
             positionViewListener = new PositionViewListener(this);
-            routingAdrViewListener = new RoutingAdrViewListener(this);
-            routingLocalViewListener = new RoutingLocalViewListener(this);
 
             Controller.addEventListener(AlertEvent.class, alertListener);
             Controller.addEventListener(ReadFromDolarEvent.class, readFromDolarListener);
@@ -295,18 +230,13 @@ public class Algo {
             Controller.addEventListener(RoutingAdrEvent.class, routingAdrListener);
             Controller.addEventListener(RoutingLocalEvent.class, routingLocalListener);
 
-            Controller.addEventListener(DolarViewEvent.class, dolarViewListener);
-            Controller.addEventListener(MarketDataAdrViewEvent.class, marketDataAdrViewListener);
-            Controller.addEventListener(MarketDataLocalViewEvent.class, marketDataLocalViewListener);
             Controller.addEventListener(PositionViewEvent.class, positionViewListener);
-            Controller.addEventListener(RoutingAdrViewEvent.class, routingAdrViewListener);
-            Controller.addEventListener(RoutingLocalViewEvent.class, routingLocalViewListener);
 
             Repository.strategy.put(this.nameAlgo, this);
             start(booleanDolar, booleanMLocal, booleanMAdr, booleanRLocal, booleanRAdr);
 
         } catch (Exception e){
-            Helper.exception(e);
+            Dialog.exception(e);
         }
     }
 
@@ -334,7 +264,7 @@ public class Algo {
                     try {
                         start(dolar, mLocal, mAdr, rLocal, rAdr);
                     } catch (Exception e) {
-                        Helper.exception(e);
+                        Dialog.exception(e);
                     }
                 }
 

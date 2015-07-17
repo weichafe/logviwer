@@ -4,11 +4,10 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.sendtoview.RoutingAdrViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.CalculatePositions;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.logviwer.utils.StringToRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
@@ -36,9 +35,7 @@ public class RoutingAdrListener implements Listener {
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
-            Controller.dispatchEvent(new RoutingAdrViewEvent(algo, modelRoutingData));
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-
             Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData));
 
             if (modelRoutingData.execType.equals("Trade")) {
@@ -46,7 +43,7 @@ public class RoutingAdrListener implements Listener {
             }
 
         } catch (Exception e){
-            Helper.exception(e);
+            Dialog.exception(e);
         }
 
     }

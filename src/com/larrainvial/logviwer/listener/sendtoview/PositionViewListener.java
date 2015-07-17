@@ -2,18 +2,12 @@ package com.larrainvial.logviwer.listener.sendtoview;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import javafx.beans.property.Property;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
 
-import java.util.*;
+import java.util.Map;
 
 public class PositionViewListener implements Listener {
 
@@ -59,7 +53,7 @@ public class PositionViewListener implements Listener {
             }
 
         } catch (Exception e) {
-            Helper.exception(e);
+            Dialog.exception(e);
         }
   }
 

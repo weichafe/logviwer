@@ -21,5 +21,6 @@ public class  Repository {
     public static boolean exception = true;
     public static boolean alertBloolean = true;
     public static String year = new SimpleDateFormat("yyyy/MM/dd").format(new Date()).replace("/", "");
+    public static String strategyLocation = "C:/workspaceGit/logviwer/src/resources/strategy.xml";
 
 }

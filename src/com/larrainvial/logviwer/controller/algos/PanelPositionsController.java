@@ -51,20 +51,20 @@ public class PanelPositionsController {
     @FXML
     private void initialize() throws Exception {
 
-        symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolLocal()));
-        symbolAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbolAdr()));
+        symbolLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().symbolLocal));
+        symbolAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().symbolAdr));
 
-        qtyBuyLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQtyBuyLocal().toString()));
-        qtyBuyAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQtyBuyAdr().toString()));
+        qtyBuyLocal.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().qtyBuyLocal.toString()));
+        qtyBuyAdr.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().qtyBuyAdr.toString()));
 
-        qtySellLocal.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtySellLocal().toString()));
-        qtySellAdr.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtySellAdr().toString()));
-        qtySellLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtySellLocalRatio().toString()));
-        qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getQtyBuyLocalRatio().toString()));
+        qtySellLocal.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtySellLocal.toString()));
+        qtySellAdr.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtySellAdr.toString()));
+        qtySellLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtySellLocalRatio.toString()));
+        qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtyBuyLocalRatio.toString()));
 
-        ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getRatio().toString()));
+        ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().ratio.toString()));
 
-        qtyBuyLocalRatio.setCellFactory(column -> {
+        qtyBuyLocal.setCellFactory(column -> {
             return new TableCell<ModelPositions, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -74,31 +74,8 @@ public class PanelPositionsController {
 
                         if (item == null || empty) {
                             setText("");
-                        }else {
-                            setTextFill(Color.GREENYELLOW);
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-        });
-
-        qtySellLocalRatio.setCellFactory(column -> {
-            return new TableCell<ModelPositions, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-                        }else {
-                            setTextFill(Color.RED);
+                        } else {
+                            setTextFill(Color.GREEN);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -120,8 +97,8 @@ public class PanelPositionsController {
 
                         if (item == null || empty) {
                             setText("");
-                        }else {
-                            setTextFill(Color.GREENYELLOW);
+                        } else {
+                            setTextFill(Color.RED);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -133,28 +110,7 @@ public class PanelPositionsController {
             };
         });
 
-        qtyBuyLocal.setCellFactory(column -> {
-            return new TableCell<ModelPositions, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
 
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-                        }else {
-                            setTextFill(Color.GREENYELLOW);
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            };
-        });
 
         qtyBuyAdr.setCellFactory(column -> {
             return new TableCell<ModelPositions, String>() {
@@ -167,7 +123,7 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
-                            setTextFill(Color.RED);
+                            setTextFill(Color.GREEN);
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
@@ -190,6 +146,52 @@ public class PanelPositionsController {
                         if (item == null || empty) {
                             setText("");
                         }else {
+                            setTextFill(Color.RED);
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtyBuyLocalRatio.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        }else {
+                            setTextFill(Color.GREEN);
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        qtySellLocalRatio.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        } else {
                             setTextFill(Color.RED);
                             setText(numFormat.format(Double.valueOf(item)));
                         }

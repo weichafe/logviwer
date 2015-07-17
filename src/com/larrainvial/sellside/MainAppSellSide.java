@@ -8,14 +8,13 @@ import java.util.Date;
 
 public class MainAppSellSide {
 
-    public static void sellside() {
+    public void sellside() {
 
         try {
 
-            Repository.buySide  = new PropertiesFile("src/resources/SellSide.properties");
+            Repository.buySide  = new PropertiesFile("C:/workspaceGit/logviwer/src/resources/SellSide.properties");
 
             Repository.qFixFile = Repository.buySide.getPropertiesString("qFixFile");
-
             Repository.XPUS_NAME = Repository.buySide.getPropertiesString("XPUS.NAME");
             Repository.XPUS_UUID = Repository.buySide.getPropertiesString("XPUS.UUID");
 
@@ -26,8 +25,7 @@ public class MainAppSellSide {
                 Repository.UUID.put(XPUS_NAME[i], XPUS_UUID[i]);
             }
 
-            SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
-            Repository.date = formato.format(new Date());
+            Repository.date =  new SimpleDateFormat("yyyyMMdd").format(new Date());
 
             StartFixApp();
             Control.initialize();

@@ -4,7 +4,7 @@
 
     <strategy>
 
-        <nameAlgo>ADRArbitrage XSGO</nameAlgo>
+        <nameAlgo>ADR Arbitrage XSGO</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
         <mkdLocal>MKD_XSGO</mkdLocal>
         <mkdAdr>MKD_NYSE</mkdAdr>
@@ -30,7 +30,7 @@
 
     <strategy>
 
-        <nameAlgo>ADRArbitrage XTSE</nameAlgo>
+        <nameAlgo>ADR Arbitrage XTSE</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
         <mkdLocal>MKD_XSGO</mkdLocal>
         <mkdAdr>MKD_NYSE</mkdAdr>
@@ -56,7 +56,7 @@
 
     <strategy>
 
-        <nameAlgo>ADRArbitrage XBOG</nameAlgo>
+        <nameAlgo>ADR Arbitrage XBOG</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
         <mkdLocal>MKD_XSGO</mkdLocal>
         <mkdAdr>MKD_NYSE</mkdAdr>
@@ -158,8 +158,6 @@
 
     </strategy>
 
-
-
     <strategy>
 
         <nameAlgo>Market Maker BCS</nameAlgo>
@@ -184,7 +182,6 @@
         <booleanRAdr>false</booleanRAdr>
 
     </strategy>
-
 
     <strategy>
 
@@ -211,7 +208,6 @@
 
     </strategy>
 
-
     <strategy>
 
         <nameAlgo>HCOLSEL</nameAlgo>
@@ -236,7 +232,5 @@
         <booleanRAdr>false</booleanRAdr>
 
     </strategy>
-
-
 
 </strategys>

@@ -13,7 +13,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         //SellSide
-        MainAppSellSide.sellside();
+        new MainAppSellSide().sellside();
 
         //LogViwer
         new MainLogViwer().start(primaryStage);

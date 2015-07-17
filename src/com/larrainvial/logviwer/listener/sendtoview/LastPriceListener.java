@@ -4,8 +4,7 @@ package com.larrainvial.logviwer.listener.sendtoview;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.model.ModelPositions;
-import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 
@@ -50,30 +49,10 @@ public class LastPriceListener implements Listener {
 
                 }
 
-
-                /*
-                for (Map.Entry<String, ModelMarketData> e : algo.lastPriceMasterListHash.entrySet()) {
-
-                    try {
-
-                        if (algo.lastPriceMasterListHash.containsKey(e.getKey())) {
-
-                            algo.lastPriceMasterList.remove(algo.lastPriceMasterListHash.get(e.getKey()));
-                            algo.lastPriceMasterList.add(algo.lastPriceMasterListHash.get(e.getKey()));
-                            algo.lastPriceTableView.setItems(algo.lastPriceMasterList);
-
-                        }
-
-                    } catch (Exception ex) {
-                        Helper.exception(ex);
-                    }
-                }
-
-                */
             }
 
         } catch (Exception e) {
-            Helper.exception(e);
+            Dialog.exception(e);
         }
 
 

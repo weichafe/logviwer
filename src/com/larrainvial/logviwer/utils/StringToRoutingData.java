@@ -48,7 +48,7 @@ public class StringToRoutingData {
             modelRoutingData.text = messageMap.containsKey(FixConstants.Text) ? messageMap.get(FixConstants.Text).toString() : "";
 
         }catch (Exception e){
-            Helper.exception(e);
+            Dialog.exception(e);
             e.printStackTrace();
         }
 

@@ -11,17 +11,16 @@ public class StrategyVO {
     public String routingAdr;
     public double time;
 
-    public StrategyVO(String nameAlgo, String mkdDolar, String mkdLocal, String mkdAdr, String routingLocal, String routingAdr, double time){
+    public String generalLocation;
+    public String mkdDolarLocaion;
+    public String mkdAdrLocaion;
+    public String mkdLocalLocaion;
+    public String routingLocalLocaion;
+    public String routingAdrLocaion;
 
-        this.nameAlgo = nameAlgo;
-        this.mkdDolar = mkdDolar;
-        this.mkdLocal = mkdLocal;
-        this.mkdAdr = mkdAdr;
-        this.routingLocal = routingLocal;
-        this.routingAdr = routingAdr;
-        this.time = time;
-
-    }
-
-
+    public boolean booleanDolar;
+    public boolean booleanMLocal;
+    public boolean booleanMAdr;
+    public boolean booleanRLocal;
+    public boolean booleanRAdr;
 }

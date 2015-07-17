@@ -50,6 +50,9 @@ public class LastPriceController {
     @FXML
     private TableColumn<ModelMarketData, String> closePx;
 
+    @FXML
+    private TableColumn<ModelMarketData, String> tradeAmount;
+
     private String items;
 
     private boolean filter = false;
@@ -80,15 +83,16 @@ public class LastPriceController {
     @FXML
     private synchronized void initialize() throws Exception {
 
-        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
-        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
-        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
-        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
-        buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyQty().toString()));
-        buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getBuyPx().toString()));
-        sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellQty().toString()));
-        sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getSellPx().toString()));
-        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClosePx().toString()));
+        messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().messageByType));
+        symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().symbol));
+        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().hour));
+        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().year));
+        buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().buyQty.toString()));
+        buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().buyPx.toString()));
+        sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().sellQty.toString()));
+        sellPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().sellPx.toString()));
+        closePx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().closePx.toString()));
+        tradeAmount.setCellValueFactory(cellData2 -> new SimpleStringProperty(String.valueOf(cellData2.getValue().tradeAmount)));
 
 
         messageByType.setCellFactory(column -> {
@@ -118,7 +122,6 @@ public class LastPriceController {
 
                             } else if (item.equals("5")) {
                                 setTextFill(Color.RED);
-                                //setStyle();
                                 setText(item);
 
                             } else if (item.equals("1")) {
@@ -211,13 +214,13 @@ public class LastPriceController {
 
 
         if(filterField.getId().equals("filterField")){
-            if (dolar.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            if (dolar.symbol.toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
                 return true;
             }
         }
 
         if(filterField.getId().equals("filterType")){
-            if (dolar.getMessageByType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            if (dolar.messageByType.toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
                 return true;
             }
         }
@@ -227,7 +230,6 @@ public class LastPriceController {
 
 
     private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
-
         lastPrice.setItems(filterData);
     }
 

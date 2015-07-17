@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="270.0" prefWidth="413.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.StrategyEditDialogController">
+   <children>
+      <GridPane layoutX="30.0" layoutY="28.0">
+          <columnConstraints>
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="111.0" />
+              <ColumnConstraints hgrow="SOMETIMES" maxWidth="316.0" minWidth="10.0" prefWidth="261.0" />
+          </columnConstraints>
+          <rowConstraints>
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+         <children>
+
+            <TextField fx:id="nameAlgo" text="nameAlgo" />
+            <TextField fx:id="mkdDolar" text="mkdDolar" />
+            <TextField fx:id="mkdLocal" text="mkdLocal" />
+            <TextField fx:id="mkdAdr" text="mkdAdr"/>
+            <TextField fx:id="routingLocal" text="routingLocal"/>
+            <TextField fx:id="routingAdr" text="routingAdr"/>
+
+             <TextField fx:id="location" text="location"/>
+             <TextField fx:id="mkd_dolar" text="mkd_dolar"/>
+             <TextField fx:id="mkd_nyse" text="mkd_nyse"/>
+             <TextField fx:id="mkd_local" text="mkd_locale"/>
+             <TextField fx:id="routing_local" text="routing_local"/>
+             <TextField fx:id="routing_nyse" text="routing_nyse" />
+
+             <TextField fx:id="booleanDolar" text="booleanDolar"/>
+             <TextField fx:id="booleanMLocal" text="booleanMLocal"/>
+             <TextField fx:id="booleanMAdr" text="booleanMAdr"/>
+             <TextField fx:id="booleanRLocal" text="booleanRLocal"/>
+             <TextField fx:id="booleanRAdr" text="booleanRAdr"/>
+
+         </children>
+      </GridPane>
+
+   </children>
+</AnchorPane>

@@ -47,7 +47,7 @@ public class StringToMarketData {
                     if(map.containsKey(FixConstants.MDEntrySize)){
                         if (map.get(FixConstants.MDEntrySize).toString() != null) {
                             modelMarketData.buyQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
-                        }
+                    }
                     }
 
                     if (map.get(FixConstants.MDEntryPx).toString() != null) {
@@ -78,8 +78,17 @@ public class StringToMarketData {
                 }
 
                 if (map.get(FixConstants.MDEntryType).equals("D")) {
-                    if (map.get(FixConstants.MDEntrySize).toString() != null) {
-                        modelMarketData.composite = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+
+                    if(map.containsKey(FixConstants.MDEntryPx)){
+                        if (map.get(FixConstants.MDEntryPx).toString() != null) {
+                            modelMarketData.tradeAmount = Double.valueOf(map.get(FixConstants.MDEntryPx).toString());
+                        }
+                    }
+
+                    if(map.containsKey(FixConstants.MDEntrySize)){
+                        if (map.get(FixConstants.MDEntrySize).toString() != null) {
+                            modelMarketData.tradeAmount = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
+                        }
                     }
 
                 }

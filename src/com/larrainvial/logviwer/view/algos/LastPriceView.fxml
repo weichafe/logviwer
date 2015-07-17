@@ -33,7 +33,9 @@
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Px" fx:id="sellPx" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Qty" fx:id="sellQty" />
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Close Px" fx:id="closePx" />
+        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Close Px" fx:id="tradeAmount" />
       </columns>
+
     </TableView>
   </children>
 </AnchorPane>
