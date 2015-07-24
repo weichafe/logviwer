@@ -3,7 +3,6 @@ package com.larrainvial.logviwer.utils;
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.Repository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,33 +22,44 @@ import java.util.Map;
 
 public class Helper {
 
-    public static void createStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
+    private String strategyPath;
 
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+    public void createStrategy() {
 
-        Document document = builder.parse(Repository.strategyLocation);
+        try {
 
-        NodeList nodeList = document.getDocumentElement().getChildNodes();
-        int tab = 0;
+            URL strategyPath = ClassLoader.getSystemResource("resources/strategy.xml");
 
-        for (int i = 0; i < nodeList.getLength(); i++) {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Node node = nodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                new Algo((Element) node, tab);
-                tab++;
+            Document document = builder.parse(strategyPath.openStream());
+
+            NodeList nodeList = document.getDocumentElement().getChildNodes();
+            int tab = 0;
+
+            for (int i = 0; i < nodeList.getLength(); i++) {
+
+                Node node = nodeList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    new Algo((Element) node, tab);
+                    tab++;
+                }
             }
+
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println("se cayo en el help");
         }
 
     }
 
-    public static void readStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
+    public void readStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(Repository.strategyLocation);
+        Document document = builder.parse(strategyPath);
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         int tab = 0;

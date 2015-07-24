@@ -40,7 +40,7 @@ public class Dialog {
 
 
 
-    public static synchronized void exception(final Exception e) {
+    public static synchronized void exception(Exception e) {
 
         try {
 
@@ -99,7 +99,7 @@ public class Dialog {
         }
     }
 
-    public static synchronized void alert(final String headerText, final String contentText1){
+    public static synchronized void alert(String headerText, String contentText1){
 
         Platform.runLater(new Runnable() {
             public void run() {

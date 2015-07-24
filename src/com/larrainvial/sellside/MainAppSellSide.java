@@ -3,6 +3,7 @@ package com.larrainvial.sellside;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.utils.PropertiesFile;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,9 +13,11 @@ public class MainAppSellSide {
 
         try {
 
-            Repository.buySide  = new PropertiesFile("C:/workspaceGit/logviwer/src/resources/SellSide.properties");
+            URL url = ClassLoader.getSystemResource("resources/SellSide.properties");
+            URL urlIni = ClassLoader.getSystemResource("resources/sessionFile.ini");
 
-            Repository.qFixFile = Repository.buySide.getPropertiesString("qFixFile");
+            Repository.buySide  = new PropertiesFile(url);
+
             Repository.XPUS_NAME = Repository.buySide.getPropertiesString("XPUS.NAME");
             Repository.XPUS_UUID = Repository.buySide.getPropertiesString("XPUS.UUID");
 
@@ -27,18 +30,15 @@ public class MainAppSellSide {
 
             Repository.date =  new SimpleDateFormat("yyyyMMdd").format(new Date());
 
-            StartFixApp();
+            new QuickFixAdapter(urlIni);
             Control.initialize();
 
 
         } catch (Exception e) {
             e.printStackTrace();
-
         }
     }
 
-    private static void StartFixApp() throws Exception {
-        Repository.quickFixAdapter = new QuickFixAdapter(Repository.qFixFile);
-    }
+
 
 }

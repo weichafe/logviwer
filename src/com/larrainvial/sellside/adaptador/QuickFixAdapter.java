@@ -10,16 +10,17 @@ import quickfix.Message;
 import quickfix.fix44.*;
 import quickfix.fix44.MessageCracker;
 
+import java.net.URL;
+
 public final class QuickFixAdapter extends MessageCracker implements Application {
 
     public SocketAcceptor socketAcceptor;
 
-    public QuickFixAdapter(String quickFixIniFile) {
+    public QuickFixAdapter(URL quickFixIniFile) {
 
         try {
 
-
-            SessionSettings sessionSettings = new SessionSettings(quickFixIniFile);
+            SessionSettings sessionSettings = new SessionSettings(quickFixIniFile.openStream());
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
             FileLogFactory fileLogFactory = new FileLogFactory(sessionSettings);
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();

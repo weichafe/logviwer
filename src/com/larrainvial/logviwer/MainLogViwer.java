@@ -54,11 +54,13 @@ public class MainLogViwer extends Application {
                 }
             });
 
-            Helper.createStrategy();
+            Helper helper = new Helper();
+            helper.createStrategy();
 
         } catch (Exception e){
+            e.printStackTrace();
             Dialog.exception(e);
-            System.exit(0);
+            //System.exit(0);
         }
 
     }
