@@ -606,6 +606,7 @@
 			<field name="ClOrdLinkID" required="N"/>
 			<field name="ListID" required="N"/>
 			<field name="OrigOrdModTime" required="N"/>
+			<field name="Currency" required="N"/>
 			<field name="Account" required="N"/>
 			<field name="AcctIDSource" required="N"/>
 			<field name="AccountType" required="N"/>

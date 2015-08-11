@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class Helper {
 
-    private String strategyPath;
+    private URL strategyPath;
 
     public void createStrategy() {
 
@@ -49,7 +49,6 @@ public class Helper {
 
         } catch (Exception e){
             e.printStackTrace();
-            System.out.println("se cayo en el help");
         }
 
     }
@@ -59,7 +58,7 @@ public class Helper {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(strategyPath);
+        Document document = builder.parse("");
 
         NodeList nodeList = document.getDocumentElement().getChildNodes();
         int tab = 0;
@@ -74,7 +73,6 @@ public class Helper {
         }
 
     }
-
 
 
     public synchronized static String adrToLocal(String symbolLocal){

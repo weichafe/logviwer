@@ -15,7 +15,7 @@ import com.larrainvial.trading.emp.Listener;
 public class RoutingLocalListener implements Listener {
 
     public Algo algo;
-
+    public final String TYPE_MARKET = "ROUTING LOCAL";
     public RoutingLocalListener(Algo algo) {
         this.algo = algo;
     }
@@ -35,7 +35,7 @@ public class RoutingLocalListener implements Listener {
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData));
+            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
 
             if (modelRoutingData.execType.equals("Trade")) {
                  new CalculatePositions(algo, modelRoutingData);

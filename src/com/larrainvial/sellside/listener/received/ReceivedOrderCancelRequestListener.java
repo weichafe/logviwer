@@ -25,11 +25,14 @@ public class ReceivedOrderCancelRequestListener implements Listener {
     private LastPx lastPx;
     private LastQty lastQty;
     private OrdStatus ordStatus;
+    private LeavesQty leavesQty;
 
     public ReceivedOrderCancelRequestListener(){
         execType =  new ExecType(ExecType.CANCELED);
         lastPx = new LastPx(0d);
         lastQty = new LastQty(0d);
+        leavesQty = new LeavesQty(0d);
+        ordStatus = new OrdStatus(OrdStatus.CANCELED);
         validator = new Validation();
     }
 
@@ -50,7 +53,6 @@ public class ReceivedOrderCancelRequestListener implements Listener {
                 this.setValuesWorkOrders(orders.workOrders);
 
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
-
                 Repository.executionWorkOrderBuy.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
             } else {
@@ -62,7 +64,6 @@ public class ReceivedOrderCancelRequestListener implements Listener {
 
                 Repository.executionWorkOrderSell.put(orderCancelRequest.getClOrdID().getValue(), orders);
                 Repository.executionWorkOrderSell.put(orders.workOrders.getOrderID().getValue(), orders);
-
                 Repository.executionWorkOrderSell.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
             }
@@ -77,11 +78,12 @@ public class ReceivedOrderCancelRequestListener implements Listener {
 
         workOrders.set(lastPx);
         workOrders.set(lastQty);
+        workOrders.set(leavesQty);
         workOrders.set(orderCancelRequest.getClOrdID());
         workOrders.set(orderCancelRequest.getOrigClOrdID());
+        workOrders.set(ordStatus);
         workOrders.set(new ExecID(IDGenerator.getID()));
         workOrders.set(new TransactTime(new Date()));
-        workOrders.set(new OrdStatus(OrdStatus.CANCELED));
 
     }
 }

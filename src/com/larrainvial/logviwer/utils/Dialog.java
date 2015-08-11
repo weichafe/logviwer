@@ -38,8 +38,6 @@ public class Dialog {
         }
     }
 
-
-
     public static synchronized void exception(Exception e) {
 
         try {

@@ -7,7 +7,7 @@
 <AnchorPane layoutX="7.0" layoutY="94" prefHeight="174.0" prefWidth="960" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.LastPriceController">
   <children>
 
-    <TableView fx:id="lastPrice" layoutX="16" layoutY="14" prefHeight="300" prefWidth="772">
+    <TableView fx:id="lastPrice" layoutX="16" layoutY="14" prefHeight="350" prefWidth="772">
 
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="Last Price" fx:id="anio" />

@@ -53,6 +53,7 @@ public class LastPriceListener implements Listener {
 
         } catch (Exception e) {
             Dialog.exception(e);
+            e.printStackTrace();
         }
 
 

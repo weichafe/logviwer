@@ -26,6 +26,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
             this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;
+            Repository.socketAcceptor.start();
 
         } catch (Exception e) {
             e.printStackTrace(System.out);

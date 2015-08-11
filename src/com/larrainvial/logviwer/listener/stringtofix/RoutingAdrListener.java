@@ -16,7 +16,7 @@ import com.larrainvial.trading.emp.Listener;
 public class RoutingAdrListener implements Listener {
 
     public Algo algo;
-
+    public final String TYPE_MARKET = "ROUTING ADR";
     public RoutingAdrListener(Algo algo) {
         this.algo = algo;
     }
@@ -36,7 +36,7 @@ public class RoutingAdrListener implements Listener {
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData));
+            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
 
             if (modelRoutingData.execType.equals("Trade")) {
                  new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);

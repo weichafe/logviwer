@@ -11,20 +11,23 @@ public class AlertEvent extends Event {
     public ModelMarketData modelMarketData;
     public ModelRoutingData modelRoutingData;
     public String execType;
+    public String typeMarket;
     public Algo algo;
 
-    public AlertEvent(Object source, ModelMarketData modelMarketData) {
+    public AlertEvent(Object source, ModelMarketData modelMarketData, String typeMarket) {
         super(source);
         this.algo = (Algo) source;
         this.modelMarketData = modelMarketData;
         this.execType = modelMarketData.messageByType;
+        this.typeMarket = typeMarket;
     }
 
-    public AlertEvent(Object source, ModelRoutingData modelRoutingData) {
+    public AlertEvent(Object source, ModelRoutingData modelRoutingData, String typeMarket) {
         super(source);
         this.algo = (Algo) source;
         this.modelRoutingData = modelRoutingData;
         this.execType = modelRoutingData.execType;
+        this.typeMarket = typeMarket;
 
     }
 

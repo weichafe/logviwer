@@ -4,7 +4,7 @@
 
     <strategy>
 
-        <nameAlgo>ADR Arbitrage XSGO</nameAlgo>
+        <nameAlgo>ADR Arbitrage XSGO IB</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
         <mkdLocal>MKD_XSGO</mkdLocal>
         <mkdAdr>MKD_NYSE</mkdAdr>
@@ -146,7 +146,7 @@
         <location>W:\\MarketMakerBEC\\connection\\log\</location>
         <mkd_dolar>FIX.4.4-ALGOARBADR2-MDFHBLP.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv7_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
-        <mkd_local>FIX.4.4-MARKET_MAKER_BEC-LVFHALGO.messages_</mkd_local>
+        <mkd_local>FIX.4.4-BTLARRADATA3-BCSGATEWAY.messages_</mkd_local>
         <routing_local>FIX.4.4-lvarbadr-to_omg_tb.messages_</routing_local>
         <routing_nyse>FIX.4.4-BS_ADR_001-SS_ADR_001.messages_</routing_nyse>
 

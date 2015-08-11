@@ -12,8 +12,6 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Thread.sleep(5000);
-
         //SellSide
         new MainAppSellSide().sellside();
 

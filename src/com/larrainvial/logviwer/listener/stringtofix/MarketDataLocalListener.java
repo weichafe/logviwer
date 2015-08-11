@@ -14,7 +14,7 @@ import com.larrainvial.trading.emp.Listener;
 public class MarketDataLocalListener implements Listener {
 
     public Algo algo;
-
+    public final String TYPE_MARKET = "MKD LOCAL";
     public MarketDataLocalListener(Algo algo) {
         this.algo = algo;
     }
@@ -33,7 +33,7 @@ public class MarketDataLocalListener implements Listener {
             StringToMarketData stringToMarketData = new StringToMarketData();
             ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
-            Controller.dispatchEvent(new AlertEvent(algo, modelMarketData));
+            Controller.dispatchEvent(new AlertEvent(algo, modelMarketData, TYPE_MARKET));
 
             new CalculateLastPrice(algo, modelMarketData);
 
