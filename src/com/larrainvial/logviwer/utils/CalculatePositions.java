@@ -44,7 +44,7 @@ public class CalculatePositions {
 
         if (modelRoutingData.side.equals("Buy")) {
 
-            if (helper.local(modelRoutingData.symbol)) {
+            if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
 
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
@@ -61,7 +61,7 @@ public class CalculatePositions {
 
         if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
 
-            if (helper.local(modelRoutingData.symbol)) {
+            if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
 
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;

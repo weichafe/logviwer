@@ -22,9 +22,9 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
             SessionSettings sessionSettings = new SessionSettings(quickFixIniFile.openStream());
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
-            FileLogFactory fileLogFactory = new FileLogFactory(sessionSettings);
+            //com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
-            this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
+            this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;
             Repository.socketAcceptor.start();
 
@@ -73,32 +73,22 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
     public void onMessage(ExecutionReport executionReport, SessionID sessionID) {
 
-       //Controller.dispatchEvent(new ReceivedExecutionReportFromSellSideEvent(this, executionReport));
-
     }
 
     public void onMessage(OrderCancelReject orderCancelReject, SessionID sessionID) {
 
-        //Controller.dispatchEvent(new ReceivedOrderCancelRejectBlotterEvent(this, orderCancelReject));
-
     }
 
     public void onMessage(NewOrderSingle newOrderSingle, SessionID sessionID) throws FieldNotFound {
-
         Controller.dispatchEvent(new ReceivedNewOrderSingleEvent(this, newOrderSingle));
-
     }
 
     public void onMessage(OrderCancelReplaceRequest orderCancelReplaceRequest, SessionID sessionID) throws FieldNotFound {
-
         Controller.dispatchEvent(new ReceivedOrderCancelReplaceRequestEvent(this, orderCancelReplaceRequest));
-
     }
 
     public void onMessage(OrderCancelRequest orderCancelRequest, SessionID sessionID) throws FieldNotFound {
-
         Controller.dispatchEvent(new ReceivedOrderCancelRequestEvent(this, orderCancelRequest));
-
     }
 
     public static void strop() throws ConfigError {
@@ -106,7 +96,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
     }
 
     public static void start() throws ConfigError {
-        Repository.socketAcceptor.stop();
+        Repository.socketAcceptor.start();
     }
 
 

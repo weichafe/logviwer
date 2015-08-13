@@ -1,5 +1,6 @@
 package com.larrainvial.sellside;
 
+import com.larrainvial.logviwer.Algo;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.utils.PropertiesFile;
 
@@ -7,7 +8,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MainAppSellSide {
+public class MainSellSide {
 
     public void sellside() {
 
@@ -28,10 +29,12 @@ public class MainAppSellSide {
                 Repository.UUID.put(XPUS_NAME[i], XPUS_UUID[i]);
             }
 
-            Repository.date =  new SimpleDateFormat("yyyyMMdd").format(new Date());
+            Repository.date = new SimpleDateFormat("yyyyMMdd").format(new Date());
 
             new QuickFixAdapter(urlIni);
             Control.initialize();
+
+            Algo algo = new Algo(1);
 
 
         } catch (Exception e) {

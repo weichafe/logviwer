@@ -1,6 +1,5 @@
 package com.larrainvial.logviwer.controller.algos;
 
-
 import com.larrainvial.logviwer.model.ModelMarketData;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -53,8 +52,6 @@ public class LastPriceController {
     @FXML
     private TableColumn<ModelMarketData, String> tradeAmount;
 
-    private String items;
-
     private boolean filter = false;
 
     private ObservableList<ModelMarketData> auxFilterData;
@@ -68,8 +65,6 @@ public class LastPriceController {
     public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
 
     public LastPriceController(){
-
-        items = "";
 
         masterData.addListener(new ListChangeListener<ModelMarketData>() {
             @Override
@@ -108,8 +103,6 @@ public class LastPriceController {
                             setText("");
 
                         } else {
-
-                            items = item;
 
                             if (item.equals("V")) {
                                 setText(item);

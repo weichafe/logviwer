@@ -208,7 +208,7 @@
 
     </strategy>
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>HCOLSEL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -232,5 +232,34 @@
         <booleanRAdr>false</booleanRAdr>
 
     </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>Sell Side</nameAlgo>
+        <mkdDolar>""</mkdDolar>
+        <mkdLocal>""</mkdLocal>
+        <mkdAdr>""</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>W:\\MMHCOLSEL\\log\\</location>
+        <mkd_dolar>""</mkd_dolar>
+        <mkd_nyse>""</mkd_nyse>
+        <mkd_local>""</mkd_local>
+        <routing_local>FIX.4.4-LVSSG_ARB-LVARB.messages.log</routing_local>
+        <routing_nyse>""</routing_nyse>
+
+        <booleanDolar>false</booleanDolar>
+        <booleanMLocal>false</booleanMLocal>
+        <booleanMAdr>false</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>false</booleanRAdr>
+
+    </strategy-->
+
+
+
 
 </strategys>

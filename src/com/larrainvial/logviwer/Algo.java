@@ -14,23 +14,24 @@ import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
+import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.Dialog;
 import com.larrainvial.logviwer.utils.SwitchButton;
+import com.larrainvial.sellside.MainSellSide;
+import com.larrainvial.sellside.controller.SellSideController;
 import com.larrainvial.trading.emp.Controller;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import org.w3c.dom.Element;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.Inet4Address;
 import java.util.*;
 
 public class Algo {
@@ -44,8 +45,8 @@ public class Algo {
     public double time;
 
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
+    public FXMLLoader sellSideLoader = new FXMLLoader();
     public FXMLLoader lastPriceLoader = new FXMLLoader();
-
 
     public ObservableList<ModelPositions> positionsMasterList = FXCollections.observableArrayList();
     public Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
@@ -59,6 +60,7 @@ public class Algo {
 
     public TableView<ModelPositions> panelPositionsTableView;
     public TableView<ModelMarketData> lastPriceTableView;
+    public TableView<ModelRoutingData> sellsideTableView;
 
     public boolean mkdDolarToggle = false;
     public boolean mkdLocalToggle = false;
@@ -238,6 +240,78 @@ public class Algo {
         } catch (Exception e){
             Dialog.exception(e);
         }
+    }
+
+
+    public Algo(int tab) {
+
+        try {
+
+            this.nameAlgo = "Sell Side";
+            this.time = 1d;
+
+            SwitchButton switchButtonDolar = new SwitchButton("Strart", this);
+            Button switchBtn1 = switchButtonDolar.returnButton();
+            switchBtn1.setLayoutX(30);
+            switchBtn1.setLayoutY(35);
+
+            SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
+            Button switchBtn6 = switchButtonAlert.returnButton();
+            switchBtn6.setLayoutX(160);
+            switchBtn6.setLayoutY(35);
+
+            Label ip = new Label("IP Server : " + Inet4Address.getLocalHost().getHostAddress());
+            ip.setLayoutX(30);
+            ip.setLayoutY(80);
+
+            Label port = new Label("Port : 6060");
+            port.setLayoutX(30);
+            port.setLayoutY(100);
+
+            Label sender = new Label("Sender : LOGVIEWER");
+            sender.setLayoutX(170);
+            sender.setLayoutY(80);
+
+            Label target = new Label("Target : CLIENT");
+            target.setLayoutX(170);
+            target.setLayoutY(100);
+
+
+
+            sellSideLoader.setLocation(MainSellSide.class.getResource("view/SellSide.fxml"));
+
+            AnchorPane anchorPane = new AnchorPane();
+            anchorPane.getChildren().add((AnchorPane) sellSideLoader.load());
+            anchorPane.getChildren().add(switchBtn1);
+            anchorPane.getChildren().add(switchBtn6);
+            anchorPane.getChildren().add(ip);
+            anchorPane.getChildren().add(sender);
+            anchorPane.getChildren().add(target);
+            anchorPane.getChildren().add(port);
+
+            ScrollPane scrollBar = new ScrollPane();
+            scrollBar.prefWidthProperty().bind(anchorPane.widthProperty());
+            scrollBar.prefHeightProperty().bind(anchorPane.heightProperty());
+            scrollBar.setContent(anchorPane);
+            scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+
+
+
+
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(this.nameAlgo);
+
+            SellSideController sellsideLoader = sellSideLoader.getController();
+            sellsideTableView = sellsideLoader.getType();
+
+            Repository.strategy.put(this.nameAlgo, this);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
     }
 
 

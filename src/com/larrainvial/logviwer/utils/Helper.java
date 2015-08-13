@@ -22,8 +22,6 @@ import java.util.Map;
 
 public class Helper {
 
-    private URL strategyPath;
-
     public void createStrategy() {
 
         try {
@@ -41,6 +39,7 @@ public class Helper {
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                 Node node = nodeList.item(i);
+
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     new Algo((Element) node, tab);
                     tab++;
@@ -73,7 +72,6 @@ public class Helper {
         }
 
     }
-
 
     public synchronized static String adrToLocal(String symbolLocal){
 
@@ -219,7 +217,7 @@ public class Helper {
         if (symbolLocal.equals("ENDESA"))      return true;
         if (symbolLocal.equals("ENERSIS"))     return true;
         if (symbolLocal.equals("SQM-B"))       return true;
-        if (symbolLocal.equals("CONCHAYTORO")) return true;
+        if (symbolLocal.equals("CONCHATORO"))  return true;
 
         return false;
     }
@@ -405,13 +403,5 @@ public class Helper {
 
 
 
-    }
-
-    public static String getIp() throws Exception {
-        return InetAddress.getLocalHost().getHostAddress();
-    }
-
-    public static String getSesion() throws Exception {
-        return InetAddress.getLocalHost().getHostAddress();
     }
 }

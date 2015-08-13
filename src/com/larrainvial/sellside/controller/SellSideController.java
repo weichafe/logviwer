@@ -1,4 +1,4 @@
-package com.larrainvial.logviwer.controller.sellside;
+package com.larrainvial.sellside.controller;
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,7 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-public class RoutingAdrController {
+public class SellSideController {
 
     @FXML
     private TextField filterFieldSymbol;
@@ -146,7 +146,7 @@ public class RoutingAdrController {
 
     private boolean filter = false;
 
-    public RoutingAdrController(){
+    public SellSideController(){
 
         masterData.addListener(new ListChangeListener<ModelRoutingData>() {
             @Override

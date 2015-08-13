@@ -17,6 +17,12 @@
       </content>
     </Tab>
 
+    <Tab text="Latency">
+      <content>
+        <Pane prefHeight="864.0" prefWidth="1026.0" />
+      </content>
+    </Tab>
+
     <Tab text="Ignition">
       <content>
         <Pane prefHeight="864.0" prefWidth="1026.0" />

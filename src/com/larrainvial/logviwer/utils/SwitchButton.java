@@ -145,8 +145,7 @@ public class SwitchButton extends Label {
 
     }
 
-    public Button returnButton (){
-
+    public Button returnButton(){
         return switchBtn;
     }
 
