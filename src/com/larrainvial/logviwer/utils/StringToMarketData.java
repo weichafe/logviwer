@@ -23,7 +23,7 @@ public class StringToMarketData {
             Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
 
             modelMarketData.symbol = messageMap.containsKey(FixConstants.Symbol) ? messageMap.get(FixConstants.Symbol).toString() : "";
-
+            modelMarketData.messageByType = typeOfMessage.getValue();
 
             if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
                 return modelMarketData;
@@ -39,6 +39,8 @@ public class StringToMarketData {
             if (messageMap.containsKey(FixConstants.NoMDEntryTypes)) {
                 return modelMarketData;
             }
+
+
 
             for (Map map : mDEntryType) {
 

@@ -19,6 +19,7 @@ public class StringToRoutingData {
             String[] date = message.split("8=")[0].split("-");
 
             modelRoutingData = new ModelRoutingData(date[0], date[1], typeOfMessage.getValue());
+            modelRoutingData.messageByType = typeOfMessage.getValue();
 
             Map<Object, Object> messageMap = new Helper().getFixMessageParties(message);
 

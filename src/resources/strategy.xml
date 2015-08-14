@@ -208,9 +208,9 @@
 
     </strategy>
 
-    <!--strategy>
+    <strategy>
 
-        <nameAlgo>HCOLSEL</nameAlgo>
+        <nameAlgo>LV BLOTTER XBOG</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
         <mkdLocal>MKD_XSGO</mkdLocal>
         <mkdAdr>MKD_NYSE</mkdAdr>
@@ -218,7 +218,167 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-        <location>W:\\MMHCOLSEL\\log\\</location>
+        <location>S:\\LVOMS\\connection\\log\\</location>
+        <mkd_dolar>""</mkd_dolar>
+        <mkd_nyse>""</mkd_nyse>
+        <mkd_local>""</mkd_local>
+        <routing_local>FIX.4.4-OMS-ORDERROUTER.messages_</routing_local>
+        <routing_nyse>FIX.4.4-OMS-OMS_XBOG.messages_</routing_nyse>
+
+        <booleanDolar>false</booleanDolar>
+        <booleanMLocal>false</booleanMLocal>
+        <booleanMAdr>false</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+    <strategy>
+
+        <nameAlgo>FH XBOG DES</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>T:\\FHALGO\\connection\\log\\</location>
+        <mkd_dolar>""</mkd_dolar>
+        <mkd_nyse>""</mkd_nyse>
+        <mkd_local>FIX.4.4-062A-XTRM.messages_</mkd_local>
+        <routing_local>""</routing_local>
+        <routing_nyse>""</routing_nyse>
+
+        <booleanDolar>false</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>false</booleanMAdr>
+        <booleanRLocal>false</booleanRLocal>
+        <booleanRAdr>false</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>ADR Arbitrage XBOG XPUS COL</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+
+        <location>U:\\ADRArbitrageXBOG\\connection\\log\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA10.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-ARBv6_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG-FHMDXBVC.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XNYS_XP_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_ADR-ORDERROUTER.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>ADR Arbitrage XBOG IB COL</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+
+        <location>U:\\ADRArbitrageXBOG_IB\\connection\\log\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA9.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-ARBv2_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG_IB-FHMDXBVC.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XNYS_IB_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_IB_ADR-ORDERROUTER.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>ADR Arbitrage XTSE XPUS COL</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+
+        <location>U:\\ADRArbitrageXTSE\\connection\\log\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA8.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA12.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE-FHMDXBVC.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XTSE_XP_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-ADRARB_XTSE_XP_TOBVC-AMGTOBVC.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>ADR Arbitrage XTSE IB COL</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+
+        <location>U:\\ADRArbitrageXTSE_IB\\connection\\log\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA4.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA11.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE_IB-FHMDXBVC.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XTSE_IB_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XTSE_IB_ADR-ORDERROUTER.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>HCOLSELL</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+
+        <location>U:\\MMHCOLSEL\\connection\\log\</location>
         <mkd_dolar>""</mkd_dolar>
         <mkd_nyse>""</mkd_nyse>
         <mkd_local>FIX.4.4-LVCLIENT1-FHMDXBVC.messages_</mkd_local>
@@ -234,30 +394,6 @@
     </strategy>
 
 
-    <strategy>
-
-        <nameAlgo>Sell Side</nameAlgo>
-        <mkdDolar>""</mkdDolar>
-        <mkdLocal>""</mkdLocal>
-        <mkdAdr>""</mkdAdr>
-        <routingLocal>ROUTING_LOCAL</routingLocal>
-        <routingAdr>ROUTING_ADR</routingAdr>
-        <time>1</time>
-
-        <location>W:\\MMHCOLSEL\\log\\</location>
-        <mkd_dolar>""</mkd_dolar>
-        <mkd_nyse>""</mkd_nyse>
-        <mkd_local>""</mkd_local>
-        <routing_local>FIX.4.4-LVSSG_ARB-LVARB.messages.log</routing_local>
-        <routing_nyse>""</routing_nyse>
-
-        <booleanDolar>false</booleanDolar>
-        <booleanMLocal>false</booleanMLocal>
-        <booleanMAdr>false</booleanMAdr>
-        <booleanRLocal>true</booleanRLocal>
-        <booleanRAdr>false</booleanRAdr>
-
-    </strategy-->
 
 
 
