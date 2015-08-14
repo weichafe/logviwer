@@ -2,6 +2,7 @@
 
 <strategys>
 
+
     <strategy>
 
         <nameAlgo>ADR Arbitrage XSGO IB</nameAlgo>
@@ -12,7 +13,6 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-        <!--location>src\\resources\\log\\AdrArbitrageIB\\</location-->
         <location>W:\\ADRArbitrageXSGOIB\\log\\</location>
         <mkd_dolar>FIX.4.4-ALGOARBADR5-MDFHBLP.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv3_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
@@ -38,7 +38,6 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-        <!--location>src\\resources\\log\\AdrArbitrageXTSE\\</location-->
         <location>W:\\ADRArbitrageXTSEBeta\\connection\\log\\</location>
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA7.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA6.messages_</mkd_nyse>
@@ -64,7 +63,6 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-        <!--location>src\\resources\\log\\AdrArbitrageXTSE\\</location-->
         <location>W:\\ADRArbitrageXBOGBeta\\connection\\log\\</location>
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA5.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv7_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
@@ -90,7 +88,6 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-        <!--location>src\\resources\\log\\AdrArbitrageXTSE\\</location-->
         <location>W:\\ETFArbitrageIB\connections\\logs\\</location>
         <mkd_dolar>FIX.4.4-ALGOARBADR2-MDFHBLP.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv7_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
@@ -233,30 +230,7 @@
 
     </strategy>
 
-    <strategy>
 
-        <nameAlgo>FH XBOG DES</nameAlgo>
-        <mkdDolar>MKD_DOLAR</mkdDolar>
-        <mkdLocal>MKD_XSGO</mkdLocal>
-        <mkdAdr>MKD_NYSE</mkdAdr>
-        <routingLocal>ROUTING_LOCAL</routingLocal>
-        <routingAdr>ROUTING_ADR</routingAdr>
-        <time>1</time>
-
-        <location>T:\\FHALGO\\connection\\log\\</location>
-        <mkd_dolar>""</mkd_dolar>
-        <mkd_nyse>""</mkd_nyse>
-        <mkd_local>FIX.4.4-062A-XTRM.messages_</mkd_local>
-        <routing_local>""</routing_local>
-        <routing_nyse>""</routing_nyse>
-
-        <booleanDolar>false</booleanDolar>
-        <booleanMLocal>true</booleanMLocal>
-        <booleanMAdr>false</booleanMAdr>
-        <booleanRLocal>false</booleanRLocal>
-        <booleanRAdr>false</booleanRAdr>
-
-    </strategy>
 
 
     <strategy>
@@ -389,6 +363,32 @@
         <booleanMLocal>true</booleanMLocal>
         <booleanMAdr>false</booleanMAdr>
         <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>false</booleanRAdr>
+
+    </strategy>
+
+
+    <strategy>
+
+        <nameAlgo>FH XBOG DES</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>T:\\FHALGO\\connection\\log\\</location>
+        <mkd_dolar>""</mkd_dolar>
+        <mkd_nyse>""</mkd_nyse>
+        <mkd_local>FIX.4.4-062A-XTRM.messages_</mkd_local>
+        <routing_local>""</routing_local>
+        <routing_nyse>""</routing_nyse>
+
+        <booleanDolar>false</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>false</booleanMAdr>
+        <booleanRLocal>false</booleanRLocal>
         <booleanRAdr>false</booleanRAdr>
 
     </strategy>

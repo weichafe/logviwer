@@ -22,7 +22,14 @@ public class StringToMarketData {
 
             Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
 
-            modelMarketData.symbol = messageMap.containsKey(FixConstants.Symbol) ? messageMap.get(FixConstants.Symbol).toString() : "";
+            if (messageMap.containsKey(FixConstants.Symbol)) {
+                modelMarketData.symbol = messageMap.get(FixConstants.Symbol).toString();
+            } else if (messageMap.containsKey(FixConstants.SecurityID)) {
+                modelMarketData.symbol = messageMap.get(FixConstants.SecurityID).toString();
+            } else {
+                modelMarketData.symbol = "";
+            }
+
             modelMarketData.messageByType = typeOfMessage.getValue();
 
             if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
