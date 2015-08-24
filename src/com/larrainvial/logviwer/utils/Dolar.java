@@ -3,11 +3,11 @@ package com.larrainvial.logviwer.utils;
 
 public class Dolar {
 
-    public static final String CLP  = "CLP DTTC CURNCY";
-    public static final String CAD  = "CAD Curncy";
-    public static final String COFX  = "COFX Index";
-    public static final Double VARIACION_CLP = 4d;
-    public static final Double VARIACION_CAD = 10d;
-    public static final Double VARIACION_COFX = 4d;
+    public static String CLP;
+    public static String CAD;
+    public static String COFX;
+    public static Double VARIACION_CLP;
+    public static Double VARIACION_CAD;
+    public static Double VARIACION_COFX;
 
 }

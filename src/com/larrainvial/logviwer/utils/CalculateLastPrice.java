@@ -5,6 +5,7 @@ import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Controller;
 
+
 public class CalculateLastPrice {
 
     private ModelMarketData modelMarketData;
@@ -47,6 +48,9 @@ public class CalculateLastPrice {
                     verifyDolar();
                 }
 
+                algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour = modelMarketData.hour;
+                algo.lastPriceMasterListHash.get(modelMarketData.symbol).messageByType = modelMarketData.messageByType;
+
                 if (modelMarketData.buyPx != 0.0) {
                     algo.lastPriceMasterListHash.get(modelMarketData.symbol).messageByType = modelMarketData.messageByType;
                     algo.lastPriceMasterListHash.get(modelMarketData.symbol).buyPx = modelMarketData.buyPx;
@@ -88,25 +92,60 @@ public class CalculateLastPrice {
         if (modelMarketData.symbol.equals(Dolar.CLP)){
 
             if (modelMarketData.closePx != 0.0 && algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx != 0.0) {
-                if (Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) /100 >= Dolar.VARIACION_CLP){
-                    Dialog.alert(algo.nameAlgo + " " + VARIACION,
-                            algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + " " + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()
-                                    + " = > " + modelMarketData.hour + " " + modelMarketData.closePx.toString());
+
+                Long variacion = Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) / 100;
+
+                if (variacion >= Dolar.VARIACION_CLP){
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.symbol + "\n";
+                    msgAlerta += VARIACION + "\n\n";
+                    msgAlerta += algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + "\t" + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()+ "\n";
+                    msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
+                    msgAlerta += "Variacion:\t " + variacion;
+                    Dialog.alert("VARIACION", msgAlerta);
+
+                    Dialog.alert("VARIACION", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
             }
 
             if (modelMarketData.messageByType.equals("W")){
 
                 if (modelMarketData.closePx == 0.0){
-                    Dialog.alert(algo.nameAlgo + " " + CLOSE_CERO_DOLAR, DOLAR_PX + " = > " + modelMarketData.closePx.toString());
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.hour + "\n";
+                    msgAlerta += CLOSE_CERO_DOLAR + "\n";
+                    msgAlerta += DOLAR_PX + "\n";
+                    msgAlerta += modelMarketData.closePx.toString() + "\n";
+
+                    Dialog.alert("", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
 
                 if (modelMarketData.buyPx == 0.0){
-                    Dialog.alert(algo.nameAlgo + " " + BUY_CERO_DOLAR, DOLAR_PX + " = > " + modelMarketData.buyPx.toString());
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.hour + "\n";
+                    msgAlerta += BUY_CERO_DOLAR + "\n";
+                    msgAlerta += DOLAR_PX + "\n";
+                    msgAlerta += modelMarketData.closePx.toString() + "\n";
+
+                    Dialog.alert("", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
 
                 if (modelMarketData.sellPx == 0.0){
-                    Dialog.alert(algo.nameAlgo + " " + SELL_CERO_DOLAR, DOLAR_PX + " = > " + modelMarketData.buyPx.toString());
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.hour + "\n";
+                    msgAlerta += SELL_CERO_DOLAR + "\n";
+                    msgAlerta += DOLAR_PX + "\n";
+                    msgAlerta += modelMarketData.closePx.toString() + "\n";
+
+                    Dialog.alert("", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
             }
         }
@@ -114,17 +153,36 @@ public class CalculateLastPrice {
         if (modelMarketData.symbol.equals(Dolar.CAD)){
 
             if (modelMarketData.closePx != 0.0 && algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx != 0.0) {
-                if (Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) /100 >= Dolar.VARIACION_CAD){
-                    Dialog.alert(algo.nameAlgo + " " + VARIACION,
-                            algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + " " + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()
-                                    + " = > " + modelMarketData.hour + " " + modelMarketData.closePx.toString());
+
+                Long variacion = Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) / 100;
+
+                if (variacion >= Dolar.VARIACION_CAD){
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.symbol + "\n";
+                    msgAlerta += VARIACION + "\n\n";
+                    msgAlerta += algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + "\t" + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()+ "\n";
+                    msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
+                    msgAlerta += "Variacion :\t " + variacion;
+
+                    Dialog.alert("VARIACION", msgAlerta);
+                    Helper.printerLog(msgAlerta);
+
                 }
             }
 
             if (modelMarketData.messageByType.equals("W") || modelMarketData.messageByType.equals("X")){
 
                 if (modelMarketData.closePx == 0.0){
-                    Dialog.alert(algo.nameAlgo + " " + BUY_CERO_DOLAR, DOLAR_PX + " = > " + modelMarketData.closePx.toString());
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.hour + "\n";
+                    msgAlerta += CLOSE_CERO_DOLAR + "\n";
+                    msgAlerta += DOLAR_PX + "\n";
+                    msgAlerta += modelMarketData.closePx.toString() + "\n";
+
+                    Dialog.alert("", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
             }
 
@@ -134,16 +192,35 @@ public class CalculateLastPrice {
         if (modelMarketData.symbol.equals(Dolar.COFX)){
 
             if (modelMarketData.closePx != 0.0 && algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx != 0.0) {
-                if (Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) /100 >= Dolar.VARIACION_COFX){
-                    Dialog.alert(algo.nameAlgo + " " + VARIACION,
-                            algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + " " + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()
-                                    + " = > " + modelMarketData.hour + " " + modelMarketData.closePx.toString());
+                Long variacion = Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) / 100;
+
+                if (variacion >= Dolar.VARIACION_COFX){
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.symbol + "\n";
+                    msgAlerta += VARIACION + "\n\n";
+                    msgAlerta += algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + "\t" + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()+ "\n";
+                    msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
+                    msgAlerta += "Variacion :\t " + variacion;
+
+                    Dialog.alert("VARIACION", msgAlerta);
+                    Helper.printerLog(msgAlerta);
+
                 }
             }
 
             if (modelMarketData.messageByType.equals("W") || modelMarketData.messageByType.equals("X")){
+
                 if (modelMarketData.closePx == 0.0){
-                    Dialog.alert(algo.nameAlgo + " " + BUY_CERO_DOLAR, DOLAR_PX + " = > " + modelMarketData.closePx.toString());
+
+                    String msgAlerta = algo.nameAlgo + "\n";
+                    msgAlerta += modelMarketData.hour + "\n";
+                    msgAlerta += CLOSE_CERO_DOLAR + "\n";
+                    msgAlerta += DOLAR_PX + "\n";
+                    msgAlerta += modelMarketData.closePx.toString() + "\n";
+
+                    Dialog.alert("", msgAlerta);
+                    Helper.printerLog(msgAlerta);
                 }
             }
         }

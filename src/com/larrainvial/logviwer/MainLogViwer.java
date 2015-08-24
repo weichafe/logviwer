@@ -2,7 +2,9 @@ package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.model.StrategyListWrapper;
 import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.utils.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.vo.StrategyVO;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.net.URL;
 import java.util.prefs.Preferences;
 
 
@@ -30,6 +33,18 @@ public class MainLogViwer extends Application {
     public void start(Stage primaryStage) {
 
         try {
+
+            URL urlIni = ClassLoader.getSystemResource("resources/logviewer.properties");
+
+            Repository.logviewer  = new PropertiesFile(urlIni);
+
+            Dolar.VARIACION_CLP = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CLP"));
+            Dolar.VARIACION_CAD = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CAD"));
+            Dolar.VARIACION_COFX = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_COFX"));
+
+            Dolar.CLP = Repository.logviewer.getPropertiesString("CLP");
+            Dolar.CAD = Repository.logviewer.getPropertiesString("CAD");
+            Dolar.COFX = Repository.logviewer.getPropertiesString("COFX");
 
             System.out.print("Inicializando servidor... ");
 

@@ -296,9 +296,6 @@ public class Algo {
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
 
-
-
-
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(this.nameAlgo);
 

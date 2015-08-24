@@ -15,10 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Helper {
 
@@ -404,4 +401,12 @@ public class Helper {
 
 
     }
+
+    public static void  printerLog(String msg){
+        System.out.println();
+        System.out.println("----------------");
+        System.out.println(new Date());
+        System.out.println(msg);
+    }
+
 }
