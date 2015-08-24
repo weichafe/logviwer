@@ -324,7 +324,6 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-
         <location>U:\\ADRArbitrageXTSE_IB\\connection\\log\\</location>
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA4.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA11.messages_</mkd_nyse>
@@ -392,10 +391,6 @@
         <booleanRAdr>false</booleanRAdr>
 
     </strategy>
-
-
-
-
 
 
 </strategys>

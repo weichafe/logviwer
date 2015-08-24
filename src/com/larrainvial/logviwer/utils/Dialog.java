@@ -3,10 +3,7 @@ package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.logviwer.Repository;
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
@@ -16,6 +13,8 @@ import java.io.StringWriter;
 import java.util.Optional;
 
 public class Dialog {
+
+
 
     public static synchronized void about() {
 

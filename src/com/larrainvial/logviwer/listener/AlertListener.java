@@ -30,6 +30,14 @@ public class AlertListener implements Listener {
 
             if (ev.messageByType.equals("9") && ev.modelRoutingData.text.equals("RMG Reject: routing failure")) {
                 if(algo.isAlert()) {
+                    Dialog.alert(algo.nameAlgo, " Variacion Dolar! " + ev.modelRoutingData.text + " " + ev.typeMarket);
+                    LOGGER.info(algo.nameAlgo + " Variacion Dolar! " + ev.modelRoutingData.text + " " + ev.typeMarket);
+                    new Sound();
+                }
+            }
+
+            if (ev.messageByType.equals("9") && ev.modelRoutingData.text.equals("RMG Reject: routing failure")) {
+                if(algo.isAlert()) {
                     Dialog.alert(algo.nameAlgo, " Rejected, check log files! " + ev.modelRoutingData.text + " " + ev.typeMarket);
                     LOGGER.info(algo.nameAlgo + " Rejected, check log files! " + ev.modelRoutingData.text + " " + ev.typeMarket);
                     new Sound();

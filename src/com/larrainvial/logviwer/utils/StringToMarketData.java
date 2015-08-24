@@ -7,7 +7,6 @@ import quickfix.fix44.Message;
 import java.util.ArrayList;
 import java.util.Map;
 
-
 public class StringToMarketData {
 
     private ModelMarketData modelMarketData;
@@ -18,36 +17,46 @@ public class StringToMarketData {
             MsgType typeOfMessage = Message.identifyType(message);
             String[] date = message.split("8=")[0].split("-");
 
-            modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
-
             Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
 
-            if (messageMap.containsKey(FixConstants.Symbol)) {
-                modelMarketData.symbol = messageMap.get(FixConstants.Symbol).toString();
-            } else if (messageMap.containsKey(FixConstants.SecurityID)) {
-                modelMarketData.symbol = messageMap.get(FixConstants.SecurityID).toString();
-            } else {
-                modelMarketData.symbol = "";
-            }
 
-            modelMarketData.messageByType = typeOfMessage.getValue();
-
-            if(typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") || typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
+            if (typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") ||
+                    typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
                 return modelMarketData;
             }
 
-            if(!messageMap.containsKey(FixConstants.NoMDEntries)){
+            if (!messageMap.containsKey(FixConstants.NoMDEntries)){
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
                 return modelMarketData;
             }
-
 
             mDEntryType = (ArrayList<Map>) messageMap.get(FixConstants.NoMDEntries);
 
             if (messageMap.containsKey(FixConstants.NoMDEntryTypes)) {
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
                 return modelMarketData;
             }
 
 
+            if (messageMap.containsKey(FixConstants.Symbol)) {
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
+                modelMarketData.symbol = messageMap.get(FixConstants.Symbol).toString();
+
+            } else if (messageMap.containsKey(FixConstants.SecurityID)) {
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
+                modelMarketData.symbol = messageMap.get(FixConstants.SecurityID).toString();
+
+            } else {
+                modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
+                modelMarketData.messageByType = typeOfMessage.getValue();
+                modelMarketData.symbol = "";
+            }
 
             for (Map map : mDEntryType) {
 
@@ -56,7 +65,7 @@ public class StringToMarketData {
                     if(map.containsKey(FixConstants.MDEntrySize)){
                         if (map.get(FixConstants.MDEntrySize).toString() != null) {
                             modelMarketData.buyQty = Double.valueOf(map.get(FixConstants.MDEntrySize).toString());
-                    }
+                        }
                     }
 
                     if (map.get(FixConstants.MDEntryPx).toString() != null) {
@@ -65,7 +74,6 @@ public class StringToMarketData {
                 }
 
                 if (map.get(FixConstants.MDEntryType).equals("1")) {
-
 
                     if(map.containsKey(FixConstants.MDEntrySize)){
                         if (map.get(FixConstants.MDEntrySize).toString() != null) {

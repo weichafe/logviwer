@@ -35,7 +35,7 @@ public class MarketDataLocalListener implements Listener {
 
             Controller.dispatchEvent(new AlertEvent(algo, modelMarketData, TYPE_MARKET));
 
-            new CalculateLastPrice(algo, modelMarketData);
+            new CalculateLastPrice(algo, modelMarketData, TYPE_MARKET);
 
         } catch (Exception e){
             Dialog.exception(e);

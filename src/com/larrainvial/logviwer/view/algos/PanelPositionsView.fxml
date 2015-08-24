@@ -7,17 +7,17 @@
   <children>
     <TableView fx:id="positionTable" layoutX="18.0" layoutY="9" prefHeight="350" prefWidth="755.0" >
       <columns>
-        <TableColumn prefWidth="110" style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Local Symbol" />
-        <TableColumn prefWidth="100" style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR Symbol" />
+        <TableColumn prefWidth="110" style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" />
+        <TableColumn prefWidth="80" style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" />
 
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocalRatio" text="Local Buy" />
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellAdr" text="ADR Sell" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocalRatio" text="Inflow" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellAdr" text="Inflow" />
 
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;"  fx:id="qtySellLocalRatio" text="Local Sell" />
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyAdr" text="ADR Buy" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;"  fx:id="qtySellLocalRatio" text="Flowback" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyAdr" text="Flowback" />
 
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocal" text="Qty Local Buy" />
-        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellLocal" text="Qty Local Sell" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocal" text="Local Buy" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellLocal" text="Local Sell" />
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="ratio" text="Ratio" />
       </columns>
     </TableView>

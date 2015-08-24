@@ -11,7 +11,7 @@ public class ModelMarketData {
     public Double sellPx;
     public Double sellQty;
     public Double closePx;
-    public double tradeAmount;
+    public Double tradeAmount;
 
 
     public ModelMarketData(String anio, String hour, String messageByType) {
@@ -20,12 +20,12 @@ public class ModelMarketData {
         this.messageByType = messageByType;
         this.hour =  hour;
         this.symbol =  "";
-        this.buyPx =  0d;
-        this.buyQty =  0d;
-        this.sellPx =  0d;
-        this.sellQty =  0d;
-        this.closePx =  0d;
-        this.tradeAmount = 0d;
+        this.buyPx = 0.0;
+        this.buyQty =  0.0;
+        this.sellPx =  0.0;
+        this.sellQty =  0.0;
+        this.closePx =  0.0;
+        this.tradeAmount = 0.0;
     }
 
 }
