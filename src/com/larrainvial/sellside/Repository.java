@@ -17,6 +17,9 @@ public class Repository {
     public static PropertiesFile buySide;
     public static SocketAcceptor socketAcceptor;
     public static SessionID sessionID;
+    public static String socketAcceptPort;
+    public static String senderCompID;
+    public static String targetCompID;
 
     public static String date;
     public static String XPUS_NAME;

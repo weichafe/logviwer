@@ -264,18 +264,17 @@ public class Algo {
             ip.setLayoutX(30);
             ip.setLayoutY(80);
 
-            Label port = new Label("Port : 6060");
+            Label port = new Label("Port : " + com.larrainvial.sellside.Repository.socketAcceptPort );
             port.setLayoutX(30);
             port.setLayoutY(100);
 
-            Label sender = new Label("Sender : LOGVIEWER");
+            Label sender = new Label("Sender : " + com.larrainvial.sellside.Repository.senderCompID);
             sender.setLayoutX(170);
             sender.setLayoutY(80);
 
-            Label target = new Label("Target : CLIENT");
+            Label target = new Label("Target : " + com.larrainvial.sellside.Repository.targetCompID);
             target.setLayoutX(170);
             target.setLayoutY(100);
-
 
 
             sellSideLoader.setLocation(MainSellSide.class.getResource("view/SellSide.fxml"));

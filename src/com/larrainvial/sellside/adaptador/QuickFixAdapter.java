@@ -15,14 +15,16 @@ import java.net.URL;
 public final class QuickFixAdapter extends MessageCracker implements Application {
 
     public SocketAcceptor socketAcceptor;
+    private SessionSettings sessionSettings;
 
     public QuickFixAdapter(URL quickFixIniFile) {
 
         try {
 
-            SessionSettings sessionSettings = new SessionSettings(quickFixIniFile.openStream());
+            sessionSettings = new SessionSettings(quickFixIniFile.openStream());
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
             //com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
+
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
             this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;
@@ -34,7 +36,19 @@ public final class QuickFixAdapter extends MessageCracker implements Application
     }
 
     public void onCreate(SessionID sessionID) {
-        Repository.sessionID = sessionID;
+
+        try {
+
+            Repository.sessionID = sessionID;
+            Repository.socketAcceptPort = sessionSettings.getString(Repository.sessionID, "SocketAcceptPort");
+            Repository.senderCompID = sessionSettings.getString(Repository.sessionID, "SenderCompID");
+            Repository.targetCompID = sessionSettings.getString(Repository.sessionID, "TargetCompID");
+
+        } catch (ConfigError configError) {
+            configError.printStackTrace();
+        } catch (FieldConvertError fieldConvertError) {
+            fieldConvertError.printStackTrace();
+        }
     }
 
     public void onLogon(SessionID sessionID) {
