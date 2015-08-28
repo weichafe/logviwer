@@ -5,7 +5,7 @@ import com.larrainvial.logviwer.event.AlertEvent;
 import com.larrainvial.logviwer.event.stringtofix.MarketDataLocalEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.CalculateLastPrice;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.StringToMarketData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;

@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.javtech.javatoolkit.fix.FixConstants;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;

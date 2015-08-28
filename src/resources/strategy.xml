@@ -28,7 +28,7 @@
 
     </strategy>
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XTSE</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -390,7 +390,7 @@
         <booleanRLocal>false</booleanRLocal>
         <booleanRAdr>false</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
 </strategys>

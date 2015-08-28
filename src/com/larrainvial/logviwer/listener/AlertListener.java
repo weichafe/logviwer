@@ -2,7 +2,7 @@ package com.larrainvial.logviwer.listener;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.AlertEvent;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Sound;
 import com.larrainvial.trading.emp.Event;

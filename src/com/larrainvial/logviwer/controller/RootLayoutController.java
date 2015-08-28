@@ -2,7 +2,7 @@ package com.larrainvial.logviwer.controller;
 
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

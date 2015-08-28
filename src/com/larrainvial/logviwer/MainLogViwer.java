@@ -1,8 +1,8 @@
 package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.model.StrategyListWrapper;
-import com.larrainvial.logviwer.utils.Dialog;
-import com.larrainvial.logviwer.utils.Dolar;
+import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.vo.StrategyVO;

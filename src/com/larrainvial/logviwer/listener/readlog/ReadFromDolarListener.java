@@ -3,7 +3,7 @@ package com.larrainvial.logviwer.listener.readlog;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.readlog.ReadFromDolarEvent;
 import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;

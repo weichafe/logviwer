@@ -3,6 +3,7 @@ package com.larrainvial.logviwer.utils;
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,7 +14,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.*;
 
@@ -45,6 +45,17 @@ public class Helper {
 
         } catch (Exception e){
             e.printStackTrace();
+        }
+
+    }
+
+    public static Boolean isNumber(String numero){
+        try {
+            Integer.parseInt(numero);
+            return true;
+
+        } catch (NumberFormatException nfe){
+            return false;
         }
 
     }

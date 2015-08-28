@@ -6,7 +6,7 @@ import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingLocalEvent;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.CalculatePositions;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.StringToRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;

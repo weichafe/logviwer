@@ -2,6 +2,8 @@ package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
+import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Controller;
 

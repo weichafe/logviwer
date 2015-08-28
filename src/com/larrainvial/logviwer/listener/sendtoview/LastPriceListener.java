@@ -4,7 +4,7 @@ package com.larrainvial.logviwer.listener.sendtoview;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.utils.Dialog;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 

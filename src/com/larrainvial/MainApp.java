@@ -15,7 +15,7 @@ public class MainApp extends Application {
         new MainLogViwer().start(primaryStage);
 
         //SellSide
-        new MainSellSide().sellside();
+        //new MainSellSide().sellside();
 
     }
 

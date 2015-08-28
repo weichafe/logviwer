@@ -35,6 +35,9 @@ public class LastPriceController {
     public TableColumn<ModelMarketData, String> symbol;
 
     @FXML
+    private TextField textField;
+
+    @FXML
     private TableColumn<ModelMarketData, String> buyPx;
 
     @FXML
@@ -81,7 +84,6 @@ public class LastPriceController {
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().messageByType));
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().symbol));
         hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().hour));
-        anio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().year));
         buyQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().buyQty.toString()));
         buyPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().buyPx.toString()));
         sellQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().sellQty.toString()));
@@ -140,18 +142,7 @@ public class LastPriceController {
             };
         });
 
-
         lastPrice.setItems(filteredDataSymbol);
-
-        filterField.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDatafilterType, filterField);
-            }
-        });
-
     }
 
     @FXML

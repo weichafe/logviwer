@@ -12,11 +12,13 @@ import com.larrainvial.logviwer.listener.readlog.*;
 import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
 import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
+import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.utils.Dialog;
-import com.larrainvial.logviwer.utils.SwitchButton;
+import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.fxvo.SwitchButton;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.sellside.controller.SellSideController;
 import com.larrainvial.trading.emp.Controller;
@@ -24,11 +26,21 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import org.w3c.dom.Element;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.Inet4Address;
@@ -98,6 +110,13 @@ public class Algo {
     public RoutingLocalListener routingLocalListener;
     public AlertListener alertListener;
 
+    public Button buttonAlert;
+    public Button buttonRoutingADR;
+    public Button buttonRoutingLocal;
+    public Button buttonMKDLocal;
+    public Button buttonMDKDAdr;
+    public Button buttonDolar;
+
 
     public Algo(Element elem, int tab) {
 
@@ -124,6 +143,9 @@ public class Algo {
             boolean booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
             boolean booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
 
+            panelPositionsLoader.setLocation(MainLogViwer.class.getResource("view/algos/PanelPositionsView.fxml"));
+            lastPriceLoader.setLocation(MainLogViwer.class.getResource("view/algos/LastPriceView.fxml"));
+
             fileMkdDolar = new File(location + mkd_dolar + Repository.year + ".log");
             fileMkdLocal = new File(location + mkd_local + Repository.year + ".log");
             fileMkdAdr = new File(location + mkd_nyse + Repository.year + ".log");
@@ -132,9 +154,24 @@ public class Algo {
 
             this.fileReader(booleanDolar, booleanMLocal, booleanMAdr, booleanRLocal, booleanRAdr);
 
+
+            HBox grill = new HBox();
+            grill.getChildren().add((AnchorPane) lastPriceLoader.load());
+            grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
+
+
+            HBox options = new HBox();
+            options.setPrefHeight(100);
+            options.setSpacing(20);
+            options.setPadding(new Insets(40, 40, 20, 10));
+
+
+            VBox general = new VBox();
+            general.getChildren().addAll(options, grill);
+
+
+
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(time));
-            opacityLevel.setLayoutX(25);
-            opacityLevel.setLayoutY(37);
 
             opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
                 public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
@@ -142,54 +179,118 @@ public class Algo {
                 }
             });
 
-            SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
-            Button switchBtn1 = switchButtonDolar.returnButton();
-            switchBtn1.setLayoutX(177);
-            switchBtn1.setLayoutY(35);
-
-            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
-            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
-            switchBtn2.setLayoutX(305);
-            switchBtn2.setLayoutY(35);
-
-            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
-            Button switchBtn3 = switchButtonMkd_Local.returnButton();
-            switchBtn3.setLayoutX(435);
-            switchBtn3.setLayoutY(35);
-
-            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
-            Button switchBtn4 = switchButtonRouting_Local.returnButton();
-            switchBtn4.setLayoutX(565);
-            switchBtn4.setLayoutY(35);
-
-            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
-            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
-            switchBtn5.setLayoutX(695);
-            switchBtn5.setLayoutY(35);
+            VBox hBoxopacityLevel = new VBox();
+            hBoxopacityLevel.setSpacing(10);
+            hBoxopacityLevel.getChildren().add(opacityLevel);
+            options.getChildren().add(hBoxopacityLevel);
 
             SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
             Button switchBtn6 = switchButtonAlert.returnButton();
-            switchBtn6.setLayoutX(825);
-            switchBtn6.setLayoutY(35);
+            this.buttonAlert =  switchBtn6;
 
-            panelPositionsLoader.setLocation(MainLogViwer.class.getResource("view/algos/PanelPositionsView.fxml"));
-            lastPriceLoader.setLocation(MainLogViwer.class.getResource("view/algos/LastPriceView.fxml"));
+            VBox vBox = new VBox();
+            vBox.getChildren().add(switchButtonAlert);
+            options.getChildren().add(vBox);
 
-            AnchorPane anchorPane = new AnchorPane();
-            anchorPane.getChildren().add((AnchorPane) panelPositionsLoader.load());
-            anchorPane.getChildren().add((AnchorPane) lastPriceLoader.load());
-            anchorPane.getChildren().add(opacityLevel);
-            anchorPane.getChildren().add(switchBtn1);
-            anchorPane.getChildren().add(switchBtn2);
-            anchorPane.getChildren().add(switchBtn3);
-            anchorPane.getChildren().add(switchBtn4);
-            anchorPane.getChildren().add(switchBtn5);
-            anchorPane.getChildren().add(switchBtn6);
+            SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
+            Button switchBtn1 = switchButtonDolar.returnButton();
+            this.buttonDolar = switchBtn1;
+
+            VBox ButtonDolar = new VBox();
+            ButtonDolar.getChildren().add(switchButtonDolar);
+            options.getChildren().add(ButtonDolar);
+
+            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
+            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
+            this.buttonMDKDAdr = switchBtn2;
+
+            VBox HBoxButtonMkd = new VBox();
+            HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
+            options.getChildren().add(HBoxButtonMkd);
+
+            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
+            Button switchBtn3 = switchButtonMkd_Local.returnButton();
+            this.buttonMKDLocal = switchBtn3;
+
+            VBox HBoswitchButtonMkd_Local = new VBox();
+            HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
+            options.getChildren().add(HBoswitchButtonMkd_Local);
+
+            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
+            Button switchBtn4 = switchButtonRouting_Local.returnButton();
+            this.buttonRoutingLocal = switchBtn4;
+
+            VBox HBosRouting_Local = new VBox();
+            HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
+            options.getChildren().add(HBosRouting_Local);
+
+
+            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
+            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
+            this.buttonRoutingADR = switchBtn5;
+
+            VBox HBosRouting_Adr = new VBox();
+            HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
+            options.getChildren().add(HBosRouting_Adr);
+
+
+            if (nameAlgo.startsWith("ADR")){
+
+                Label labelCofx = new Label("COFX VAR ");
+                labelCofx.setTranslateY(3);
+                labelCofx.setStyle("-fx-font-weight: bold");
+
+
+                TextField cofxvar = new TextField();
+                cofxvar.setPrefWidth(60);
+
+                cofxvar.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (Helper.isNumber(newValue)) {
+                        Dolar.setVARIACION_COFX(Double.valueOf(newValue));
+                    }
+                });
+
+
+                Label labelCAD = new Label("CAD VAR ");
+                labelCAD.setTranslateY(3);
+                labelCAD.setStyle("-fx-font-weight: bold");
+
+                TextField cadvar = new TextField();
+                cadvar.setPrefWidth(60);
+
+                cadvar.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (Helper.isNumber(newValue)) {
+                        Dolar.setVARIACION_CAD(Double.valueOf(newValue));
+                    }
+                });
+
+
+                Label labelCLP = new Label("CLP VAR ");
+                labelCLP.setTranslateY(3);
+                labelCLP.setStyle("-fx-font-weight: bold");
+
+                TextField clpvar = new TextField();
+                clpvar.setPrefWidth(60);
+
+                clpvar.textProperty().addListener((observable, oldValue, newValue) -> {
+                    if (Helper.isNumber(newValue)) {
+                        Dolar.setVARIACION_CLP(Double.valueOf(newValue));
+                    }
+                });
+
+
+                HBox variacion = new HBox();
+                variacion.setSpacing(10);
+                variacion.setPadding(new Insets(0, 0, 0, 135));
+                variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
+                options.getChildren().add(variacion);
+
+            }
 
             ScrollPane scrollBar = new ScrollPane();
-            scrollBar.prefWidthProperty().bind(anchorPane.widthProperty());
-            scrollBar.prefHeightProperty().bind(anchorPane.heightProperty());
-            scrollBar.setContent(anchorPane);
+            scrollBar.prefHeightProperty().bind(general.heightProperty());
+            scrollBar.prefHeightProperty().bind(general.heightProperty());
+            scrollBar.setContent(general);
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab+2).setContent(scrollBar);

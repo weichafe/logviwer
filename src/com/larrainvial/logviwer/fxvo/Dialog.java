@@ -1,4 +1,4 @@
-package com.larrainvial.logviwer.utils;
+package com.larrainvial.logviwer.fxvo;
 
 
 import com.larrainvial.logviwer.Repository;

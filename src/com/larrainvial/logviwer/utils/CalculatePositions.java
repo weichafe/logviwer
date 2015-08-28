@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 
