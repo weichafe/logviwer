@@ -26,6 +26,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -35,10 +36,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -240,16 +238,8 @@ public class Algo {
                 labelCofx.setTranslateY(3);
                 labelCofx.setStyle("-fx-font-weight: bold");
 
-
                 TextField cofxvar = new TextField();
                 cofxvar.setPrefWidth(60);
-
-                cofxvar.textProperty().addListener((observable, oldValue, newValue) -> {
-                    if (Helper.isNumber(newValue)) {
-                        Dolar.setVARIACION_COFX(Double.valueOf(newValue));
-                    }
-                });
-
 
                 Label labelCAD = new Label("CAD VAR ");
                 labelCAD.setTranslateY(3);
@@ -258,13 +248,6 @@ public class Algo {
                 TextField cadvar = new TextField();
                 cadvar.setPrefWidth(60);
 
-                cadvar.textProperty().addListener((observable, oldValue, newValue) -> {
-                    if (Helper.isNumber(newValue)) {
-                        Dolar.setVARIACION_CAD(Double.valueOf(newValue));
-                    }
-                });
-
-
                 Label labelCLP = new Label("CLP VAR ");
                 labelCLP.setTranslateY(3);
                 labelCLP.setStyle("-fx-font-weight: bold");
@@ -272,18 +255,43 @@ public class Algo {
                 TextField clpvar = new TextField();
                 clpvar.setPrefWidth(60);
 
-                clpvar.textProperty().addListener((observable, oldValue, newValue) -> {
-                    if (Helper.isNumber(newValue)) {
-                        Dolar.setVARIACION_CLP(Double.valueOf(newValue));
-                    }
-                });
-
-
                 HBox variacion = new HBox();
                 variacion.setSpacing(10);
-                variacion.setPadding(new Insets(0, 0, 0, 135));
+                variacion.setPadding(new Insets(0, 0, 0, 90));
                 variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
                 options.getChildren().add(variacion);
+
+                Button submit = new Button("Save ");
+                GridPane.setConstraints(submit, 10, 1);
+                options.getChildren().add(submit);
+
+                submit.setOnAction(new EventHandler<ActionEvent>() {
+
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (cofxvar.getText() != null){
+                            if (Helper.isNumber(cofxvar.getText())) {
+                                Dolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
+                                System.out.println(cofxvar.getText());
+                            }
+
+                        }
+
+                        if (cadvar.getText() != null) {
+                            if (Helper.isNumber(cadvar.getText())) {
+                                Dolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
+                                System.out.println(Dolar.VARIACION_CAD);
+                            }
+                        }
+
+                        if (clpvar.getText() != null) {
+                            if (Helper.isNumber(clpvar.getText())) {
+                                Dolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
+                                System.out.println(Dolar.VARIACION_CLP);
+                            }
+                        }
+                    }
+                });
 
             }
 
