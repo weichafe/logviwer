@@ -2,8 +2,32 @@
 
 <strategys>
 
-
     <strategy>
+
+        <nameAlgo>ADR Arbitrage XTSE</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>C:\\ADRArbitrageXSGOIB\\</location>
+        <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA7.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA6.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-BOGCURNCY-LVMDG.messages_</mkd_local>
+        <routing_local>FIX.4.4-ADRARB_XTSE_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_nyse>FIX.4.4-LVBSG-CL04.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+    </strategy>
+
+
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XSGO IB</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -26,7 +50,7 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
     <!--strategy>
 

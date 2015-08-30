@@ -18,10 +18,13 @@ public class Dolar {
     }
 
     public static void setVARIACION_CAD(Double VARIACION_CAD) {
+
         Dolar.VARIACION_CAD = VARIACION_CAD;
+        Repository.logviewer.setPropertiesString("VARIACION_CAD", String.valueOf(VARIACION_CAD));
     }
 
     public static void setVARIACION_COFX(Double VARIACION_COFX) {
         Dolar.VARIACION_COFX = VARIACION_COFX;
+        Repository.logviewer.setPropertiesString("VARIACION_COFX", String.valueOf(VARIACION_COFX));
     }
 }

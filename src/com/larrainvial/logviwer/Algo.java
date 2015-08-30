@@ -7,6 +7,7 @@ import com.larrainvial.logviwer.event.readlog.*;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.*;
+import com.larrainvial.logviwer.fxvo.Graph;
 import com.larrainvial.logviwer.listener.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
 import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
@@ -19,6 +20,7 @@ import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.fxvo.SwitchButton;
 import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.vo.LatencyVO;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.sellside.controller.SellSideController;
 import com.larrainvial.trading.emp.Controller;
@@ -31,12 +33,18 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -108,12 +116,23 @@ public class Algo {
     public RoutingLocalListener routingLocalListener;
     public AlertListener alertListener;
 
+
+    //Button Options
     public Button buttonAlert;
     public Button buttonRoutingADR;
     public Button buttonRoutingLocal;
     public Button buttonMKDLocal;
     public Button buttonMDKDAdr;
     public Button buttonDolar;
+
+    //GRAPH
+    public XYChart.Series adrRouting;
+    public XYChart.Series localRouting;
+    public LineChart<Number,Number> lineChart;
+
+    //LATENCY
+    public Map<String, LatencyVO> latencyADR = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
+    public Map<String, LatencyVO> latencyLocal = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
 
 
     public Algo(Element elem, int tab) {
@@ -152,7 +171,6 @@ public class Algo {
 
             this.fileReader(booleanDolar, booleanMLocal, booleanMAdr, booleanRLocal, booleanRAdr);
 
-
             HBox grill = new HBox();
             grill.getChildren().add((AnchorPane) lastPriceLoader.load());
             grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
@@ -163,11 +181,8 @@ public class Algo {
             options.setSpacing(20);
             options.setPadding(new Insets(40, 40, 20, 10));
 
-
             VBox general = new VBox();
             general.getChildren().addAll(options, grill);
-
-
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(time));
 
@@ -257,15 +272,19 @@ public class Algo {
 
                 HBox variacion = new HBox();
                 variacion.setSpacing(10);
-                variacion.setPadding(new Insets(0, 0, 0, 90));
+                variacion.setPadding(new Insets(0, 0, 0, 60));
                 variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
                 options.getChildren().add(variacion);
 
-                Button submit = new Button("Save ");
-                GridPane.setConstraints(submit, 10, 1);
+
+                HBox submit = new HBox();
+                Button save = new Button("Save");
+                save.setPrefWidth(80);
+                submit.getChildren().add(save);
+
                 options.getChildren().add(submit);
 
-                submit.setOnAction(new EventHandler<ActionEvent>() {
+                save.setOnAction(new EventHandler<ActionEvent>() {
 
                     @Override
                     public void handle(ActionEvent e) {
@@ -294,6 +313,13 @@ public class Algo {
                 });
 
             }
+
+            Graph.newLineChart(this);
+
+            HBox graph = new HBox();
+            graph.getChildren().add(lineChart);
+            general.getChildren().add(graph);
+
 
             ScrollPane scrollBar = new ScrollPane();
             scrollBar.prefHeightProperty().bind(general.heightProperty());
@@ -467,7 +493,6 @@ public class Algo {
 
                 if (routingAdrToggle && rAdr) {
                     Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
-
                 }
 
             }
@@ -496,4 +521,6 @@ public class Algo {
         this.alert = alert;
     }
 
+
 }
+

@@ -4,6 +4,8 @@ import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.model.ModelRoutingData;
+import com.larrainvial.logviwer.vo.LatencyVO;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -51,7 +53,7 @@ public class Helper {
 
     public static Boolean isNumber(String numero){
         try {
-            Integer.parseInt(numero);
+            Double.parseDouble(numero);
             return true;
 
         } catch (NumberFormatException nfe){
@@ -419,5 +421,57 @@ public class Helper {
         System.out.println(new Date());
         System.out.println(msg);
     }
+
+    public static Boolean isRouting(ModelRoutingData modelRoutingData){
+
+        if (modelRoutingData.messageByType.equals("D")) return true;
+        else if (modelRoutingData.messageByType.equals("G")) return true;
+        else if (modelRoutingData.messageByType.equals("F")) return true;
+        else if (modelRoutingData.messageByType.equals("8")) return true;
+        else if (modelRoutingData.messageByType.equals("9")) return true;
+        else return false;
+
+    }
+
+    public static Boolean isSolicitud(ModelRoutingData modelRoutingData){
+
+        if (modelRoutingData.messageByType.equals("D")) return true;
+        else if (modelRoutingData.messageByType.equals("G")) return true;
+        else if (modelRoutingData.messageByType.equals("F")) return true;
+        else return false;
+
+    }
+
+
+    public static Boolean isASK(ModelRoutingData modelRoutingData){
+
+        if (modelRoutingData.execType.equals("F")) return true;
+        else if (modelRoutingData.execType.equals("New")) return true;
+        else if (modelRoutingData.execType.equals("Cancel")) return true;
+        else if (modelRoutingData.execType.equals("Replaced")) return true;
+        else if (modelRoutingData.execType.equals("Rejected")) return true;
+        else if (modelRoutingData.execType.equals("Expired")) return true;
+        else if (modelRoutingData.execType.equals("Restated")) return true;
+        else if (modelRoutingData.execType.equals("Suspended")) return true;
+        else if (modelRoutingData.execType.equals("Done for day")) return true;
+        else return false;
+
+    }
+
+    public static void printLatency(LatencyVO latencyVO){
+
+        System.out.println();
+        System.out.println("Latency superior a 400 mm");
+        System.out.println("clOrdID " + latencyVO.clOrdID);
+        System.out.println("nameAlgo " + latencyVO.nameAlgo);
+        System.out.println("timeStart " + latencyVO.timeStart);
+        System.out.println("timeEnd " + latencyVO.timeEnd);
+        System.out.println("timeLatency " + latencyVO.timeLatency);
+        System.out.println(latencyVO.routing);
+        System.out.println();
+
+
+    }
+
 
 }

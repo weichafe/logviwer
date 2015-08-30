@@ -156,7 +156,8 @@ public class CalculateLastPrice {
 
             if (modelMarketData.closePx != 0.0 && algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx != 0.0) {
 
-                Long variacion = Math.round(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx)* 100) / 100;
+                Double variacion = Double.valueOf(Math.abs(algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx - modelMarketData.closePx));
+                variacion = Double.valueOf(Math.round(variacion * 100) / 100);
 
                 if (variacion >= Dolar.VARIACION_CAD){
 
@@ -172,6 +173,8 @@ public class CalculateLastPrice {
 
                 }
             }
+
+
 
             if (modelMarketData.messageByType.equals("W") || modelMarketData.messageByType.equals("X")){
 

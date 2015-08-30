@@ -2,6 +2,7 @@ package com.larrainvial.logviwer.fxvo;
 
 
 import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.vo.LatencyVO;
 import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -14,6 +15,34 @@ import java.util.Optional;
 
 public class Dialog {
 
+
+    public static synchronized void latency(LatencyVO latencyVO) {
+
+        try {
+
+            String text = "Name Algo : " + latencyVO.nameAlgo + "\n";
+            text += "ClOrdID: " + latencyVO.clOrdID + "\n";
+            text += "Routing: " + latencyVO.routing + "\n";
+            text += "Latency: " + latencyVO.timeLatency + " mm" + "\n";
+
+            final String finalText = text;
+
+            Platform.runLater(new Runnable() {
+
+                public void run() {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Latency");
+                    alert.setContentText(finalText);
+                    alert.showAndWait();
+                }
+            });
+
+        } catch (Exception ex) {
+            exception(ex);
+
+        }
+    }
 
 
     public static synchronized void about() {

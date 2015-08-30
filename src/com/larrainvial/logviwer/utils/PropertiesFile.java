@@ -12,16 +12,16 @@ public class PropertiesFile {
 
     private Properties properties;
     private static final String NAME = PropertiesFile.class.getSimpleName();
+    private OutputStream output = null;
+    private URL url;
+
 
     public PropertiesFile(URL url) {
 
-        properties = new Properties();
-        OutputStream output = null;
-
         try {
-
-            this.properties.load(url.openStream());
-            //output = new FileOutputStream(url.openStream());
+            this.url = url;
+            properties = new Properties();
+            properties.load(url.openStream());
 
 
         } catch (IOException e) {
@@ -30,12 +30,22 @@ public class PropertiesFile {
     }
 
     public String getPropertiesString(String key) {
+
         return properties.getProperty(key);
     }
 
     public void setPropertiesString(String key, String value) {
-         properties.setProperty(key, value);
-         //properties.store(output, null);
+
+        try {
+
+            output = new FileOutputStream(url.getPath());
+            properties.setProperty(key, value);
+            properties.store(output, null);
+            output.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

@@ -8,6 +8,7 @@ import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.CalculatePositions;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Latency;
 import com.larrainvial.logviwer.utils.StringToRoutingData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
@@ -31,7 +32,6 @@ public class RoutingAdrListener implements Listener {
             if (ev.lineFromLog.equals("")) return;
             if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
@@ -41,6 +41,9 @@ public class RoutingAdrListener implements Listener {
             if (modelRoutingData.execType.equals("Trade")) {
                  new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
             }
+
+
+            Latency.latencyADR(algo, modelRoutingData);
 
         } catch (Exception e){
             Dialog.exception(e);
