@@ -6,13 +6,14 @@ import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 
 public class PositionViewListener implements Listener {
 
     public Algo algo;
-
+    private static Logger logger = Logger.getLogger(PositionViewListener.class.getName());
 
     public PositionViewListener(Algo algo) {
 

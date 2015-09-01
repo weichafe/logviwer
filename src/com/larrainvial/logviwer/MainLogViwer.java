@@ -84,6 +84,7 @@ public class MainLogViwer extends Application {
         } catch (Exception e){
             e.printStackTrace();
             Dialog.exception(e);
+            log.error(e);
         }
 
     }
