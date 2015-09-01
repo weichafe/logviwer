@@ -17,13 +17,13 @@ public final class QuickFixAdapter extends MessageCracker implements Application
     public SocketAcceptor socketAcceptor;
     private SessionSettings sessionSettings;
 
-    public QuickFixAdapter(URL quickFixIniFile) {
+    public QuickFixAdapter(String quickFixIniFile) {
 
         try {
 
-            sessionSettings = new SessionSettings(quickFixIniFile.openStream());
+            sessionSettings = new SessionSettings(quickFixIniFile);
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
-            //com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
+            com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
 
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
             this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, defaultMessageFactory);

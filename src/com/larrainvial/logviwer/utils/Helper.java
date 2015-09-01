@@ -6,6 +6,7 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.vo.LatencyVO;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.*;
 
 public class Helper {
+
+    private static Logger logger = Logger.getLogger(Helper.class.getName());
 
     public void createStrategy() {
 
@@ -47,6 +50,7 @@ public class Helper {
 
         } catch (Exception e){
             e.printStackTrace();
+            logger.error(e);
         }
 
     }
@@ -343,6 +347,7 @@ public class Helper {
 
         } catch (Exception e) {
             Dialog.exception(e);
+            logger.error(e);
         }
 
         return null;
@@ -415,13 +420,6 @@ public class Helper {
 
     }
 
-    public static void  printerLog(String msg){
-        System.out.println();
-        System.out.println("----------------");
-        System.out.println(new Date());
-        System.out.println(msg);
-    }
-
     public static Boolean isRouting(ModelRoutingData modelRoutingData){
 
         if (modelRoutingData.messageByType.equals("D")) return true;
@@ -459,18 +457,22 @@ public class Helper {
     }
 
     public static void printLatency(LatencyVO latencyVO){
+        logger.info("Latency superior a 400 mm");
+        logger.info("clOrdID " + latencyVO.clOrdID);
+        logger.info("nameAlgo " + latencyVO.nameAlgo);
+        logger.info("timeStart " + latencyVO.timeStart);
+        logger.info("timeEnd " + latencyVO.timeEnd);
+        logger.info("timeLatency " + latencyVO.timeLatency);
+        logger.info(latencyVO.routing);
+        logger.info("----------");
+    }
 
-        System.out.println();
-        System.out.println("Latency superior a 400 mm");
-        System.out.println("clOrdID " + latencyVO.clOrdID);
-        System.out.println("nameAlgo " + latencyVO.nameAlgo);
-        System.out.println("timeStart " + latencyVO.timeStart);
-        System.out.println("timeEnd " + latencyVO.timeEnd);
-        System.out.println("timeLatency " + latencyVO.timeLatency);
-        System.out.println(latencyVO.routing);
-        System.out.println();
-
-
+    public static void  printerLog(String msg){
+        logger.info("----------------");
+        logger.info("\n");
+        logger.info(new Date());
+        logger.info(msg);
+        logger.info("\n");
     }
 
 

@@ -4,6 +4,7 @@ import com.larrainvial.logviwer.model.StrategyListWrapper;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Latency;
 import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.vo.StrategyVO;
 import javafx.application.Application;
@@ -15,6 +16,8 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.controlsfx.dialog.Dialogs;
 
 import javax.xml.bind.JAXBContext;
@@ -28,15 +31,21 @@ import java.util.prefs.Preferences;
 public class MainLogViwer extends Application {
 
     private ObservableList<StrategyVO> strategyData = FXCollections.observableArrayList();
+    private static Logger log = Logger.getLogger(MainLogViwer.class.getName());
+    private String log4jConfPath = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\log4j.properties";
+
 
 
     public void start(Stage primaryStage) {
 
         try {
 
-            URL urlIni = ClassLoader.getSystemResource("resources/logviewer.properties");
+            PropertyConfigurator.configure(log4jConfPath);
+            Repository.logviewer  = new PropertiesFile("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\logviewer.properties");
 
-            Repository.logviewer  = new PropertiesFile(urlIni);
+
+            Latency.LATENCY_MIN = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MIN"));
+            Latency.LATENCY_MAX = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MAX"));
 
             Dolar.VARIACION_CLP = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CLP"));
             Dolar.VARIACION_CAD = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CAD"));
@@ -46,10 +55,10 @@ public class MainLogViwer extends Application {
             Dolar.CAD = Repository.logviewer.getPropertiesString("CAD");
             Dolar.COFX = Repository.logviewer.getPropertiesString("COFX");
 
-            System.out.print("Inicializando servidor... ");
+            log.info("Inicializando servidor... ");
 
             Repository.primaryStage = primaryStage;
-            Repository.primaryStage.setTitle("Log Viwer");
+            Repository.primaryStage.setTitle("Log Viewer");
 
             Repository.rootLayout_Loader.setLocation(MainLogViwer.class.getResource("view/rootLayout.fxml"));
             BorderPane rootLayout_Loader = (BorderPane) Repository.rootLayout_Loader.load();
@@ -75,7 +84,6 @@ public class MainLogViwer extends Application {
         } catch (Exception e){
             e.printStackTrace();
             Dialog.exception(e);
-            //System.exit(0);
         }
 
     }

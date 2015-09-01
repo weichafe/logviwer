@@ -6,6 +6,8 @@ import com.larrainvial.sellside.MainSellSide;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Date;
+
 public class MainApp extends Application {
 
     @Override

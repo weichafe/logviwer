@@ -6,6 +6,7 @@ import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.trading.emp.Controller;
+import java.util.logging.Logger;
 
 
 public class CalculateLastPrice {
@@ -19,6 +20,8 @@ public class CalculateLastPrice {
     private final String BUY_CERO_DOLAR = "BUY DOLAR CERO";
     private final String SELL_CERO_DOLAR = "SELL DOLAR CERO";
     private final String DOLAR_PX = "DOLAR PX : ";
+
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Helper.class.getName());
 
 
     public CalculateLastPrice(Algo algo, ModelMarketData modelMarketData, String type_market) {
@@ -99,6 +102,7 @@ public class CalculateLastPrice {
 
                 if (variacion >= Dolar.VARIACION_CLP){
 
+                    logger.info("-----------------");
                     String msgAlerta = algo.nameAlgo + "\n";
                     msgAlerta += modelMarketData.symbol + "\n";
                     msgAlerta += VARIACION + "\n\n";
@@ -107,7 +111,6 @@ public class CalculateLastPrice {
                     msgAlerta += "Variacion:\t " + variacion;
                     Dialog.alert("VARIACION", msgAlerta);
 
-                    Dialog.alert("VARIACION", msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
             }
@@ -116,12 +119,12 @@ public class CalculateLastPrice {
 
                 if (modelMarketData.closePx == 0.0){
 
+                    logger.info("-----------------");
                     String msgAlerta = algo.nameAlgo + "\n";
                     msgAlerta += modelMarketData.hour + "\n";
                     msgAlerta += CLOSE_CERO_DOLAR + "\n";
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
-
                     Dialog.alert("", msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }

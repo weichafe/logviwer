@@ -5,20 +5,13 @@
 <TabPane blendMode="SRC_OVER" layoutX="0.0" layoutY="0.0" prefHeight="897.0" prefWidth="768" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <tabs>
 
-
-    <!--Tab text="Sell Side">
-      <content>
-        <Pane prefHeight="864.0" prefWidth="1026.0" />
-      </content>
-    </Tab-->
-
-    <Tab text="Latency">
+    <Tab text="Ignition">
       <content>
         <Pane prefHeight="864.0" prefWidth="768" />
       </content>
     </Tab>
 
-    <Tab text="Ignition">
+    <Tab text="indefinido">
       <content>
         <Pane prefHeight="864.0" prefWidth="768" />
       </content>

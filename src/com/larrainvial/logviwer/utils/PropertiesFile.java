@@ -2,6 +2,7 @@ package com.larrainvial.logviwer.utils;
 
 import com.larrainvial.trading.utils.Logger;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,12 +17,12 @@ public class PropertiesFile {
     private URL url;
 
 
-    public PropertiesFile(URL url) {
+    public PropertiesFile(String url) {
 
         try {
-            this.url = url;
+            //this.url = url;
             properties = new Properties();
-            properties.load(url.openStream());
+            properties.load(new FileInputStream(url));
 
 
         } catch (IOException e) {

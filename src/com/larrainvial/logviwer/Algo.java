@@ -46,6 +46,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,6 +55,8 @@ import java.util.*;
 
 public class Algo {
 
+    private static Logger logger = Logger.getLogger(Algo.class.getName());
+
     public String nameAlgo;
     public String mkdDolar;
     public String mkdLocal;
@@ -61,6 +64,7 @@ public class Algo {
     public String routingLocal;
     public String routingAdr;
     public double time;
+    public int countOrder = 0;
 
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
     public FXMLLoader sellSideLoader = new FXMLLoader();
@@ -291,7 +295,7 @@ public class Algo {
                         if (cofxvar.getText() != null){
                             if (Helper.isNumber(cofxvar.getText())) {
                                 Dolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
-                                System.out.println(cofxvar.getText());
+                                logger.info(cofxvar.getText());
                             }
 
                         }
@@ -299,14 +303,14 @@ public class Algo {
                         if (cadvar.getText() != null) {
                             if (Helper.isNumber(cadvar.getText())) {
                                 Dolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
-                                System.out.println(Dolar.VARIACION_CAD);
+                                logger.info(Dolar.VARIACION_CAD);
                             }
                         }
 
                         if (clpvar.getText() != null) {
                             if (Helper.isNumber(clpvar.getText())) {
                                 Dolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
-                                System.out.println(Dolar.VARIACION_CLP);
+                                logger.info(Dolar.VARIACION_CLP);
                             }
                         }
                     }
@@ -317,6 +321,7 @@ public class Algo {
             Graph.newLineChart(this);
 
             HBox graph = new HBox();
+            graph.setPrefHeight(350);
             graph.getChildren().add(lineChart);
             general.getChildren().add(graph);
 
