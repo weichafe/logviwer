@@ -7,12 +7,14 @@ import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 
 public class ReadFromDolarListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(ReadFromDolarListener.class.getName());
 
     public ReadFromDolarListener(Algo algo){
         this.algo = algo;
@@ -36,6 +38,7 @@ public class ReadFromDolarListener implements Listener {
 
         } catch (Exception e) {
             Dialog.exception(e);
+            logger.error(e);
         }
 
     }

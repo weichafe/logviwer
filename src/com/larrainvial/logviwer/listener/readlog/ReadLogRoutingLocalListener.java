@@ -7,12 +7,14 @@ import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 
 public class ReadLogRoutingLocalListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(ReadLogRoutingLocalListener.class.getName());
 
     public ReadLogRoutingLocalListener(Algo algo){
         this.algo = algo;
