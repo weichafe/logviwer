@@ -4,6 +4,8 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.readlog.ReadFromDolarEvent;
 import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
@@ -14,7 +16,6 @@ import java.util.Scanner;
 public class ReadFromDolarListener implements Listener {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(ReadFromDolarListener.class.getName());
 
     public ReadFromDolarListener(Algo algo){
         this.algo = algo;
@@ -37,8 +38,9 @@ public class ReadFromDolarListener implements Listener {
 
 
         } catch (Exception e) {
-            Dialog.exception(e);
-            logger.error(e);
+            e.printStackTrace();
+            Helper.printerLog(e.getMessage().toString());
+            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
         }
 
     }

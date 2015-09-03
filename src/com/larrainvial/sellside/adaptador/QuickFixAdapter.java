@@ -1,5 +1,6 @@
 package com.larrainvial.sellside.adaptador;
 
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedNewOrderSingleEvent;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelReplaceRequestEvent;
@@ -26,9 +27,11 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
 
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
-            this.socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, defaultMessageFactory);
+            socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;
             Repository.socketAcceptor.start();
+
+            Notifier.INSTANCE.notifySuccess("Success", "Sell Side");
 
         } catch (Exception e) {
             e.printStackTrace(System.out);

@@ -42,28 +42,47 @@ public class SwitchButton extends Label {
 
                     if (switchBtn.getId().equals("Dolar")) {
                         algo.mkdDolarToggle = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
                         algo.mkdAdrToggle = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
                         algo.mkdLocalToggle = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
                         algo.routingLocalToggle = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
                         algo.routingAdrToggle = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                     }
+
+
 
                     if (switchBtn.getId().equals("Routing")) {
 
                         try {
-
+                            switchBtn.setText(nameType + " ON");
+                            switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                            switchBtn.setContentDisplay(ContentDisplay.RIGHT);
                             algo.routingAdrToggle = true;
                             QuickFixAdapter.start();
 
@@ -80,39 +99,79 @@ public class SwitchButton extends Label {
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
-                    } else {
+                    }
+
+                    /*else {
+
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
+                    }
+                    */
+
+                    if (switchBtn.getId().equals("Graph")) {
+                        algo.graphEnable = false;
+
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
+
+                    }
+                    /*
+                    else {
 
                         switchBtn.setText(nameType + " ON");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.RIGHT);
 
                     }
+                    */
+
+
 
                 } else {
 
                     if (switchBtn.getId().equals("Dolar")) {
                         algo.mkdDolarToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
                     if (switchBtn.getId().equals("MKD ADR")) {
                         algo.mkdAdrToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
                     if (switchBtn.getId().equals("MKD Local")) {
                         algo.mkdLocalToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
                     if (switchBtn.getId().equals("Routing Local")) {
                         algo.routingLocalToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
                     if (switchBtn.getId().equals("Routing ADR")) {
                         algo.routingAdrToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
                     if (switchBtn.getId().equals("Routing")) {
 
                         algo.routingAdrToggle = false;
+                        switchBtn.setText(nameType + " OFF");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                         try {
                             QuickFixAdapter.strop();
@@ -123,19 +182,31 @@ public class SwitchButton extends Label {
                     }
 
                     if (switchBtn.getId().equals("Alert")) {
-
                         algo.setAlert(true);
                         switchBtn.setText(nameType + " ON");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.RIGHT);
 
-                    } else {
+                    }
+
+
+                    if (switchBtn.getId().equals("Graph")) {
+                        algo.graphEnable = true;
+                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
+
+                    }
+
+                    /*
+                    else {
 
                         switchBtn.setText(nameType + " OFF");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                     }
+                    */
 
                 }
             }

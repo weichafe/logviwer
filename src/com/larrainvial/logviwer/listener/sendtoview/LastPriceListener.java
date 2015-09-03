@@ -5,8 +5,11 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import javafx.application.Platform;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
@@ -14,7 +17,6 @@ import java.util.Map;
 public class LastPriceListener implements Listener {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
 
     public LastPriceListener(Algo algo){
         this.algo = algo;
@@ -44,9 +46,7 @@ public class LastPriceListener implements Listener {
                         algo.countLastPrice++;
 
                     } else {
-
                         algo.lastPriceTableView.getItems().set(algo.lastPrice.get(e.getKey()), modelMarketData);
-
                     }
 
                 }
@@ -54,8 +54,9 @@ public class LastPriceListener implements Listener {
             }
 
         } catch (Exception e) {
-            Dialog.exception(e);
             e.printStackTrace();
+            Helper.printerLog(e.getMessage().toString());
+            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
         }
 
 

@@ -31,7 +31,7 @@ public class MainSellSide {
             new QuickFixAdapter("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\sessionFile.ini");
             Control.initialize();
 
-            Algo algo = new Algo(1);
+            Algo algo = new Algo(0);
 
 
         } catch (Exception e) {

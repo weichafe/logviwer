@@ -1,20 +1,24 @@
 package com.larrainvial.logviwer.fxvo;
 
-
 import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.vo.LatencyVO;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-
+import javafx.scene.layout.*;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Optional;
 
 public class Dialog {
-
 
     public static synchronized void latency(LatencyVO latencyVO) {
 
@@ -28,18 +32,17 @@ public class Dialog {
             final String finalText = text;
 
             Platform.runLater(new Runnable() {
-
                 public void run() {
-
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Latency");
-                    alert.setContentText(finalText);
-                    alert.showAndWait();
+                    Notifier.INSTANCE.notifyWarning("Latency", finalText);
                 }
             });
 
-        } catch (Exception ex) {
-            exception(ex);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
 
         }
     }
@@ -60,90 +63,12 @@ public class Dialog {
                 }
             });
 
-        } catch (Exception ex) {
-            exception(ex);
-
-        }
-    }
-
-    public static synchronized void exception(Exception e) {
-
-        try {
-
-            Platform.runLater(new Runnable() {
-
-                public void run() {
-
-                    if (!Repository.exception) return;
-
-                    Alert alertException = new Alert(Alert.AlertType.ERROR);
-                    alertException.setTitle("Exception Dialog");
-                    alertException.setHeaderText("Look, an Exception Dialog");
-                    alertException.setContentText(e.toString());
-
-                    Exception ex = new FileNotFoundException(e.toString());
-
-                    StringWriter sw = new StringWriter();
-                    PrintWriter pw = new PrintWriter(sw);
-                    ex.printStackTrace(pw);
-                    String exceptionText = sw.toString();
-
-                    Label label = new Label("The exception stacktrace was:");
-
-                    TextArea textArea = new TextArea(exceptionText);
-                    textArea.setEditable(false);
-                    textArea.setWrapText(true);
-
-                    textArea.setMaxWidth(Double.MAX_VALUE);
-                    textArea.setMaxHeight(Double.MAX_VALUE);
-                    GridPane.setVgrow(textArea, Priority.ALWAYS);
-                    GridPane.setHgrow(textArea, Priority.ALWAYS);
-
-                    GridPane expContent = new GridPane();
-                    expContent.setMaxWidth(Double.MAX_VALUE);
-                    expContent.add(label, 0, 0);
-                    expContent.add(textArea, 0, 1);
-
-                    alertException.getDialogPane().setExpandableContent(expContent);
-
-                    Repository.exception = false;
-                    Optional<ButtonType> result = alertException.showAndWait();
-
-                    if (result.get() == ButtonType.OK) {
-                        Repository.exception = true;
-                    }
-
-
-                }
-            });
-
+        } catch (Exception e) {
             e.printStackTrace();
-
-        }catch (Exception ex){
-            ex.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
 
         }
     }
 
-    public static synchronized void alert(String headerText, String contentText1){
-
-        Platform.runLater(new Runnable() {
-            public void run() {
-
-                if(!Repository.alertBloolean) return;
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Alert");
-                alert.setHeaderText(headerText);
-                alert.setContentText(contentText1);
-
-                Repository.alertBloolean = false;
-                Optional<ButtonType> result = alert.showAndWait();
-
-                if (result.get() == ButtonType.OK){
-                    Repository.alertBloolean = true;
-                }
-            }
-        });
-    }
 }

@@ -19,7 +19,9 @@ public class CalculatePositions {
             this.calculatePositions();
 
         } catch (Exception e){
-            Dialog.exception(e);
+            e.printStackTrace();
+            Helper.printerLog(e.getMessage().toString());
+            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
         }
     }
 
@@ -43,6 +45,7 @@ public class CalculatePositions {
             positions.positions = helper.positions(keyHashPositions);
         }
 
+
         if (modelRoutingData.side.equals("Buy")) {
 
             if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
@@ -50,6 +53,7 @@ public class CalculatePositions {
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
+                positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr) * 100 )/ 100;
 
 
             } else {
@@ -67,11 +71,13 @@ public class CalculatePositions {
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
+                positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr) * 100 )/ 100;
 
             } else {
 
                 positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;
                 positions.symbolAdr = modelRoutingData.getSymbol();
+
 
             }
 

@@ -5,15 +5,27 @@ import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Latency;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.vo.StrategyVO;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;
@@ -25,6 +37,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.prefs.Preferences;
 
 
@@ -32,7 +45,7 @@ public class MainLogViwer extends Application {
 
     private ObservableList<StrategyVO> strategyData = FXCollections.observableArrayList();
     private static Logger log = Logger.getLogger(MainLogViwer.class.getName());
-    private String log4jConfPath = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\log4j.properties";
+    private String log4jConfPath = Repository.location + "log4j.properties";
 
 
 
@@ -41,11 +54,11 @@ public class MainLogViwer extends Application {
         try {
 
             PropertyConfigurator.configure(log4jConfPath);
-            Repository.logviewer  = new PropertiesFile("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\logviewer.properties");
-
+            Repository.logviewer  = new PropertiesFile(Repository.location + "logviewer.properties");
 
             Latency.LATENCY_MIN = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MIN"));
             Latency.LATENCY_MAX = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MAX"));
+            Latency.LATENCY_GRAPH = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_GRAPH"));
 
             Dolar.VARIACION_CLP = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CLP"));
             Dolar.VARIACION_CAD = Double.valueOf(Repository.logviewer.getPropertiesString("VARIACION_CAD"));
@@ -69,7 +82,6 @@ public class MainLogViwer extends Application {
 
             Repository.scene = new Scene(rootLayout_Loader);
             primaryStage.setScene(Repository.scene);
-
             primaryStage.show();
 
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -81,10 +93,11 @@ public class MainLogViwer extends Application {
             Helper helper = new Helper();
             helper.createStrategy();
 
+
         } catch (Exception e){
             e.printStackTrace();
-            Dialog.exception(e);
-            log.error(e);
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
 
     }
@@ -131,10 +144,9 @@ public class MainLogViwer extends Application {
             setPersonFilePath(file);
 
         } catch (Exception e) {
-            Dialogs.create().title("Error")
-                    .masthead("Could not save data to file:\n" + file.getPath())
-                    .showException(e);
-
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
     }
 
@@ -153,11 +165,9 @@ public class MainLogViwer extends Application {
             setPersonFilePath(file);
 
         } catch (Exception e) { // catches ANY exception
-            Dialogs.create()
-                    .title("Error")
-                    .masthead("Could not load data from file:\n" + file.getPath())
-                    .showException(e);
-
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
     }
 

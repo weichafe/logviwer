@@ -1,11 +1,13 @@
 package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.AlertEvent;
+import com.larrainvial.logviwer.event.utils.AlertEvent;
+import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
 import com.larrainvial.logviwer.event.stringtofix.MarketDataLocalEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.utils.CalculateLastPrice;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.utils.StringToMarketData;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
@@ -34,11 +36,14 @@ public class MarketDataLocalListener implements Listener {
             ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
             Controller.dispatchEvent(new AlertEvent(algo, modelMarketData, TYPE_MARKET));
+            Controller.dispatchEvent(new CalculateLastPriceEvent(algo, modelMarketData, TYPE_MARKET));
 
-            new CalculateLastPrice(algo, modelMarketData, TYPE_MARKET);
+            //new CalculateLastPrice(algo, modelMarketData, TYPE_MARKET);
 
         } catch (Exception e){
-            Dialog.exception(e);
+            e.printStackTrace();
+            Helper.printerLog(e.getMessage().toString());
+            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
         }
 
     }

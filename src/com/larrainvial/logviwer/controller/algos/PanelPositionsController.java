@@ -20,6 +20,12 @@ public class PanelPositionsController {
     private TableColumn<ModelPositions, String> symbolLocal;
 
     @FXML
+    private TableColumn<ModelPositions, String> differenceInflow;
+
+    @FXML
+    private TableColumn<ModelPositions, String> differenceFlowback;
+
+    @FXML
     private TableColumn<ModelPositions, String> symbolAdr;
 
     @FXML
@@ -61,8 +67,49 @@ public class PanelPositionsController {
         qtySellAdr.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtySellAdr.toString()));
         qtySellLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtySellLocalRatio.toString()));
         qtyBuyLocalRatio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().qtyBuyLocalRatio.toString()));
+        differenceFlowback.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().differenceflowback.toString()));
+        differenceInflow.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().differenceInflow.toString()));
 
         ratio.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().ratio.toString()));
+
+
+        differenceInflow.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        if (item == null || empty) {
+                            setText("");
+                        } else {
+                            setText(numFormat.format(Double.valueOf(item)));
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            };
+        });
+
+        differenceFlowback.setCellFactory(column -> {
+            return new TableCell<ModelPositions, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item == null || empty) {
+                        setText("");
+                    } else {
+                        setText(numFormat.format(Double.valueOf(item)));
+                    }
+
+                }
+            };
+        });
 
         qtyBuyLocal.setCellFactory(column -> {
             return new TableCell<ModelPositions, String>() {
@@ -210,6 +257,8 @@ public class PanelPositionsController {
     private synchronized void refreshTableView() {
 
         positionTable.setVisible(true);
+        differenceFlowback.setVisible(true);
+        differenceInflow.setVisible(true);
         symbolLocal.setVisible(true);
         symbolAdr.setVisible(true);
         qtyBuyLocal.setVisible(true);

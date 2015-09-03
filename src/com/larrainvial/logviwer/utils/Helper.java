@@ -16,6 +16,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -28,12 +29,12 @@ public class Helper {
 
         try {
 
-            URL strategyPath = ClassLoader.getSystemResource("resources/strategy.xml");
+            File xmlFile = new File("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\strategy.xml");
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(strategyPath.openStream());
+            Document document = builder.parse(xmlFile);
 
             NodeList nodeList = document.getDocumentElement().getChildNodes();
             int tab = 0;
@@ -346,8 +347,9 @@ public class Helper {
             return orderedFixMessage;
 
         } catch (Exception e) {
-            Dialog.exception(e);
-            logger.error(e);
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
 
         return null;

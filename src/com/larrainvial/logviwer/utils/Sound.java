@@ -1,6 +1,9 @@
 package com.larrainvial.logviwer.utils;
 
+import com.larrainvial.logviwer.Repository;
+
 import javax.sound.sampled.*;
+import java.io.File;
 import java.net.URL;
 
 public class Sound {
@@ -9,7 +12,7 @@ public class Sound {
 
         try {
 
-            URL urlSound = ClassLoader.getSystemResource("resources/tos-redalert.wav");
+            File urlSound = new File(Repository.location + "tos-redalert.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(urlSound);
 
             AudioFormat format = audioStream.getFormat();

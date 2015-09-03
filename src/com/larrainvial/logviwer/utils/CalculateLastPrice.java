@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 
 public class CalculateLastPrice {
 
+    private static Logger logger = Logger.getLogger(CalculateLastPrice.class.getName());
+
     private ModelMarketData modelMarketData;
     private Algo algo;
     private String type_market;
@@ -21,7 +23,6 @@ public class CalculateLastPrice {
     private final String SELL_CERO_DOLAR = "SELL DOLAR CERO";
     private final String DOLAR_PX = "DOLAR PX : ";
 
-    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Helper.class.getName());
 
 
     public CalculateLastPrice(Algo algo, ModelMarketData modelMarketData, String type_market) {
@@ -34,7 +35,9 @@ public class CalculateLastPrice {
             this.calculateLastPrice();
 
         } catch (Exception e) {
-            Dialog.exception(e);
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
     }
 
@@ -109,8 +112,9 @@ public class CalculateLastPrice {
                     msgAlerta += algo.lastPriceMasterListHash.get(modelMarketData.symbol).hour + "\t" + algo.lastPriceMasterListHash.get(modelMarketData.symbol).closePx.toString()+ "\n";
                     msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
                     msgAlerta += "Variacion:\t " + variacion;
-                    Dialog.alert("VARIACION", msgAlerta);
 
+
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
             }
@@ -125,7 +129,8 @@ public class CalculateLastPrice {
                     msgAlerta += CLOSE_CERO_DOLAR + "\n";
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
-                    Dialog.alert("", msgAlerta);
+
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
 
@@ -137,7 +142,7 @@ public class CalculateLastPrice {
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
 
-                    Dialog.alert("", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
 
@@ -149,7 +154,7 @@ public class CalculateLastPrice {
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
 
-                    Dialog.alert("", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
             }
@@ -171,7 +176,7 @@ public class CalculateLastPrice {
                     msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
                     msgAlerta += "Variacion :\t " + variacion;
 
-                    Dialog.alert("VARIACION", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(VARIACION, msgAlerta);
                     Helper.printerLog(msgAlerta);
 
                 }
@@ -189,7 +194,7 @@ public class CalculateLastPrice {
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
 
-                    Dialog.alert("", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(VARIACION, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
             }
@@ -211,7 +216,7 @@ public class CalculateLastPrice {
                     msgAlerta += modelMarketData.hour + "\t" + modelMarketData.closePx.toString() + "\n";
                     msgAlerta += "Variacion :\t " + variacion;
 
-                    Dialog.alert("VARIACION", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
 
                 }
@@ -227,7 +232,7 @@ public class CalculateLastPrice {
                     msgAlerta += DOLAR_PX + "\n";
                     msgAlerta += modelMarketData.closePx.toString() + "\n";
 
-                    Dialog.alert("", msgAlerta);
+                    Notifier.INSTANCE.notifyWarning(algo.nameAlgo, msgAlerta);
                     Helper.printerLog(msgAlerta);
                 }
             }

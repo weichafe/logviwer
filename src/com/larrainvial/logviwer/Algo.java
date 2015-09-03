@@ -2,17 +2,21 @@ package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
-import com.larrainvial.logviwer.event.AlertEvent;
+import com.larrainvial.logviwer.event.utils.AlertEvent;
 import com.larrainvial.logviwer.event.readlog.*;
+import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.*;
+import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
 import com.larrainvial.logviwer.fxvo.Graph;
-import com.larrainvial.logviwer.listener.AlertListener;
+import com.larrainvial.logviwer.listener.util.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
+import com.larrainvial.logviwer.listener.util.CalculateLastPriceListener;
 import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
 import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
+import com.larrainvial.logviwer.listener.util.CalculatePositionsListener;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
@@ -20,6 +24,7 @@ import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.fxvo.SwitchButton;
 import com.larrainvial.logviwer.utils.Helper;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.vo.LatencyVO;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.sellside.controller.SellSideController;
@@ -32,20 +37,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -64,7 +62,7 @@ public class Algo {
     public String routingLocal;
     public String routingAdr;
     public double time;
-    public int countOrder = 0;
+    public int countQtyOrderLocal = 0;
 
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
     public FXMLLoader sellSideLoader = new FXMLLoader();
@@ -110,6 +108,7 @@ public class Algo {
     public ReadLogMkdLocalListener readLogMkdLocalListener;
     public ReadlogRoutingAdrListener readlogRoutingAdrListener;
     public ReadLogRoutingLocalListener readLogRoutingLocalListener;
+    public CalculatePositionsListener calculatePositionsListener;
 
     public LastPriceListener lastPriceListener;
     public PositionViewListener positionViewListener;
@@ -118,8 +117,8 @@ public class Algo {
     public MarketDataLocalListener marketDataLocalListener;
     public RoutingAdrListener routingAdrListener;
     public RoutingLocalListener routingLocalListener;
+    public CalculateLastPriceListener calculateLastPriceListener;
     public AlertListener alertListener;
-
 
     //Button Options
     public Button buttonAlert;
@@ -128,11 +127,13 @@ public class Algo {
     public Button buttonMKDLocal;
     public Button buttonMDKDAdr;
     public Button buttonDolar;
+    public Button graphButton;
 
     //GRAPH
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
     public LineChart<Number,Number> lineChart;
+    public boolean graphEnable  = false;
 
     //LATENCY
     public Map<String, LatencyVO> latencyADR = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
@@ -182,8 +183,9 @@ public class Algo {
 
             HBox options = new HBox();
             options.setPrefHeight(100);
+
             options.setSpacing(20);
-            options.setPadding(new Insets(40, 40, 20, 10));
+            options.setPadding(new Insets(40, 40, 20, 20));
 
             VBox general = new VBox();
             general.getChildren().addAll(options, grill);
@@ -204,6 +206,14 @@ public class Algo {
             SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
             Button switchBtn6 = switchButtonAlert.returnButton();
             this.buttonAlert =  switchBtn6;
+
+            SwitchButton graphSwith = new SwitchButton("Graph", this);
+            Button switchBtn7 = graphSwith.returnButton();
+            this.graphButton = switchBtn7;
+
+            VBox vBoxgraph = new VBox();
+            vBoxgraph.getChildren().add(graphSwith);
+            options.getChildren().add(vBoxgraph);
 
             VBox vBox = new VBox();
             vBox.getChildren().add(switchButtonAlert);
@@ -241,7 +251,6 @@ public class Algo {
             HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
             options.getChildren().add(HBosRouting_Local);
 
-
             SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
             Button switchBtn5 = switchButtonRouting_Adr.returnButton();
             this.buttonRoutingADR = switchBtn5;
@@ -249,6 +258,8 @@ public class Algo {
             VBox HBosRouting_Adr = new VBox();
             HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
             options.getChildren().add(HBosRouting_Adr);
+
+
 
 
             if (nameAlgo.startsWith("ADR")){
@@ -276,7 +287,7 @@ public class Algo {
 
                 HBox variacion = new HBox();
                 variacion.setSpacing(10);
-                variacion.setPadding(new Insets(0, 0, 0, 60));
+                variacion.setPadding(new Insets(0, 0, 0, 80));
                 variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
                 options.getChildren().add(variacion);
 
@@ -295,6 +306,7 @@ public class Algo {
                         if (cofxvar.getText() != null){
                             if (Helper.isNumber(cofxvar.getText())) {
                                 Dolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
+                                Notifier.INSTANCE.notifySuccess("COFX Index", "Variacion: " + cofxvar.getText());
                                 logger.info(cofxvar.getText());
                             }
 
@@ -303,6 +315,7 @@ public class Algo {
                         if (cadvar.getText() != null) {
                             if (Helper.isNumber(cadvar.getText())) {
                                 Dolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
+                                Notifier.INSTANCE.notifySuccess("CAD Curncy", "Variacion: " + cadvar.getText());
                                 logger.info(Dolar.VARIACION_CAD);
                             }
                         }
@@ -310,6 +323,7 @@ public class Algo {
                         if (clpvar.getText() != null) {
                             if (Helper.isNumber(clpvar.getText())) {
                                 Dolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
+                                Notifier.INSTANCE.notifySuccess("CLP", "Variacion: " + clpvar.getText());
                                 logger.info(Dolar.VARIACION_CLP);
                             }
                         }
@@ -321,10 +335,9 @@ public class Algo {
             Graph.newLineChart(this);
 
             HBox graph = new HBox();
-            graph.setPrefHeight(350);
+            graph.setPrefHeight(400);
             graph.getChildren().add(lineChart);
             general.getChildren().add(graph);
-
 
             ScrollPane scrollBar = new ScrollPane();
             scrollBar.prefHeightProperty().bind(general.heightProperty());
@@ -332,8 +345,8 @@ public class Algo {
             scrollBar.setContent(general);
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+2).setContent(scrollBar);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+2).setText(this.nameAlgo);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+1).setContent(scrollBar);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+1).setText(this.nameAlgo);
 
             PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();
             panelPositionsTableView = panelLocalLoader.getType();
@@ -346,6 +359,7 @@ public class Algo {
             readLogMkdLocalListener = new ReadLogMkdLocalListener(this);
             readlogRoutingAdrListener = new ReadlogRoutingAdrListener(this);
             readLogRoutingLocalListener = new ReadLogRoutingLocalListener(this);
+            calculateLastPriceListener = new CalculateLastPriceListener(this);
 
             dolarListener =  new DolarListener(this);
             marketDataAdrListener = new MarketDataAdrListener(this);
@@ -353,7 +367,7 @@ public class Algo {
             routingAdrListener = new RoutingAdrListener(this);
             routingLocalListener = new RoutingLocalListener(this);
             alertListener = new AlertListener(this);
-
+            calculatePositionsListener = new CalculatePositionsListener(this);
             lastPriceListener = new LastPriceListener(this);
             positionViewListener = new PositionViewListener(this);
 
@@ -363,9 +377,10 @@ public class Algo {
             Controller.addEventListener(ReadLogMkdLocalEvent.class, readLogMkdLocalListener);
             Controller.addEventListener(ReadlogRoutingAdrEvent.class, readlogRoutingAdrListener);
             Controller.addEventListener(ReadLogRoutingLocalEvent.class, readLogRoutingLocalListener);
+            Controller.addEventListener(CalculateLastPriceEvent.class, calculateLastPriceListener);
+            Controller.addEventListener(CalculatePositionsEvent.class, calculatePositionsListener);
 
             Controller.addEventListener(LastPriceEvent.class, lastPriceListener);
-
             Controller.addEventListener(DolarEvent.class, dolarListener);
             Controller.addEventListener(MarketDataADREvent.class, marketDataAdrListener);
             Controller.addEventListener(MarketDataLocalEvent.class, marketDataLocalListener);
@@ -378,7 +393,9 @@ public class Algo {
             start(booleanDolar, booleanMLocal, booleanMAdr, booleanRLocal, booleanRAdr);
 
         } catch (Exception e){
-            Dialog.exception(e);
+            e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
     }
 
@@ -445,6 +462,8 @@ public class Algo {
 
         } catch (Exception e){
             e.printStackTrace();
+            Helper.printerLog(e.toString());
+            Notifier.INSTANCE.notifyError("Error", e.toString());
         }
 
 
@@ -474,7 +493,9 @@ public class Algo {
                     try {
                         start(dolar, mLocal, mAdr, rLocal, rAdr);
                     } catch (Exception e) {
-                        Dialog.exception(e);
+                        e.printStackTrace();
+                        Helper.printerLog(e.toString());
+                        Notifier.INSTANCE.notifyError("Error", e.toString());
                     }
                 }
 
@@ -528,4 +549,5 @@ public class Algo {
 
 
 }
+
 

@@ -10,12 +10,11 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class Latency {
-
 
     public static int LATENCY_MIN;
     public static int LATENCY_MAX;
+    public static int LATENCY_GRAPH;
 
     public static void latencyLocal(Algo algo, ModelRoutingData modelRoutingData) {
 
@@ -34,7 +33,9 @@ public class Latency {
                     latencyVO.timeEnd = time(modelRoutingData.getHour().trim());
                     latencyVO.timeLatency = latencyVO.timeEnd - latencyVO.timeStart;
 
-                    algo.localRouting.getData().add(new XYChart.Data(algo.countOrder++, latencyVO.timeLatency));
+                    if (latencyVO.timeLatency >= LATENCY_GRAPH){
+                        algo.localRouting.getData().add(new XYChart.Data(algo.countQtyOrderLocal++, latencyVO.timeLatency));
+                    }
 
                     if (latencyVO.timeLatency >= LATENCY_MIN){
                         Helper.printLatency(latencyVO);
@@ -84,7 +85,7 @@ public class Latency {
                     latencyVO.timeEnd = time(modelRoutingData.getHour().trim());
                     latencyVO.timeLatency = latencyVO.timeEnd - latencyVO.timeStart;
 
-                    algo.adrRouting.getData().add(new XYChart.Data(algo.countOrder++, latencyVO.timeLatency));
+                    algo.adrRouting.getData().add(new XYChart.Data(algo.countQtyOrderLocal++, latencyVO.timeLatency));
 
                     if (latencyVO.timeLatency >= LATENCY_MIN){
                         Helper.printLatency(latencyVO);

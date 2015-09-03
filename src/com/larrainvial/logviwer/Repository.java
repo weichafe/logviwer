@@ -22,8 +22,8 @@ public class  Repository {
     public static boolean alertBloolean = true;
     public static String year = new SimpleDateFormat("yyyy/MM/dd").format(new Date()).replace("/", "");
 
-    public static final int LATENCY_MIN = 400;
-    public static final int LATENCY_MAX = 1400;
+    public static String location = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\";
+
 
 
 

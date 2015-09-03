@@ -35,7 +35,7 @@ public class Repository {
     public static final String IB = "IB";
     public static final String FCSTONE = "FCSTONE";
 
-
+    public static String location = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\";
 
 
 }

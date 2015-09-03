@@ -3,18 +3,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane layoutX="800" layoutY="100" prefHeight="200" prefWidth="780" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.PanelPositionsController">
+<AnchorPane layoutX="800" layoutY="100" prefHeight="200" prefWidth="985" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.PanelPositionsController">
   <children>
-    <TableView fx:id="positionTable" layoutX="18.0" layoutY="9" prefHeight="350" prefWidth="780" >
+    <TableView fx:id="positionTable" layoutX="18.0" layoutY="9" prefHeight="350" prefWidth="985" >
       <columns>
         <TableColumn prefWidth="110" style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" />
         <TableColumn prefWidth="80" style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" />
 
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocalRatio" text="Inflow" />
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellAdr" text="Inflow" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="differenceInflow" text="Difference" />
 
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;"  fx:id="qtySellLocalRatio" text="Flowback" />
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyAdr" text="Flowback" />
+        <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="differenceFlowback" text="Difference" />
 
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtyBuyLocal" text="Local Buy" />
         <TableColumn prefWidth="90" style="-fx-alignment: CENTER;" fx:id="qtySellLocal" text="Local Sell" />
