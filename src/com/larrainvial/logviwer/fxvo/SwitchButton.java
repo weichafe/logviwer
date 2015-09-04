@@ -179,6 +179,7 @@ public class SwitchButton extends Label {
                             configError.printStackTrace();
                         }
 
+                        
                     }
 
                     if (switchBtn.getId().equals("Alert")) {
