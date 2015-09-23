@@ -92,7 +92,7 @@ public class AlertListener implements Listener {
                 text += ev.typeMarket + "\n";
 
                 Notifier.INSTANCE.notifyError(ev.algo.nameAlgo, text);
-                Helper.printerLog(algo.nameAlgo + " Protocol, check log files! " + ev.modelRoutingData.text + " " + ev.typeMarket);
+                Helper.printerLog(algo.nameAlgo + " Protocol, check log files! " + ev.text + " " + ev.typeMarket);
 
                 if (algo.isAlert()) {
                     new Sound();

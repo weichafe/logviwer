@@ -1,7 +1,6 @@
 package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.model.StrategyListWrapper;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Latency;
@@ -9,35 +8,20 @@ import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.vo.StrategyVO;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.controlsfx.dialog.Dialogs;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.net.URL;
-import java.util.Optional;
 import java.util.prefs.Preferences;
 
 

@@ -38,12 +38,9 @@ public class RoutingAdrListener implements Listener {
             Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
 
             if (modelRoutingData.execType.equals("Trade")) {
-
                 new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
                 //Controller.dispatchEvent(new CalculatePositionsEvent(algo, modelRoutingData, TYPE_MARKET));
-
             }
-
 
             if (algo.graphEnable) {
                 Latency.latencyADR(algo, modelRoutingData);

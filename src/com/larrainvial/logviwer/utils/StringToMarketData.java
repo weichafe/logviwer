@@ -24,6 +24,12 @@ public class StringToMarketData {
                     typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
                 modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
                 modelMarketData.messageByType = typeOfMessage.getValue();
+
+                if (message.indexOf("58=") > -1)  {
+                    modelMarketData.text = message.split("58=")[1];
+                    modelMarketData.text = modelMarketData.text.substring(0, modelMarketData.text.indexOf("\u0001"));
+
+                }
                 return modelMarketData;
             }
 

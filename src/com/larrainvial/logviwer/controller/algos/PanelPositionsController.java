@@ -49,7 +49,8 @@ public class PanelPositionsController {
     @FXML
     private TableColumn<ModelPositions, String> ratio;
 
-    private DecimalFormat numFormat = new DecimalFormat("###,###.##");
+    private DecimalFormat numFormat = new DecimalFormat("###,###");
+    private DecimalFormat numFormatMil = new DecimalFormat("###,###");
 
     private boolean validator = false;
 
@@ -104,7 +105,7 @@ public class PanelPositionsController {
                     if (item == null || empty) {
                         setText("");
                     } else {
-                        setText(numFormat.format(Double.valueOf(item)));
+                        setText(numFormatMil.format(Double.valueOf(item)));
                     }
 
                 }
@@ -274,10 +275,5 @@ public class PanelPositionsController {
 
         return positionTable;
     }
-
-    public void formatingData(){
-
-    }
-
 
 }

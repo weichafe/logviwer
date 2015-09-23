@@ -139,6 +139,14 @@ public class Algo {
     public Map<String, LatencyVO> latencyADR = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
     public Map<String, LatencyVO> latencyLocal = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
 
+    //count line file
+    public int countDolar = 0;
+    public int countMkdLocal = 0;
+    public int countMdkAdr = 0;
+    public int countRoutingLocal = 0;
+    public int countRoutingAdr = 0;
+
+
 
     public Algo(Element elem, int tab) {
 

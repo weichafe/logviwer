@@ -93,6 +93,12 @@ public class Validation {
 
         ExecutionReport workOrders;
 
+        if (orderCancelReplaceRequest.getPrice().getValue() == 100000d){
+            Controller.dispatchEvent(new OrderCancelRejectEvent(this, orderCancelReplaceRequest, new String[]{"1", "Rejected Forzado"}, "1"));
+            return false;
+        }
+
+
         for(int i=1; i <= orderCancelReplaceRequest.getGroups(NoPartyIDs.FIELD).size(); i++){
 
             if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Repository.XPUS)){
@@ -143,10 +149,6 @@ public class Validation {
             }
 
         }
-
-
-
-
 
 
         if(orderCancelReplaceRequest.getSide().valueEquals(Side.BUY)){

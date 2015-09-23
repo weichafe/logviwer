@@ -53,8 +53,8 @@ public class CalculatePositions {
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-                positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr) * 100 )/ 100;
-
+                //positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr) * 100 )/ 100;
+                positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr));
 
             } else {
 
@@ -71,13 +71,13 @@ public class CalculatePositions {
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-                positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr) * 100 )/ 100;
+                //positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr) * 100 )/ 100;
+                positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr));
 
             } else {
 
                 positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;
                 positions.symbolAdr = modelRoutingData.getSymbol();
-
 
             }
 

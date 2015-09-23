@@ -6,6 +6,7 @@ public class ModelMarketData {
     public String hour;
     public String year;
     public String messageByType;
+    public String text;
     public Double buyPx;
     public Double buyQty;
     public Double sellPx;
@@ -26,6 +27,7 @@ public class ModelMarketData {
         this.sellQty =  0.0;
         this.closePx =  0.0;
         this.tradeAmount = 0.0;
+        this.text = "";
     }
 
 }
