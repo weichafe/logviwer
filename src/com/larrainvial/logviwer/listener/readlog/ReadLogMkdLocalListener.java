@@ -22,6 +22,7 @@ import java.util.Scanner;
 public class ReadLogMkdLocalListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(ReadLogMkdLocalListener.class.getName());
 
     public ReadLogMkdLocalListener(Algo algo){
         this.algo = algo;
@@ -57,9 +58,7 @@ public class ReadLogMkdLocalListener implements Listener {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
 
     }

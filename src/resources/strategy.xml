@@ -52,7 +52,7 @@
 
     </strategy>
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XTSE</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -75,9 +75,9 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XBOG</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -100,7 +100,7 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
     <strategy>
 
@@ -162,7 +162,6 @@
         <routingLocal>ROUTING_LOCAL</routingLocal>
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
-
 
         <location>W:\\MarketMakerBEC\\connection\\log\</location>
         <mkd_dolar>FIX.4.4-ALGOARBADR2-MDFHBLP.messages_</mkd_dolar>
@@ -255,8 +254,6 @@
     </strategy>
 
 
-
-
     <strategy>
 
         <nameAlgo>ADR Arbitrage XBOG XPUS COL</nameAlgo>
@@ -267,12 +264,11 @@
         <routingAdr>ROUTING_ADR</routingAdr>
         <time>1</time>
 
-
         <location>U:\\ADRArbitrageXBOG\\connection\\log\\</location>
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA10.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv6_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG-FHMDXBVC.messages_</mkd_local>
-        <routing_local>FIX.4.4-ADRARB_XNYS_XP_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_local>FIX.4.4-ADR_ARBITRAGE_XBOG_XPUS-TCM.messages_</routing_local>
         <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_ADR-ORDERROUTER.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
@@ -299,7 +295,7 @@
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA9.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-ARBv2_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG_IB-FHMDXBVC.messages_</mkd_local>
-        <routing_local>FIX.4.4-ADRARB_XNYS_IB_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_local>FIX.4.4-ADR_ARBITRAGE_XBOG_IB-TCM.messages_</routing_local>
         <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_IB_ADR-ORDERROUTER.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
@@ -326,8 +322,8 @@
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA8.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA12.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE-FHMDXBVC.messages_</mkd_local>
-        <routing_local>FIX.4.4-ADRARB_XTSE_XP_TOBVC-AMGTOBVC.messages_</routing_local>
-        <routing_nyse>FIX.4.4-ADRARB_XTSE_XP_TOBVC-AMGTOBVC.messages_</routing_nyse>
+        <routing_local>FIX.4.4-ADR_ARBITRAGE_XTSE_XPUS-TCM.messages_</routing_local>
+        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XTSE_ADR-ORDERROUTER.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
         <booleanMLocal>true</booleanMLocal>
@@ -352,7 +348,7 @@
         <mkd_dolar>FIX.4.4-LVMDG-BLODPENNA4.messages_</mkd_dolar>
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA11.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE_IB-FHMDXBVC.messages_</mkd_local>
-        <routing_local>FIX.4.4-ADRARB_XTSE_IB_TOBVC-AMGTOBVC.messages_</routing_local>
+        <routing_local>FIX.4.4-ADR_ARBITRAGE_XTSE_IB-TCM.messages_</routing_local>
         <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XTSE_IB_ADR-ORDERROUTER.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
@@ -379,7 +375,7 @@
         <mkd_dolar>""</mkd_dolar>
         <mkd_nyse>""</mkd_nyse>
         <mkd_local>FIX.4.4-LVCLIENT1-FHMDXBVC.messages_</mkd_local>
-        <routing_local>FIX.4.4-etfech-to_xpus.messages_</routing_local>
+        <routing_local>FIX.4.4-MMHCOLSEL-TCM.messages_</routing_local>
         <routing_nyse>""</routing_nyse>
 
         <booleanDolar>false</booleanDolar>

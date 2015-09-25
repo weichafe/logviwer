@@ -1,5 +1,7 @@
 package com.larrainvial.logviwer;
 
+import com.jcraft.jsch.Session;
+import com.larrainvial.killprocess.MainKillProcess;
 import com.larrainvial.logviwer.model.StrategyListWrapper;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
@@ -14,6 +16,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;
@@ -30,7 +34,6 @@ public class MainLogViwer extends Application {
     private ObservableList<StrategyVO> strategyData = FXCollections.observableArrayList();
     private static Logger log = Logger.getLogger(MainLogViwer.class.getName());
     private String log4jConfPath = Repository.location + "log4j.properties";
-
 
 
     public void start(Stage primaryStage) {
@@ -62,7 +65,9 @@ public class MainLogViwer extends Application {
 
             Repository.principalTabPanel_Loader.setLocation(MainLogViwer.class.getResource("view/PrincipalTabPanel.fxml"));
             Repository.tabPanePrincipalTabPanel = (TabPane) Repository.principalTabPanel_Loader.load();
+
             rootLayout_Loader.setCenter(Repository.tabPanePrincipalTabPanel);
+
 
             Repository.scene = new Scene(rootLayout_Loader);
             primaryStage.setScene(Repository.scene);

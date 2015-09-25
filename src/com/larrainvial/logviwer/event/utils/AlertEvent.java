@@ -15,6 +15,7 @@ public class AlertEvent extends Event {
     public String typeMarket;
     public Algo algo;
     public String text;
+    public String hour;
 
     public AlertEvent(Object source, ModelMarketData modelMarketData, String typeMarket) {
         super(source);
@@ -23,6 +24,7 @@ public class AlertEvent extends Event {
         this.messageByType = modelMarketData.messageByType;
         this.typeMarket = typeMarket;
         this.text = modelMarketData.text;
+        this.hour = modelMarketData.hour;
     }
 
     public AlertEvent(Object source, ModelRoutingData modelRoutingData, String typeMarket) {
@@ -33,6 +35,7 @@ public class AlertEvent extends Event {
         this.messageByType = modelRoutingData.messageByType;
         this.typeMarket = typeMarket;
         this.text = modelRoutingData.text;
+        this.hour = modelRoutingData.hour;
 
     }
 

@@ -12,11 +12,14 @@ import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
+import org.apache.log4j.Logger;
 
 public class RoutingAdrListener implements Listener {
 
     public Algo algo;
     public final String TYPE_MARKET = "ROUTING ADR";
+    private static Logger logger = Logger.getLogger(RoutingAdrListener.class.getName());
+
     public RoutingAdrListener(Algo algo) {
         this.algo = algo;
     }
@@ -39,7 +42,6 @@ public class RoutingAdrListener implements Listener {
 
             if (modelRoutingData.execType.equals("Trade")) {
                 new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
-                //Controller.dispatchEvent(new CalculatePositionsEvent(algo, modelRoutingData, TYPE_MARKET));
             }
 
             if (algo.graphEnable) {
@@ -47,9 +49,7 @@ public class RoutingAdrListener implements Listener {
             }
 
         } catch (Exception e){
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
 
     }

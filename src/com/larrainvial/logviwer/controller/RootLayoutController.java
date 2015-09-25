@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.controller;
 
+import com.larrainvial.killprocess.MainKillProcess;
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.fxvo.Dialog;
@@ -86,6 +87,49 @@ public class RootLayoutController {
             }
             mainApp.savePersonDataToFile(file);
         }
+    }
+
+    @FXML
+    private void santiago() {
+
+        try {
+
+            new MainKillProcess().santiago(Repository.primaryStage);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void colombia() {
+
+        try {
+
+            new MainKillProcess().santiago(Repository.primaryStage);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
+    private void lima() {
+
+        try {
+
+            new MainKillProcess().santiago(Repository.primaryStage);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

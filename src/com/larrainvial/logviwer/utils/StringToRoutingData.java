@@ -3,6 +3,7 @@ package com.larrainvial.logviwer.utils;
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import org.apache.log4j.Logger;
 import quickfix.field.MsgType;
 import quickfix.fix44.Message;
 
@@ -11,6 +12,7 @@ import java.util.Map;
 public class StringToRoutingData {
 
     private ModelRoutingData modelRoutingData;
+    private static Logger logger = Logger.getLogger(CalculatePositions.class.getName());
 
     public ModelRoutingData routing(String message){
 
@@ -50,9 +52,7 @@ public class StringToRoutingData {
             modelRoutingData.text = messageMap.containsKey(FixConstants.Text) ? messageMap.get(FixConstants.Text).toString() : "";
 
         }catch (Exception e){
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
 
 

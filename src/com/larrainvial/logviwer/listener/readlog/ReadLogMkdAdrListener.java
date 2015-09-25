@@ -22,6 +22,7 @@ import java.util.Scanner;
 public class ReadLogMkdAdrListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(ReadLogMkdAdrListener.class.getName());
 
     public ReadLogMkdAdrListener(Algo algo){
         this.algo = algo;
@@ -56,9 +57,7 @@ public class ReadLogMkdAdrListener implements Listener {
 
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
 
     }
@@ -90,17 +89,8 @@ public class ReadLogMkdAdrListener implements Listener {
     }
 
 
-
-
     public boolean verifyMessageFix(String message){
-
-        if (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1){
-            return true;
-
-        } else {
-            return false;
-        }
-
+        return (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1) ? true : false;
     }
 
 

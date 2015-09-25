@@ -14,8 +14,13 @@ public class  Repository {
     public static Stage primaryStage;
     public static Scene scene;
     public static TabPane tabPanePrincipalTabPanel;
+    public static TabPane tabPanePrincipalTabPanelColombia;
     public static FXMLLoader rootLayout_Loader = new FXMLLoader();
     public static FXMLLoader principalTabPanel_Loader = new FXMLLoader();
+
+    public static FXMLLoader principalTabPanel_LoaderColombia = new FXMLLoader();
+
+
     public static HashMap<String, Algo> strategy = new HashMap<String, Algo>();
     public static PropertiesFile logviewer;
     public static boolean exception = true;

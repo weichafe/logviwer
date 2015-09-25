@@ -23,6 +23,7 @@ import java.util.Scanner;
 public class ReadFromDolarListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(ReadFromDolarListener.class.getName());
 
     public ReadFromDolarListener(Algo algo){
         this.algo = algo;
@@ -56,9 +57,7 @@ public class ReadFromDolarListener implements Listener {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
 
     }

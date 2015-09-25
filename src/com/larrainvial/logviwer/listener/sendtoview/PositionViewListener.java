@@ -17,6 +17,7 @@ import java.util.Map;
 public class PositionViewListener implements Listener {
 
     public Algo algo;
+    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
 
     public PositionViewListener(Algo algo) {
         this.algo = algo;
@@ -56,9 +57,7 @@ public class PositionViewListener implements Listener {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
   }
 

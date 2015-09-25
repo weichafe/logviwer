@@ -43,7 +43,6 @@ public class CalculateLastPriceListener implements Listener {
 
         } catch (Exception e){
             logger.error(e);
-            Notifier.INSTANCE.notifyError("Logon, check log files!", e.getMessage());
         }
 
     }

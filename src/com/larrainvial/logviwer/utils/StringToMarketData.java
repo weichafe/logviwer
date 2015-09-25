@@ -30,6 +30,7 @@ public class StringToMarketData {
                     modelMarketData.text = modelMarketData.text.substring(0, modelMarketData.text.indexOf("\u0001"));
 
                 }
+
                 return modelMarketData;
             }
 

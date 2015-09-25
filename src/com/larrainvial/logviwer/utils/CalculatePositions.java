@@ -4,9 +4,11 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
+import org.apache.log4j.Logger;
 
 public class CalculatePositions {
 
+    private static Logger logger = Logger.getLogger(CalculatePositions.class.getName());
     private ModelRoutingData modelRoutingData;
     private Algo algo;
 
@@ -19,9 +21,7 @@ public class CalculatePositions {
             this.calculatePositions();
 
         } catch (Exception e){
-            e.printStackTrace();
-            Helper.printerLog(e.getMessage().toString());
-            Notifier.INSTANCE.notifyError("Error", e.getMessage().toString());
+            logger.error(e);
         }
     }
 

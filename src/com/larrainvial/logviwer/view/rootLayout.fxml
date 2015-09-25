@@ -38,6 +38,22 @@
         </items>
       </Menu>
 
+      <Menu mnemonicParsing="false" text="Kill Process">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#santiago" text="Santiago" />
+          </items>
+
+          <items>
+              <MenuItem mnemonicParsing="false" onAction="#colombia" text="Colombia" />
+          </items>
+
+          <items>
+              <MenuItem mnemonicParsing="false" onAction="#lima" text="Lima" />
+          </items>
+
+      </Menu>
+
+
       <Menu mnemonicParsing="false" text="Help">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
