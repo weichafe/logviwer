@@ -510,23 +510,23 @@ public class Algo {
                 Algo algo = Repository.strategy.get(nameAlgo);
 
                 if (mkdDolarToggle && dolar) {
-                    Controller.dispatchEvent(new ReadFromDolarEvent(algo));
+                    //Controller.dispatchEvent(new ReadFromDolarEvent(algo));
                 }
 
                 if (mkdAdrToggle && mAdr) {
-                    Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
+                    //Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
                 }
 
                 if (mkdLocalToggle && mLocal) {
-                    Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
+                    //Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
                 }
 
                 if (routingLocalToggle && rLocal) {
-                    Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
+                    //Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
                 }
 
                 if (routingAdrToggle && rAdr) {
-                    Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
+                    //Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                 }
 
             }

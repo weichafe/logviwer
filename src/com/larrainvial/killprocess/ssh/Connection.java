@@ -37,24 +37,7 @@ public class Connection {
     }
 }
 /*
-            session.connect();
 
-            ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
-
-            InputStream in = channelExec.getInputStream();
-
-            channelExec.setCommand("top -bn 1");
-            channelExec.connect();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String linea = null;
-            int index = 0;
-
-            while ((linea = reader.readLine()) != null) {
-                System.out.println(++index + " : " + linea);
-            }
-
-            channelExec.disconnect();
 
 
 */

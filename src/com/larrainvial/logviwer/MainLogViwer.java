@@ -1,7 +1,5 @@
 package com.larrainvial.logviwer;
 
-import com.jcraft.jsch.Session;
-import com.larrainvial.killprocess.MainKillProcess;
 import com.larrainvial.logviwer.model.StrategyListWrapper;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.utils.Helper;
@@ -16,8 +14,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;

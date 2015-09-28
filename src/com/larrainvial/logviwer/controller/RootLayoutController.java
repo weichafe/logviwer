@@ -1,6 +1,6 @@
 package com.larrainvial.logviwer.controller;
 
-import com.larrainvial.killprocess.MainKillProcess;
+import com.larrainvial.killprocess.market.Santiago;
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.fxvo.Dialog;
@@ -94,7 +94,7 @@ public class RootLayoutController {
 
         try {
 
-            new MainKillProcess().santiago(Repository.primaryStage);
+            new Santiago().killProcess(Repository.primaryStage);
 
 
         } catch (Exception e) {
@@ -108,7 +108,7 @@ public class RootLayoutController {
 
         try {
 
-            new MainKillProcess().santiago(Repository.primaryStage);
+            new Santiago().killProcess(Repository.primaryStage);
 
 
         } catch (Exception e) {
@@ -123,7 +123,7 @@ public class RootLayoutController {
 
         try {
 
-            new MainKillProcess().santiago(Repository.primaryStage);
+            new Santiago().killProcess(Repository.primaryStage);
 
 
         } catch (Exception e) {
