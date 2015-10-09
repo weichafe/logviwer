@@ -17,8 +17,7 @@ public class Graph {
 
         algo.lineChart = new LineChart<Number,Number>(xAxis,yAxis);
 
-        algo.lineChart.setPrefWidth(1580);
-        algo.lineChart.setTitle(" ");
+        algo.lineChart.setPrefWidth(2000);
 
         algo.adrRouting = new XYChart.Series();
         algo.adrRouting.setName("ADR Routing");

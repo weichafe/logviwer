@@ -188,15 +188,10 @@ public class Algo {
             grill.getChildren().add((AnchorPane) lastPriceLoader.load());
             grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
 
-
             HBox options = new HBox();
-            options.setPrefHeight(100);
+            options.getStyleClass().add("options");
 
-            options.setSpacing(20);
-            options.setPadding(new Insets(40, 40, 20, 20));
 
-            VBox general = new VBox();
-            general.getChildren().addAll(options, grill);
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(time));
 
@@ -266,8 +261,6 @@ public class Algo {
             VBox HBosRouting_Adr = new VBox();
             HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
             options.getChildren().add(HBosRouting_Adr);
-
-
 
 
             if (nameAlgo.startsWith("ADR")){
@@ -342,8 +335,11 @@ public class Algo {
 
             Graph.newLineChart(this);
 
+            VBox general = new VBox();
+            general.getChildren().addAll(options, grill);
+
             HBox graph = new HBox();
-            graph.setPrefHeight(400);
+            graph.getStyleClass().add("hboxGraph");
             graph.getChildren().add(lineChart);
             general.getChildren().add(graph);
 
@@ -353,7 +349,8 @@ public class Algo {
             scrollBar.setContent(general);
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+1).setContent(scrollBar);
+
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab + 1).setContent(scrollBar);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab+1).setText(this.nameAlgo);
 
             PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();

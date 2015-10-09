@@ -6,6 +6,7 @@ import com.larrainvial.sellside.event.receievd.ReceivedNewOrderSingleEvent;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelReplaceRequestEvent;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelRequestEvent;
 import com.larrainvial.trading.emp.Controller;
+import org.apache.log4j.Logger;
 import quickfix.*;
 import quickfix.Message;
 import quickfix.fix44.*;
@@ -17,6 +18,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
     public SocketAcceptor socketAcceptor;
     private SessionSettings sessionSettings;
+    private static Logger logger = Logger.getLogger(QuickFixAdapter.class.getName());
 
     public QuickFixAdapter(String quickFixIniFile) {
 
@@ -31,10 +33,15 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             Repository.socketAcceptor = this.socketAcceptor;
             Repository.socketAcceptor.start();
 
+            Repository.socketAcceptPort = sessionSettings.getString(Repository.sessionID, "SocketAcceptPort");
+            Repository.senderCompID = sessionSettings.getString(Repository.sessionID, "SenderCompID");
+            Repository.targetCompID = sessionSettings.getString(Repository.sessionID, "TargetCompID");
+
             Notifier.INSTANCE.notifySuccess("Success", "Sell Side");
 
         } catch (Exception e) {
-            e.printStackTrace(System.out);
+            logger.error(e);
+            e.printStackTrace();
         }
     }
 
@@ -47,10 +54,8 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             Repository.senderCompID = sessionSettings.getString(Repository.sessionID, "SenderCompID");
             Repository.targetCompID = sessionSettings.getString(Repository.sessionID, "TargetCompID");
 
-        } catch (ConfigError configError) {
-            configError.printStackTrace();
-        } catch (FieldConvertError fieldConvertError) {
-            fieldConvertError.printStackTrace();
+        } catch (Exception e) {
+            logger.error(e);
         }
     }
 
@@ -71,7 +76,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
         try {
             crack(message, sessionID);
         } catch (UnsupportedMessageType unsupportedMessageType) {
-            unsupportedMessageType.printStackTrace();
+            logger.error(unsupportedMessageType);
         }
     }
 
@@ -84,7 +89,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
         try {
             crack(message, sessionID);
         } catch (UnsupportedMessageType unsupportedMessageType) {
-            unsupportedMessageType.printStackTrace();
+            logger.error(unsupportedMessageType);
         }
     }
 

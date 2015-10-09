@@ -1,9 +1,9 @@
 package com.larrainvial.logviwer.controller;
 
-import com.larrainvial.killprocess.market.Santiago;
+import com.larrainvial.logviwer.utils.About;
+import com.larrainvial.process.market.Antuco;
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,9 +38,6 @@ public class RootLayoutController {
         mainApp.setPersonFilePath(null);
     }
 
-    /**
-     * Opens a FileChooser to let the user select an address book to load.
-     */
     @FXML
     private void handleOpen() {
         FileChooser fileChooser = new FileChooser();
@@ -73,15 +70,12 @@ public class RootLayoutController {
     private void handleSaveAs() {
         FileChooser fileChooser = new FileChooser();
 
-        // Set extension filter
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show save file dialog
         File file = fileChooser.showSaveDialog(Repository.primaryStage);
 
         if (file != null) {
-
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
@@ -89,13 +83,24 @@ public class RootLayoutController {
         }
     }
 
+
+
+
+    @FXML
+    private void antuco() {
+
+        try {
+            new Antuco(Repository.primaryStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @FXML
     private void santiago() {
 
         try {
-
-            new Santiago().killProcess(Repository.primaryStage);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,9 +113,6 @@ public class RootLayoutController {
 
         try {
 
-            new Santiago().killProcess(Repository.primaryStage);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -122,9 +124,6 @@ public class RootLayoutController {
     private void lima() {
 
         try {
-
-            new Santiago().killProcess(Repository.primaryStage);
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,27 +138,8 @@ public class RootLayoutController {
 
         try {
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainLogViwer.class.getResource("view/StrategyEditDialog.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
 
-
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(Repository.primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-
-            StrategyEditDialogController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            //controller.setStrategy(person);
-
-            dialogStage.showAndWait();
-
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -168,7 +148,7 @@ public class RootLayoutController {
 
     @FXML
     private void handleAbout() {
-        Dialog.about();
+        new About(Repository.primaryStage);
     }
 
 

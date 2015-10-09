@@ -38,7 +38,12 @@
         </items>
       </Menu>
 
-      <Menu mnemonicParsing="false" text="Kill Process">
+      <Menu mnemonicParsing="false" text="Process">
+
+          <items>
+              <MenuItem mnemonicParsing="false" onAction="#antuco" text="Antuco" />
+          </items>
+
           <items>
             <MenuItem mnemonicParsing="false" onAction="#santiago" text="Santiago" />
           </items>

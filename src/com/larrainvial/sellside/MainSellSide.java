@@ -14,7 +14,7 @@ public class MainSellSide {
 
         try {
 
-            Repository.buySide  = new PropertiesFile("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\SellSide.properties");
+            Repository.buySide  = new PropertiesFile(com.larrainvial.logviwer.Repository.locationPath + "SellSide.properties");
 
             Repository.XPUS_NAME = Repository.buySide.getPropertiesString("XPUS.NAME");
             Repository.XPUS_UUID = Repository.buySide.getPropertiesString("XPUS.UUID");
@@ -28,10 +28,10 @@ public class MainSellSide {
 
             Repository.date = new SimpleDateFormat("yyyyMMdd").format(new Date());
 
-            new QuickFixAdapter("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\sessionFile.ini");
+            new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
             Control.initialize();
 
-            Algo algo = new Algo(0);
+            new Algo(0);
 
 
         } catch (Exception e) {

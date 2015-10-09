@@ -12,7 +12,7 @@ public class Sound {
 
         try {
 
-            File urlSound = new File(Repository.location + "tos-redalert.wav");
+            File urlSound = new File(Repository.locationPath + "tos-redalert.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(urlSound);
 
             AudioFormat format = audioStream.getFormat();

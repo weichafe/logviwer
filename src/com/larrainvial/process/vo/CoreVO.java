@@ -1,4 +1,4 @@
-package com.larrainvial.killprocess.vo;
+package com.larrainvial.process.vo;
 
 
 public class CoreVO {

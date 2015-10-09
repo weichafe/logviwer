@@ -28,16 +28,13 @@ import java.util.prefs.Preferences;
 public class MainLogViwer extends Application {
 
     private ObservableList<StrategyVO> strategyData = FXCollections.observableArrayList();
-    private static Logger log = Logger.getLogger(MainLogViwer.class.getName());
-    private String log4jConfPath = Repository.location + "log4j.properties";
-
+    private static Logger logger = Logger.getLogger(MainLogViwer.class.getName());
 
     public void start(Stage primaryStage) {
 
         try {
 
-            PropertyConfigurator.configure(log4jConfPath);
-            Repository.logviewer  = new PropertiesFile(Repository.location + "logviewer.properties");
+            Repository.logviewer  = new PropertiesFile(Repository.locationPath + "logviewer.properties");
 
             Latency.LATENCY_MIN = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MIN"));
             Latency.LATENCY_MAX = Integer.valueOf(Repository.logviewer.getPropertiesString("LATENCY_MAX"));
@@ -51,7 +48,7 @@ public class MainLogViwer extends Application {
             Dolar.CAD = Repository.logviewer.getPropertiesString("CAD");
             Dolar.COFX = Repository.logviewer.getPropertiesString("COFX");
 
-            log.info("Inicializando servidor... ");
+            logger.info("Inicializando servidor... ");
 
             Repository.primaryStage = primaryStage;
             Repository.primaryStage.setTitle("Log Viewer");
@@ -71,6 +68,8 @@ public class MainLogViwer extends Application {
 
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
+                    logger.info("Close Aplications");
+                    logger.info("");
                     System.exit(0);
                 }
             });
@@ -80,7 +79,7 @@ public class MainLogViwer extends Application {
 
 
         } catch (Exception e){
-            e.printStackTrace();
+            logger.error(e);
             Helper.printerLog(e.toString());
             Notifier.INSTANCE.notifyError("Error", e.toString());
         }

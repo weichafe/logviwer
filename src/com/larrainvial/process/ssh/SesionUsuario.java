@@ -1,9 +1,8 @@
-package com.larrainvial.killprocess.ssh;
+package com.larrainvial.process.ssh;
 
 import com.jcraft.jsch.UserInfo;
-/**
- * Contiene los datos se autenticacion del Usuario
- */
+
+
 public class SesionUsuario implements UserInfo {
 
     private String password;

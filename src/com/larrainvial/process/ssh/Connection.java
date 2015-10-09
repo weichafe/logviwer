@@ -1,16 +1,11 @@
-package com.larrainvial.killprocess.ssh;
+package com.larrainvial.process.ssh;
 
 
-import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
-import com.larrainvial.killprocess.vo.ServerVO;
+import com.larrainvial.process.vo.ServerVO;
 import org.apache.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 public class Connection {
 

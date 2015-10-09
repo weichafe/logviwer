@@ -25,6 +25,31 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
     </strategy-->
+	
+	<strategy>
+
+        <nameAlgo>ADR Arbitrage XSGO XP</nameAlgo>
+        <mkdDolar>MKD_DOLAR</mkdDolar>
+        <mkdLocal>MKD_XSGO</mkdLocal>
+        <mkdAdr>MKD_NYSE</mkdAdr>
+        <routingLocal>ROUTING_LOCAL</routingLocal>
+        <routingAdr>ROUTING_ADR</routingAdr>
+        <time>1</time>
+
+        <location>W:\\ADRArbitrageBetaXPUS\\connections\\logs\\</location>
+        <mkd_dolar>FIX.4.4-ALGOARBADR4-MDFHBLP.messages_</mkd_dolar>
+        <mkd_nyse>FIX.4.4-ARBv8_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
+        <mkd_local>FIX.4.4-ADR_ARBITRAGE_XSGO_XPUS-LVFHALGO.messages_</mkd_local>
+        <routing_local>FIX.4.4-adrbcs-to_xsgo.messages_</routing_local>
+        <routing_nyse>FIX.4.4-LVBSG-CL02.messages_</routing_nyse>
+
+        <booleanDolar>true</booleanDolar>
+        <booleanMLocal>true</booleanMLocal>
+        <booleanMAdr>true</booleanMAdr>
+        <booleanRLocal>true</booleanRLocal>
+        <booleanRAdr>true</booleanRAdr>
+
+    </strategy>
 
 
     <strategy>
@@ -228,7 +253,7 @@
 
     </strategy>
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>LV BLOTTER XBOG</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -242,7 +267,7 @@
         <mkd_dolar>""</mkd_dolar>
         <mkd_nyse>""</mkd_nyse>
         <mkd_local>""</mkd_local>
-        <routing_local>FIX.4.4-OMS-ORDERROUTER.messages_</routing_local>
+        <routing_local>FIX.4.4-BLOTTER-LVBSG.messages_</routing_local>
         <routing_nyse>FIX.4.4-OMS-OMS_XBOG.messages_</routing_nyse>
 
         <booleanDolar>false</booleanDolar>
@@ -251,10 +276,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XBOG XPUS COL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -269,7 +294,7 @@
         <mkd_nyse>FIX.4.4-ARBv6_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG-FHMDXBVC.messages_</mkd_local>
         <routing_local>FIX.4.4-ADR_ARBITRAGE_XBOG_XPUS-TCM.messages_</routing_local>
-        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_ADR-ORDERROUTER.messages_</routing_nyse>
+        <routing_nyse>FIX.4.4-LVBSG-ADR_ARBITRAGE_XBOG_XPUS.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
         <booleanMLocal>true</booleanMLocal>
@@ -277,10 +302,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XBOG IB COL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -296,7 +321,7 @@
         <mkd_nyse>FIX.4.4-ARBv2_EQUITY_NYS_BCS-MAMA_NYSE.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XBOG_IB-FHMDXBVC.messages_</mkd_local>
         <routing_local>FIX.4.4-ADR_ARBITRAGE_XBOG_IB-TCM.messages_</routing_local>
-        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XBOG_IB_ADR-ORDERROUTER.messages_</routing_nyse>
+        <routing_nyse>FIX.4.4-LVBSG-ADR_ARBITRAGE_XBOG_IB.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
         <booleanMLocal>true</booleanMLocal>
@@ -304,10 +329,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XTSE XPUS COL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -323,7 +348,7 @@
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA12.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE-FHMDXBVC.messages_</mkd_local>
         <routing_local>FIX.4.4-ADR_ARBITRAGE_XTSE_XPUS-TCM.messages_</routing_local>
-        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XTSE_ADR-ORDERROUTER.messages_</routing_nyse>
+        <routing_nyse>FIX.4.4-LVBSG-ADR_ARBITRAGE_XTSE_XPUS.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
         <booleanMLocal>true</booleanMLocal>
@@ -331,10 +356,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>ADR Arbitrage XTSE IB COL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -349,7 +374,7 @@
         <mkd_nyse>FIX.4.4-LVMDG-BLODPENNA11.messages_</mkd_nyse>
         <mkd_local>FIX.4.4-ADR_ARBITRAGE_XTSE_IB-FHMDXBVC.messages_</mkd_local>
         <routing_local>FIX.4.4-ADR_ARBITRAGE_XTSE_IB-TCM.messages_</routing_local>
-        <routing_nyse>FIX.4.4-ADR_ARBITRAGE_XTSE_IB_ADR-ORDERROUTER.messages_</routing_nyse>
+        <routing_nyse>FIX.4.4-LVBSG-ADR_ARBITRAGE_XTSE_IB.messages_</routing_nyse>
 
         <booleanDolar>true</booleanDolar>
         <booleanMLocal>true</booleanMLocal>
@@ -357,10 +382,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>true</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>HCOLSELL</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -384,10 +409,10 @@
         <booleanRLocal>true</booleanRLocal>
         <booleanRAdr>false</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
-    <strategy>
+    <!--strategy>
 
         <nameAlgo>FH XBOG DES</nameAlgo>
         <mkdDolar>MKD_DOLAR</mkdDolar>
@@ -410,7 +435,7 @@
         <booleanRLocal>false</booleanRLocal>
         <booleanRAdr>false</booleanRAdr>
 
-    </strategy>
+    </strategy-->
 
 
 </strategys>

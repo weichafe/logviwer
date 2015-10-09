@@ -14,22 +14,12 @@ public class  Repository {
     public static Stage primaryStage;
     public static Scene scene;
     public static TabPane tabPanePrincipalTabPanel;
-    public static TabPane tabPanePrincipalTabPanelColombia;
     public static FXMLLoader rootLayout_Loader = new FXMLLoader();
     public static FXMLLoader principalTabPanel_Loader = new FXMLLoader();
-
-    public static FXMLLoader principalTabPanel_LoaderColombia = new FXMLLoader();
-
-
     public static HashMap<String, Algo> strategy = new HashMap<String, Algo>();
     public static PropertiesFile logviewer;
     public static boolean exception = true;
-    public static boolean alertBloolean = true;
     public static String year = new SimpleDateFormat("yyyy/MM/dd").format(new Date()).replace("/", "");
-
-    public static String location = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\";
-
-
-
+    public static String locationPath;
 
 }

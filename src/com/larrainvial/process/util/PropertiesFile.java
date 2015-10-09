@@ -1,6 +1,7 @@
-package com.larrainvial.killprocess.util;
+package com.larrainvial.process.util;
 
-import com.larrainvial.trading.utils.Logger;
+import org.apache.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -8,7 +9,7 @@ import java.util.Properties;
 public class PropertiesFile {
 
     public Properties properties;
-    private static final String NAME = PropertiesFile.class.getSimpleName();
+    private static Logger logger = Logger.getLogger(PropertiesFile.class.getName());
 
     public PropertiesFile(String url) {
 
@@ -19,7 +20,7 @@ public class PropertiesFile {
             this.properties.load(new FileInputStream(url));
 
         } catch (IOException e) {
-            Logger.error(NAME, "Exception: " + NAME, e);
+            logger.error(e);
         }
     }
 
