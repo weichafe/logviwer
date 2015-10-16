@@ -133,27 +133,27 @@
 }
 
 
-.grillPrice{
+.grillPrice {
     -fx-pref-width: 100%;
-    -fx-border-color: red;
-    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
     -fx-spacing: 20px;
 
 }
 
 .grillPositions{
     -fx-pref-width: 100%;
-    -fx-border-color: white;
-    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
 
 }
 
 .hboxGeneral{
-    -fx-border-color: orange;
     -fx-padding: 35px;
+    -fx-spacing: 20px;
     -fx-gap-start-and-end: true;
     -fx-pref-width: 100%;
-    -fx-spacing: 20px;
+
 }
 
 .options {
@@ -162,8 +162,8 @@
     -fx-padding: 35px;
     -fx-gap-start-and-end: true;
     -fx-pref-height: 100px;
-    -fx-border-color: aqua;
-    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
     -fx-spacing: 35px;
 }
 
@@ -172,7 +172,7 @@
     -fx-font-size: 10;
     -fx-border-style: solid;
     -fx-pref-height: 400px;
-    -fx-border-color: yellow;
+    -fx-border-color: black;
     -fx-border-width: 2px;
 
 }
