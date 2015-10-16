@@ -46,6 +46,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
+import quickfix.field.TransactTime;
+import quickfix.fix40.ExecutionReport;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.Inet4Address;
@@ -184,13 +187,17 @@ public class Algo {
 
             this.fileReader(booleanDolar, booleanMLocal, booleanMAdr, booleanRLocal, booleanRAdr);
 
-            HBox grill = new HBox();
-            grill.getChildren().add((AnchorPane) lastPriceLoader.load());
-            grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
+            HBox grillLastPrice = new HBox();
+            grillLastPrice.getStyleClass().add("grillPrice");
+            grillLastPrice.getChildren().add((AnchorPane) lastPriceLoader.load());
+
+
+            HBox grillPositions = new HBox();
+            grillLastPrice.getStyleClass().add("grillPositions");
+            grillLastPrice.getChildren().add((AnchorPane) panelPositionsLoader.load());
 
             HBox options = new HBox();
             options.getStyleClass().add("options");
-
 
 
             Slider opacityLevel = new Slider(1, 10, Double.valueOf(time));
@@ -288,10 +295,9 @@ public class Algo {
 
                 HBox variacion = new HBox();
                 variacion.setSpacing(10);
-                variacion.setPadding(new Insets(0, 0, 0, 80));
+                variacion.setPadding(new Insets(0, 0, 0, 0));
                 variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
                 options.getChildren().add(variacion);
-
 
                 HBox submit = new HBox();
                 Button save = new Button("Save");
@@ -329,19 +335,21 @@ public class Algo {
                             }
                         }
                     }
+
                 });
 
             }
 
             Graph.newLineChart(this);
 
-            VBox general = new VBox();
-            general.getChildren().addAll(options, grill);
-
             HBox graph = new HBox();
             graph.getStyleClass().add("hboxGraph");
             graph.getChildren().add(lineChart);
-            general.getChildren().add(graph);
+
+            VBox general = new VBox();
+            general.getStyleClass().add("hboxGeneral");
+            general.getChildren().addAll(options,   grillLastPrice, grillPositions, graph);
+
 
             ScrollPane scrollBar = new ScrollPane();
             scrollBar.prefHeightProperty().bind(general.heightProperty());
@@ -350,8 +358,11 @@ public class Algo {
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
 
+            Tab tabAlgo = new Tab();
+            tabAlgo.setText(this.nameAlgo);
+            Repository.tabPanePrincipalTabPanel.getTabs().add(tabAlgo);
             Repository.tabPanePrincipalTabPanel.getTabs().get(tab + 1).setContent(scrollBar);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab+1).setText(this.nameAlgo);
+
 
             PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();
             panelPositionsTableView = panelLocalLoader.getType();
@@ -456,9 +467,13 @@ public class Algo {
             scrollBar.setContent(anchorPane);
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
+            Tab tabAlgo = new Tab();
+            tabAlgo.setText(this.nameAlgo);
+            Repository.tabPanePrincipalTabPanel.getTabs().add(tabAlgo);
+            Repository.tabPanePrincipalTabPanel.getTabs().get(tab + 1).setContent(scrollBar);
 
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(this.nameAlgo);
+            //Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
+            //Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setText(this.nameAlgo);
 
             SellSideController sellsideLoader = sellSideLoader.getController();
             sellsideTableView = sellsideLoader.getType();

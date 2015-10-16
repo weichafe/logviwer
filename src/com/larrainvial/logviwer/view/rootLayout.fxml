@@ -41,19 +41,27 @@
       <Menu mnemonicParsing="false" text="Process">
 
           <items>
-              <MenuItem mnemonicParsing="false" onAction="#antuco" text="Antuco" />
+              <MenuItem mnemonicParsing="false" onAction="#Antuco" text="Antuco" />
           </items>
 
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#santiago" text="Santiago" />
+            <MenuItem mnemonicParsing="false" onAction="#Everest" text="Everest" />
           </items>
 
           <items>
-              <MenuItem mnemonicParsing="false" onAction="#colombia" text="Colombia" />
+              <MenuItem mnemonicParsing="false" onAction="#Marmolejo" text="Marmolejo" />
           </items>
 
           <items>
-              <MenuItem mnemonicParsing="false" onAction="#lima" text="Lima" />
+              <MenuItem mnemonicParsing="false" onAction="#Catedral" text="Catedral" />
+          </items>
+
+          <items>
+              <MenuItem mnemonicParsing="false" onAction="#Esmeralda" text="Esmeralda" />
+          </items>
+
+          <items>
+              <MenuItem mnemonicParsing="false" onAction="#Desconsuelo" text="Desconsuelo" />
           </items>
 
       </Menu>

@@ -4,21 +4,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane layoutX="7.0" layoutY="90" prefHeight="200" prefWidth="760" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.LastPriceController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.LastPriceController">
   <children>
 
-    <TableView fx:id="lastPrice" layoutX="16" layoutY="9" prefHeight="350" prefWidth="755">
+    <TableView fx:id="lastPrice">
 
       <columns>
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="Last Price" fx:id="hour" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="Type" fx:id="messageByType"/>
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="140" text="Symbol" fx:id="symbol" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Buy Px" fx:id="buyPx" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Buy Qty" fx:id="buyQty" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Px" fx:id="sellPx" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Sell Qty" fx:id="sellQty" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="75.0" text="Close Px" fx:id="closePx" />
-        <TableColumn style="-fx-alignment: CENTER;" prefWidth="80" text="Trade Amount" fx:id="tradeAmount" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Last Price" fx:id="hour" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Type" fx:id="messageByType"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Symbol" fx:id="symbol" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Buy Px" fx:id="buyPx" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Buy Qty" fx:id="buyQty" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Sell Px" fx:id="sellPx" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Sell Qty" fx:id="sellQty" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" />
       </columns>
 
     </TableView>

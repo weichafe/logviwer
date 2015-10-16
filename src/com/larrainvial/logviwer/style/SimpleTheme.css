@@ -60,13 +60,7 @@
     -fx-spacing: 10;
 }
 
-.options {
-    -fx-background-color: #333333;
-    -fx-table-header-border-color: transparent;
-    -fx-pref-height: 100px;
-    -fx-padding: 40, 40, 20, 20;
-    -fx-spacing: 20;
-}
+
 
 .optionsblack {
     -fx-background-color: #333333;
@@ -139,27 +133,62 @@
 }
 
 
-.hboxGraph{
-    -fx-padding: 15,0,0,0;
-    -fx-spacing: 0;
+.grillPrice{
     -fx-pref-width: 100%;
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-spacing: 20px;
+
+}
+
+.grillPositions{
+    -fx-pref-width: 100%;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+
+}
+
+.hboxGeneral{
+    -fx-border-color: orange;
+    -fx-padding: 35px;
+    -fx-gap-start-and-end: true;
+    -fx-pref-width: 100%;
+    -fx-spacing: 20px;
+}
+
+.options {
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 35px;
+    -fx-gap-start-and-end: true;
+    -fx-pref-height: 100px;
+    -fx-border-color: aqua;
+    -fx-border-width: 2px;
+    -fx-spacing: 35px;
+}
+
+.hboxGraph{
+    -fx-background-color: #1f1f1f;
+    -fx-font-size: 10;
+    -fx-border-style: solid;
     -fx-pref-height: 400px;
+    -fx-border-color: yellow;
+    -fx-border-width: 2px;
 
 }
 
 .chart {
-    -fx-padding: 5px;
     -fx-background-color: #1f1f1f;
-    -fx-font-size: 12;
-    -fx-border-style: solid;
-
+    -fx-font-size: 10;
 }
+
 .chart-content {
     -fx-padding: 30px;
 }
+
 .chart-legend {
     -fx-background-color: rgba(255, 255, 255, 0);
-    -fx-padding: 20px;
+    -fx-padding: 10px;
     -fx-border-style: solid;
 
 }

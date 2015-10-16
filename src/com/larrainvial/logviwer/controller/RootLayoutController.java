@@ -1,19 +1,13 @@
 package com.larrainvial.logviwer.controller;
 
 import com.larrainvial.logviwer.utils.About;
-import com.larrainvial.process.market.Antuco;
+import com.larrainvial.process.market.ConnectServer;
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 
 public class RootLayoutController {
 
@@ -84,23 +78,13 @@ public class RootLayoutController {
     }
 
 
-
-
     @FXML
-    private void antuco() {
+    private void Marmolejo() {
 
         try {
-            new Antuco(Repository.primaryStage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-    }
-
-    @FXML
-    private void santiago() {
-
-        try {
+            String properties = "KillProcessMarmolejo.properties";
+            new ConnectServer(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,10 +92,71 @@ public class RootLayoutController {
 
     }
 
+
+
     @FXML
-    private void colombia() {
+    private void Antuco() {
 
         try {
+
+            String properties = "KillProcessAntuco.properties";
+            new ConnectServer(Repository.primaryStage, properties);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void Everest() {
+
+        try {
+
+            String properties = "KillProcessEverest.properties";
+            new ConnectServer(Repository.primaryStage, properties);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void Catedral() {
+
+        try {
+
+            String properties = "KillProcessCatedral.properties";
+            new ConnectServer(Repository.primaryStage, properties);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void Esmeralda() {
+
+        try {
+
+            String properties = "KillProcessEsmeralda.properties";
+            new ConnectServer(Repository.primaryStage, properties);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void Desconsuelo() {
+
+        try {
+
+            String properties = "KillProcessDesconsuelo.properties";
+            new ConnectServer(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();

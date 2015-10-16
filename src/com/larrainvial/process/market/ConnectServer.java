@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,9 +26,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-public class Antuco {
+public class ConnectServer {
 
-    private static Logger logger = Logger.getLogger(Antuco.class.getName());
+    private static Logger logger = Logger.getLogger(ConnectServer.class.getName());
 
     public TextArea textAreaWebOrb = new TextArea();
     public TextArea textAreaCore = new TextArea();
@@ -41,17 +42,17 @@ public class Antuco {
     public AnchorPane ventanaPrincipal;
     public VBox general = new VBox();
 
-    public static String textCore = "Console Core";
-    public static String textWebOrb = "";
+    public static String textCore = "Console Core " + "\n";
+    public static String textWebOrb = "Console WebOrb " + "\n";
 
-    public VBox strategyHbox = new VBox();
-    public HBox coreVbox = new HBox();
-    public HBox weborbVbox = new HBox();
+    public HBox strategyHbox = new HBox();
+    public VBox coreVbox = new VBox();
+    public VBox weborbVbox = new VBox();
 
 
-    public Antuco(Stage primaryStage){
+    public ConnectServer(Stage primaryStage, String properties){
 
-        this.getProperties();
+        this.getProperties(properties);
         this.connectServerWebOrb();
         this.connectServerCore();
         this.killProcess(primaryStage);
@@ -111,7 +112,7 @@ public class Antuco {
         consoleCore.getStyleClass().add("hboxConsole");
         consoleCore.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
 
-        textAreaCore.setPrefHeight(250);
+        textAreaCore.setPrefHeight(240);
         textAreaCore.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
         consoleCore.getChildren().addAll(textAreaCore);
         general.getChildren().add(consoleCore);
@@ -120,7 +121,7 @@ public class Antuco {
         consoleWeborb.getStyleClass().add("hboxConsole");
         consoleWeborb.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
 
-        textAreaWebOrb.setPrefHeight(250);
+        textAreaWebOrb.setPrefHeight(240);
         textAreaWebOrb.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
         consoleWeborb.getChildren().addAll(textAreaWebOrb);
         general.getChildren().add(consoleWeborb);
@@ -149,20 +150,20 @@ public class Antuco {
             Button strategyCore = new Button();
             strategyCore.setId(core.name);
             strategyCore.setText(core.name);
+            strategyCore.setTooltip(new Tooltip(core.commentario));
 
             Boolean verifyProcces = verifyProccesCoreLinux(core);
 
             if (verifyProcces) {
                 strategyCore.getStyleClass().removeAll("processLinuxDown");
                 strategyCore.getStyleClass().add("processLinuxUP");
+
             } else {
                 strategyCore.getStyleClass().removeAll("processLinuxUP");
                 strategyCore.getStyleClass().add("processLinuxDown");
             }
 
             strategyCore.setPrefWidth(140);
-
-            coreVbox.getChildren().addAll(strategyCore);
 
             strategyCore.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -172,6 +173,8 @@ public class Antuco {
 
                 }
             });
+
+            coreVbox.getChildren().addAll(strategyCore);
         }
 
 
@@ -183,10 +186,12 @@ public class Antuco {
             strategyWebOrb.setPrefWidth(140);
             strategyWebOrb.setId(weborb.name);
             strategyWebOrb.setText(weborb.name);
+            strategyWebOrb.setTooltip(new Tooltip(weborb.commentario));
 
             if (verifyProcceswebOrbLinux(weborb)) {
                 strategyWebOrb.getStyleClass().removeAll("processLinuxDown");
                 strategyWebOrb.getStyleClass().add("processLinuxUP");
+
             } else {
                 strategyWebOrb.getStyleClass().removeAll("processLinuxUP");
                 strategyWebOrb.getStyleClass().add("processLinuxDown");
@@ -195,6 +200,7 @@ public class Antuco {
             weborbVbox.getChildren().add(strategyWebOrb);
 
             strategyWebOrb.setOnAction(new EventHandler<ActionEvent>() {
+
                 @Override
                 public void handle(ActionEvent t) {
                     Button clickedBtn = (Button) t.getSource();
@@ -289,9 +295,9 @@ public class Antuco {
     }
 
 
-    public void getProperties(){
+    public void getProperties(String properties){
 
-        Repository.killProcess = new PropertiesFile(com.larrainvial.logviwer.Repository.locationPath + "KillProcessAntuco.properties");
+        Repository.killProcess = new PropertiesFile(com.larrainvial.logviwer.Repository.locationPath + properties);
 
         serverCore.url = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.url");
         serverCore.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.usuario");
@@ -314,6 +320,7 @@ public class Antuco {
                 core.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.name");
                 core.nameprocess = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.processname");
                 core.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.pathbin");
+                core.commentario = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.comentario");
 
                 Repository.coreStrategy.put(core.name, core);
             }
@@ -326,6 +333,7 @@ public class Antuco {
                 core.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.name");
                 core.nameprocess = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.processname");
                 core.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.pathbin");
+                core.commentario = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.comentario");
 
                 Repository.weborbStrategy.put(core.name, core);
             }
@@ -448,6 +456,8 @@ public class Antuco {
                     printConsole(linea, true);
                 }
 
+
+
                 core.proccesUp = false;
                 channelExec.disconnect();
 
@@ -464,6 +474,7 @@ public class Antuco {
 
                 ChannelExec channelExec = (ChannelExec) sessionServerCore.openChannel("exec");
 
+
                 InputStream in = channelExec.getInputStream();
 
                 channelExec.setCommand(core.pathbin);
@@ -475,6 +486,7 @@ public class Antuco {
                 while ((linea = reader.readLine()) != null) {
                     printConsole(linea, true);
                 }
+
 
                 channelExec.disconnect();
 
