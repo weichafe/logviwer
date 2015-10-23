@@ -45,7 +45,6 @@ public class CalculatePositions {
             positions.positions = helper.positions(keyHashPositions);
         }
 
-
         if (modelRoutingData.side.equals("Buy")) {
 
             if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
@@ -53,15 +52,13 @@ public class CalculatePositions {
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-                //positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr) * 100 )/ 100;
-                positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr));
 
             } else {
 
                 positions.qtyBuyAdr = modelRoutingData.lastQty + positions.qtyBuyAdr;
                 positions.symbolAdr = modelRoutingData.getSymbol();
-            }
 
+            }
         }
 
         if (modelRoutingData.side.equals("Sell") || modelRoutingData.side.equals("Sell Short")) {
@@ -71,8 +68,7 @@ public class CalculatePositions {
                 positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-                //positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr) * 100 )/ 100;
-                positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr));
+
 
             } else {
 
@@ -82,6 +78,9 @@ public class CalculatePositions {
             }
 
         }
+
+        positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr));
+        positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr));
 
     }
 }

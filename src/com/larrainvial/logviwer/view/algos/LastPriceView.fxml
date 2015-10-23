@@ -10,15 +10,15 @@
     <TableView fx:id="lastPrice">
 
       <columns>
-        <TableColumn style="-fx-alignment: CENTER;" text="Last Price" fx:id="hour" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Type" fx:id="messageByType"/>
-        <TableColumn style="-fx-alignment: CENTER;" text="Symbol" fx:id="symbol" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Buy Px" fx:id="buyPx" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Buy Qty" fx:id="buyQty" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Sell Px" fx:id="sellPx" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Sell Qty" fx:id="sellQty" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" />
-        <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" />
+        <TableColumn style="-fx-alignment: CENTER;" text="Last Price" fx:id="hour" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Type" fx:id="messageByType" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Symbol" fx:id="symbol" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Buy Px" fx:id="buyPx" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Buy Qty" fx:id="buyQty" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Sell Px" fx:id="sellPx" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Sell Qty" fx:id="sellQty" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" prefWidth="120"/>
       </columns>
 
     </TableView>

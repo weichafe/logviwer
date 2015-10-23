@@ -141,21 +141,9 @@ public class SellSideController {
     public ObservableList<ModelRoutingData> filteredDataOrderID = FXCollections.observableArrayList();
 
     public ObservableList<ModelRoutingData> auxFilterData;
+
     public TextField auxFilterField;
 
-
-    private boolean filter = false;
-
-    public SellSideController(){
-
-        masterData.addListener(new ListChangeListener<ModelRoutingData>() {
-            @Override
-            public void onChanged(Change<? extends ModelRoutingData> change) {
-                updateFilteredData(auxFilterData, auxFilterField);
-            }
-        });
-
-    }
 
     @FXML
     private void refreshTableView() {
@@ -228,183 +216,14 @@ public class SellSideController {
 
         routing_nyse.setItems(filteredDataSymbol);
 
-        filterFieldSymbol.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataSymbol, filterFieldSymbol);
-            }
-        });
-
-        filterFieldClOrdID.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataClOrdID, filterFieldClOrdID);
-            }
-        });
-
-        filterFieldOrderID.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataOrderID, filterFieldOrderID);
-            }
-        });
-
-        filterFieldOrigClOrdID.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDatadOrigClOrdID, filterFieldOrigClOrdID);
-            }
-        });
-
-
-        filterFieldExecType.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataExecType, filterFieldExecType);
-            }
-        });
-
-        filterFieldOrdStatus.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataOrdStatus, filterFieldOrdStatus);
-            }
-        });
-
-        filterFieldAccount.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataAccount, filterFieldAccount);
-            }
-        });
-
-        filterFieldSide.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataSide, filterFieldSide);
-            }
-        });
-
-        filterFieldClOrdLinkID.textProperty().addListener(new ChangeListener<String>() {
-
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                filter = true;
-                updateFilteredData(filteredDataClOrdLinkID, filterFieldClOrdLinkID);
-            }
-        });
-
 
     }
-
-
 
     public TableView<ModelRoutingData> getType() {
 
         return routing_nyse;
     }
 
-    private void updateFilteredData(ObservableList<ModelRoutingData> filterData, TextField filterField) {
-
-        if(!filter) return;
-
-        auxFilterData = filterData;
-        auxFilterField = filterField;
-
-        filterData.clear();
-
-        for (ModelRoutingData p : masterData) {
-            if (matchesFilter(p, filterField)) {
-                filterData.add(p);
-            }
-        }
-
-        reapplyTableSortOrder(filterData);
-    }
-
-    private boolean matchesFilter(ModelRoutingData routingAdr, TextField filterField) {
-
-        String filterString = filterField.getText();
-
-        if (filterString == null || filterString.isEmpty()) {
-            return true;
-        }
-
-        String lowerCaseFilterString = filterString.toLowerCase();
-
-
-        if(filterField.getId().equals("filterFieldClOrdLinkID")){
-            if (routingAdr.getClOrdLinkID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldSide")){
-            if (routingAdr.getSide().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldAccount")){
-            if (routingAdr.getAccount().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldOrdStatus")){
-            if (routingAdr.getOrdStatus().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldExecType")){
-            if (routingAdr.getExecType().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldOrigClOrdID")){
-            if (routingAdr.getOrigClOrdID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldOrderID")){
-            if (routingAdr.getOrderID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldSymbol")){
-            if (routingAdr.getSymbol().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterFieldClOrdID")){
-            if (routingAdr.getClOrdID().toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     private void reapplyTableSortOrder(ObservableList<ModelRoutingData> filterData) {
 

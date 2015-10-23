@@ -1,34 +1,40 @@
-package com.larrainvial.process.market;
+package com.larrainvial.process;
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
-import com.larrainvial.process.Repository;
+import com.larrainvial.logviwer.controller.algos.LastPriceController;
+import com.larrainvial.logviwer.controller.process.ProccesController;
+import com.larrainvial.logviwer.model.ModelProcess;
 import com.larrainvial.process.ssh.Connection;
 import com.larrainvial.process.util.PropertiesFile;
-import com.larrainvial.process.vo.CoreVO;
 import com.larrainvial.process.vo.ServerVO;
 import com.larrainvial.logviwer.MainLogViwer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import org.apache.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.logging.Level;
 
-public class ConnectServer {
+public class MainProcess {
 
-    private static Logger logger = Logger.getLogger(ConnectServer.class.getName());
+    private static Logger logger = Logger.getLogger(MainProcess.class.getName());
 
     public TextArea textAreaWebOrb = new TextArea();
     public TextArea textAreaCore = new TextArea();
@@ -45,47 +51,75 @@ public class ConnectServer {
     public static String textCore = "Console Core " + "\n";
     public static String textWebOrb = "Console WebOrb " + "\n";
 
-    public HBox strategyHbox = new HBox();
-    public VBox coreVbox = new VBox();
     public VBox weborbVbox = new VBox();
 
+    public Double prefWidth;
+    public Double prefHeight;
 
-    public ConnectServer(Stage primaryStage, String properties){
+    public FXMLLoader proccessFXMLLoader = new FXMLLoader();
+    public TableView<ModelProcess> tableView = null;
+    public FXMLLoader loader;
 
-        this.getProperties(properties);
-        this.connectServerWebOrb();
-        this.connectServerCore();
-        this.killProcess(primaryStage);
-
-    }
-
-
-    public void killProcess(Stage primaryStage) {
+    public MainProcess(Stage primaryStage, String properties){
 
         try {
 
             logger.info("Kill Pocess OK");
 
-            FXMLLoader loader = new FXMLLoader(MainLogViwer.class.getResource("view/KillProcess.fxml"));
+            general.getStyleClass().add("generalKillProcess");
+
+            loader = new FXMLLoader(MainLogViwer.class.getResource("view/process/Process.fxml"));
+            proccessFXMLLoader.setLocation(MainLogViwer.class.getResource("view/process/PanelProccesView.fxml"));
+            proccessFXMLLoader.load();
+
+
+            ProccesController modelProcess = proccessFXMLLoader.getController();
+            tableView = modelProcess.getType();
+
+
+            this.prefWidth = primaryStage.getWidth();
+            this.prefHeight = primaryStage.getHeight();
+            this.process(primaryStage, properties);
+
+        } catch (Exception e){
+            logger.error(Level.SEVERE);
+            e.printStackTrace();
+        }
+    }
+
+
+    public void process(Stage primaryStage, String properties) {
+
+        try {
+
             ventanaPrincipal = (AnchorPane) loader.load();
-            ventanaPrincipal.setPrefWidth(700);
-            ventanaPrincipal.setPrefHeight(800);
 
-            general.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
+            general.getChildren().addAll(tableView);
 
-            strategyHbox.getStyleClass().add("hboxMenuKill");
-            coreVbox.getStyleClass().add("hboxMenuKillCore");
-            weborbVbox.getStyleClass().add("hboxMenuKillwebOrb");
+            this.getProperties(properties);
+
+            this.connectServerWebOrb();
+            this.connectServerCore();
+
 
             this.setButtonStrategy();
             this.consoles();
 
-            ventanaPrincipal.getChildren().addAll(general);
+            ventanaPrincipal.getChildren().add(general);
+
+
+            ScrollPane scrollBar = new ScrollPane();
+            scrollBar.setFitToHeight(true);
+            scrollBar.setFitToWidth(true);
+            scrollBar.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+            scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+            scrollBar.setContent(ventanaPrincipal);
 
             Stage santiago = new Stage();
             santiago.initOwner(primaryStage);
 
-            Scene scene = new Scene(ventanaPrincipal);
+            Scene scene = new Scene(scrollBar,prefHeight, prefWidth);
             santiago.setScene(scene);
             santiago.show();
 
@@ -95,9 +129,9 @@ public class ConnectServer {
                     sessionServerWebOrb.disconnect();
                     textCore = "";
                     textWebOrb = "";
-
                 }
             });
+
 
         } catch (Exception e) {
             logger.error(e);
@@ -143,14 +177,14 @@ public class ConnectServer {
 
     public void setButtonStrategy(){
 
-        for (Map.Entry<String, CoreVO> e : Repository.coreStrategy.entrySet()) {
+        for (Map.Entry<String, ModelProcess> e : Repository.coreStrategy.entrySet()) {
 
-            CoreVO core = Repository.coreStrategy.get(e.getKey());
+            ModelProcess core = Repository.coreStrategy.get(e.getKey());
 
             Button strategyCore = new Button();
             strategyCore.setId(core.name);
             strategyCore.setText(core.name);
-            strategyCore.setTooltip(new Tooltip(core.commentario));
+            strategyCore.setTooltip(new Tooltip(core.comentary));
 
             Boolean verifyProcces = verifyProccesCoreLinux(core);
 
@@ -174,19 +208,19 @@ public class ConnectServer {
                 }
             });
 
-            coreVbox.getChildren().addAll(strategyCore);
+            //Aqui
         }
 
 
-        for (Map.Entry<String, CoreVO> e : Repository.weborbStrategy.entrySet()) {
+        for (Map.Entry<String, ModelProcess> e : Repository.weborbStrategy.entrySet()) {
 
-            CoreVO weborb = Repository.weborbStrategy.get(e.getKey());
+            ModelProcess weborb = Repository.weborbStrategy.get(e.getKey());
 
             Button strategyWebOrb = new Button();
             strategyWebOrb.setPrefWidth(140);
             strategyWebOrb.setId(weborb.name);
             strategyWebOrb.setText(weborb.name);
-            strategyWebOrb.setTooltip(new Tooltip(weborb.commentario));
+            strategyWebOrb.setTooltip(new Tooltip(weborb.comentary));
 
             if (verifyProcceswebOrbLinux(weborb)) {
                 strategyWebOrb.getStyleClass().removeAll("processLinuxDown");
@@ -212,12 +246,12 @@ public class ConnectServer {
 
         }
 
-        strategyHbox.getChildren().addAll(coreVbox, weborbVbox);
-        general.getChildren().add(strategyHbox);
+
+        //Aqui
 
     }
 
-    public Boolean verifyProcceswebOrbLinux(CoreVO core){
+    public Boolean verifyProcceswebOrbLinux(ModelProcess core){
 
         String console;
 
@@ -227,14 +261,14 @@ public class ConnectServer {
 
             InputStream in = channelExec.getInputStream();
 
-            channelExec.setCommand("ps -fea | grep " + core.nameprocess);
+            channelExec.setCommand("ps -fea | grep " + core.processName);
             channelExec.connect();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             while ((console = reader.readLine()) != null) {
 
-                if (console.contains("-Dname=" + core.nameprocess)) {
+                if (console.contains("-Dname=" + core.processName)) {
                     final String aux = console;
                     printConsole(aux, false);
                     core.proccesUp = true;
@@ -257,7 +291,7 @@ public class ConnectServer {
     }
 
 
-    public Boolean verifyProccesCoreLinux(CoreVO core){
+    public Boolean verifyProccesCoreLinux(ModelProcess core){
 
         String console;
 
@@ -267,14 +301,14 @@ public class ConnectServer {
 
             InputStream in = channelExec.getInputStream();
 
-            channelExec.setCommand("ps -fea | grep " + core.nameprocess);
+            channelExec.setCommand("ps -fea | grep " + core.processName);
             channelExec.connect();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
             while ((console = reader.readLine()) != null) {
 
-                if (console.contains("-Dname="+core.nameprocess)) {
+                if (console.contains("-Dname="+core.processName)) {
                     final String aux = console;
                     printConsole(aux, true);
                     core.proccesUp = true;
@@ -307,6 +341,7 @@ public class ConnectServer {
         serverWeborb.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.usuario");
         serverWeborb.pass = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.pass");
 
+        int count = 1;
 
         for (Map.Entry<?, ?> entry : com.larrainvial.process.Repository.killProcess.properties.entrySet()) {
 
@@ -314,31 +349,101 @@ public class ConnectServer {
 
             if (key.indexOf(".core.name") > -1) {
 
-                CoreVO core = new CoreVO();
+                ModelProcess strategy = new ModelProcess();
                 String name = key.replace(".core.name", "");
 
-                core.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.name");
-                core.nameprocess = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.processname");
-                core.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.pathbin");
-                core.commentario = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.comentario");
+                strategy.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.name");
+                strategy.processName = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.processname");
+                strategy.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.pathbin");
+                strategy.comentary = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.comentario");
 
-                Repository.coreStrategy.put(core.name, core);
+                tableView.getItems().add(strategy);
+                Repository.coreStrategy.put(strategy.name, strategy);
+
+                ProccesController modelProcess = proccessFXMLLoader.getController();
+                modelProcess.getCore();
+
+
             }
 
+/*
             if (key.indexOf(".weborb.name") > -1) {
 
-                CoreVO core = new CoreVO();
+                ModelProcess strategy = new ModelProcess();
                 String name = key.replace(".weborb.name", "");
 
-                core.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.name");
-                core.nameprocess = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.processname");
-                core.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.pathbin");
-                core.commentario = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.comentario");
+                strategy.name = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.name");
+                strategy.processName = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.processname");
+                strategy.pathbin = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.pathbin");
+                strategy.comentary = com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.comentario");
 
-                Repository.weborbStrategy.put(core.name, core);
+                Repository.weborbStrategy.put(strategy.name, strategy);
+                tableView.getItems().add(strategy);
+
+
+                Callback<TableColumn<ModelProcess, String>, TableCell<ModelProcess, String>> cellFactory =
+                        new Callback<TableColumn<ModelProcess, String>, TableCell<ModelProcess, String>>() {
+
+                            @Override
+                            public TableCell call( final TableColumn<ModelProcess, String> param){
+
+                                final TableCell<ModelProcess, String> cell = new TableCell<ModelProcess, String>(){
+
+                                    final Button btn = new Button();
+
+                                    @Override
+                                    public void updateItem(String item, boolean empty ) {
+                                        super.updateItem(item, empty);
+
+                                        if (empty) {
+                                            setGraphic(null);
+                                            setText(null);
+
+                                        } else {
+
+                                            btn.setId(strategy.name);
+                                            btn.setText(strategy.name);
+                                            btn.setTooltip(new Tooltip(strategy.comentary));
+                                            btn.setPrefWidth(140);
+
+                                            Boolean verifyProcces = verifyProccesCoreLinux(strategy);
+
+                                            if (verifyProcces) {
+                                                btn.getStyleClass().removeAll("processLinuxDown");
+                                                btn.getStyleClass().add("processLinuxUP");
+
+                                            } else {
+                                                btn.getStyleClass().removeAll("processLinuxUP");
+                                                btn.getStyleClass().add("processLinuxDown");
+                                            }
+
+
+
+                                            btn.setOnAction(new EventHandler<ActionEvent>() {
+
+                                                @Override
+                                                public void handle(ActionEvent t) {
+                                                    Button clickedBtn = (Button) t.getSource();
+                                                    setCommandtoServerWebOrb(clickedBtn);
+
+                                                }
+                                            });
+
+                                            setGraphic(btn);
+                                            setText(null);
+                                        }
+                                    }
+                                };
+                                return cell;
+                            }
+                        };
+
+                weborb.setCellFactory(cellFactory);
+
             }
-
+*/
         }
+
 
 
     }
@@ -364,7 +469,7 @@ public class ConnectServer {
 
             if (!Repository.weborbStrategy.containsKey(clickedBtn.getId())) return;
 
-            CoreVO weborb = Repository.weborbStrategy.get(clickedBtn.getId());
+            ModelProcess weborb = Repository.weborbStrategy.get(clickedBtn.getId());
 
 
             if (weborb.proccesUp){
@@ -373,7 +478,7 @@ public class ConnectServer {
 
                 InputStream in = channelExec.getInputStream();
 
-                channelExec.setCommand("kill -9 $(ps aux | grep " + weborb.nameprocess + " | awk '{print $2}')");
+                channelExec.setCommand("kill -9 $(ps aux | grep " + weborb.processName + " | awk '{print $2}')");
                 channelExec.connect();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -436,7 +541,7 @@ public class ConnectServer {
 
             if (!Repository.coreStrategy.containsKey(clickedBtn.getId())) return;
 
-            CoreVO core = Repository.coreStrategy.get(clickedBtn.getId());
+            ModelProcess core = Repository.coreStrategy.get(clickedBtn.getId());
 
 
             if (core.proccesUp){
@@ -445,7 +550,7 @@ public class ConnectServer {
 
                 InputStream in = channelExec.getInputStream();
 
-                channelExec.setCommand("kill -9 $(ps aux | grep " + core.nameprocess + " | awk '{print $2}')");
+                channelExec.setCommand("kill -9 $(ps aux | grep " + core.processName + " | awk '{print $2}')");
                 channelExec.connect();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -516,6 +621,38 @@ public class ConnectServer {
 
         } catch (Exception e) {
             logger.error(e);
+        }
+    }
+
+
+    private class ButtonCell extends TableCell<ModelProcess, Boolean> {
+
+        final Button cellButton = new Button();
+
+        ButtonCell(ModelProcess strategy){
+
+            cellButton.setId(strategy.name);
+            cellButton.setText(strategy.name);
+            cellButton.setTooltip(new Tooltip(strategy.comentary));
+            cellButton.setPrefWidth(140);
+
+            cellButton.setOnAction(new EventHandler<ActionEvent>(){
+
+                @Override
+                public void handle(ActionEvent t) {
+                    Button clickedBtn = (Button) t.getSource();
+                    setCommandtoServerWebOrb(clickedBtn);
+                }
+            });
+        }
+
+
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(cellButton);
+            }
         }
     }
 

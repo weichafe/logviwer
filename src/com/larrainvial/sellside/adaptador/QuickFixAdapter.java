@@ -13,6 +13,7 @@ import quickfix.fix44.*;
 import quickfix.fix44.MessageCracker;
 
 import java.net.URL;
+import java.util.logging.Level;
 
 public final class QuickFixAdapter extends MessageCracker implements Application {
 
@@ -40,7 +41,7 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             Notifier.INSTANCE.notifySuccess("Success", "Sell Side");
 
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(Level.SEVERE, e);
             e.printStackTrace();
         }
     }
@@ -113,12 +114,28 @@ public final class QuickFixAdapter extends MessageCracker implements Application
         Controller.dispatchEvent(new ReceivedOrderCancelRequestEvent(this, orderCancelRequest));
     }
 
-    public static void strop() throws ConfigError {
-        Repository.socketAcceptor.stop();
+    public static void strop() {
+
+        try {
+
+            Repository.socketAcceptor.stop();
+
+        } catch (Exception e){
+            logger.error(Level.SEVERE, e);
+            e.printStackTrace();
+        }
     }
 
-    public static void start() throws ConfigError {
-        Repository.socketAcceptor.start();
+    public static void start() {
+
+        try {
+
+            Repository.socketAcceptor.start();
+
+        } catch (Exception e){
+            logger.error(Level.SEVERE, e);
+            e.printStackTrace();
+        }
     }
 
 

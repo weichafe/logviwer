@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import java.net.URL?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+  <stylesheets>
+    <URL value="@../../style/SimpleTheme.css" />
+  </stylesheets>
+  <children>
+
+  </children>
+</AnchorPane>

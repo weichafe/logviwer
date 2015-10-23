@@ -1,6 +1,8 @@
 package com.larrainvial.logviwer.fxvo;
 
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.utils.Notifier;
+import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -10,7 +12,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import quickfix.ConfigError;
+
 
 public class SwitchButton extends Label {
 
@@ -76,22 +78,6 @@ public class SwitchButton extends Label {
                     }
 
 
-
-                    if (switchBtn.getId().equals("Routing")) {
-
-                        try {
-                            switchBtn.setText(nameType + " ON");
-                            switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
-                            switchBtn.setContentDisplay(ContentDisplay.RIGHT);
-                            algo.routingAdrToggle = true;
-                            QuickFixAdapter.start();
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
                     if (switchBtn.getId().equals("Alert")) {
                         algo.setAlert(false);
 
@@ -101,14 +87,6 @@ public class SwitchButton extends Label {
 
                     }
 
-                    /*else {
-
-                        switchBtn.setText(nameType + " ON");
-                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
-                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
-                    }
-                    */
-
                     if (switchBtn.getId().equals("Graph")) {
                         algo.graphEnable = false;
 
@@ -117,16 +95,23 @@ public class SwitchButton extends Label {
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                     }
-                    /*
-                    else {
 
+                    if (switchBtn.getId().equals("Strart")) {
                         switchBtn.setText(nameType + " ON");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
-                        switchBtn.setContentDisplay(ContentDisplay.RIGHT);
-
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
+                        QuickFixAdapter.start();
                     }
-                    */
 
+                    if (switchBtn.getId().equals("Reset")) {
+
+                        switchBtn.setText(nameType + " Orders");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
+
+                        Notifier.INSTANCE.notifyWarning("Sell Side", "All orders were deleted");
+                        Repository.deleteOrder();
+                    }
 
 
                 } else {
@@ -166,22 +151,6 @@ public class SwitchButton extends Label {
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
                     }
 
-                    if (switchBtn.getId().equals("Routing")) {
-
-                        algo.routingAdrToggle = false;
-                        switchBtn.setText(nameType + " OFF");
-                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
-                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
-
-                        try {
-                            QuickFixAdapter.strop();
-                        } catch (ConfigError configError) {
-                            configError.printStackTrace();
-                        }
-
-
-                    }
-
                     if (switchBtn.getId().equals("Alert")) {
                         algo.setAlert(true);
                         switchBtn.setText(nameType + " ON");
@@ -199,15 +168,22 @@ public class SwitchButton extends Label {
 
                     }
 
-                    /*
-                    else {
-
-                        switchBtn.setText(nameType + " OFF");
+                    if (switchBtn.getId().equals("Strart")) {
+                        switchBtn.setText(nameType + " ON");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-
+                        QuickFixAdapter.strop();
                     }
-                    */
+
+                    if (switchBtn.getId().equals("Reset")) {
+
+                        switchBtn.setText(nameType + " Orders");
+                        switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                        switchBtn.setContentDisplay(ContentDisplay.LEFT);
+
+                        Notifier.INSTANCE.notifyWarning("Sell Side", "All orders were deleted");
+                        Repository.deleteOrder();
+                    }
 
                 }
             }

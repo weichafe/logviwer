@@ -3,6 +3,7 @@ package com.larrainvial.logviwer.utils;
 import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.vo.LatencyVO;
@@ -29,7 +30,7 @@ public class Helper {
 
         try {
 
-            File xmlFile = new File("C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\strategy.xml");
+            File xmlFile = new File(Repository.locationPath + "strategy.xml");
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -37,15 +38,15 @@ public class Helper {
             Document document = builder.parse(xmlFile);
 
             NodeList nodeList = document.getDocumentElement().getChildNodes();
-            int tab = 0;
+            int tab = 1;
 
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                 Node node = nodeList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    new Algo((Element) node, tab);
-                    tab++;
+                    new Algo((Element) node, tab++);
+
                 }
             }
 
@@ -67,26 +68,6 @@ public class Helper {
 
     }
 
-    public void readStrategy() throws ParserConfigurationException, SAXException, IOException, InterruptedException {
-
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-
-        Document document = builder.parse("");
-
-        NodeList nodeList = document.getDocumentElement().getChildNodes();
-        int tab = 0;
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-
-            Node node = nodeList.item(i);
-            if (node.getNodeType() == Node.ELEMENT_NODE) {
-                new Algo((Element) node, tab);
-                tab++;
-            }
-        }
-
-    }
 
     public synchronized static String adrToLocal(String symbolLocal){
 

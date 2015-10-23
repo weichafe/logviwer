@@ -1,7 +1,7 @@
 package com.larrainvial.logviwer.controller;
 
 import com.larrainvial.logviwer.utils.About;
-import com.larrainvial.process.market.ConnectServer;
+import com.larrainvial.process.MainProcess;
 import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
 import javafx.fxml.FXML;
@@ -14,18 +14,11 @@ public class RootLayoutController {
 
     private MainLogViwer mainApp;
 
-    /**
-     * Is called by the main application to give a reference back to itself.
-     *
-     * @param mainApp
-     */
     public void setMainApp(MainLogViwer mainApp) {
         this.mainApp = mainApp;
     }
 
-    /**
-     * Creates an empty address book.
-     */
+
     @FXML
     private void handleNew() {
         mainApp.getPersonData().clear();
@@ -84,7 +77,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessMarmolejo.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,7 +93,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessAntuco.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,7 +107,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessEverest.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,7 +121,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessCatedral.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,7 +135,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessEsmeralda.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -156,7 +149,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessDesconsuelo.properties";
-            new ConnectServer(Repository.primaryStage, properties);
+            new MainProcess(Repository.primaryStage, properties);
 
         } catch (Exception e) {
             e.printStackTrace();

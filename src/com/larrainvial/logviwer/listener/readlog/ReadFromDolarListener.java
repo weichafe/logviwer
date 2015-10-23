@@ -58,6 +58,7 @@ public class ReadFromDolarListener implements Listener {
 
         } catch (Exception e) {
             logger.error(e);
+            e.printStackTrace();
         }
 
     }

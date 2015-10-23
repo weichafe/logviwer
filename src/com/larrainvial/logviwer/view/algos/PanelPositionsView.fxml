@@ -6,21 +6,23 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.PanelPositionsController">
   <children>
     <TableView fx:id="positionTable">
+
       <columns>
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" />
+        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" prefWidth="100"/>
+        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" prefWidth="80"/>
 
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="qtyBuyLocalRatio" text="Inflow" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="qtySellAdr" text="Inflow" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="differenceInflow" text="Difference" />
+        <TableColumn fx:id="qtyBuyLocalRatio" text="Inflow" prefWidth="80" />
+        <TableColumn fx:id="qtySellAdr" text="Inflow"  prefWidth="70"/>
+        <TableColumn fx:id="differenceInflow" text="Difference" prefWidth="90"/>
 
-        <TableColumn style="-fx-alignment: CENTER;"  fx:id="qtySellLocalRatio" text="Flowback" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="qtyBuyAdr" text="Flowback" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="differenceFlowback" text="Difference" />
+        <TableColumn fx:id="qtySellLocalRatio" text="Flowback" prefWidth="80"/>
+        <TableColumn fx:id="qtyBuyAdr" text="Flowback" prefWidth="80"/>
+        <TableColumn fx:id="differenceFlowback" text="Difference" prefWidth="90"/>
 
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="qtyBuyLocal" text="Local Buy" />
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="qtySellLocal" text="Local Sell" />
-        <TableColumn  style="-fx-alignment: CENTER;" fx:id="ratio" text="Ratio" />
+        <TableColumn fx:id="qtyBuyLocal" text="Local Buy" prefWidth="80"/>
+        <TableColumn fx:id="qtySellLocal" text="Local Sell" prefWidth="80"/>
+        <TableColumn fx:id="ratio" text="Ratio" prefWidth="70"/>
+
       </columns>
     </TableView>
   </children>

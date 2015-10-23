@@ -3,12 +3,16 @@ package com.larrainvial.sellside;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.utils.PropertiesFile;
+import org.apache.log4j.Logger;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
 
 public class MainSellSide {
+
+    private static Logger logger = Logger.getLogger(MainSellSide.class.getName());
 
     public void sellside() {
 
@@ -36,6 +40,7 @@ public class MainSellSide {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(Level.SEVERE, e);
         }
     }
 

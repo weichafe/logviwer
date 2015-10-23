@@ -38,7 +38,7 @@ public class About {
             texto += "\tEtrading " + "\n";
             texto += "Gerencia de Sitemas " + "\n";
             texto += "Larrainvial 2015 " + "\n";
-            texto += "Version Beta build 1.0.0.1 " + "\n";
+            texto += "Version terrible chora  1.0.0.3 " + "\n";
 
             Label label1 = new Label(texto);
             text.getChildren().addAll(label1);

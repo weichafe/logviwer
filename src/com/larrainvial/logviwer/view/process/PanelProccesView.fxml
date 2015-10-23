@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.process.ProccesController">
+  <children>
+
+    <TableView fx:id="process">
+
+      <columns>
+        <TableColumn fx:id="name" text="Name" prefWidth="200"/>
+        <TableColumn fx:id="nameprocess" text="Process Name" prefWidth="200"/>
+        <TableColumn fx:id="pathbin" text="Path Core" prefWidth="500"/>
+        <TableColumn fx:id="comentary" text="Comentary" prefWidth="250"/>
+        <TableColumn fx:id="core" text="Core" prefWidth="200"/>
+      </columns>
+
+    </TableView>
+
+  </children>
+</AnchorPane>
