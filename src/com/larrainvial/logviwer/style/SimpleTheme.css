@@ -226,8 +226,6 @@
 
 
 /* KILL PROCCES */
-
-
 .tableviewProcess {
     -fx-pref-width: 100%;
     -fx-border-color: yellow;
@@ -240,8 +238,8 @@
 
 .generalKillProcess {
     -fx-pref-width: 1600px;
+    -fx-text-fill: red;
     -fx-background-color: #1f1f1f;
-    -fx-border-color: red;
     -fx-border-width: 2px;
     -fx-padding: 35px;
     -fx-stroke: black;
@@ -250,7 +248,7 @@
 }
 
 .tableViewKillProcess{
-    -fx-text-fill: red;
+    /*-fx-text-fill: red;*/
 }
 
 
@@ -273,6 +271,11 @@
     -fx-table-header-border-color: transparent;
     -fx-padding: 20,10,10,10;
     -fx-spacing: 10;
+}
+
+
+.table-cell {
+    -fx-alignment: BASELINE_CENTER;
 }
 
 

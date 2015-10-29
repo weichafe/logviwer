@@ -1,7 +1,7 @@
 package com.larrainvial.process;
 
 
-import com.larrainvial.logviwer.model.ModelProcess;
+import com.larrainvial.process.model.ModelProcess;
 import com.larrainvial.process.util.PropertiesFile;
 import java.util.LinkedHashMap;
 

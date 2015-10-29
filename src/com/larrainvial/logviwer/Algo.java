@@ -625,19 +625,19 @@ public class Algo {
                 }
 
                 if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                    //Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
+                   //Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
                 }
 
                 if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                    //Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
+                   //Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
                 }
 
                 if (routingLocalToggle && xmlVO.booleanRLocal) {
-                   // Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
+                   //Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
                 }
 
                 if (routingAdrToggle && xmlVO.booleanRAdr) {
-                   // Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
+                   //Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                 }
 
             }

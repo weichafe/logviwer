@@ -25,6 +25,8 @@ public class Connection {
             session.setUserInfo(ui);
             session.setPassword(xmlVO.passServer);
 
+
+
         } catch (Exception e) {
             logger.error(e);
             e.printStackTrace();
