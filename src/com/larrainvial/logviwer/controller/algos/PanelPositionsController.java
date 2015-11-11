@@ -88,8 +88,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -127,8 +127,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -150,8 +150,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -175,8 +175,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -198,8 +198,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -221,8 +221,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }
@@ -244,8 +244,8 @@ public class PanelPositionsController {
                             setText(numFormat.format(Double.valueOf(item)));
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
 
                 }

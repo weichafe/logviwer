@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
 
 public class PropertiesFile {
 
@@ -19,8 +20,8 @@ public class PropertiesFile {
 
             this.properties.load(new FileInputStream(url));
 
-        } catch (IOException e) {
-            logger.error(e);
+        } catch (IOException ex) {
+            logger.error(Level.SEVERE, ex);
         }
     }
 

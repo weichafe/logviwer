@@ -130,8 +130,8 @@ public class Latency {
 
             return sqlTimestamp.getTime();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
         return null;

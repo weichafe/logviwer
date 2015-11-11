@@ -79,8 +79,8 @@ public class RootLayoutController {
             String properties = "KillProcessMarmolejo.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -95,8 +95,8 @@ public class RootLayoutController {
             String properties = "KillProcessAntuco.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -109,8 +109,8 @@ public class RootLayoutController {
             String properties = "KillProcessEverest.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -123,8 +123,8 @@ public class RootLayoutController {
             String properties = "KillProcessCatedral.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -137,8 +137,8 @@ public class RootLayoutController {
             String properties = "KillProcessEsmeralda.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -151,8 +151,8 @@ public class RootLayoutController {
             String properties = "KillProcessDesconsuelo.properties";
             new MainProcess(Repository.primaryStage, properties);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -163,8 +163,8 @@ public class RootLayoutController {
 
         try {
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -177,8 +177,8 @@ public class RootLayoutController {
         try {
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

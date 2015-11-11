@@ -34,10 +34,10 @@ public class CalculateLastPrice {
             this.algo = algo;
             this.calculateLastPrice();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
     }
 

@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
+import java.util.logging.Level;
 
 public class PositionViewListener implements Listener {
 
@@ -56,8 +57,8 @@ public class PositionViewListener implements Listener {
 
             }
 
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
         }
   }
 

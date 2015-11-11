@@ -40,9 +40,9 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
             Notifier.INSTANCE.notifySuccess("Success", "Sell Side");
 
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -55,8 +55,8 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             Repository.senderCompID = sessionSettings.getString(Repository.sessionID, "SenderCompID");
             Repository.targetCompID = sessionSettings.getString(Repository.sessionID, "TargetCompID");
 
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
         }
     }
 
@@ -120,9 +120,9 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
             Repository.socketAcceptor.stop();
 
-        } catch (Exception e){
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
     }
 
@@ -132,9 +132,9 @@ public final class QuickFixAdapter extends MessageCracker implements Application
 
             Repository.socketAcceptor.start();
 
-        } catch (Exception e){
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
     }
 

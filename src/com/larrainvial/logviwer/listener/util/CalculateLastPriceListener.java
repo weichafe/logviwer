@@ -3,7 +3,6 @@ package com.larrainvial.logviwer.listener.util;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
 import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.Helper;
@@ -12,6 +11,7 @@ import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
+import java.util.logging.Level;
 
 
 public class CalculateLastPriceListener implements Listener {
@@ -41,8 +41,8 @@ public class CalculateLastPriceListener implements Listener {
 
             this.calculateLastPrice(ev.modelMarketData, ev.type_Market);
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
 
     }

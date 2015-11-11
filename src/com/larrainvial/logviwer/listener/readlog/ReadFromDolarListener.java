@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class ReadFromDolarListener implements Listener {
 
@@ -56,9 +57,9 @@ public class ReadFromDolarListener implements Listener {
 
             }
 
-        } catch (Exception e) {
-            logger.error(e);
-            e.printStackTrace();
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
     }

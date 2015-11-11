@@ -14,6 +14,8 @@ import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class RoutingAdrListener implements Listener {
 
     public Algo algo;
@@ -48,8 +50,8 @@ public class RoutingAdrListener implements Listener {
                 Latency.latencyADR(algo, modelRoutingData);
             }
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
 
     }

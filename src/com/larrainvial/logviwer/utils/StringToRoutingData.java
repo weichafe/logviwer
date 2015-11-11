@@ -8,6 +8,7 @@ import quickfix.field.MsgType;
 import quickfix.fix44.Message;
 
 import java.util.Map;
+import java.util.logging.Level;
 
 public class StringToRoutingData {
 
@@ -51,8 +52,8 @@ public class StringToRoutingData {
             modelRoutingData.securityExchange = messageMap.containsKey(FixConstants.SecurityExchange) ? messageMap.get(FixConstants.SecurityExchange).toString() : "";
             modelRoutingData.text = messageMap.containsKey(FixConstants.Text) ? messageMap.get(FixConstants.Text).toString() : "";
 
-        }catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
 
 

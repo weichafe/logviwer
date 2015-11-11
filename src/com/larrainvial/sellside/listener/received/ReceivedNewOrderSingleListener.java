@@ -52,8 +52,8 @@ public class ReceivedNewOrderSingleListener implements Listener {
             Controller.dispatchEvent(new TradeEvent(this, orders));
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

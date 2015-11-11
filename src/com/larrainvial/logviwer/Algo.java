@@ -453,10 +453,10 @@ public class Algo {
             Repository.strategy.put(this.nameAlgo, this);
             start(xmlVO);
 
-        } catch (Exception e){
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
     }
 
@@ -538,10 +538,10 @@ public class Algo {
 
             Repository.strategy.put(this.nameAlgo, this);
 
-        } catch (Exception e){
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
 
 
@@ -574,9 +574,9 @@ public class Algo {
             if(xmlVO.booleanRAdr)   inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
             */
 
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -592,8 +592,8 @@ public class Algo {
             if(xmlVO.booleanRLocal) inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
             if(xmlVO.booleanRAdr)   inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
 
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
         }
 
     }
@@ -611,33 +611,33 @@ public class Algo {
 
                     try {
                         start(xmlVO);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Helper.printerLog(e.toString());
-                        Notifier.INSTANCE.notifyError("Error", e.toString());
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        Helper.printerLog(ex.toString());
+                        Notifier.INSTANCE.notifyError("Error", ex.toString());
                     }
                 }
 
                 Algo algo = Repository.strategy.get(nameAlgo);
 
                 if (mkdDolarToggle && xmlVO.booleanDolar) {
-                   //Controller.dispatchEvent(new ReadFromDolarEvent(algo));
+                //   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
                 }
 
                 if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                   //Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
+                //   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
                 }
 
                 if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                   //Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
+                //   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
                 }
 
                 if (routingLocalToggle && xmlVO.booleanRLocal) {
-                   //Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
+                //   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
                 }
 
                 if (routingAdrToggle && xmlVO.booleanRAdr) {
-                   //Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
+                //   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                 }
 
             }

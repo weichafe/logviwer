@@ -46,8 +46,8 @@ public class OrderCancelRejectListener implements Listener {
 
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

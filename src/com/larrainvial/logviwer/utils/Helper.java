@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
 
 public class Helper {
 
@@ -50,9 +51,9 @@ public class Helper {
                 }
             }
 
-        } catch (Exception e){
-            e.printStackTrace();
-            logger.error(e);
+        } catch (Exception ex){
+            ex.printStackTrace();
+            logger.error(Level.SEVERE, ex);
         }
 
     }
@@ -327,10 +328,10 @@ public class Helper {
 
             return orderedFixMessage;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
 
         return null;

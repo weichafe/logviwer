@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
 
 public class ReadLogMkdAdrListener implements Listener {
 
@@ -56,8 +57,8 @@ public class ReadLogMkdAdrListener implements Listener {
             }
 
 
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
         }
 
     }

@@ -44,8 +44,8 @@ public class PropertiesFile {
             properties.store(output, null);
             output.close();
 
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 

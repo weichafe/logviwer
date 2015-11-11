@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class About {
 
     public AnchorPane ventanaPrincipal;
@@ -51,8 +53,8 @@ public class About {
             santiago.setScene(scene);
             santiago.show();
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
 
 

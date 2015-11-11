@@ -11,6 +11,8 @@ import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class CalculatePositionsListener implements Listener {
 
     public Algo algo;
@@ -33,8 +35,8 @@ public class CalculatePositionsListener implements Listener {
             this.calculatePositions(ev.modelRoutingData);
 
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
 
         }
 
@@ -66,7 +68,6 @@ public class CalculatePositionsListener implements Listener {
                 positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
                 positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
-
 
             } else {
 

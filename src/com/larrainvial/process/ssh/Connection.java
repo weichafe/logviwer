@@ -9,6 +9,8 @@ import com.larrainvial.logviwer.vo.XmlVO;
 import com.larrainvial.process.vo.ServerVO;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class Connection {
 
     private static Logger logger = Logger.getLogger(Connection.class.getName());
@@ -27,9 +29,9 @@ public class Connection {
 
 
 
-        } catch (Exception e) {
-            logger.error(e);
-            e.printStackTrace();
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+
         }
 
         return session;
@@ -48,8 +50,8 @@ public class Connection {
             session.setUserInfo(ui);
             session.setPassword(serverVO.pass);
 
-        } catch (Exception e) {
-            logger.error(e);
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
         }
 
         return session;

@@ -6,6 +6,8 @@ import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class CalculatePositions {
 
     private static Logger logger = Logger.getLogger(CalculatePositions.class.getName());
@@ -20,8 +22,8 @@ public class CalculatePositions {
             this.algo = algo;
             this.calculatePositions();
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
     }
 

@@ -15,6 +15,8 @@ import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
 
+import java.util.logging.Level;
+
 public class DolarListener implements Listener {
 
     public Algo algo;
@@ -43,8 +45,8 @@ public class DolarListener implements Listener {
 
             Controller.dispatchEvent(new CalculateLastPriceEvent(algo, modelMarketData, TYPE_MARKET));
 
-        } catch (Exception e){
-            logger.error(e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
         }
 
     }

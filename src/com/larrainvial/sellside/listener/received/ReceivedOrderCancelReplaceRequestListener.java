@@ -69,8 +69,8 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
             }
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -98,8 +98,8 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
 
             orders.workOrders.set(new LeavesQty(orders.workOrders.getOrderQty().getValue() - orders.cumQtyLocal));
 
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
 
     }

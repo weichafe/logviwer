@@ -19,8 +19,8 @@ public class SendToViewListener implements Listener {
 
 
 
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
 
     }

@@ -38,9 +38,9 @@ public class MainSellSide {
             new Algo(0);
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error(Level.SEVERE, e);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            logger.error(Level.SEVERE, ex);
         }
     }
 

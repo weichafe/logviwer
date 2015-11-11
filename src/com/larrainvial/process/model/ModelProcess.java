@@ -1,6 +1,7 @@
 package com.larrainvial.process.model;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Button;
 
 public class ModelProcess {
 
@@ -10,6 +11,15 @@ public class ModelProcess {
     public SimpleStringProperty comentary;
     public Boolean proccesUp = false;
     public String algo;
+    public Button button;
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void setButton(Button button) {
+        this.button = button;
+    }
 
     public String getName() {
         return name.get();

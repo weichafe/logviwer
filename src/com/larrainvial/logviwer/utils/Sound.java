@@ -22,8 +22,8 @@ public class Sound {
             audioClip.start();
             audioClip.close();
 
-        } catch (Exception e){
-            e.printStackTrace();
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
 
     }

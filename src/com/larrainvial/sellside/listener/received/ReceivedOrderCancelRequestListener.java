@@ -68,8 +68,8 @@ public class ReceivedOrderCancelRequestListener implements Listener {
 
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

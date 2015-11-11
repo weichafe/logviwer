@@ -18,8 +18,8 @@ public class ExecutionReportListener implements Listener {
 
             Session.sendToTarget(ev.workOrdersToBuySide, Configuration.Buyside.SenderCompID, Configuration.Buyside.TargetCompID);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }

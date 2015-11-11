@@ -2,12 +2,14 @@ package com.larrainvial.process;
 
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
+import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.process.model.ModelProcess;
 import com.larrainvial.process.ssh.Connection;
 import com.larrainvial.process.util.PropertiesFile;
 import com.larrainvial.process.vo.ServerVO;
 import com.larrainvial.logviwer.MainLogViwer;
+import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
@@ -31,11 +33,13 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 
 public class MainProcess {
 
-    private static Logger logger = Logger.getLogger(MainProcess.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     public final String CORE = "core";
     public final String WEB_ORB = "weborb";
     public String TEXT_CORE = "Console Core \n";
@@ -43,9 +47,6 @@ public class MainProcess {
 
     public TextArea textAreaWebOrb = new TextArea();
     public TextArea textAreaCore = new TextArea();
-
-    public ServerVO serverCore = new ServerVO();
-    public ServerVO serverWeborb = new ServerVO();
 
     public Session sessionServerCore;
     public Session sessionServerWebOrb;
@@ -59,6 +60,7 @@ public class MainProcess {
     public Double prefWidth;
     public Double prefHeight;
     public FXMLLoader loader;
+    public TimerTask timerTask;
 
     public TableView<ModelProcess> tableView = new TableView<>();
     public TableColumn<ModelProcess, String> name = new TableColumn<>("Name");
@@ -66,7 +68,6 @@ public class MainProcess {
     public TableColumn<ModelProcess, String> pathbin = new TableColumn<>("Path Bin");
     public TableColumn<ModelProcess, String> comentary = new TableColumn<>("Comentary");
     public TableColumn<ModelProcess, ModelProcess> core = new TableColumn<ModelProcess, ModelProcess>("Core");
-    public ChannelExec channelExec;
 
     public MainProcess(Stage primaryStage, String properties) {
 
@@ -99,9 +100,9 @@ public class MainProcess {
             this.process(primaryStage, properties);
 
 
-        } catch (Exception e) {
+        } catch (Exception ex) {
             logger.error(Level.SEVERE);
-            e.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
@@ -129,16 +130,18 @@ public class MainProcess {
 
             principalStage = new Stage();
             principalStage.initOwner(primaryStage);
-            principalStage.setTitle(serverCore.url);
 
             Scene scene = new Scene(scrollBar, prefHeight, prefWidth);
             principalStage.setScene(scene);
             principalStage.show();
 
+
+
             principalStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
                     sessionServerCore.disconnect();
                     sessionServerWebOrb.disconnect();
+                    timerTask.cancel();
                 }
             });
 
@@ -167,13 +170,14 @@ public class MainProcess {
                             if (modelProcess != null) {
                                 button.setText(modelProcess.getName());
                                 button.setId(modelProcess.getName());
+                                modelProcess.setButton(button);
                                 setGraphic(button);
 
                                 if (modelProcess.algo.equals(CORE)) {
-                                    buttonStyle(modelProcess, sessionServerCore, button);
+                                    buttonStyle(modelProcess, sessionServerCore, false);
 
                                 } else if (modelProcess.algo.equals(WEB_ORB)) {
-                                    buttonStyle(modelProcess, sessionServerCore, button);
+                                    buttonStyle(modelProcess, sessionServerWebOrb, false);
                                 }
 
                                 button.setOnAction(new EventHandler<ActionEvent>() {
@@ -183,11 +187,10 @@ public class MainProcess {
                                         Button clickedBtn = (Button) t.getSource();
 
                                         if (modelProcess.algo.equals(CORE)) {
-                                            setCommandtoServerCore(clickedBtn);
+                                            setCommandToServer(clickedBtn, sessionServerCore);
                                         } else {
-                                            setCommandtoServerWebOrb(clickedBtn);
+                                            setCommandToServer(clickedBtn, sessionServerWebOrb);
                                         }
-
                                     }
 
                                 });
@@ -200,9 +203,11 @@ public class MainProcess {
                 }
             });
 
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+            verifyProcessCron();
+
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
     }
@@ -212,13 +217,18 @@ public class MainProcess {
 
         Repository.killProcess = new PropertiesFile(com.larrainvial.logviwer.Repository.locationPath + properties);
 
+        ServerVO serverCore = new ServerVO();
         serverCore.url = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.url");
         serverCore.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.usuario");
         serverCore.pass = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.pass");
 
+        ServerVO serverWeborb = new ServerVO();
         serverWeborb.url = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.url");
         serverWeborb.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.usuario");
         serverWeborb.pass = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.pass");
+
+        sessionServerCore = this.connectServer(serverCore);
+        sessionServerWebOrb = this.connectServer(serverWeborb);
 
 
         for (Map.Entry<?, ?> entry : com.larrainvial.process.Repository.killProcess.properties.entrySet()) {
@@ -248,23 +258,22 @@ public class MainProcess {
                 strategy.setComentary(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.comentario"));
                 strategy.algo = WEB_ORB;
 
-                Repository.weborbStrategy.put(strategy.getName(), strategy);
+                Repository.coreStrategy.put(strategy.getName(), strategy);
                 dataList.add(strategy);
 
             }
 
         }
 
-        this.connectServerWebOrb();
-        this.connectServerCore();
+
 
     }
 
-    public Boolean verifyProcess(ModelProcess core, Session sesion) {
+    public Boolean verifyProcess(ModelProcess core, Session sesion, boolean print) {
 
         try {
 
-            channelExec = (ChannelExec) sesion.openChannel("exec");
+            ChannelExec channelExec = (ChannelExec) sesion.openChannel("exec");
 
             InputStream in = channelExec.getInputStream();
 
@@ -278,8 +287,7 @@ public class MainProcess {
             while ((console = reader.readLine()) != null) {
 
                 if (console.contains("-Dname="+core.getProcessName())) {
-                    final String aux = console;
-                    printConsole(aux, true);
+                    printConsole(core, console, print);
                     core.setProccesUp(true);
                     channelExec.disconnect();
                     return true;
@@ -289,169 +297,99 @@ public class MainProcess {
             core.setProccesUp(false);
 
 
-        } catch (Exception e){
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
         return false;
     }
 
 
-    public void setCommandtoServerWebOrb(Button clickedBtn){
-
-        try {
-
-            if (!Repository.weborbStrategy.containsKey(clickedBtn.getId())) return;
-
-            ModelProcess weborb = Repository.weborbStrategy.get(clickedBtn.getId());
-
-            if (weborb.proccesUp){
-
-                channelExec = (ChannelExec) sessionServerWebOrb.openChannel("exec");
-
-                InputStream in = channelExec.getInputStream();
-
-                channelExec.setCommand("kill -9 $(ps aux | grep " + weborb.getProcessName() + " | awk '{print $2}')");
-                channelExec.connect();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String linea;
-
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(linea, false);
-                }
-
-                weborb.proccesUp = false;
-
-                buttonStyle(weborb, sessionServerWebOrb, clickedBtn);
-                channelExec.disconnect();
-
-            } else {
-
-                ChannelExec channelExec = (ChannelExec) sessionServerWebOrb.openChannel("exec");
-
-                InputStream in = channelExec.getInputStream();
-
-                channelExec.setCommand(weborb.getPathbin());
-                channelExec.connect();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String linea;
-
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(linea, false);
-                }
-
-                buttonStyle(weborb, sessionServerWebOrb, clickedBtn);
-                channelExec.disconnect();
-            }
-
-        } catch (Exception e){
-            logger.error(Level.SEVERE, e);
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public void setCommandtoServerCore(Button clickedBtn) {
+    public void setCommandToServer(Button clickedBtn, Session session){
 
         try {
 
             if (!Repository.coreStrategy.containsKey(clickedBtn.getId())) return;
 
-            ModelProcess core = Repository.coreStrategy.get(clickedBtn.getId());
+            ModelProcess modelProcess = Repository.coreStrategy.get(clickedBtn.getId());
 
-            if (core.proccesUp){
+            if (modelProcess.proccesUp){
 
-                ChannelExec channelExec = (ChannelExec) sessionServerCore.openChannel("exec");
-
-                InputStream in = channelExec.getInputStream();
-
-                channelExec.setCommand("kill -9 $(ps aux | grep " + core.getProcessName() + " | awk '{print $2}')");
-                channelExec.connect();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String linea = null;
-
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(linea, true);
-                }
-
-                buttonStyle(core, sessionServerCore, clickedBtn);
-                channelExec.disconnect();
-                core.setProccesUp(false);
-
-            } else {
-
-                ChannelExec channelExec = (ChannelExec) sessionServerCore.openChannel("exec");
+                ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
 
                 InputStream in = channelExec.getInputStream();
 
-                channelExec.setCommand(core.getPathbin());
+                channelExec.setCommand("kill -9 $(ps aux | grep " + modelProcess.getProcessName() + " | awk '{print $2}')");
                 channelExec.connect();
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 String linea;
 
                 while ((linea = reader.readLine()) != null) {
-                    printConsole(linea, true);
+                    printConsole(modelProcess, linea, true);
                 }
 
-                buttonStyle(core, sessionServerCore, clickedBtn);
+                while ((linea = reader.readLine()) != null) {
+                    printConsole(modelProcess, linea ,true);
+                }
+
+                modelProcess.setProccesUp(false);
+
+                buttonStyle(modelProcess, session, true);
                 channelExec.disconnect();
 
+            } else {
+
+                ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+
+                InputStream in = channelExec.getInputStream();
+
+                channelExec.setCommand(modelProcess.getPathbin());
+                channelExec.connect();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String linea;
+
+                while ((linea = reader.readLine()) != null) {
+                    printConsole(modelProcess, linea, true);
+                }
+
+                buttonStyle(modelProcess, session, true);
+                channelExec.disconnect();
             }
 
-        } catch (Exception e){
-            logger.error(Level.SEVERE, e);
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
     }
 
-    public void connectServerCore(){
+    public Session connectServer(ServerVO serverVO){
+
+        Session session = null;
 
         try {
 
             Connection connection  = new Connection();
-            sessionServerCore = connection.connectServer(serverCore);
-            sessionServerCore.connect();
+            session = connection.connectServer(serverVO);
+            session.connect();
 
-            if (sessionServerCore.isConnected()){
-                Notifier.INSTANCE.notifyInfo(serverCore.url, "Connection Established");
-
-            } else {
-                Notifier.INSTANCE.notifyError(serverCore.url, "Check Settings");
-            }
-
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
-            Notifier.INSTANCE.notifyError(serverCore.url, "Check Settings");
-            principalStage.close();
-        }
-    }
-
-    public void connectServerWebOrb(){
-
-        try {
-
-            Connection connection  = new Connection();
-            sessionServerWebOrb = connection.connectServer(serverWeborb);
-            sessionServerWebOrb.connect();
-
-            if (sessionServerWebOrb.isConnected()){
-                Notifier.INSTANCE.notifyInfo(serverWeborb.url, "Connection Established");
+            if (session.isConnected()){
+                Notifier.INSTANCE.notifyInfo(serverVO.url, "Connection Established");
 
             } else {
-                Notifier.INSTANCE.notifyError(serverWeborb.url, "Check Settings");
+                Notifier.INSTANCE.notifyError(serverVO.url, "Check Settings");
             }
 
-        } catch (Exception e) {
-            logger.error(Level.SEVERE, e);
-            Notifier.INSTANCE.notifyError(serverWeborb.url, "Check Settings");
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            Notifier.INSTANCE.notifyError(serverVO.url, "Check Settings");
             principalStage.close();
         }
+
+        return session;
     }
 
 
@@ -477,28 +415,89 @@ public class MainProcess {
 
     }
 
-    public void printConsole(String aux, Boolean core) throws Exception {
+    public void printConsole(ModelProcess modelProcess, String aux, boolean print) throws Exception {
 
-        if (core) {
-            TEXT_CORE += aux + "\n";
-            textAreaCore.setText(TEXT_CORE);
+        try {
 
-        } else {
-            TEXT_WEBORB += aux + "\n";
-            textAreaWebOrb.setText(TEXT_WEBORB);
+            if (!print) return;
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+
+                    if (modelProcess.algo.equals(CORE)) {
+                        TEXT_CORE += aux + "\n";
+                        textAreaCore.setText(TEXT_CORE);
+
+                    } else {
+                        TEXT_WEBORB += aux + "\n";
+                        textAreaWebOrb.setText(TEXT_WEBORB);
+                    }
+
+                }
+
+            });
+
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
         }
 
     }
 
-    public void buttonStyle(ModelProcess core, Session sesion, Button button){
+    public void buttonStyle(ModelProcess core, Session sesion, boolean print) {
 
-        if (verifyProcess(core, sesion)){
-            button.getStyleClass().removeAll("processLinuxDown");
-            button.getStyleClass().add("processLinuxUP");
-        } else {
-            button.getStyleClass().removeAll("processLinuxUP");
-            button.getStyleClass().add("processLinuxDown");
+        try {
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (verifyProcess(core, sesion, print)){
+                        core.button.getStyleClass().removeAll("processLinuxDown");
+                        core.button.getStyleClass().add("processLinuxUP");
+                    } else {
+                        core.button.getStyleClass().removeAll("processLinuxUP");
+                        core.button.getStyleClass().add("processLinuxDown");
+                    }
+                }
+
+            });
+
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
+    }
+
+
+    public void verifyProcessCron(){
+
+        timerTask = new TimerTask(){
+
+            public void run() {
+
+                    try {
+
+                        for (Map.Entry<?, ?> entry : Repository.coreStrategy.entrySet()) {
+
+                            ModelProcess modelProcess = Repository.coreStrategy.get((String) entry.getKey());
+
+                            if (modelProcess.algo.equals(CORE)){
+                                buttonStyle(modelProcess, sessionServerCore, false);
+                            } else {
+                                buttonStyle(modelProcess, sessionServerWebOrb, false);
+                            }
+                        }
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        Helper.printerLog(ex.toString());
+                    }
+                }
+
+        };
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(timerTask, 1, 1000);
 
     }
 

@@ -22,6 +22,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.logging.Level;
 import java.util.prefs.Preferences;
 
 
@@ -78,10 +79,10 @@ public class MainLogViwer extends Application {
             helper.createStrategy();
 
 
-        } catch (Exception e){
-            logger.error(e);
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex){
+            logger.error(Level.SEVERE);
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
 
     }
@@ -127,10 +128,10 @@ public class MainLogViwer extends Application {
             m.marshal(wrapper, file);
             setPersonFilePath(file);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
     }
 
@@ -148,10 +149,10 @@ public class MainLogViwer extends Application {
             strategyData.addAll(wrapper.getPersons());
             setPersonFilePath(file);
 
-        } catch (Exception e) { // catches ANY exception
-            e.printStackTrace();
-            Helper.printerLog(e.toString());
-            Notifier.INSTANCE.notifyError("Error", e.toString());
+        } catch (Exception ex) { // catches ANY exception
+            ex.printStackTrace();
+            Helper.printerLog(ex.toString());
+            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
     }
 
