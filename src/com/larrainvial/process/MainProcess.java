@@ -1,9 +1,11 @@
 package com.larrainvial.process;
 
+import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
+import com.larrainvial.process.Thread.PrintConsole;
 import com.larrainvial.process.model.ModelProcess;
 import com.larrainvial.process.ssh.Connection;
 import com.larrainvial.process.util.PropertiesFile;
@@ -11,6 +13,7 @@ import com.larrainvial.process.vo.ServerVO;
 import com.larrainvial.logviwer.MainLogViwer;
 import javafx.application.Platform;
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -29,9 +32,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,6 +51,8 @@ public class MainProcess {
 
     public Session sessionServerCore;
     public Session sessionServerWebOrb;
+    public ChannelExec channelExec;
+    public Channel channel;
 
     public AnchorPane ventanaPrincipal;
     public VBox general = new VBox();
@@ -69,11 +72,31 @@ public class MainProcess {
     public TableColumn<ModelProcess, String> comentary = new TableColumn<>("Comentary");
     public TableColumn<ModelProcess, ModelProcess> core = new TableColumn<ModelProcess, ModelProcess>("Core");
 
+    public PrintConsole printConsole = null;
+
     public MainProcess(Stage primaryStage, String properties) {
 
         try {
 
             logger.info("Kill Pocess OK");
+
+            textAreaCore.scrollTopProperty().addListener(new ChangeListener<Object>() {
+                @Override
+                public void changed(ObservableValue<?> observable, Object oldValue,
+                                    Object newValue) {
+                    textAreaCore.setScrollTop(Double.MAX_VALUE);
+
+                }
+            });
+
+            textAreaWebOrb.scrollTopProperty().addListener(new ChangeListener<Object>() {
+                @Override
+                public void changed(ObservableValue<?> observable, Object oldValue,
+                                    Object newValue) {
+                    textAreaWebOrb.setScrollTop(Double.MAX_VALUE);
+
+                }
+            });
 
             general.getStyleClass().add("generalKillProcess");
             loader = new FXMLLoader(MainLogViwer.class.getResource("view/process/Process.fxml"));
@@ -98,7 +121,6 @@ public class MainProcess {
             ventanaPrincipal = (AnchorPane) loader.load();
 
             this.process(primaryStage, properties);
-
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE);
@@ -265,15 +287,13 @@ public class MainProcess {
 
         }
 
-
-
     }
 
     public Boolean verifyProcess(ModelProcess core, Session sesion, boolean print) {
 
         try {
 
-            ChannelExec channelExec = (ChannelExec) sesion.openChannel("exec");
+            channelExec = (ChannelExec) sesion.openChannel("exec");
 
             InputStream in = channelExec.getInputStream();
 
@@ -296,7 +316,6 @@ public class MainProcess {
 
             core.setProccesUp(false);
 
-
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
             ex.printStackTrace();
@@ -314,50 +333,31 @@ public class MainProcess {
 
             ModelProcess modelProcess = Repository.coreStrategy.get(clickedBtn.getId());
 
-            if (modelProcess.proccesUp){
+            channel = session.openChannel("shell");
+            OutputStream outputStream = channel.getOutputStream();
+            PrintStream commander = new PrintStream(outputStream, true);
+            channel.setOutputStream(System.out, true);
+            channel.connect();
 
-                ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
+            String command = (modelProcess.proccesUp) ? "kill -9 $(ps aux | grep " + modelProcess.getProcessName() + " | awk '{print $2}')"
+                    : modelProcess.getPathbin();
 
-                InputStream in = channelExec.getInputStream();
+            commander.println(command);
+            verifyProcess(modelProcess, session, false);
 
-                channelExec.setCommand("kill -9 $(ps aux | grep " + modelProcess.getProcessName() + " | awk '{print $2}')");
-                channelExec.connect();
+            InputStream outputstream = channel.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(outputstream));
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String linea;
+            Thread thread;
 
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(modelProcess, linea, true);
-                }
-
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(modelProcess, linea ,true);
-                }
-
-                modelProcess.setProccesUp(false);
-
-                buttonStyle(modelProcess, session, true);
-                channelExec.disconnect();
-
+            if(modelProcess.algo.equals(CORE)){
+                thread = new Thread(new PrintConsole(br, textAreaCore, true));
             } else {
-
-                ChannelExec channelExec = (ChannelExec) session.openChannel("exec");
-
-                InputStream in = channelExec.getInputStream();
-
-                channelExec.setCommand(modelProcess.getPathbin());
-                channelExec.connect();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String linea;
-
-                while ((linea = reader.readLine()) != null) {
-                    printConsole(modelProcess, linea, true);
-                }
-
-                buttonStyle(modelProcess, session, true);
-                channelExec.disconnect();
+                thread = new Thread(new PrintConsole(br, textAreaWebOrb, true));
             }
+
+            thread.start();
+
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
@@ -415,6 +415,7 @@ public class MainProcess {
 
     }
 
+
     public void printConsole(ModelProcess modelProcess, String aux, boolean print) throws Exception {
 
         try {
@@ -444,6 +445,7 @@ public class MainProcess {
         }
 
     }
+
 
     public void buttonStyle(ModelProcess core, Session sesion, boolean print) {
 
@@ -497,11 +499,9 @@ public class MainProcess {
         };
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(timerTask, 1, 1000);
+        timer.scheduleAtFixedRate(timerTask, 1, 2000);
 
     }
-
-
 
 
 }

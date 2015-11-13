@@ -547,41 +547,6 @@ public class Algo {
 
     }
 
-
-    public void fileReaderShh(XmlVO xmlVO) {
-
-        try {
-
-            ChannelSftp  channelSftp = (ChannelSftp) session.openChannel("sftp");
-            channelSftp.connect();
-
-
-            System.out.println("Is connected to IP:" + channelSftp.isConnected());
-
-            channelSftp.cd(xmlVO.location);
-
-            if (xmlVO.booleanDolar) {
-
-                //File localFile = new File(xmlVO.mkd_dolar + Repository.year + ".log");
-                //inputStreamMkdLocal = new FileInputStream(localFile);
-            }
-
-            //FileInputStream
-/*
-            if(xmlVO.booleanMLocal) inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
-            if(xmlVO.booleanMAdr)   inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
-            if(xmlVO.booleanRLocal) inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
-            if(xmlVO.booleanRAdr)   inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
-            */
-
-        } catch (Exception ex) {
-            logger.error(Level.SEVERE, ex);
-            ex.printStackTrace();
-        }
-
-    }
-
-
     public void fileReader(XmlVO xmlVO) {
 
         try {
@@ -621,23 +586,23 @@ public class Algo {
                 Algo algo = Repository.strategy.get(nameAlgo);
 
                 if (mkdDolarToggle && xmlVO.booleanDolar) {
-                //   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
+                   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
                 }
 
                 if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                //   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
+                   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
                 }
 
                 if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                //   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
+                   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
                 }
 
                 if (routingLocalToggle && xmlVO.booleanRLocal) {
-                //   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
+                   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
                 }
 
                 if (routingAdrToggle && xmlVO.booleanRAdr) {
-                //   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
+                   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                 }
 
             }

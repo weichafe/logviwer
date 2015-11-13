@@ -36,7 +36,7 @@ public class AlertListener implements Listener {
 
             if (!ev.algo.nameAlgo.equals(algo.nameAlgo) || validateTime(ev.hour)) return;
 
-            if(ev.execType.equals("8")) {
+            if (ev.messageByType.equals("8") && ev.execType.equals("8")) {
 
                 Notifier.INSTANCE.notifyError(ev.algo.nameAlgo, ev.modelRoutingData.text + " " + ev.typeMarket + "\n" + "Rejected, 35=8 ;150 = 8 !");
                 Helper.printerLog(algo.nameAlgo + " Rejected, 35=8 ;150 = 8 ! " + ev.modelRoutingData.text + " " + ev.typeMarket);
@@ -111,6 +111,7 @@ public class AlertListener implements Listener {
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
 
