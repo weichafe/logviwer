@@ -1,43 +1,24 @@
 package com.larrainvial.logviwer.listener.readlog;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.readlog.ReadFromDolarEvent;
-import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
-import com.larrainvial.logviwer.fxvo.Dialog;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
+import com.larrainvial.logviwer.listener.stringtofix.DolarListener;
 import org.apache.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class ReadFromDolarListener implements Listener {
+public class ReadFromDolarListener implements Runnable {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(ReadFromDolarListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public ReadFromDolarListener(Algo algo){
         this.algo = algo;
     }
 
     @Override
-    public synchronized void eventOccurred(Event event){
+    public synchronized void run(){
 
         try {
-
-            ReadFromDolarEvent ev = (ReadFromDolarEvent) event;
-
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             Scanner sc = new Scanner(algo.inputStreamMkdDolar, "UTF-8");
 
@@ -46,16 +27,12 @@ public class ReadFromDolarListener implements Listener {
                 String message = sc.nextLine();
 
                 if (verifyMessageFix(message)){
-                    Controller.dispatchEvent(new DolarEvent(algo, message));
+                    new Thread(new DolarListener(algo, message)).start();
                     algo.countDolar++;
 
-                } else {
-                    message = readFromFile(algo.countDolar);
-                    Controller.dispatchEvent(new DolarEvent(algo, message));
-                    algo.countDolar++;
                 }
-
             }
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
@@ -63,34 +40,6 @@ public class ReadFromDolarListener implements Listener {
         }
 
     }
-
-    private String readFromFile(int position) throws IOException {
-
-        BufferedReader reader = new BufferedReader(new FileReader(algo.fileMkdDolar));
-
-        String line = reader.readLine();
-        List<String> lines = new ArrayList<String>();
-
-        while (line != null) {
-            lines.add(line);
-            line = reader.readLine();
-        }
-
-        String message = lines.get(position);
-
-        if (verifyMessageFix(message)){
-            return message;
-
-        } else {
-            this.readFromFile(position);
-        }
-
-        return null;
-
-    }
-
-
-
 
     public boolean verifyMessageFix(String message){
 
@@ -100,7 +49,6 @@ public class ReadFromDolarListener implements Listener {
         } else {
             return false;
         }
-
     }
 
 }

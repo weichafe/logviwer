@@ -18,7 +18,7 @@ public class About {
 
     public AnchorPane ventanaPrincipal;
     public VBox general = new VBox();
-    private static Logger logger = Logger.getLogger(About.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public About(Stage primaryStage){
 

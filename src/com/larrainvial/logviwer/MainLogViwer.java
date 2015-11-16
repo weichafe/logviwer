@@ -29,7 +29,7 @@ import java.util.prefs.Preferences;
 public class MainLogViwer extends Application {
 
     private ObservableList<StrategyVO> strategyData = FXCollections.observableArrayList();
-    private static Logger logger = Logger.getLogger(MainLogViwer.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public void start(Stage primaryStage) {
 

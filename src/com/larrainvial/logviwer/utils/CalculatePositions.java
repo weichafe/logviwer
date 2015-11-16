@@ -10,7 +10,7 @@ import java.util.logging.Level;
 
 public class CalculatePositions {
 
-    private static Logger logger = Logger.getLogger(CalculatePositions.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private ModelRoutingData modelRoutingData;
     private Algo algo;
 

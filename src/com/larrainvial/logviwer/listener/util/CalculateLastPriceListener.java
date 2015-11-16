@@ -1,23 +1,23 @@
 package com.larrainvial.logviwer.listener.util;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
+import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
+
 import java.util.logging.Level;
 
 
-public class CalculateLastPriceListener implements Listener {
+public class CalculateLastPriceListener implements Runnable {
 
-    private static Logger logger = Logger.getLogger(CalculateLastPriceListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private Algo algo;
+    public ModelMarketData modelMarketData;
+    public String typeMarket;
 
     private final String DOLAR = "DOLAR";
     private final String VARIACION = "VARIACION DEL DOLAR";
@@ -26,20 +26,18 @@ public class CalculateLastPriceListener implements Listener {
     private final String SELL_CERO_DOLAR = "SELL DOLAR CERO";
     private final String DOLAR_PX = "DOLAR PX : ";
 
-    public CalculateLastPriceListener(Algo algo) {
+    public CalculateLastPriceListener(Algo algo, ModelMarketData modelMarketData, String typeMarket) {
         this.algo = algo;
+        this.modelMarketData = modelMarketData;
+        this.typeMarket = typeMarket;
     }
 
     @Override
-    public void eventOccurred(Event event) {
+    public void run() {
 
         try {
 
-            CalculateLastPriceEvent ev = (CalculateLastPriceEvent)event;
-
-            if (!this.algo.equals(ev.algo)) return;
-
-            this.calculateLastPrice(ev.modelMarketData, ev.type_Market);
+            this.calculateLastPrice(this.modelMarketData, typeMarket);
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
@@ -97,7 +95,7 @@ public class CalculateLastPriceListener implements Listener {
             }
         }
 
-        Controller.dispatchEvent(new LastPriceEvent(algo, modelMarketData));
+        new Thread(new LastPriceListener(algo, modelMarketData)).start();
 
     }
 

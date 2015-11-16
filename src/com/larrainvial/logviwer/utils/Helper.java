@@ -27,7 +27,7 @@ public class Helper {
 
     private static Logger logger = Logger.getLogger(Helper.class.getName());
 
-    public void createStrategy() {
+    public synchronized void createStrategy() {
 
         try {
 
@@ -46,8 +46,8 @@ public class Helper {
                 Node node = nodeList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    new Algo((Element) node, tab++);
-
+                    Algo algo = new Algo((Element) node, tab++);
+                    algo.run();
                 }
             }
 
@@ -58,7 +58,7 @@ public class Helper {
 
     }
 
-    public static Boolean isNumber(String numero){
+    public synchronized static Boolean isNumber(String numero){
         try {
             Double.parseDouble(numero);
             return true;
@@ -417,46 +417,75 @@ public class Helper {
 
     public static Boolean isSolicitud(ModelRoutingData modelRoutingData){
 
-        if (modelRoutingData.messageByType.equals("D")) return true;
-        else if (modelRoutingData.messageByType.equals("G")) return true;
-        else if (modelRoutingData.messageByType.equals("F")) return true;
-        else return false;
+        try {
+
+            if (modelRoutingData.messageByType.equals("D")) return true;
+            else if (modelRoutingData.messageByType.equals("G")) return true;
+            else if (modelRoutingData.messageByType.equals("F")) return true;
+
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+        }
+
+        return false;
 
     }
 
 
     public static Boolean isASK(ModelRoutingData modelRoutingData){
 
-        if (modelRoutingData.execType.equals("F")) return true;
-        else if (modelRoutingData.execType.equals("New")) return true;
-        else if (modelRoutingData.execType.equals("Cancel")) return true;
-        else if (modelRoutingData.execType.equals("Replaced")) return true;
-        else if (modelRoutingData.execType.equals("Rejected")) return true;
-        else if (modelRoutingData.execType.equals("Expired")) return true;
-        else if (modelRoutingData.execType.equals("Restated")) return true;
-        else if (modelRoutingData.execType.equals("Suspended")) return true;
-        else if (modelRoutingData.execType.equals("Done for day")) return true;
-        else return false;
+        try {
+
+            if (modelRoutingData.execType.equals("F")) return true;
+            else if (modelRoutingData.execType.equals("New")) return true;
+            else if (modelRoutingData.execType.equals("Cancel")) return true;
+            else if (modelRoutingData.execType.equals("Replaced")) return true;
+            else if (modelRoutingData.execType.equals("Rejected")) return true;
+            else if (modelRoutingData.execType.equals("Expired")) return true;
+            else if (modelRoutingData.execType.equals("Restated")) return true;
+            else if (modelRoutingData.execType.equals("Suspended")) return true;
+            else if (modelRoutingData.execType.equals("Done for day")) return true;
+
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+        }
+
+        return false;
 
     }
 
     public static void printLatency(LatencyVO latencyVO){
-        logger.info("Latency superior a 400 mm");
-        logger.info("clOrdID " + latencyVO.clOrdID);
-        logger.info("nameAlgo " + latencyVO.nameAlgo);
-        logger.info("timeStart " + latencyVO.timeStart);
-        logger.info("timeEnd " + latencyVO.timeEnd);
-        logger.info("timeLatency " + latencyVO.timeLatency);
-        logger.info(latencyVO.routing);
-        logger.info("----------");
+
+        try {
+
+            logger.info("Latency superior a 400 mm");
+            logger.info("clOrdID " + latencyVO.clOrdID);
+            logger.info("nameAlgo " + latencyVO.nameAlgo);
+            logger.info("timeStart " + latencyVO.timeStart);
+            logger.info("timeEnd " + latencyVO.timeEnd);
+            logger.info("timeLatency " + latencyVO.timeLatency);
+            logger.info(latencyVO.routing);
+            logger.info("----------");
+
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+        }
+
     }
 
     public static void  printerLog(String msg){
-        logger.info("----------------");
-        logger.info("\n");
-        logger.info(new Date());
-        logger.info(msg);
-        logger.info("\n");
+
+        try {
+
+            logger.info("----------------");
+            logger.info("\n");
+            logger.info(new Date());
+            logger.info(msg);
+            logger.info("\n");
+
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+        }
     }
 
 

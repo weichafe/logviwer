@@ -1,25 +1,10 @@
 package com.larrainvial.logviwer;
 
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
-import com.larrainvial.logviwer.event.utils.AlertEvent;
-import com.larrainvial.logviwer.event.readlog.*;
-import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.stringtofix.*;
-import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
 import com.larrainvial.logviwer.fxvo.Graph;
-import com.larrainvial.logviwer.listener.util.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
-import com.larrainvial.logviwer.listener.util.CalculateLastPriceListener;
-import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
-import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
-import com.larrainvial.logviwer.listener.stringtofix.*;
-import com.larrainvial.logviwer.listener.util.CalculatePositionsListener;
 import com.larrainvial.logviwer.model.Dolar;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
@@ -32,11 +17,6 @@ import com.larrainvial.logviwer.vo.XmlVO;
 import com.larrainvial.process.ssh.Connection;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.sellside.controller.SellSideController;
-import com.larrainvial.trading.emp.Controller;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +30,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
-
 import java.io.*;
 import java.net.Inet4Address;
 import java.util.*;
@@ -58,7 +37,7 @@ import java.util.logging.Level;
 
 public class Algo {
 
-    private static Logger logger = Logger.getLogger(Algo.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public String nameAlgo;
     public String mkdDolar;
@@ -73,12 +52,12 @@ public class Algo {
     public FXMLLoader sellSideLoader = new FXMLLoader();
     public FXMLLoader lastPriceLoader = new FXMLLoader();
 
-    public Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
-    public HashMap<String, Integer> positions = new HashMap<String, Integer>();
+    public Map<String, ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
+    public Map<String, Integer> positions = Collections.synchronizedMap(new HashMap<String, Integer>());
     public int countPositions = 0;
 
-    public Map<String,ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
-    public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
+    public Map<String, ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
+    public Map<String, Integer> lastPrice = Collections.synchronizedMap(new HashMap<String, Integer>());
     public int countLastPrice = 0;
 
     public TableView<ModelPositions> panelPositionsTableView;
@@ -106,23 +85,6 @@ public class Algo {
     public FileInputStream inputStreamRoutingLocal;
     public FileInputStream inputStreamRoutingAdr;
 
-    public ReadFromDolarListener readFromDolarListener;
-    public ReadLogMkdAdrListener readLogMkdAdrListener;
-    public ReadLogMkdLocalListener readLogMkdLocalListener;
-    public ReadlogRoutingAdrListener readlogRoutingAdrListener;
-    public ReadLogRoutingLocalListener readLogRoutingLocalListener;
-    public CalculatePositionsListener calculatePositionsListener;
-
-    public LastPriceListener lastPriceListener;
-    public PositionViewListener positionViewListener;
-    public DolarListener dolarListener;
-    public MarketDataAdrListener marketDataAdrListener;
-    public MarketDataLocalListener marketDataLocalListener;
-    public RoutingAdrListener routingAdrListener;
-    public RoutingLocalListener routingLocalListener;
-    public CalculateLastPriceListener calculateLastPriceListener;
-    public AlertListener alertListener;
-
     //Button Options
     public Button buttonAlert;
     public Button buttonRoutingADR;
@@ -135,8 +97,8 @@ public class Algo {
     //GRAPH
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
-    public LineChart<Number,Number> lineChart;
-    public boolean graphEnable  = false;
+    public LineChart<Number, Number> lineChart;
+    public boolean graphEnable = false;
 
     //LATENCY
     public Map<String, LatencyVO> latencyADR = Collections.synchronizedMap(new HashMap<String, LatencyVO>());
@@ -158,302 +120,251 @@ public class Algo {
 
         try {
 
-            XmlVO xmlVO = new XmlVO();
+            synchronized (this) {
 
-            if (elem.getElementsByTagName("sshValidator").item(0).getChildNodes().item(0).getNodeValue().equals("true")){
+                this.xmlVO = new XmlVO();
 
-                xmlVO.nameServer = elem.getElementsByTagName("sshServer").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.userServer = elem.getElementsByTagName("sshUser").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.passServer = elem.getElementsByTagName("sshPass").item(0).getChildNodes().item(0).getNodeValue();
+                if (elem.getElementsByTagName("sshValidator").item(0).getChildNodes().item(0).getNodeValue().equals("true")) {
 
-                xmlVO.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.nameServer = elem.getElementsByTagName("sshServer").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.userServer = elem.getElementsByTagName("sshUser").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.passServer = elem.getElementsByTagName("sshPass").item(0).getChildNodes().item(0).getNodeValue();
 
-                this.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdLocal =  elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
-                this.routingLocal = elem.getElementsByTagName("routingLocal").item(0).getChildNodes().item(0).getNodeValue();
-                this.routingAdr = elem.getElementsByTagName("routingAdr").item(0).getChildNodes().item(0).getNodeValue();
-                this.time = Double.valueOf(elem.getElementsByTagName("time").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
 
-                xmlVO.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
+                    this.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdLocal = elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
+                    this.routingLocal = elem.getElementsByTagName("routingLocal").item(0).getChildNodes().item(0).getNodeValue();
+                    this.routingAdr = elem.getElementsByTagName("routingAdr").item(0).getChildNodes().item(0).getNodeValue();
+                    this.time = Double.valueOf(elem.getElementsByTagName("time").item(0).getChildNodes().item(0).getNodeValue());
 
-                Connection connection  = new Connection();
-                this.session =  connection.connectServer(xmlVO);
-                this.session.connect();
+                    xmlVO.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
 
-                //this.fileReaderShh(xmlVO);
-
-            } else {
-
-                xmlVO.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
-                xmlVO.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
-
-                this.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdLocal =  elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
-                this.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
-                this.routingLocal = elem.getElementsByTagName("routingLocal").item(0).getChildNodes().item(0).getNodeValue();
-                this.routingAdr = elem.getElementsByTagName("routingAdr").item(0).getChildNodes().item(0).getNodeValue();
-                this.time = Double.valueOf(elem.getElementsByTagName("time").item(0).getChildNodes().item(0).getNodeValue());
-
-                xmlVO.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
-                xmlVO.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
-
-                fileMkdDolar = new File(xmlVO.location + xmlVO.mkd_dolar + Repository.year + ".log");
-                fileMkdLocal = new File(xmlVO.location + xmlVO.mkd_local + Repository.year + ".log");
-                fileMkdAdr = new File(xmlVO.location + xmlVO.mkd_nyse + Repository.year + ".log");
-                fileRoutingLocal = new File(xmlVO.location + xmlVO.routing_local + Repository.year + ".log");
-                fileRoutingAdr = new File(xmlVO.location + xmlVO.routing_nyse + Repository.year + ".log");
-
-                this.fileReader(xmlVO);
-
-            }
+                    Connection connection = new Connection();
+                    this.session = connection.connectServer(xmlVO);
+                    this.session.connect();
 
 
-            this.xmlVO = xmlVO;
+                } else {
 
-            panelPositionsLoader.setLocation(MainLogViwer.class.getResource("view/algos/PanelPositionsView.fxml"));
-            lastPriceLoader.setLocation(MainLogViwer.class.getResource("view/algos/LastPriceView.fxml"));
+                    xmlVO.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
+                    xmlVO.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
 
+                    this.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdLocal = elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
+                    this.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
+                    this.routingLocal = elem.getElementsByTagName("routingLocal").item(0).getChildNodes().item(0).getNodeValue();
+                    this.routingAdr = elem.getElementsByTagName("routingAdr").item(0).getChildNodes().item(0).getNodeValue();
+                    this.time = Double.valueOf(elem.getElementsByTagName("time").item(0).getChildNodes().item(0).getNodeValue());
 
-            HBox grill = new HBox();
-            grill.getStyleClass().add("grillStrategy");
-            grill.getChildren().add((AnchorPane) lastPriceLoader.load());
-            grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
+                    xmlVO.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
+                    xmlVO.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
 
-            HBox grillLastPricePositions = new HBox();
-            grillLastPricePositions.getChildren().addAll(grill);
+                    fileMkdDolar = new File(xmlVO.location + xmlVO.mkd_dolar + Repository.year + ".log");
+                    fileMkdLocal = new File(xmlVO.location + xmlVO.mkd_local + Repository.year + ".log");
+                    fileMkdAdr = new File(xmlVO.location + xmlVO.mkd_nyse + Repository.year + ".log");
+                    fileRoutingLocal = new File(xmlVO.location + xmlVO.routing_local + Repository.year + ".log");
+                    fileRoutingAdr = new File(xmlVO.location + xmlVO.routing_nyse + Repository.year + ".log");
 
-            HBox options = new HBox();
-            options.getStyleClass().add("options");
+                    this.fileReader();
 
-
-            Slider opacityLevel = new Slider(1, 10, Double.valueOf(time));
-
-            opacityLevel.valueProperty().addListener(new ChangeListener<Number>() {
-                public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-                    time = new_val.doubleValue();
                 }
-            });
 
-            VBox hBoxopacityLevel = new VBox();
-            hBoxopacityLevel.setSpacing(10);
-            hBoxopacityLevel.getChildren().add(opacityLevel);
-            options.getChildren().add(hBoxopacityLevel);
+                panelPositionsLoader.setLocation(MainLogViwer.class.getResource("view/algos/PanelPositionsView.fxml"));
+                lastPriceLoader.setLocation(MainLogViwer.class.getResource("view/algos/LastPriceView.fxml"));
 
-            SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
-            Button switchBtn6 = switchButtonAlert.returnButton();
-            this.buttonAlert =  switchBtn6;
+                HBox grill = new HBox();
+                grill.getStyleClass().add("grillStrategy");
+                grill.getChildren().add((AnchorPane) lastPriceLoader.load());
+                grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
 
-            SwitchButton graphSwith = new SwitchButton("Graph", this);
-            Button switchBtn7 = graphSwith.returnButton();
-            this.graphButton = switchBtn7;
+                HBox grillLastPricePositions = new HBox();
+                grillLastPricePositions.getChildren().addAll(grill);
 
-            VBox vBoxgraph = new VBox();
-            vBoxgraph.getChildren().add(graphSwith);
-            options.getChildren().add(vBoxgraph);
+                HBox options = new HBox();
+                options.getStyleClass().add("options");
 
-            VBox vBox = new VBox();
-            vBox.getChildren().add(switchButtonAlert);
-            options.getChildren().add(vBox);
+                SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
+                Button switchBtn6 = switchButtonAlert.returnButton();
+                this.buttonAlert = switchBtn6;
 
-            SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
-            Button switchBtn1 = switchButtonDolar.returnButton();
-            this.buttonDolar = switchBtn1;
+                SwitchButton graphSwith = new SwitchButton("Graph", this);
+                Button switchBtn7 = graphSwith.returnButton();
+                this.graphButton = switchBtn7;
 
-            VBox ButtonDolar = new VBox();
-            ButtonDolar.getChildren().add(switchButtonDolar);
-            options.getChildren().add(ButtonDolar);
+                VBox vBoxgraph = new VBox();
+                vBoxgraph.getChildren().add(graphSwith);
+                options.getChildren().add(vBoxgraph);
 
-            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
-            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
-            this.buttonMDKDAdr = switchBtn2;
+                VBox vBox = new VBox();
+                vBox.getChildren().add(switchButtonAlert);
+                options.getChildren().add(vBox);
 
-            VBox HBoxButtonMkd = new VBox();
-            HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
-            options.getChildren().add(HBoxButtonMkd);
+                SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
+                Button switchBtn1 = switchButtonDolar.returnButton();
+                this.buttonDolar = switchBtn1;
 
-            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
-            Button switchBtn3 = switchButtonMkd_Local.returnButton();
-            this.buttonMKDLocal = switchBtn3;
+                VBox ButtonDolar = new VBox();
+                ButtonDolar.getChildren().add(switchButtonDolar);
+                options.getChildren().add(ButtonDolar);
 
-            VBox HBoswitchButtonMkd_Local = new VBox();
-            HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
-            options.getChildren().add(HBoswitchButtonMkd_Local);
+                SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
+                Button switchBtn2 = switchButtonMkd_nyse.returnButton();
+                this.buttonMDKDAdr = switchBtn2;
 
-            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
-            Button switchBtn4 = switchButtonRouting_Local.returnButton();
-            this.buttonRoutingLocal = switchBtn4;
+                VBox HBoxButtonMkd = new VBox();
+                HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
+                options.getChildren().add(HBoxButtonMkd);
 
-            VBox HBosRouting_Local = new VBox();
-            HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
-            options.getChildren().add(HBosRouting_Local);
+                SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
+                Button switchBtn3 = switchButtonMkd_Local.returnButton();
+                this.buttonMKDLocal = switchBtn3;
 
-            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
-            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
-            this.buttonRoutingADR = switchBtn5;
+                VBox HBoswitchButtonMkd_Local = new VBox();
+                HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
+                options.getChildren().add(HBoswitchButtonMkd_Local);
 
-            VBox HBosRouting_Adr = new VBox();
-            HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
-            options.getChildren().add(HBosRouting_Adr);
+                SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
+                Button switchBtn4 = switchButtonRouting_Local.returnButton();
+                this.buttonRoutingLocal = switchBtn4;
+
+                VBox HBosRouting_Local = new VBox();
+                HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
+                options.getChildren().add(HBosRouting_Local);
+
+                SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
+                Button switchBtn5 = switchButtonRouting_Adr.returnButton();
+                this.buttonRoutingADR = switchBtn5;
+
+                VBox HBosRouting_Adr = new VBox();
+                HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
+                options.getChildren().add(HBosRouting_Adr);
 
 
-            if (nameAlgo.startsWith("ADR")){
+                if (nameAlgo.startsWith("ADR")) {
 
-                Label labelCofx = new Label("COFX VAR ");
-                labelCofx.setTranslateY(3);
-                labelCofx.setStyle("-fx-font-weight: bold");
+                    Label labelCofx = new Label("COFX VAR ");
+                    labelCofx.setTranslateY(3);
+                    labelCofx.setStyle("-fx-font-weight: bold");
 
-                TextField cofxvar = new TextField();
-                cofxvar.setPrefWidth(60);
+                    TextField cofxvar = new TextField();
+                    cofxvar.setPrefWidth(60);
 
-                Label labelCAD = new Label("CAD VAR ");
-                labelCAD.setTranslateY(3);
-                labelCAD.setStyle("-fx-font-weight: bold");
+                    Label labelCAD = new Label("CAD VAR ");
+                    labelCAD.setTranslateY(3);
+                    labelCAD.setStyle("-fx-font-weight: bold");
 
-                TextField cadvar = new TextField();
-                cadvar.setPrefWidth(60);
+                    TextField cadvar = new TextField();
+                    cadvar.setPrefWidth(60);
 
-                Label labelCLP = new Label("CLP VAR ");
-                labelCLP.setTranslateY(3);
-                labelCLP.setStyle("-fx-font-weight: bold");
+                    Label labelCLP = new Label("CLP VAR ");
+                    labelCLP.setTranslateY(3);
+                    labelCLP.setStyle("-fx-font-weight: bold");
 
-                TextField clpvar = new TextField();
-                clpvar.setPrefWidth(60);
+                    TextField clpvar = new TextField();
+                    clpvar.setPrefWidth(60);
 
-                HBox variacion = new HBox();
-                variacion.setSpacing(10);
-                variacion.setPadding(new Insets(0, 0, 0, 0));
-                variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
-                options.getChildren().add(variacion);
+                    HBox variacion = new HBox();
+                    variacion.setSpacing(10);
+                    variacion.setPadding(new Insets(0, 0, 0, 0));
+                    variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
+                    options.getChildren().add(variacion);
 
-                HBox submit = new HBox();
-                Button save = new Button("Save");
-                save.setPrefWidth(80);
-                submit.getChildren().add(save);
+                    HBox submit = new HBox();
+                    Button save = new Button("Save");
+                    save.setPrefWidth(80);
+                    submit.getChildren().add(save);
 
-                options.getChildren().add(submit);
+                    options.getChildren().add(submit);
 
-                save.setOnAction(new EventHandler<ActionEvent>() {
+                    save.setOnAction(new EventHandler<ActionEvent>() {
 
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (cofxvar.getText() != null){
-                            if (Helper.isNumber(cofxvar.getText())) {
-                                Dolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
-                                Notifier.INSTANCE.notifySuccess("COFX Index", "Variacion: " + cofxvar.getText());
-                                logger.info(cofxvar.getText());
+                        @Override
+                        public void handle(ActionEvent e) {
+                            if (cofxvar.getText() != null) {
+                                if (Helper.isNumber(cofxvar.getText())) {
+                                    Dolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
+                                    Notifier.INSTANCE.notifySuccess("COFX Index", "Variacion: " + cofxvar.getText());
+                                    logger.info(cofxvar.getText());
+                                }
+
                             }
 
-                        }
+                            if (cadvar.getText() != null) {
+                                if (Helper.isNumber(cadvar.getText())) {
+                                    Dolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
+                                    Notifier.INSTANCE.notifySuccess("CAD Curncy", "Variacion: " + cadvar.getText());
+                                    logger.info(Dolar.VARIACION_CAD);
+                                }
+                            }
 
-                        if (cadvar.getText() != null) {
-                            if (Helper.isNumber(cadvar.getText())) {
-                                Dolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
-                                Notifier.INSTANCE.notifySuccess("CAD Curncy", "Variacion: " + cadvar.getText());
-                                logger.info(Dolar.VARIACION_CAD);
+                            if (clpvar.getText() != null) {
+                                if (Helper.isNumber(clpvar.getText())) {
+                                    Dolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
+                                    Notifier.INSTANCE.notifySuccess("CLP", "Variacion: " + clpvar.getText());
+                                    logger.info(Dolar.VARIACION_CLP);
+                                }
                             }
                         }
 
-                        if (clpvar.getText() != null) {
-                            if (Helper.isNumber(clpvar.getText())) {
-                                Dolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
-                                Notifier.INSTANCE.notifySuccess("CLP", "Variacion: " + clpvar.getText());
-                                logger.info(Dolar.VARIACION_CLP);
-                            }
-                        }
-                    }
+                    });
 
-                });
+                }
 
+                Graph.newLineChart(this);
+
+                HBox graph = new HBox();
+                graph.getStyleClass().add("hboxGraph");
+                graph.getChildren().add(lineChart);
+
+                VBox general = new VBox();
+                general.getStyleClass().add("hboxGeneral");
+                general.getChildren().addAll(options, grillLastPricePositions, graph);
+
+
+                ScrollPane scrollBar = new ScrollPane();
+                scrollBar.prefHeightProperty().bind(general.heightProperty());
+                scrollBar.prefWidthProperty().bind(general.widthProperty());
+                scrollBar.setContent(general);
+                scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+
+                Tab tabAlgo = new Tab();
+                tabAlgo.setText(this.nameAlgo);
+                Repository.tabPanePrincipalTabPanel.getTabs().add(tabAlgo);
+                Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
+
+
+                PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();
+                panelPositionsTableView = panelLocalLoader.getType();
+
+                LastPriceController lastPriceLocal = this.lastPriceLoader.getController();
+                lastPriceTableView = lastPriceLocal.getType();
+
+                Repository.strategy.put(this.nameAlgo, this);
+                this.fileReader();
             }
 
-            Graph.newLineChart(this);
-
-            HBox graph = new HBox();
-            graph.getStyleClass().add("hboxGraph");
-            graph.getChildren().add(lineChart);
-
-            VBox general = new VBox();
-            general.getStyleClass().add("hboxGeneral");
-            general.getChildren().addAll(options, grillLastPricePositions, graph);
-
-
-            ScrollPane scrollBar = new ScrollPane();
-            scrollBar.prefHeightProperty().bind(general.heightProperty());
-            scrollBar.prefWidthProperty().bind(general.widthProperty());
-            scrollBar.setContent(general);
-            scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-
-            Tab tabAlgo = new Tab();
-            tabAlgo.setText(this.nameAlgo);
-            Repository.tabPanePrincipalTabPanel.getTabs().add(tabAlgo);
-            Repository.tabPanePrincipalTabPanel.getTabs().get(tab).setContent(scrollBar);
-
-
-            PanelPositionsController panelLocalLoader = panelPositionsLoader.getController();
-            panelPositionsTableView = panelLocalLoader.getType();
-
-            LastPriceController lastPriceLocal = this.lastPriceLoader.getController();
-            lastPriceTableView = lastPriceLocal.getType();
-
-            readFromDolarListener = new ReadFromDolarListener(this);
-            readLogMkdAdrListener = new ReadLogMkdAdrListener(this);
-            readLogMkdLocalListener = new ReadLogMkdLocalListener(this);
-            readlogRoutingAdrListener = new ReadlogRoutingAdrListener(this);
-            readLogRoutingLocalListener = new ReadLogRoutingLocalListener(this);
-            calculateLastPriceListener = new CalculateLastPriceListener(this);
-
-            dolarListener =  new DolarListener(this);
-            marketDataAdrListener = new MarketDataAdrListener(this);
-            marketDataLocalListener = new MarketDataLocalListener(this);
-            routingAdrListener = new RoutingAdrListener(this);
-            routingLocalListener = new RoutingLocalListener(this);
-            alertListener = new AlertListener(this);
-            calculatePositionsListener = new CalculatePositionsListener(this);
-            lastPriceListener = new LastPriceListener(this);
-            positionViewListener = new PositionViewListener(this);
-
-            Controller.addEventListener(AlertEvent.class, alertListener);
-            Controller.addEventListener(ReadFromDolarEvent.class, readFromDolarListener);
-            Controller.addEventListener(ReadLogMkdAdrEvent.class, readLogMkdAdrListener);
-            Controller.addEventListener(ReadLogMkdLocalEvent.class, readLogMkdLocalListener);
-            Controller.addEventListener(ReadlogRoutingAdrEvent.class, readlogRoutingAdrListener);
-            Controller.addEventListener(ReadLogRoutingLocalEvent.class, readLogRoutingLocalListener);
-            Controller.addEventListener(CalculateLastPriceEvent.class, calculateLastPriceListener);
-            Controller.addEventListener(CalculatePositionsEvent.class, calculatePositionsListener);
-
-            Controller.addEventListener(LastPriceEvent.class, lastPriceListener);
-            Controller.addEventListener(DolarEvent.class, dolarListener);
-            Controller.addEventListener(MarketDataADREvent.class, marketDataAdrListener);
-            Controller.addEventListener(MarketDataLocalEvent.class, marketDataLocalListener);
-            Controller.addEventListener(RoutingAdrEvent.class, routingAdrListener);
-            Controller.addEventListener(RoutingLocalEvent.class, routingLocalListener);
-
-            Controller.addEventListener(PositionViewEvent.class, positionViewListener);
-
-            Repository.strategy.put(this.nameAlgo, this);
-            start(xmlVO);
-
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             Helper.printerLog(ex.toString());
             Notifier.INSTANCE.notifyError("Error", ex.toString());
@@ -499,7 +410,7 @@ public class Algo {
             ip.setLayoutX(30);
             ip.setLayoutY(80);
 
-            Label port = new Label("Port : " + com.larrainvial.sellside.Repository.socketAcceptPort );
+            Label port = new Label("Port : " + com.larrainvial.sellside.Repository.socketAcceptPort);
             port.setLayoutX(30);
             port.setLayoutY(100);
 
@@ -538,7 +449,7 @@ public class Algo {
 
             Repository.strategy.put(this.nameAlgo, this);
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             Helper.printerLog(ex.toString());
             Notifier.INSTANCE.notifyError("Error", ex.toString());
@@ -547,15 +458,25 @@ public class Algo {
 
     }
 
-    public void fileReader(XmlVO xmlVO) {
+    public synchronized void fileReader() {
 
         try {
 
-            if(xmlVO.booleanDolar)  inputStreamMkdDolar = new FileInputStream(fileMkdDolar);
-            if(xmlVO.booleanMLocal) inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
-            if(xmlVO.booleanMAdr)   inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
-            if(xmlVO.booleanRLocal) inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
-            if(xmlVO.booleanRAdr)   inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
+            if (xmlVO.booleanDolar) {
+                inputStreamMkdDolar = new FileInputStream(fileMkdDolar);
+            }
+            if (xmlVO.booleanMLocal) {
+                inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
+            }
+            if (xmlVO.booleanMAdr) {
+                inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
+            }
+            if (xmlVO.booleanRLocal) {
+                inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
+            }
+            if (xmlVO.booleanRAdr) {
+                inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
+            }
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
@@ -563,63 +484,56 @@ public class Algo {
 
     }
 
-    public void start(XmlVO xmlVO) throws Exception {
 
-        final double finalTimer_initial = this.time;
-        stopTimer();
+    public synchronized void run() {
 
-        timerTask = new TimerTask(){
+        Algo algo = Repository.strategy.get(nameAlgo);
+
+        TimerTask timerTask = new TimerTask() {
 
             public void run() {
 
-                if(finalTimer_initial != time) {
+                synchronized (algo) {
 
                     try {
-                        start(xmlVO);
+
+                        if (algo.mkdDolarToggle && xmlVO.booleanDolar) {
+                            new Thread(new ReadFromDolarListener(algo)).start();
+                        }
+
+                        if (algo.mkdAdrToggle && xmlVO.booleanMAdr) {
+                            new Thread(new ReadLogMkdAdrListener(algo)).start();
+                        }
+
+                        if (algo.mkdLocalToggle && xmlVO.booleanMLocal) {
+                            new Thread(new ReadLogMkdLocalListener(algo)).start();
+                        }
+
+                        if (algo.routingLocalToggle && xmlVO.booleanRLocal) {
+                            new Thread(new ReadLogRoutingLocalListener(algo)).start();
+                        }
+
+                        if (algo.routingAdrToggle && xmlVO.booleanRAdr) {
+                            new Thread(new ReadlogRoutingAdrListener(algo)).start();
+                        }
+
+
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        Helper.printerLog(ex.toString());
-                        Notifier.INSTANCE.notifyError("Error", ex.toString());
+                        System.out.println(algo.nameAlgo);
+                        System.out.println(algo.mkdDolarToggle);
+                        System.out.println(xmlVO.booleanDolar);
                     }
-                }
 
-                Algo algo = Repository.strategy.get(nameAlgo);
-
-                if (mkdDolarToggle && xmlVO.booleanDolar) {
-                   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
-                }
-
-                if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
-                }
-
-                if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
-                }
-
-                if (routingLocalToggle && xmlVO.booleanRLocal) {
-                   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
-                }
-
-                if (routingAdrToggle && xmlVO.booleanRAdr) {
-                   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                 }
 
             }
-
         };
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(timerTask, 1, (int) this.time * 1000);
+        timer.scheduleAtFixedRate(timerTask, 1l, 300);
 
-    }
 
-    public void stopTimer() {
-
-        if (timerTask != null) {
-            timerTask.cancel();
-            timerTask = null;
-        }
 
     }
 
@@ -630,7 +544,6 @@ public class Algo {
     public void setAlert(boolean alert) {
         this.alert = alert;
     }
-
 
 }
 

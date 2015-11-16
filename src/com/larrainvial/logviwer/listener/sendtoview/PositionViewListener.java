@@ -1,38 +1,31 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.model.ModelPositions;
-import com.larrainvial.logviwer.fxvo.Dialog;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
-import eu.hansolo.enzo.notification.Notification;
-import javafx.application.Platform;
+import com.larrainvial.logviwer.model.ModelRoutingData;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
 import java.util.logging.Level;
 
-public class PositionViewListener implements Listener {
+public class PositionViewListener implements Runnable {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+    public ModelRoutingData modelRoutingData;
 
-    public PositionViewListener(Algo algo) {
+    public PositionViewListener(Algo algo, ModelRoutingData modelRoutingData) {
         this.algo = algo;
+        this.modelRoutingData = modelRoutingData;
     }
 
 
     @Override
-    public synchronized void eventOccurred(Event event) {
+    public synchronized void run() {
 
         try {
 
-            PositionViewEvent ev = (PositionViewEvent) event;
-
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if(!this.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             synchronized (algo.positionsMasterListHash) {
 

@@ -2,48 +2,46 @@ package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
-import com.larrainvial.logviwer.event.utils.AlertEvent;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
-import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
+import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
+import com.larrainvial.logviwer.listener.util.AlertListener;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.fxvo.Dialog;
-import com.larrainvial.logviwer.utils.*;
+import com.larrainvial.logviwer.utils.CalculatePositions;
+import com.larrainvial.logviwer.utils.Latency;
+import com.larrainvial.logviwer.utils.StringToRoutingData;
 import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
 
 import java.util.logging.Level;
 
-public class RoutingAdrListener implements Listener {
+public class RoutingAdrListener implements Runnable {
 
     public Algo algo;
+    public String message;
     public final String TYPE_MARKET = "ROUTING ADR";
-    private static Logger logger = Logger.getLogger(RoutingAdrListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public RoutingAdrListener(Algo algo) {
+    public RoutingAdrListener(Algo algo, String message) {
         this.algo = algo;
+        this.message = message;
     }
 
     @Override
-    public synchronized void eventOccurred(Event event) {
+    public synchronized void run() {
 
         try {
 
-            RoutingAdrEvent ev = (RoutingAdrEvent) event;
 
-            if (ev.lineFromLog.equals("")) return;
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (this.message.equals("")) return;
+            if(!this.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
-            ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
+            ModelRoutingData modelRoutingData = stringToRoutingData.routing(this.message);
 
-            Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
+            new Thread(new PositionViewListener(algo, modelRoutingData)).start();
+            new Thread(new AlertListener(algo, modelRoutingData, TYPE_MARKET)).start();
 
             if (modelRoutingData.execType.equals("Trade")) {
-                new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
+                new CalculatePositions(Repository.strategy.get(this.algo.nameAlgo), modelRoutingData);
             }
 
             if (algo.graphEnable) {

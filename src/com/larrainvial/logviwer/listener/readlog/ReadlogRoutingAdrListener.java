@@ -1,43 +1,25 @@
 package com.larrainvial.logviwer.listener.readlog;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.readlog.ReadlogRoutingAdrEvent;
-import com.larrainvial.logviwer.event.stringtofix.DolarEvent;
-import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
-import com.larrainvial.logviwer.fxvo.Dialog;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
+import com.larrainvial.logviwer.listener.stringtofix.RoutingAdrListener;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class ReadlogRoutingAdrListener implements Listener {
+public class ReadlogRoutingAdrListener implements Runnable {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(ReadlogRoutingAdrListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public ReadlogRoutingAdrListener(Algo algo){
         this.algo = algo;
     }
 
-
     @Override
-    public synchronized void eventOccurred(Event event){
+    public synchronized void run(){
 
         try {
-
-            ReadlogRoutingAdrEvent ev = (ReadlogRoutingAdrEvent) event;
-
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             Scanner sc = new Scanner(algo.inputStreamRoutingAdr, "UTF-8");
 
@@ -46,15 +28,9 @@ public class ReadlogRoutingAdrListener implements Listener {
                 String message = sc.nextLine();
 
                 if (verifyMessageFix(message)){
-                    Controller.dispatchEvent(new RoutingAdrEvent(algo, message));
-                    algo.countRoutingAdr++;
-
-                } else {
-                    message = readFromFile(algo.countRoutingAdr);
-                    Controller.dispatchEvent(new RoutingAdrEvent(algo, message));
+                    new Thread(new RoutingAdrListener(algo, message)).start();
                     algo.countRoutingAdr++;
                 }
-
 
             }
 
@@ -64,33 +40,6 @@ public class ReadlogRoutingAdrListener implements Listener {
         }
 
     }
-
-    private String readFromFile(int position) throws IOException {
-
-        BufferedReader reader = new BufferedReader(new FileReader(algo.fileRoutingAdr));
-
-        String line = reader.readLine();
-        List<String> lines = new ArrayList<String>();
-
-        while (line != null) {
-            lines.add(line);
-            line = reader.readLine();
-        }
-
-        String message = lines.get(position);
-
-        if (verifyMessageFix(message)){
-            return message;
-
-        } else {
-            this.readFromFile(position);
-        }
-
-        return null;
-
-    }
-
-
 
 
     public boolean verifyMessageFix(String message){

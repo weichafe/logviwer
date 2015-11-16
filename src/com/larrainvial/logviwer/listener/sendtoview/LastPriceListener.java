@@ -1,37 +1,30 @@
 package com.larrainvial.logviwer.listener.sendtoview;
 
-
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
-import com.larrainvial.logviwer.fxvo.Dialog;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import javafx.application.Platform;
 import org.apache.log4j.Logger;
-
 import java.util.Map;
 import java.util.logging.Level;
 
-public class LastPriceListener implements Listener {
+public class LastPriceListener implements Runnable {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+    public ModelMarketData modelMarketData;
 
-    public LastPriceListener(Algo algo){
+    public LastPriceListener(Algo algo, ModelMarketData modelMarketData){
         this.algo = algo;
+        this.modelMarketData = modelMarketData;
     }
 
     @Override
-    public void eventOccurred(Event event) {
+    public void run() {
 
         try {
 
-            LastPriceEvent ev = (LastPriceEvent) event;
-
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if(!this.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
 
             synchronized (algo.lastPriceMasterListHash) {
