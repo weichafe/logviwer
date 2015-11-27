@@ -13,7 +13,6 @@ import quickfix.fix44.ExecutionReport;
 
 import java.util.Map;
 
-
 public class TradeListener implements Listener {
 
     private Orders receivedOrder;
@@ -30,7 +29,6 @@ public class TradeListener implements Listener {
 
             if(receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) return;
 
-
             Thread.sleep(100);
             if (receivedOrder.workOrders.getSide().valueEquals(Side.BUY)) {
 
@@ -42,7 +40,7 @@ public class TradeListener implements Listener {
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
-                    if ( /*receivedOrder.workOrders.getPrice().getValue() >= repositoryOrders.workOrders.getPrice().getValue() && */receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
+                    if (receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
                     }
 
@@ -59,9 +57,8 @@ public class TradeListener implements Listener {
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
                     if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
-                    if (/*receivedOrder.workOrders.getPrice().getValue() <= repositoryOrders.workOrders.getPrice().getValue() && */receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
+                    if (receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
-
                     }
 
                 }

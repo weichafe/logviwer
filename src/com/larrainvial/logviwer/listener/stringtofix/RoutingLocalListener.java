@@ -4,9 +4,8 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.utils.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingLocalEvent;
-import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
+import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCS;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
@@ -18,8 +17,7 @@ import java.util.logging.Level;
 public class RoutingLocalListener implements Listener {
 
     public Algo algo;
-    public final String TYPE_MARKET = "ROUTING LOCAL";
-    private static Logger logger = Logger.getLogger(RoutingAdrListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public RoutingLocalListener(Algo algo) {
         this.algo = algo;
@@ -33,21 +31,25 @@ public class RoutingLocalListener implements Listener {
 
             RoutingLocalEvent ev = (RoutingLocalEvent) event;
 
-            if (ev.lineFromLog.equals("")) return;
+            if (ev.lineFromLog.equals(Constants.EMPTY)) return;
             if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
+            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_LOCAL));
 
-            if (modelRoutingData.execType.equals("Trade")) {
+            if (modelRoutingData.execType.equals(Constants.TRADE)) {
                 new CalculatePositions(algo, modelRoutingData);
             }
 
             if (algo.graphEnable) {
                 Latency.latencyLocal(algo, modelRoutingData);
+            }
+
+            if (this.algo.nameAlgo.equals(Constants.MMBCS)){
+                new AlertMarketMakerBCS(modelRoutingData, algo);
             }
 
         } catch (Exception ex) {

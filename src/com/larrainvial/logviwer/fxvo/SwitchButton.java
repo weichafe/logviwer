@@ -2,6 +2,7 @@ package com.larrainvial.logviwer.fxvo;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.utils.Notifier;
+import com.larrainvial.sellside.Control;
 import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -12,7 +13,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-
 
 public class SwitchButton extends Label {
 
@@ -97,10 +97,12 @@ public class SwitchButton extends Label {
                     }
 
                     if (switchBtn.getId().equals("Strart")) {
-                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setText("Sell Side OFF");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-                        QuickFixAdapter.start();
+                        new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
+
+
                     }
 
                     if (switchBtn.getId().equals("Reset")) {
@@ -169,7 +171,7 @@ public class SwitchButton extends Label {
                     }
 
                     if (switchBtn.getId().equals("Strart")) {
-                        switchBtn.setText(nameType + " ON");
+                        switchBtn.setText("Sell Side Start");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
                         QuickFixAdapter.strop();

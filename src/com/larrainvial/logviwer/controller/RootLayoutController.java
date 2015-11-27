@@ -1,73 +1,29 @@
 package com.larrainvial.logviwer.controller;
 
-import com.larrainvial.logviwer.utils.About;
-import com.larrainvial.process.MainProcess;
-import com.larrainvial.logviwer.MainLogViwer;
 import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.menu.About.About;
+import com.larrainvial.logviwer.menu.Process.Process;
 import javafx.fxml.FXML;
-import javafx.stage.FileChooser;
-
-import java.io.File;
 
 public class RootLayoutController {
 
 
-    private MainLogViwer mainApp;
-
-    public void setMainApp(MainLogViwer mainApp) {
-        this.mainApp = mainApp;
-    }
-
-
     @FXML
     private void handleNew() {
-        mainApp.getPersonData().clear();
-        mainApp.setPersonFilePath(null);
     }
 
     @FXML
     private void handleOpen() {
-        FileChooser fileChooser = new FileChooser();
-
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        // Show save file dialog
-        File file = fileChooser.showOpenDialog(Repository.primaryStage);
-
-        if (file != null) {
-            mainApp.loadPersonDataFromFile(file);
-        }
     }
 
 
     @FXML
     private void handleSave() {
-        File personFile = mainApp.getPersonFilePath();
-        if (personFile != null) {
-            mainApp.savePersonDataToFile(personFile);
-        } else {
-            handleSaveAs();
-        }
     }
 
 
     @FXML
     private void handleSaveAs() {
-        FileChooser fileChooser = new FileChooser();
-
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
-
-        File file = fileChooser.showSaveDialog(Repository.primaryStage);
-
-        if (file != null) {
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            mainApp.savePersonDataToFile(file);
-        }
     }
 
 
@@ -77,7 +33,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessMarmolejo.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -93,7 +49,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessAntuco.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -107,7 +63,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessEverest.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -121,7 +77,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessCatedral.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -135,7 +91,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessEsmeralda.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -149,7 +105,7 @@ public class RootLayoutController {
         try {
 
             String properties = "KillProcessDesconsuelo.properties";
-            new MainProcess(Repository.primaryStage, properties);
+            new Process(Repository.primaryStage, properties);
 
         } catch (Exception ex) {
             ex.printStackTrace();

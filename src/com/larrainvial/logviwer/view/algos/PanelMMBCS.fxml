@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.MMBCSController">
+  <children>
+
+    <TableView fx:id="mmbcs">
+      <columns>
+
+        <TableColumn fx:id="symbol" text="Symbol" prefWidth="80"/>
+        <TableColumn fx:id="side" text="Side" prefWidth="70"/>
+        <TableColumn fx:id="orderQty" text="Order Qty"  prefWidth="60"/>
+        <TableColumn fx:id="price" text="Price" prefWidth="90"/>
+
+        <TableColumn fx:id="cumQty" text="Cum Qty" prefWidth="80"/>
+        <TableColumn fx:id="lastPx" text="Last Px" prefWidth="80"/>
+        <TableColumn fx:id="lastQty" text="last Qty" prefWidth="90"/>
+
+        <TableColumn fx:id="leavesQty" text="Leaves Qty" prefWidth="80"/>
+
+      </columns>
+    </TableView>
+
+  </children>
+</AnchorPane>

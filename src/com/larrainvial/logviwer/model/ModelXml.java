@@ -1,7 +1,7 @@
-package com.larrainvial.logviwer.vo;
+package com.larrainvial.logviwer.model;
 
 
-public class XmlVO {
+public class ModelXml {
 
     public String nameServer;
     public String userServer;
@@ -15,17 +15,18 @@ public class XmlVO {
     public String routing_nyse;
 
     public String nameAlgo;
-    public String mkdDolar;
-    public String mkdLocal;
-    public String mkdAdr;
-    public String routingLocal;
-    public String routingAdr;
-    public String time;
 
     public Boolean booleanDolar;
     public Boolean booleanMLocal;
     public Boolean booleanMAdr;
     public Boolean booleanRLocal;
     public Boolean booleanRAdr;
+
+    public String mkdDolar;
+    public String mkdLocal;
+    public String mkdAdr;
+    public String routingLocal;
+    public String routingAdr;
+    public int time;
 
 }

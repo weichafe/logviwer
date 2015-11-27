@@ -1,9 +1,8 @@
-package com.larrainvial.logviwer.listener.util;
+package com.larrainvial.logviwer.listener;
 
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.Helper;
@@ -16,7 +15,7 @@ import java.util.logging.Level;
 public class CalculatePositionsListener implements Listener {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(CalculatePositionsListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public CalculatePositionsListener(Algo algo){
         this.algo = algo;
@@ -24,7 +23,6 @@ public class CalculatePositionsListener implements Listener {
 
     @Override
     public void eventOccurred(Event event) {
-
 
         try {
 

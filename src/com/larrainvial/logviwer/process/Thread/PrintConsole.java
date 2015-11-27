@@ -1,4 +1,4 @@
-package com.larrainvial.process.Thread;
+package com.larrainvial.logviwer.process.Thread;
 
 import com.larrainvial.logviwer.utils.Helper;
 import javafx.application.Platform;
@@ -17,12 +17,10 @@ public class PrintConsole implements Runnable {
     public boolean print;
 
     public PrintConsole(BufferedReader br, TextArea textArea, boolean print) {
-
         this.br = br;
         this.textArea = textArea;
         this.print = print;
     }
-
 
     @Override
     public void run() {

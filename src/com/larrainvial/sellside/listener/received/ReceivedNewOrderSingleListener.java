@@ -83,6 +83,7 @@ public class ReceivedNewOrderSingleListener implements Listener {
         executionReport.set(newOrderSingle.getSettlType());
         executionReport.set(new LeavesQty(newOrderSingle.getOrderQty().getValue()));
 
+
         if(newOrderSingle.isSetSecondaryClOrdID()){
             executionReport.set(newOrderSingle.getSecondaryClOrdID());
         }

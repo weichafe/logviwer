@@ -3,7 +3,7 @@ package com.larrainvial.logviwer.utils;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.vo.LatencyVO;
+import com.larrainvial.logviwer.model.ModelLatency;
 import javafx.application.Platform;
 import javafx.scene.chart.XYChart;
 import java.sql.Timestamp;
@@ -29,7 +29,7 @@ public class Latency {
 
                     if (!Helper.isASK(modelRoutingData)) return;
 
-                    LatencyVO latencyVO = algo.latencyLocal.get(modelRoutingData.clOrdID);
+                    ModelLatency latencyVO = algo.latencyLocal.get(modelRoutingData.clOrdID);
                     latencyVO.timeEnd = time(modelRoutingData.getHour().trim());
                     latencyVO.timeLatency = latencyVO.timeEnd - latencyVO.timeStart;
 
@@ -52,13 +52,13 @@ public class Latency {
 
                     if (!Helper.isSolicitud(modelRoutingData)) return;
 
-                    LatencyVO latencyVO = new LatencyVO();
+                    ModelLatency latencyVO = new ModelLatency();
                     latencyVO.clOrdID = modelRoutingData.clOrdID;
                     latencyVO.msgType = modelRoutingData.messageByType;
                     latencyVO.side = modelRoutingData.side;
                     latencyVO.symbol = modelRoutingData.symbol;
                     latencyVO.timeStart = time(modelRoutingData.getHour().trim());
-                    latencyVO.routing = "LOCAL";
+                    latencyVO.routing = Constants.LOCAL;
                     latencyVO.nameAlgo = algo.nameAlgo;
 
                     algo.latencyLocal.put(modelRoutingData.clOrdID, latencyVO);
@@ -81,7 +81,7 @@ public class Latency {
 
                     if (!Helper.isASK(modelRoutingData)) return;
 
-                    LatencyVO latencyVO = algo.latencyADR.get(modelRoutingData.clOrdID);
+                    ModelLatency latencyVO = algo.latencyADR.get(modelRoutingData.clOrdID);
                     latencyVO.timeEnd = time(modelRoutingData.getHour().trim());
                     latencyVO.timeLatency = latencyVO.timeEnd - latencyVO.timeStart;
 
@@ -102,13 +102,13 @@ public class Latency {
 
                     if (!Helper.isSolicitud(modelRoutingData)) return;
 
-                    LatencyVO latencyVO = new LatencyVO();
+                    ModelLatency latencyVO = new ModelLatency();
                     latencyVO.clOrdID = modelRoutingData.clOrdID;
                     latencyVO.msgType = modelRoutingData.messageByType;
                     latencyVO.side = modelRoutingData.side;
                     latencyVO.symbol = modelRoutingData.symbol;
                     latencyVO.timeStart = time(modelRoutingData.getHour().trim());
-                    latencyVO.routing = "ADR";
+                    latencyVO.routing = Constants.ADR;
                     latencyVO.nameAlgo = algo.nameAlgo;
 
                     algo.latencyADR.put(modelRoutingData.clOrdID, latencyVO);

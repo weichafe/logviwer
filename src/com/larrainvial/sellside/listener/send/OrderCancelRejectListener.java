@@ -1,6 +1,5 @@
 package com.larrainvial.sellside.listener.send;
 
-
 import com.larrainvial.sellside.event.send.OrderCancelRejectEvent;
 import com.larrainvial.sellside.utils.Configuration;
 import com.larrainvial.trading.emp.Event;
@@ -24,9 +23,8 @@ public class OrderCancelRejectListener implements Listener {
             orderCancelReject.set(new ClOrdID(ev.message.getString(ClOrdID.FIELD)));
             orderCancelReject.set(new OrigClOrdID(ev.message.getString(OrigClOrdID.FIELD)));
 
-            if(ev.message.isSetField(OrderID.FIELD)){
+            if (ev.message.isSetField(OrderID.FIELD)) {
                 orderCancelReject.set(new OrderID(ev.message.getString(OrderID.FIELD)));
-
             } else {
                 orderCancelReject.set(new OrderID(IDGenerator.getID()));
             }
@@ -38,13 +36,11 @@ public class OrderCancelRejectListener implements Listener {
             orderCancelReject.set(new TransactTime(new Date()));
             orderCancelReject.set(new Account(ev.message.getString(1)));
 
-            if(ev.message.isSetField(ClOrdLinkID.FIELD)){
+            if (ev.message.isSetField(ClOrdLinkID.FIELD)) {
                 orderCancelReject.set(new ClOrdLinkID(ev.message.getString(ClOrdLinkID.FIELD)));
             }
 
             quickfix.Session.sendToTarget(orderCancelReject, Configuration.Buyside.SenderCompID, Configuration.Buyside.TargetCompID);
-
-
 
         } catch (Exception ex) {
             ex.printStackTrace();

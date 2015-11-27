@@ -26,12 +26,14 @@ public final class QuickFixAdapter extends MessageCracker implements Application
         try {
 
             sessionSettings = new SessionSettings(quickFixIniFile);
+
             FileStoreFactory fileStoreFactory = new FileStoreFactory(sessionSettings);
             com.larrainvial.trading.utils.quickfix.FileLogFactory fileLogFactory = new com.larrainvial.trading.utils.quickfix.FileLogFactory(sessionSettings);
 
             DefaultMessageFactory defaultMessageFactory = new DefaultMessageFactory();
             socketAcceptor = new SocketAcceptor(this, fileStoreFactory, sessionSettings, fileLogFactory, defaultMessageFactory);
             Repository.socketAcceptor = this.socketAcceptor;
+
             Repository.socketAcceptor.start();
 
             Repository.socketAcceptPort = sessionSettings.getString(Repository.sessionID, "SocketAcceptPort");
@@ -119,18 +121,6 @@ public final class QuickFixAdapter extends MessageCracker implements Application
         try {
 
             Repository.socketAcceptor.stop();
-
-        } catch (Exception ex){
-            logger.error(Level.SEVERE, ex);
-            ex.printStackTrace();
-        }
-    }
-
-    public static void start() {
-
-        try {
-
-            Repository.socketAcceptor.start();
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);

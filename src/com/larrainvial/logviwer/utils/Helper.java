@@ -4,22 +4,16 @@ import com.javtech.javatoolkit.fix.FixConstants;
 import com.javtech.javatoolkit.message.Attribute;
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.vo.LatencyVO;
+import com.larrainvial.logviwer.model.ModelLatency;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -39,15 +33,13 @@ public class Helper {
             Document document = builder.parse(xmlFile);
 
             NodeList nodeList = document.getDocumentElement().getChildNodes();
-            int tab = 1;
 
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                 Node node = nodeList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    new Algo((Element) node, tab++);
-
+                    new Algo((Element) node);
                 }
             }
 
@@ -440,7 +432,7 @@ public class Helper {
 
     }
 
-    public static void printLatency(LatencyVO latencyVO){
+    public static void printLatency(ModelLatency latencyVO){
         logger.info("Latency superior a 400 mm");
         logger.info("clOrdID " + latencyVO.clOrdID);
         logger.info("nameAlgo " + latencyVO.nameAlgo);

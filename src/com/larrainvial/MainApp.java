@@ -1,7 +1,7 @@
 package com.larrainvial;
 
 
-import com.larrainvial.logviwer.MainLogViwer;
+import com.larrainvial.logviwer.Start;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.MainSellSide;
 import javafx.application.Application;
@@ -9,21 +9,19 @@ import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
-import java.util.Date;
-
 public class MainApp extends Application {
 
-    private static String OS = System.getProperty("os.name").toLowerCase();
-    private static Logger logger = Logger.getLogger(MainApp.class.getName());
+    private static final String OS = System.getProperty("os.name").toLowerCase();
+    private static final Logger logger = Logger.getLogger(MainApp.class.getName());
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         //LogViwer
-        new MainLogViwer().start(primaryStage);
+        new Start().start(primaryStage);
 
         //SellSide
-       new MainSellSide().sellside();
+        new MainSellSide().start();
 
     }
 

@@ -1,4 +1,4 @@
-package com.larrainvial.process.ssh;
+package com.larrainvial.logviwer.process.SSH;
 
 import com.jcraft.jsch.UserInfo;
 

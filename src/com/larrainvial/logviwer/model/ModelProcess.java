@@ -1,4 +1,4 @@
-package com.larrainvial.process.model;
+package com.larrainvial.logviwer.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Button;

@@ -8,11 +8,11 @@
     <TableView fx:id="positionTable">
 
       <columns>
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" prefWidth="100"/>
-        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" prefWidth="80"/>
+        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolLocal" text="Symbol" prefWidth="80"/>
+        <TableColumn style="-fx-alignment: CENTER;" fx:id="symbolAdr" text="ADR" prefWidth="70"/>
 
-        <TableColumn fx:id="qtyBuyLocalRatio" text="Inflow" prefWidth="80" />
-        <TableColumn fx:id="qtySellAdr" text="Inflow"  prefWidth="70"/>
+        <TableColumn fx:id="qtyBuyLocalRatio" text="Inflow" prefWidth="70"/>
+        <TableColumn fx:id="qtySellAdr" text="Inflow"  prefWidth="60"/>
         <TableColumn fx:id="differenceInflow" text="Difference" prefWidth="90"/>
 
         <TableColumn fx:id="qtySellLocalRatio" text="Flowback" prefWidth="80"/>
@@ -21,7 +21,7 @@
 
         <TableColumn fx:id="qtyBuyLocal" text="Local Buy" prefWidth="80"/>
         <TableColumn fx:id="qtySellLocal" text="Local Sell" prefWidth="80"/>
-        <TableColumn fx:id="ratio" text="Ratio" prefWidth="70"/>
+        <TableColumn fx:id="ratio" text="Ratio" prefWidth="60"/>
 
       </columns>
     </TableView>

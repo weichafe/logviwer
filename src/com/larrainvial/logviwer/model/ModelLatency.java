@@ -1,6 +1,6 @@
-package com.larrainvial.logviwer.vo;
+package com.larrainvial.logviwer.model;
 
-public class LatencyVO {
+public class ModelLatency {
 
     public Long timeStart;
     public Long timeEnd;

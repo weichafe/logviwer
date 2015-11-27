@@ -1,7 +1,7 @@
-package com.larrainvial.logviwer.utils;
+package com.larrainvial.logviwer.menu.About;
 
 
-import com.larrainvial.logviwer.MainLogViwer;
+import com.larrainvial.logviwer.Start;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,8 +24,7 @@ public class About {
 
         try {
 
-
-            FXMLLoader loader = new FXMLLoader(MainLogViwer.class.getResource("view/about.fxml"));
+            FXMLLoader loader = new FXMLLoader(Start.class.getResource("view/about.fxml"));
             ventanaPrincipal = (AnchorPane) loader.load();
             ventanaPrincipal.setPrefWidth(300);
             ventanaPrincipal.setPrefHeight(200);
@@ -37,10 +36,11 @@ public class About {
             text.setAlignment(Pos.CENTER);
 
             String texto = "\n\n\n";
-            texto += "\tEtrading " + "\n";
+            texto += "Etrading " + "\n";
             texto += "Gerencia de Sitemas " + "\n";
             texto += "Larrainvial 2015 " + "\n";
-            texto += "Version terrible chora  1.0.0.3 " + "\n";
+            texto += "Version terrible chora  1.0.0.3 " + " 16/11/2015" + "\n";
+            texto += "Version terrible ni que choriza 1.0.0.4 " + " Proximamente" + "\n";
 
             Label label1 = new Label(texto);
             text.getChildren().addAll(label1);

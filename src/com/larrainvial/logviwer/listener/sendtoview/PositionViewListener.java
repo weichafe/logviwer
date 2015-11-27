@@ -18,7 +18,7 @@ import java.util.logging.Level;
 public class PositionViewListener implements Listener {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public PositionViewListener(Algo algo) {
         this.algo = algo;

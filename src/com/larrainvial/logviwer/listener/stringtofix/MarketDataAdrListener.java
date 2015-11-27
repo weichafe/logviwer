@@ -6,6 +6,7 @@ import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
 import com.larrainvial.logviwer.event.stringtofix.MarketDataADREvent;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.logviwer.utils.StringToMarketData;
@@ -19,8 +20,8 @@ import java.util.logging.Level;
 public class MarketDataAdrListener implements Listener {
 
     public Algo algo;
-    public final String TYPE_MARKET = "MKD ADR";
-    private static Logger logger = Logger.getLogger(MarketDataAdrListener.class.getName());
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public MarketDataAdrListener(Algo algo) {
         this.algo = algo;
@@ -34,15 +35,14 @@ public class MarketDataAdrListener implements Listener {
 
             MarketDataADREvent ev = (MarketDataADREvent) event;
 
-            if (ev.lineFromLog.equals("") ) return;
+            if (ev.lineFromLog.equals(Constants.EMPTY) ) return;
             if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToMarketData stringToMarketData = new StringToMarketData();
             ModelMarketData modelMarketData = stringToMarketData.marketData(ev.lineFromLog);
 
-            Controller.dispatchEvent(new AlertEvent(algo, modelMarketData, TYPE_MARKET));
-
-            Controller.dispatchEvent(new CalculateLastPriceEvent(algo, modelMarketData, TYPE_MARKET));
+            Controller.dispatchEvent(new AlertEvent(algo, modelMarketData, Constants.TypeMarket.MKD_ADR));
+            Controller.dispatchEvent(new CalculateLastPriceEvent(algo, modelMarketData, Constants.TypeMarket.MKD_ADR));
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);

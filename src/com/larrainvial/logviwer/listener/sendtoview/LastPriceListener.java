@@ -10,6 +10,8 @@ import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import org.apache.log4j.Logger;
 
 import java.util.Map;
@@ -18,7 +20,7 @@ import java.util.logging.Level;
 public class LastPriceListener implements Listener {
 
     public Algo algo;
-    private static Logger logger = Logger.getLogger(LastPriceListener.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public LastPriceListener(Algo algo){
         this.algo = algo;
@@ -54,6 +56,9 @@ public class LastPriceListener implements Listener {
                 }
 
             }
+
+
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

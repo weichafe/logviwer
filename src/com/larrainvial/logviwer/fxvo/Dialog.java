@@ -1,26 +1,14 @@
 package com.larrainvial.logviwer.fxvo;
 
-import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.logviwer.vo.LatencyVO;
+import com.larrainvial.logviwer.model.ModelLatency;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Optional;
 
 public class Dialog {
 
-    public static synchronized void latency(LatencyVO latencyVO) {
+    public static synchronized void latency(ModelLatency latencyVO) {
 
         try {
 

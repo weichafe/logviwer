@@ -19,8 +19,8 @@ import java.util.logging.Level;
 public class RoutingAdrListener implements Listener {
 
     public Algo algo;
-    public final String TYPE_MARKET = "ROUTING ADR";
-    private static Logger logger = Logger.getLogger(RoutingAdrListener.class.getName());
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public RoutingAdrListener(Algo algo) {
         this.algo = algo;
@@ -33,16 +33,16 @@ public class RoutingAdrListener implements Listener {
 
             RoutingAdrEvent ev = (RoutingAdrEvent) event;
 
-            if (ev.lineFromLog.equals("")) return;
+            if (ev.lineFromLog.equals(Constants.EMPTY)) return;
             if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, TYPE_MARKET));
+            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_ADR));
 
-            if (modelRoutingData.execType.equals("Trade")) {
+            if (modelRoutingData.execType.equals(Constants.TRADE)) {
                 new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
             }
 

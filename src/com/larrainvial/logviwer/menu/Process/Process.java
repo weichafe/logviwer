@@ -1,16 +1,17 @@
-package com.larrainvial.process;
+package com.larrainvial.logviwer.menu.Process;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.Session;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.process.Thread.PrintConsole;
-import com.larrainvial.process.model.ModelProcess;
-import com.larrainvial.process.ssh.Connection;
-import com.larrainvial.process.util.PropertiesFile;
-import com.larrainvial.process.vo.ServerVO;
-import com.larrainvial.logviwer.MainLogViwer;
+import com.larrainvial.logviwer.process.Thread.PrintConsole;
+import com.larrainvial.logviwer.model.ModelProcess;
+import com.larrainvial.logviwer.process.SSH.Connection;
+import com.larrainvial.logviwer.process.vo.ServerVO;
+import com.larrainvial.logviwer.Start;
+import com.larrainvial.logviwer.utils.PropertiesFile;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
@@ -38,7 +39,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 
-public class MainProcess {
+public class Process {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     public final String CORE = "core";
@@ -72,9 +73,7 @@ public class MainProcess {
     public TableColumn<ModelProcess, String> comentary = new TableColumn<>("Comentary");
     public TableColumn<ModelProcess, ModelProcess> core = new TableColumn<ModelProcess, ModelProcess>("Core");
 
-    public PrintConsole printConsole = null;
-
-    public MainProcess(Stage primaryStage, String properties) {
+    public Process(Stage primaryStage, String properties) {
 
         try {
 
@@ -99,7 +98,7 @@ public class MainProcess {
             });
 
             general.getStyleClass().add("generalKillProcess");
-            loader = new FXMLLoader(MainLogViwer.class.getResource("view/process/Process.fxml"));
+            loader = new FXMLLoader(Start.class.getResource("view/process/Process.fxml"));
 
             name.setMinWidth(200);
             name.setCellValueFactory(new PropertyValueFactory("name"));
@@ -156,8 +155,6 @@ public class MainProcess {
             Scene scene = new Scene(scrollBar, prefHeight, prefWidth);
             principalStage.setScene(scene);
             principalStage.show();
-
-
 
             principalStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
@@ -237,23 +234,23 @@ public class MainProcess {
 
     public void getProperties(String properties) throws Exception {
 
-        Repository.killProcess = new PropertiesFile(com.larrainvial.logviwer.Repository.locationPath + properties);
+        Repository.killProcess = new PropertiesFile(Repository.locationPath + properties);
 
         ServerVO serverCore = new ServerVO();
-        serverCore.url = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.url");
-        serverCore.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.usuario");
-        serverCore.pass = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.core.pass");
+        serverCore.url = Repository.killProcess.getPropertiesString("servidor.core.url");
+        serverCore.usuario = Repository.killProcess.getPropertiesString("servidor.core.usuario");
+        serverCore.pass = Repository.killProcess.getPropertiesString("servidor.core.pass");
 
         ServerVO serverWeborb = new ServerVO();
-        serverWeborb.url = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.url");
-        serverWeborb.usuario = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.usuario");
-        serverWeborb.pass = com.larrainvial.process.Repository.killProcess.getPropertiesString("servidor.weborb.pass");
+        serverWeborb.url = Repository.killProcess.getPropertiesString("servidor.weborb.url");
+        serverWeborb.usuario = Repository.killProcess.getPropertiesString("servidor.weborb.usuario");
+        serverWeborb.pass = Repository.killProcess.getPropertiesString("servidor.weborb.pass");
 
         sessionServerCore = this.connectServer(serverCore);
         sessionServerWebOrb = this.connectServer(serverWeborb);
 
 
-        for (Map.Entry<?, ?> entry : com.larrainvial.process.Repository.killProcess.properties.entrySet()) {
+        for (Map.Entry<?, ?> entry : Repository.killProcess.properties.entrySet()) {
 
             String key = (String) entry.getKey();
             ModelProcess strategy = new ModelProcess();
@@ -261,10 +258,10 @@ public class MainProcess {
             if (key.indexOf(".core.name") > -1) {
 
                 String name = key.replace(".core.name", "");
-                strategy.setName(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.name"));
-                strategy.setProcessName(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.processname"));
-                strategy.setPathbin(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.pathbin"));
-                strategy.setComentary(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".core.comentario"));
+                strategy.setName(Repository.killProcess.getPropertiesString(name + ".core.name"));
+                strategy.setProcessName(Repository.killProcess.getPropertiesString(name + ".core.processname"));
+                strategy.setPathbin(Repository.killProcess.getPropertiesString(name + ".core.pathbin"));
+                strategy.setComentary(Repository.killProcess.getPropertiesString(name + ".core.comentario"));
                 strategy.algo = CORE;
 
                 Repository.coreStrategy.put(strategy.getName(), strategy);
@@ -274,10 +271,10 @@ public class MainProcess {
             if (key.indexOf(".weborb.name") > -1) {
 
                 String name = key.replace(".weborb.name", "");
-                strategy.setName(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.name"));
-                strategy.setProcessName(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.processname"));
-                strategy.setPathbin(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.pathbin"));
-                strategy.setComentary(com.larrainvial.process.Repository.killProcess.getPropertiesString(name + ".weborb.comentario"));
+                strategy.setName(Repository.killProcess.getPropertiesString(name + ".weborb.name"));
+                strategy.setProcessName(Repository.killProcess.getPropertiesString(name + ".weborb.processname"));
+                strategy.setPathbin(Repository.killProcess.getPropertiesString(name + ".weborb.pathbin"));
+                strategy.setComentary(Repository.killProcess.getPropertiesString(name + ".weborb.comentario"));
                 strategy.algo = WEB_ORB;
 
                 Repository.coreStrategy.put(strategy.getName(), strategy);

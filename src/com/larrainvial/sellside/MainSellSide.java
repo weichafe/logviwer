@@ -4,8 +4,6 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.utils.PropertiesFile;
 import org.apache.log4j.Logger;
-
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -14,7 +12,7 @@ public class MainSellSide {
 
     private static Logger logger = Logger.getLogger(MainSellSide.class.getName());
 
-    public void sellside() {
+    public void start() {
 
         try {
 
@@ -32,10 +30,12 @@ public class MainSellSide {
 
             Repository.date = new SimpleDateFormat("yyyyMMdd").format(new Date());
 
-            new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
+            //new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
+
             Control.initialize();
 
-            new Algo(0);
+
+            new Algo();
 
 
         } catch (Exception ex) {

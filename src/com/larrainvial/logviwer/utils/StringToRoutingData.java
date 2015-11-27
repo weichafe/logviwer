@@ -13,7 +13,7 @@ import java.util.logging.Level;
 public class StringToRoutingData {
 
     private ModelRoutingData modelRoutingData;
-    private static Logger logger = Logger.getLogger(CalculatePositions.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public ModelRoutingData routing(String message){
 

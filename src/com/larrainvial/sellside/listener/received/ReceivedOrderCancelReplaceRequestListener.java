@@ -39,9 +39,9 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
 
             orderCancelReplaceRequest = ev.orderCancelReplaceRequest;
 
-            if(!validator.validateOrderCancelReplaceRequestFromBuySide(orderCancelReplaceRequest)) return;
+            if (!validator.validateOrderCancelReplaceRequestFromBuySide(orderCancelReplaceRequest)) return;
 
-            if(orderCancelReplaceRequest.getSide().valueEquals(Side.BUY)){
+            if (orderCancelReplaceRequest.getSide().valueEquals(Side.BUY)) {
 
                 orders = Repository.executionWorkOrderBuy.get(orderCancelReplaceRequest.getOrigClOrdID().getValue());
                 this.setValuesWorkOrders(orders.workOrders);
