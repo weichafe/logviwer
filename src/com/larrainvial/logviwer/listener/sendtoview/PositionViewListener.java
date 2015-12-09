@@ -2,8 +2,10 @@ package com.larrainvial.logviwer.listener.sendtoview;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
+import com.larrainvial.logviwer.model.ModelMMBCS;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.fxvo.Dialog;
+import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Event;
@@ -32,35 +34,66 @@ public class PositionViewListener implements Listener {
 
             PositionViewEvent ev = (PositionViewEvent) event;
 
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-            synchronized (algo.positionsMasterListHash) {
+            if (ev.algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
 
-                for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
+                synchronized (algo.mmBCSMasterListHash) {
 
-                    ModelPositions modelPositions = algo.positionsMasterListHash.get(e.getKey());
+                    for (Map.Entry<String, ModelMMBCS> e : algo.mmBCSMasterListHash.entrySet()) {
 
-                    if (!algo.positions.containsKey(e.getKey())) {
+                        ModelMMBCS modelMMBCS = algo.mmBCSMasterListHash.get(e.getKey());
 
-                        algo.panelPositionsTableView.getItems().add(algo.countPositions, modelPositions);
+                        if (!algo.mmBCE.containsKey(e.getKey())) {
 
-                        algo.positions.put(e.getKey(), algo.countPositions);
-                        algo.countPositions++;
+                            algo.panelMMBCSTableView.getItems().add(algo.countMMBCC, modelMMBCS);
 
-                    } else {
+                            algo.mmBCE.put(e.getKey(), algo.countMMBCC);
+                            algo.countMMBCC++;
 
-                        algo.panelPositionsTableView.getItems().set(algo.positions.get(e.getKey()), modelPositions);
+                        } else {
+
+                            algo.panelMMBCSTableView.getItems().set(algo.mmBCE.get(e.getKey()), modelMMBCS);
+
+                        }
+
+                    }
+                }
+
+
+            } else {
+
+                synchronized (algo.positionsMasterListHash) {
+
+                    for (Map.Entry<String, ModelPositions> e : algo.positionsMasterListHash.entrySet()) {
+
+                        ModelPositions modelPositions = algo.positionsMasterListHash.get(e.getKey());
+
+                        if (!algo.positions.containsKey(e.getKey())) {
+
+                            algo.panelPositionsTableView.getItems().add(algo.countPositions, modelPositions);
+
+                            algo.positions.put(e.getKey(), algo.countPositions);
+                            algo.countPositions++;
+
+                        } else {
+
+                            algo.panelPositionsTableView.getItems().set(algo.positions.get(e.getKey()), modelPositions);
+
+                        }
 
                     }
 
                 }
-
             }
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
         }
-  }
+
+    }
+
+
 
 }
 

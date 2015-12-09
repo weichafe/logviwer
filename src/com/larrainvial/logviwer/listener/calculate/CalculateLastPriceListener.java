@@ -1,4 +1,4 @@
-package com.larrainvial.logviwer.listener;
+package com.larrainvial.logviwer.listener.calculate;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;

@@ -1,9 +1,8 @@
 package com.larrainvial.logviwer.fxvo;
 
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.utils.Notifier;
-import com.larrainvial.sellside.Control;
-import com.larrainvial.sellside.Repository;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -100,7 +99,7 @@ public class SwitchButton extends Label {
                         switchBtn.setText("Sell Side OFF");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-                        new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
+                        new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + Repository.nameFileQuickFix);
 
 
                     }
@@ -112,7 +111,6 @@ public class SwitchButton extends Label {
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
 
                         Notifier.INSTANCE.notifyWarning("Sell Side", "All orders were deleted");
-                        Repository.deleteOrder();
                     }
 
 
@@ -182,7 +180,6 @@ public class SwitchButton extends Label {
                         switchBtn.setText(nameType + " Orders");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-
                         Notifier.INSTANCE.notifyWarning("Sell Side", "All orders were deleted");
                         Repository.deleteOrder();
                     }

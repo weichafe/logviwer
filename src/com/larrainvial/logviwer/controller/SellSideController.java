@@ -1,4 +1,4 @@
-package com.larrainvial.sellside.controller;
+package com.larrainvial.logviwer.controller;
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,40 +15,10 @@ import javafx.scene.control.TextField;
 public class SellSideController {
 
     @FXML
-    private TextField filterFieldSymbol;
+    private TableView<ModelRoutingData> sellside;
 
     @FXML
-    private TextField filterFieldClOrdID;
-
-    @FXML
-    private TextField filterFieldOrderID;
-
-    @FXML
-    private TextField filterFieldOrigClOrdID;
-
-    @FXML
-    private TextField filterFieldExecType;
-
-    @FXML
-    private TextField filterFieldOrdStatus;
-
-    @FXML
-    private TextField filterFieldAccount;
-
-    @FXML
-    private TextField filterFieldSide;
-
-    @FXML
-    private TextField filterFieldClOrdLinkID;
-
-    @FXML
-    private TableView<ModelRoutingData> routing_nyse;
-
-    @FXML
-    private TableColumn<ModelRoutingData, String> year;
-
-    @FXML
-    private TableColumn<ModelRoutingData, String> hour;
+    private TableColumn<ModelRoutingData, String> received;
 
     @FXML
     private TableColumn<ModelRoutingData, String> messageByType;
@@ -102,6 +72,9 @@ public class SellSideController {
     private TableColumn<ModelRoutingData, String> price;
 
     @FXML
+    private TableColumn<ModelRoutingData, String> orderQty;
+
+    @FXML
     private TableColumn<ModelRoutingData, String> lastQty;
 
     @FXML
@@ -120,37 +93,10 @@ public class SellSideController {
     private TableColumn<ModelRoutingData, String> maxFloor;
 
 
-    public ObservableList<ModelRoutingData> masterData = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataSymbol = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataSide = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataAccount = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataOrdStatus = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataExecType = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataClOrdLinkID = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDatadOrigClOrdID = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataClOrdID = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> filteredDataOrderID = FXCollections.observableArrayList();
-
-    public ObservableList<ModelRoutingData> auxFilterData;
-
-    public TextField auxFilterField;
-
-
     @FXML
     private void refreshTableView() {
 
-        routing_nyse.setVisible(true);
-        hour.setVisible(true);
-        year.setVisible(true);
+        sellside.setVisible(true);
         messageByType.setVisible(true);
         symbol.setVisible(true);
         orderID.setVisible(true);
@@ -172,6 +118,7 @@ public class SellSideController {
 
         securityExchange.setVisible(true);
         price.setVisible(true);
+        orderQty.setVisible(true);
         lastQty.setVisible(true);
         lastPx.setVisible(true);
         cumQty.setVisible(true);
@@ -186,8 +133,6 @@ public class SellSideController {
 
         symbol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSymbol()));
         messageByType.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMessageByType()));
-        hour.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHour()));
-        year.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYear()));
 
         orderID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrderID()));
         clOrdID.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getClOrdID()));
@@ -207,27 +152,20 @@ public class SellSideController {
         text.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getText()));
 
         price.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getPrice().toString()));
+        orderQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getOrderQty().toString()));
         lastQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastQty().toString()));
         lastPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLastPx().toString()));
         cumQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getCumQty().toString()));
         avgPx.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getAvgPx().toString()));
         leavesQty.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getLeavesQty().toString()));
         maxFloor.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getMaxFloor().toString()));
-
-        routing_nyse.setItems(filteredDataSymbol);
-
+        received.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().getReceived().toString()));
 
     }
 
     public TableView<ModelRoutingData> getType() {
 
-        return routing_nyse;
-    }
-
-
-    private void reapplyTableSortOrder(ObservableList<ModelRoutingData> filterData) {
-
-        routing_nyse.setItems(filterData);
+        return sellside;
     }
 
 }

@@ -2,37 +2,40 @@ package com.larrainvial.logviwer.model;
 
 public class ModelRoutingData {
 
-    public String hour;
-    public String year;
-    public String messageByType;
-    public String symbol;
+    public String received = "";
+    public String hour = "-";
+    public String year = "-";
+    public String messageByType = "-";
+    public String symbol = "-";
 
-    public String orderID;
-    public String clOrdID;
-    public String origClOrdID;
-    public String clOrdLinkID;
-    public String execID;
-    public String execType;
-    public String ordStatus;
-    public String account;
-    public String side;
+    public String orderID = "-";
+    public String clOrdID = "-";
+    public String origClOrdID = "-";
+    public String clOrdLinkID = "-";
+    public String execID = "-";
+    public String execType = "-";
+    public String ordStatus = "-";
+    public String account = "-";
+    public String side = "-";
 
-    public String effectiveTime;
-    public String text;
-    public String expireTime;
-    public String exDestination;
-    public String securityExchange;
+    public String effectiveTime = "-";
+    public String text = "-";
+    public String expireTime = "-";
+    public String exDestination = "-";
+    public String securityExchange = "-";
 
-    public Double price;
-    public Double orderQty;
-    public Double lastQty;
-    public Double lastPx;
-    public Double cumQty;
-    public Double avgPx;
-    public Double leavesQty;
-    public Double maxFloor;
+    public Double price = 0d;
+    public Double orderQty = 0d;
+    public Double lastQty = 0d;
+    public Double lastPx = 0d;
+    public Double cumQty = 0d;
+    public Double avgPx = 0d;
+    public Double leavesQty = 0d;
+    public Double maxFloor = 0d;
 
+    public ModelRoutingData(){
 
+    }
 
     public ModelRoutingData(String year, String hour, String messageByType) {
 
@@ -62,6 +65,14 @@ public class ModelRoutingData {
         this.leavesQty = 0d;
         this.maxFloor = 0d;
         this.orderQty = 0d;
+    }
+
+    public String getReceived() {
+        return received;
+    }
+
+    public void setReceived(String received) {
+        this.received = received;
     }
 
     public Double getOrderQty() {

@@ -4,9 +4,7 @@ import quickfix.fix44.ExecutionReport;
 
 import java.io.Serializable;
 
-public class Orders implements Serializable {
-
-    private static final long serialVersionUID = 666L;
+public class Orders {
 
     public ExecutionReport workOrders = new ExecutionReport();
 

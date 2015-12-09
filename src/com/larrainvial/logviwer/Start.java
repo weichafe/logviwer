@@ -60,7 +60,7 @@ public class Start extends Application {
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
                     logger.info("\nClose Aplications\n");
-                    com.larrainvial.sellside.Repository.socketAcceptor.stop();
+                    Repository.socketAcceptor.stop();
                     System.exit(0);
                 }
             });

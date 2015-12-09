@@ -21,7 +21,6 @@ public class RootLayoutController {
     private void handleSave() {
     }
 
-
     @FXML
     private void handleSaveAs() {
     }
@@ -40,7 +39,6 @@ public class RootLayoutController {
         }
 
     }
-
 
 
     @FXML
@@ -113,7 +111,6 @@ public class RootLayoutController {
 
     }
 
-
     @FXML
     private void lima() {
 
@@ -124,8 +121,6 @@ public class RootLayoutController {
         }
 
     }
-
-
 
     @FXML
     private void editStrategy() {
@@ -139,15 +134,15 @@ public class RootLayoutController {
 
     }
 
-
     @FXML
     private void handleAbout() {
+
         new About(Repository.primaryStage);
     }
 
-
     @FXML
     private void handleExit() {
+
         System.exit(0);
     }
 }

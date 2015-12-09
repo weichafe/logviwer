@@ -1,6 +1,7 @@
 package com.larrainvial.sellside.utils;
 
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.sellside.event.send.OrderCancelRejectEvent;
 import com.larrainvial.sellside.event.send.RejectedEvent;
 import com.larrainvial.trading.emp.Controller;
@@ -15,9 +16,9 @@ public class Validation {
     public synchronized boolean validateNewOrderSingleFromBuySide(NewOrderSingle newOrderSingle) throws Exception {
 
 
-        for(int i=1; i <= newOrderSingle.getGroups(NoPartyIDs.FIELD).size(); i++){
+        for (int i=1; i <= newOrderSingle.getGroups(NoPartyIDs.FIELD).size(); i++) {
 
-            if(newOrderSingle.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Repository.XPUS)){
+            if (newOrderSingle.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.XPUS)) {
 
                 if (!newOrderSingle.isSetMaxFloor()){
                     Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new String[] { "99", "Reject XPUS Max Floor" }));
@@ -50,9 +51,9 @@ public class Validation {
 
             }
 
-            if(newOrderSingle.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Repository.IB)){
+            if (newOrderSingle.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.IB)) {
 
-                if(!newOrderSingle.isSetCurrency()){
+                if (!newOrderSingle.isSetCurrency()){
                     Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new String[] { "99", "Reject IB" }));
                     return false;
                 }
@@ -75,7 +76,7 @@ public class Validation {
             }
         }
 
-        if(newOrderSingle.isSetOrderQty()){
+        if (newOrderSingle.isSetOrderQty()){
             if (newOrderSingle.getOrderQty().getValue() <= 0){
                 Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new String[] { "99", "Your request can't be processed, because the OrderQty is zero" }));
                 return false;
@@ -101,7 +102,7 @@ public class Validation {
 
         for(int i=1; i <= orderCancelReplaceRequest.getGroups(NoPartyIDs.FIELD).size(); i++){
 
-            if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Repository.XPUS)){
+            if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.XPUS)){
 
                 if (!orderCancelReplaceRequest.getHeader().getString(TargetSubID.FIELD).equals("XPUS")){
                     Controller.dispatchEvent(new OrderCancelRejectEvent(this, orderCancelReplaceRequest, new String[]{"1", "Rejected XPUS"}, "1"));
@@ -134,7 +135,7 @@ public class Validation {
 
             }
 
-            if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Repository.IB)){
+            if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.IB)){
 
                 if(!orderCancelReplaceRequest.isSetCurrency()){
                     Controller.dispatchEvent(new OrderCancelRejectEvent(this, orderCancelReplaceRequest, new String[]{"1", "Rejected IB"}, "1"));

@@ -52,8 +52,6 @@ public class PanelPositionsController {
     private DecimalFormat numFormat = new DecimalFormat("###,###");
     private DecimalFormat numFormatMil = new DecimalFormat("###,###");
 
-    private boolean validator = false;
-
 
     @FXML
     private void initialize() throws Exception {
@@ -170,7 +168,7 @@ public class PanelPositionsController {
 
                         if (item == null || empty) {
                             setText("");
-                        }else {
+                        } else {
                             setTextFill(Color.GREEN);
                             setText(numFormat.format(Double.valueOf(item)));
                         }

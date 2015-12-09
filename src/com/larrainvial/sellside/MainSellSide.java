@@ -1,6 +1,7 @@
 package com.larrainvial.sellside;
 
 import com.larrainvial.logviwer.Algo;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.adaptador.QuickFixAdapter;
 import com.larrainvial.sellside.utils.PropertiesFile;
 import org.apache.log4j.Logger;
@@ -29,14 +30,9 @@ public class MainSellSide {
             }
 
             Repository.date = new SimpleDateFormat("yyyyMMdd").format(new Date());
-
-            //new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + "sessionFile.ini");
-
             Control.initialize();
 
-
-            new Algo();
-
+            Repository.sellside =  new Algo();
 
         } catch (Exception ex) {
             ex.printStackTrace();

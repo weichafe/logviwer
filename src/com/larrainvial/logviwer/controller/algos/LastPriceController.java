@@ -61,22 +61,6 @@ public class LastPriceController {
 
     private TextField auxFilterField;
 
-    public ObservableList<ModelMarketData> masterData = FXCollections.observableArrayList();
-
-    public ObservableList<ModelMarketData> filteredDataSymbol = FXCollections.observableArrayList();
-
-    public ObservableList<ModelMarketData> filteredDatafilterType = FXCollections.observableArrayList();
-
-    public LastPriceController(){
-
-        masterData.addListener(new ListChangeListener<ModelMarketData>() {
-            @Override
-            public void onChanged(ListChangeListener.Change<? extends ModelMarketData> change) {
-
-                updateFilteredData(auxFilterData, auxFilterField);
-            }
-        });
-    }
 
     @FXML
     private synchronized void initialize() throws Exception {
@@ -142,7 +126,6 @@ public class LastPriceController {
             };
         });
 
-        lastPrice.setItems(filteredDataSymbol);
     }
 
     @FXML
@@ -163,58 +146,6 @@ public class LastPriceController {
 
 
     public TableView<ModelMarketData> getType() {
-
         return lastPrice;
     }
-
-    private void updateFilteredData(ObservableList<ModelMarketData> filterData, TextField filterField) {
-
-        if(!filter) return;
-
-        auxFilterData = filterData;
-        auxFilterField = filterField;
-
-        filterData.clear();
-
-        for (ModelMarketData p : masterData) {
-            if (matchesFilter(p, filterField)) {
-                filterData.add(p);
-            }
-        }
-
-        reapplyTableSortOrder(filterData);
-    }
-
-
-    private boolean matchesFilter(ModelMarketData dolar, TextField filterField) {
-
-        String filterString = filterField.getText();
-
-        if (filterString == null || filterString.isEmpty()) {
-            return true;
-        }
-
-        String lowerCaseFilterString = filterString.toLowerCase();
-
-
-        if(filterField.getId().equals("filterField")){
-            if (dolar.symbol.toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        if(filterField.getId().equals("filterType")){
-            if (dolar.messageByType.toString().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    private void reapplyTableSortOrder(ObservableList<ModelMarketData> filterData) {
-        lastPrice.setItems(filterData);
-    }
-
 }

@@ -35,14 +35,16 @@ public class About {
             HBox text = new HBox();
             text.setAlignment(Pos.CENTER);
 
-            String texto = "\n\n\n";
-            texto += "Etrading " + "\n";
-            texto += "Gerencia de Sitemas " + "\n";
-            texto += "Larrainvial 2015 " + "\n";
-            texto += "Version terrible chora  1.0.0.3 " + " 16/11/2015" + "\n";
-            texto += "Version terrible ni que choriza 1.0.0.4 " + " Proximamente" + "\n";
+            StringBuffer texto = new StringBuffer();
+            texto.append("\n\n\n");
+            texto.append("Etrading\n");
+            texto.append("Gerencia de Sitemas\n");
+            texto.append("Larrainvial 2015\n");
+            texto.append("Version terrible Chora 1.0.0.3 16/11/2015\n");
+            texto.append("Version terrible ni que Choriza 1.0.0.4 25/11/2015\n");
+            texto.append("Version destripadora 1.0.0.5 09/12/2015\n");
 
-            Label label1 = new Label(texto);
+            Label label1 = new Label(texto.toString());
             text.getChildren().addAll(label1);
             general.getChildren().addAll(text);
 

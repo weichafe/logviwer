@@ -6,19 +6,21 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.MMBCSController">
   <children>
 
-    <TableView fx:id="mmbcs">
+    <TableView fx:id="mmbcs" prefWidth="860">
       <columns>
 
-        <TableColumn fx:id="symbol" text="Symbol" prefWidth="80"/>
-        <TableColumn fx:id="side" text="Side" prefWidth="70"/>
-        <TableColumn fx:id="orderQty" text="Order Qty"  prefWidth="60"/>
-        <TableColumn fx:id="price" text="Price" prefWidth="90"/>
+        <TableColumn fx:id="symbol" text="Symbol" prefWidth="90"/>
+        <TableColumn fx:id="orderQtyBuy" text="OrderQty"  prefWidth="90"/>
+        <TableColumn fx:id="priceBuy" text="Price" prefWidth="90"/>
+        <TableColumn fx:id="cumQtyBuy" text="CumQty" prefWidth="90"/>
+        <TableColumn fx:id="leavesQtyBuy" text="LeavesQty" prefWidth="90"/>
+        <TableColumn fx:id="pxqBuy" text="Price * Qty" prefWidth="90"/>
 
-        <TableColumn fx:id="cumQty" text="Cum Qty" prefWidth="80"/>
-        <TableColumn fx:id="lastPx" text="Last Px" prefWidth="80"/>
-        <TableColumn fx:id="lastQty" text="last Qty" prefWidth="90"/>
-
-        <TableColumn fx:id="leavesQty" text="Leaves Qty" prefWidth="80"/>
+        <TableColumn fx:id="orderQtySell" text="OrderQty"  prefWidth="90"/>
+        <TableColumn fx:id="priceSell" text="Price" prefWidth="90"/>
+        <TableColumn fx:id="cumQtySell" text="CumQty" prefWidth="90"/>
+        <TableColumn fx:id="leavesQtySell" text="LeavesQty" prefWidth="90"/>
+        <TableColumn fx:id="pxqSell" text="Price * Qty" prefWidth="90"/>
 
       </columns>
     </TableView>

@@ -1,6 +1,6 @@
 package com.larrainvial.sellside.listener.send;
 
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
 import com.larrainvial.sellside.event.send.TradeEvent;
 import com.larrainvial.sellside.orders.Orders;
@@ -10,7 +10,6 @@ import com.larrainvial.trading.emp.Listener;
 import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
-
 import java.util.Map;
 
 public class TradeListener implements Listener {
@@ -27,21 +26,25 @@ public class TradeListener implements Listener {
 
             receivedOrder = ev.orders;
 
-            if(receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) return;
+            if (receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) return;
 
-            Thread.sleep(100);
+
             if (receivedOrder.workOrders.getSide().valueEquals(Side.BUY)) {
 
                 for (Map.Entry<String, Orders> e: Repository.executionWorkOrderSell.entrySet()) {
 
                     repositoryOrders = Repository.executionWorkOrderSell.get(e.getKey());
 
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) continue;
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
+                    if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) continue;
+                    else if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
+                    else if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
                     if (receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
+                    }
+
+                    if (receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)){
+                        break;
                     }
 
                 }
@@ -53,12 +56,16 @@ public class TradeListener implements Listener {
 
                     repositoryOrders = Repository.executionWorkOrderBuy.get(e.getKey());
 
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) continue;
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
-                    if(repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
+                    if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)) continue;
+                    else if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.CANCELED)) continue;
+                    else if (repositoryOrders.workOrders.getOrdStatus().valueEquals(OrdStatus.REJECTED)) continue;
 
                     if (receivedOrder.workOrders.getSymbol().valueEquals(repositoryOrders.workOrders.getSymbol().getValue())) {
                         this.privateFillOrder(receivedOrder, repositoryOrders);
+                    }
+
+                    if (receivedOrder.workOrders.getOrdStatus().valueEquals(OrdStatus.FILLED)){
+                        break;
                     }
 
                 }
@@ -81,9 +88,8 @@ public class TradeListener implements Listener {
 
              Controller.dispatchEvent(new ExecutionReportEvent(this, receivedOrder, new ExecType(ExecType.TRADE)));
              Controller.dispatchEvent(new ExecutionReportEvent(this, repositoryOrders, new ExecType(ExecType.TRADE)));
-         }
 
-         else if (receivedOrder.workOrders.getOrderQty().getValue() == repositoryOrders.workOrders.getOrderQty().getValue())  {
+         } else if (receivedOrder.workOrders.getOrderQty().getValue() == repositoryOrders.workOrders.getOrderQty().getValue())  {
 
              this.saveTrade(receivedOrder, repositoryOrders.workOrders.getPrice().getValue(), repositoryOrders.workOrders.getOrderQty().getValue());
              this.saveTrade(repositoryOrders, receivedOrder.workOrders.getPrice().getValue(), receivedOrder.workOrders.getOrderQty().getValue());
@@ -94,7 +100,7 @@ public class TradeListener implements Listener {
          } else if (receivedOrder.workOrders.getOrderQty().getValue() <= repositoryOrders.workOrders.getOrderQty().getValue()) {
 
              this.saveTrade(repositoryOrders, receivedOrder.workOrders.getPrice().getValue(), receivedOrder.workOrders.getOrderQty().getValue());
-             this.saveTrade(receivedOrder,    receivedOrder.workOrders.getPrice().getValue(), receivedOrder.workOrders.getOrderQty().getValue());
+             this.saveTrade(receivedOrder, receivedOrder.workOrders.getPrice().getValue(), receivedOrder.workOrders.getOrderQty().getValue());
 
              Controller.dispatchEvent(new ExecutionReportEvent(this, receivedOrder, new ExecType(ExecType.TRADE)));
              Controller.dispatchEvent(new ExecutionReportEvent(this, repositoryOrders, new ExecType(ExecType.TRADE)));

@@ -1,6 +1,7 @@
 package com.larrainvial.sellside.utils;
 
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.utils.Constants;
 import quickfix.StringField;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
@@ -16,7 +17,7 @@ public class Configuration {
 
     public synchronized static void sendXpusBroker(Message menssage, ExecutionReport workOrders) throws Exception {
 
-        menssage.getHeader().setString(TargetSubID.FIELD, Repository.XPUS);
+        menssage.getHeader().setString(TargetSubID.FIELD, Constants.Brokers.XPUS);
         menssage.setDouble(MaxFloor.FIELD, 100d);
 
         if (menssage.getString(Side.FIELD).equals("5")) {

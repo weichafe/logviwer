@@ -1,6 +1,6 @@
 package com.larrainvial.sellside.listener.received;
 
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedNewOrderSingleEvent;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
 import com.larrainvial.sellside.event.send.TradeEvent;
@@ -34,13 +34,12 @@ public class ReceivedNewOrderSingleListener implements Listener {
 
             newOrderSingle = ev.newOrderSingle;
 
-            if(!validator.validateNewOrderSingleFromBuySide(newOrderSingle)) return;
+            if (!validator.validateNewOrderSingleFromBuySide(newOrderSingle)) return;
 
             Orders orders = new Orders();
             orders.workOrders = this.saveWorkOrder(newOrderSingle);
 
             Controller.dispatchEvent(new ExecutionReportEvent(this, orders, new ExecType(ExecType.NEW)));
-
 
             if (orders.workOrders.getSide().valueEquals(Side.BUY)) {
                 Repository.executionWorkOrderBuy.put(orders.workOrders.getString(ClOrdID.FIELD), orders);
@@ -83,6 +82,9 @@ public class ReceivedNewOrderSingleListener implements Listener {
         executionReport.set(newOrderSingle.getSettlType());
         executionReport.set(new LeavesQty(newOrderSingle.getOrderQty().getValue()));
 
+        if(newOrderSingle.isSetPrice()){
+            executionReport.set(newOrderSingle.getPrice());
+        }
 
         if(newOrderSingle.isSetSecondaryClOrdID()){
             executionReport.set(newOrderSingle.getSecondaryClOrdID());
@@ -106,6 +108,9 @@ public class ReceivedNewOrderSingleListener implements Listener {
 
         if (newOrderSingle.isSetText()) {
             executionReport.set(newOrderSingle.getText());
+
+        } else {
+            executionReport.set(new Text("New " + (executionReport.getSide().valueEquals(Side.BUY) ? "Buy " : "Sell ") + executionReport.getSymbol().getValue() + " " + executionReport.getDouble(OrderQty.FIELD) + " @ " + (executionReport.isSetField(Price.FIELD) ? executionReport.getDouble(Price.FIELD) : "MARKET")));
         }
 
         if(newOrderSingle.isSetEffectiveTime()){
@@ -132,18 +137,14 @@ public class ReceivedNewOrderSingleListener implements Listener {
             executionReport.getHeader().setString(SenderSubID.FIELD, newOrderSingle.getHeader().getString(TargetSubID.FIELD));
         }
 
-
         for(int i=1; i <= newOrderSingle.getGroups(NoPartyIDs.FIELD).size(); i++){
             executionReport.addGroup(newOrderSingle.getGroup(i, NoPartyIDs.FIELD));
         }
-
 
         for(int i=1; i <= newOrderSingle.getGroups(NoStrategyParameters.FIELD).size(); i++){
             executionReport.addGroup(newOrderSingle.getGroup(i, NoStrategyParameters.FIELD));
         }
 
-
-        executionReport.set(new Text("New " + (executionReport.getSide().valueEquals(Side.BUY) ? "Buy " : "Sell ") + executionReport.getSymbol().getValue() + " " + executionReport.getDouble(OrderQty.FIELD) + " @ " + (executionReport.isSetField(Price.FIELD) ? executionReport.getDouble(Price.FIELD) : "MARKET")));
 
         return executionReport;
     }

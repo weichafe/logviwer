@@ -17,6 +17,8 @@ public class CalculatePositions {
 
         try {
 
+            if (!modelRoutingData.execType.equals(Constants.TRADE)) return;
+
             this.modelRoutingData = modelRoutingData;
             this.algo = algo;
             this.calculatePositions();

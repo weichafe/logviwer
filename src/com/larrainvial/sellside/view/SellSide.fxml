@@ -3,12 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.sellside.controller.SellSideController">
+<AnchorPane  xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.SellSideController">
   <children>
-    <TableView fx:id="routing_nyse">
+    <TableView fx:id="sellside" prefWidth="1490">
       <columns>
-        <TableColumn text="Routing" fx:id="year" />
-        <TableColumn text="Hour" fx:id="hour" />
+        <TableColumn text="Received" fx:id="received" />
         <TableColumn text="Type" fx:id="messageByType" />
         <TableColumn text="Symbol" fx:id="symbol" />
         <TableColumn text="ClOrdID" fx:id="clOrdID" />

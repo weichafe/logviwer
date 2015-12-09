@@ -1,7 +1,6 @@
 package com.larrainvial.sellside.listener.received;
 
-
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelRequestEvent;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
 import com.larrainvial.sellside.orders.Orders;
@@ -55,15 +54,12 @@ public class ReceivedOrderCancelRequestListener implements Listener {
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
                 Repository.executionWorkOrderBuy.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
-            } else {
+            } else if ((orderCancelRequest.getSide().valueEquals(Side.SELL) || (orderCancelRequest.getSide().valueEquals(Side.SELL_SHORT)))) {
 
                 orders = Repository.executionWorkOrderSell.get(orderCancelRequest.getOrigClOrdID().getValue());
                 this.setValuesWorkOrders(orders.workOrders);
 
                 Controller.dispatchEvent(new ExecutionReportEvent(this, orders, execType));
-
-                Repository.executionWorkOrderSell.put(orderCancelRequest.getClOrdID().getValue(), orders);
-                Repository.executionWorkOrderSell.put(orders.workOrders.getOrderID().getValue(), orders);
                 Repository.executionWorkOrderSell.remove(orderCancelRequest.getOrigClOrdID().getValue(), orders);
 
             }

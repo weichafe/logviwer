@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Class-Path: im4java-1.4.0.jar slf4j-jdk14-1.3.0.jar backport-util-conc
+ urrent-3.0.jar quickfixj-all-1.5.1.jar commons-lang-2.6.jar Enzo-0.1.
+ jar jsch-0.1.53.jar mina-core-1.0.3.jar LVTradingUtils-1.0.0.jar appi
+ a-7.1.0.3.jar event-manager-pro-1.0.jar controlsfx-8.40.9.jar openjfx
+ -dialogs-1.0.3.jar lvfix44-1.1.jar notification-1.0.jar slf4j-api-1.3
+ .0.jar log4j-1.2.17.jar
+Main-Class: com.larrainvial.MainApp
+

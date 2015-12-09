@@ -124,6 +124,7 @@ public class RejectedListener implements Listener {
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
     }

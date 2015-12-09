@@ -30,7 +30,7 @@ public class AlertListener implements Listener {
             
             AlertEvent ev = (AlertEvent) event;
 
-            if (!ev.algo.nameAlgo.equals(algo.nameAlgo) || validateTime(ev.hour)) return;
+            if (!ev.algo.nameAlgo.equals(algo.nameAlgo) || Helper.validateTime(ev.hour)) return;
 
             if (ev.messageByType.equals("8") && ev.execType.equals("8")) {
 
@@ -116,36 +116,5 @@ public class AlertListener implements Listener {
 
 
     }
-
-    public Boolean validateTime(String time){
-
-        try {
-
-            SimpleDateFormat dateFormatGmt = new SimpleDateFormat("HH:mm:ss");
-            dateFormatGmt.setTimeZone(TimeZone.getTimeZone("GMT"));
-
-            SimpleDateFormat dateFormatLocal = new SimpleDateFormat("HH:mm:ss");
-            Date datePC = dateFormatLocal.parse(dateFormatGmt.format(new Date()));
-
-            Calendar newDatePC = Calendar.getInstance();
-            newDatePC.setTime(datePC);
-            newDatePC.set(Calendar.MINUTE, newDatePC.get(Calendar.MINUTE) - 5);
-            datePC = newDatePC.getTime();
-
-            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-            Date dateLog = formatter.parse(time);
-
-            return (datePC.before(dateLog)) ? false : true;
-
-        } catch (Exception ex) {
-            logger.error(Level.SEVERE, ex);
-            ex.printStackTrace();
-        }
-
-        return null;
-
-    }
-
-
 
 }

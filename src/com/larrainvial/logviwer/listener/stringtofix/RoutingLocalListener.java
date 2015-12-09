@@ -4,7 +4,8 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.utils.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingLocalEvent;
-import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCS;
+import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCSListener;
+import com.larrainvial.logviwer.listener.calculate.CalculateMMBCSListener;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.trading.emp.Controller;
@@ -32,24 +33,24 @@ public class RoutingLocalListener implements Listener {
             RoutingLocalEvent ev = (RoutingLocalEvent) event;
 
             if (ev.lineFromLog.equals(Constants.EMPTY)) return;
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
-            Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
             Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_LOCAL));
-
-            if (modelRoutingData.execType.equals(Constants.TRADE)) {
-                new CalculatePositions(algo, modelRoutingData);
-            }
 
             if (algo.graphEnable) {
                 Latency.latencyLocal(algo, modelRoutingData);
             }
 
-            if (this.algo.nameAlgo.equals(Constants.MMBCS)){
-                new AlertMarketMakerBCS(modelRoutingData, algo);
+            if(algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
+                new CalculateMMBCSListener(algo, modelRoutingData);
+                Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
+
+            } else {
+                new CalculatePositions(algo, modelRoutingData);
+                Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
             }
 
         } catch (Exception ex) {

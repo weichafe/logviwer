@@ -14,6 +14,8 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 
@@ -60,7 +62,6 @@ public class Helper {
         }
 
     }
-
 
     public synchronized static String adrToLocal(String symbolLocal){
 
@@ -416,7 +417,6 @@ public class Helper {
 
     }
 
-
     public static Boolean isASK(ModelRoutingData modelRoutingData){
 
         if (modelRoutingData.execType.equals("F")) return true;
@@ -450,6 +450,42 @@ public class Helper {
         logger.info(msg);
         logger.info("\n");
     }
+
+    public static Boolean validateTime(String time){
+
+        try {
+
+            SimpleDateFormat dateFormatGmt = new SimpleDateFormat("HH:mm:ss");
+            dateFormatGmt.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+            SimpleDateFormat dateFormatLocal = new SimpleDateFormat("HH:mm:ss");
+            Date datePC = dateFormatLocal.parse(dateFormatGmt.format(new Date()));
+
+            Calendar newDatePC = Calendar.getInstance();
+            newDatePC.setTime(datePC);
+            newDatePC.set(Calendar.MINUTE, newDatePC.get(Calendar.MINUTE) - 5);
+            datePC = newDatePC.getTime();
+
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+            Date dateLog = formatter.parse(time);
+
+            return (datePC.before(dateLog)) ? false : true;
+
+        } catch (Exception ex) {
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    public static Double formatNumber(double number) {
+
+        DecimalFormat df2 = new DecimalFormat( "#,###,###,##0.00" );
+        return new Double(df2.format(number)).doubleValue();
+    }
+
 
 
 }

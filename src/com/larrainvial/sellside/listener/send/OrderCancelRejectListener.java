@@ -25,6 +25,7 @@ public class OrderCancelRejectListener implements Listener {
 
             if (ev.message.isSetField(OrderID.FIELD)) {
                 orderCancelReject.set(new OrderID(ev.message.getString(OrderID.FIELD)));
+
             } else {
                 orderCancelReject.set(new OrderID(IDGenerator.getID()));
             }

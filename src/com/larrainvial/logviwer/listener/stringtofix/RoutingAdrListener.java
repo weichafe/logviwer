@@ -5,15 +5,12 @@ import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.event.utils.AlertEvent;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
-import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
 import org.apache.log4j.Logger;
-
 import java.util.logging.Level;
 
 public class RoutingAdrListener implements Listener {
@@ -34,7 +31,7 @@ public class RoutingAdrListener implements Listener {
             RoutingAdrEvent ev = (RoutingAdrEvent) event;
 
             if (ev.lineFromLog.equals(Constants.EMPTY)) return;
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
@@ -42,9 +39,8 @@ public class RoutingAdrListener implements Listener {
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
             Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_ADR));
 
-            if (modelRoutingData.execType.equals(Constants.TRADE)) {
-                new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
-            }
+             new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
+
 
             if (algo.graphEnable) {
                 Latency.latencyADR(algo, modelRoutingData);

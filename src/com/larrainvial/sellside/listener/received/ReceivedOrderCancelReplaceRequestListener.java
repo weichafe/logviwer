@@ -1,6 +1,6 @@
 package com.larrainvial.sellside.listener.received;
 
-import com.larrainvial.sellside.Repository;
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.event.receievd.ReceivedOrderCancelReplaceRequestEvent;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
 import com.larrainvial.sellside.event.send.TradeEvent;
@@ -13,7 +13,6 @@ import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
 import quickfix.fix44.OrderCancelReplaceRequest;
-
 import java.util.Date;
 
 public class ReceivedOrderCancelReplaceRequestListener implements Listener {
@@ -50,7 +49,6 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
 
                 Repository.executionWorkOrderBuy.put(orderCancelReplaceRequest.getClOrdID().getValue(), orders);
                 Repository.executionWorkOrderBuy.remove(orderCancelReplaceRequest.getOrigClOrdID().getValue(), orders);
-
 
                 Controller.dispatchEvent(new TradeEvent(this, orders));
 

@@ -38,7 +38,6 @@ public class ReadLogRoutingLocalListener implements Listener {
                 if (verifyMessageFix(message)) {
                     Controller.dispatchEvent(new RoutingLocalEvent(algo, message));
                     algo.countRoutingLocal++;
-
                 }
             }
 
@@ -51,14 +50,7 @@ public class ReadLogRoutingLocalListener implements Listener {
 
 
     public boolean verifyMessageFix(String message){
-
-        if (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1){
-            return true;
-
-        } else {
-            return false;
-        }
-
+        return (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1) ? true : false;
     }
 
 }
