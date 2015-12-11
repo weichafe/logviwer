@@ -1,57 +1,58 @@
 package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.utils.AlertEvent;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.stringtofix.RoutingLocalEvent;
+import com.larrainvial.logviwer.listener.alert.AlertListener;
 import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCSListener;
 import com.larrainvial.logviwer.listener.calculate.CalculateMMBCSListener;
+import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.utils.*;
-import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
+import com.larrainvial.logviwer.utils.CalculatePositions;
+import com.larrainvial.logviwer.utils.Constants;
+import com.larrainvial.logviwer.utils.Latency;
+import com.larrainvial.logviwer.utils.StringToRoutingData;
 import org.apache.log4j.Logger;
-
 import java.util.logging.Level;
 
-public class RoutingLocalListener implements Listener {
+public class RoutingLocalListener extends Thread {
 
     public Algo algo;
+    public String message;
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public RoutingLocalListener(Algo algo) {
+    public RoutingLocalListener(Algo algo, String message) {
         this.algo = algo;
+        this.message = message;
     }
 
 
     @Override
-    public synchronized void eventOccurred(Event event) {
+    public synchronized void run(){
 
         try {
 
-            RoutingLocalEvent ev = (RoutingLocalEvent) event;
-
-            if (ev.lineFromLog.equals(Constants.EMPTY)) return;
-            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (message.equals(Constants.EMPTY)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
-            ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
+            ModelRoutingData modelRoutingData = stringToRoutingData.routing(message);
 
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_LOCAL));
+            AlertListener alertListener = new AlertListener(algo, modelRoutingData, Constants.TypeMarket.ROUTING_LOCAL);
+            alertListener.start();
 
-            if (algo.graphEnable) {
-                Latency.latencyLocal(algo, modelRoutingData);
-            }
+            AlertMarketMakerBCSListener alertMarketMakerBCSListener = new AlertMarketMakerBCSListener(algo, modelRoutingData, Constants.TypeMarket.ROUTING_LOCAL);
+            alertMarketMakerBCSListener.wait();
 
-            if(algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
+            if (algo.graphEnable) Latency.latencyLocal(algo, modelRoutingData);
+
+            if (algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
                 new CalculateMMBCSListener(algo, modelRoutingData);
-                Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
+                new PositionViewListener(algo, modelRoutingData).start();
 
             } else {
                 new CalculatePositions(algo, modelRoutingData);
-                Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
+                new PositionViewListener(algo, modelRoutingData).start();
             }
+
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

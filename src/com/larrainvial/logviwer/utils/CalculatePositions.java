@@ -72,7 +72,6 @@ public class CalculatePositions {
                 positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
                 positions.symbolLocal = modelRoutingData.getSymbol();
 
-
             } else {
 
                 positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;

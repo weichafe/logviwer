@@ -17,22 +17,20 @@ public class StringToMarketData {
             MsgType typeOfMessage = Message.identifyType(message);
             String[] date = message.split("8=")[0].split("-");
 
-            Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
+            if (Helper.returnMessage(typeOfMessage)){
 
-
-            if (typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") ||
-                    typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3")){
                 modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());
                 modelMarketData.messageByType = typeOfMessage.getValue();
 
                 if (message.indexOf("58=") > -1)  {
                     modelMarketData.text = message.split("58=")[1];
                     modelMarketData.text = modelMarketData.text.substring(0, modelMarketData.text.indexOf("\u0001"));
-
                 }
 
                 return modelMarketData;
             }
+
+        Map<Object, Object> messageMap = new Helper().getFixMessageAttributeFull(message);
 
             if (!messageMap.containsKey(FixConstants.NoMDEntries)){
                 modelMarketData = new ModelMarketData(date[0], date[1], typeOfMessage.getValue());

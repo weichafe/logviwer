@@ -11,6 +11,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import quickfix.field.MsgType;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -324,7 +326,6 @@ public class Helper {
         } catch (Exception ex) {
             ex.printStackTrace();
             Helper.printerLog(ex.toString());
-            Notifier.INSTANCE.notifyError("Error", ex.toString());
         }
 
         return null;
@@ -481,9 +482,18 @@ public class Helper {
     }
 
     public static Double formatNumber(double number) {
-
         DecimalFormat df2 = new DecimalFormat( "#,###,###,##0.00" );
         return new Double(df2.format(number)).doubleValue();
+    }
+
+    public static Boolean returnMessage(MsgType typeOfMessage){
+
+         return (typeOfMessage.getValue().equals("5") || typeOfMessage.getValue().equals("A") ||
+                 typeOfMessage.getValue().equals("1") || typeOfMessage.getValue().equals("3") ||
+                 typeOfMessage.getValue().equals("0")) ? true : false;
+
+
+
     }
 
 

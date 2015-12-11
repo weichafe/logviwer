@@ -57,7 +57,7 @@ public enum Notifier {
 
     // ******************** Initialization ************************************
     private void init() {
-        popupLifetime = Duration.millis(5000);
+        popupLifetime = Duration.millis(8000);
         popups        = FXCollections.observableArrayList();
     }
 

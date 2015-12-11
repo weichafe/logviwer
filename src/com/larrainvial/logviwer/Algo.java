@@ -1,33 +1,18 @@
 package com.larrainvial.logviwer;
 
+import com.larrainvial.logviwer.controller.SellSideController;
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.MMBCSController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
-import com.larrainvial.logviwer.event.readlog.*;
-import com.larrainvial.logviwer.event.sendtoview.LastPriceEvent;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.stringtofix.*;
-import com.larrainvial.logviwer.event.utils.AlertEvent;
-import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
-import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
 import com.larrainvial.logviwer.fxvo.Graph;
 import com.larrainvial.logviwer.fxvo.SwitchButton;
-import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCSListener;
-import com.larrainvial.logviwer.listener.calculate.CalculateLastPriceListener;
-import com.larrainvial.logviwer.listener.calculate.CalculatePositionsListener;
-import com.larrainvial.logviwer.listener.alert.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
-import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
-import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
-import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.*;
 import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.logviwer.utils.ExportExcel;
 import com.larrainvial.logviwer.utils.Helper;
 import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.sellside.MainSellSide;
-import com.larrainvial.logviwer.controller.SellSideController;
-import com.larrainvial.trading.emp.Controller;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.Inet4Address;
@@ -66,8 +52,6 @@ public class Algo {
 
     public Map<String,ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
     public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
-
-
 
     public Map<String, ModelLatency> latencyADR = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
     public Map<String, ModelLatency> latencyLocal = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
@@ -102,24 +86,6 @@ public class Algo {
     public FileInputStream inputStreamRoutingLocal;
     public FileInputStream inputStreamRoutingAdr;
 
-    public ReadFromDolarListener readFromDolarListener;
-    public ReadLogMkdAdrListener readLogMkdAdrListener;
-    public ReadLogMkdLocalListener readLogMkdLocalListener;
-    public ReadlogRoutingAdrListener readlogRoutingAdrListener;
-    public ReadLogRoutingLocalListener readLogRoutingLocalListener;
-    public CalculatePositionsListener calculatePositionsListener;
-
-    public LastPriceListener lastPriceListener;
-    public PositionViewListener positionViewListener;
-    public DolarListener dolarListener;
-    public MarketDataAdrListener marketDataAdrListener;
-    public MarketDataLocalListener marketDataLocalListener;
-    public RoutingAdrListener routingAdrListener;
-    public RoutingLocalListener routingLocalListener;
-    public CalculateLastPriceListener calculateLastPriceListener;
-    public AlertListener alertListener;
-    public AlertMarketMakerBCSListener alertMarketMakerBCSListener;
-
     public Button buttonAlert;
     public Button buttonRoutingADR;
     public Button buttonRoutingLocal;
@@ -140,9 +106,13 @@ public class Algo {
     public int countRoutingAdr = 0;
 
     public static ModelXml modelXml;
-
     private HBox options;
 
+    public boolean blockDolar = true;
+    public boolean blockMKDLocal = true;
+    public boolean blockMKDADR = true;
+    public boolean blockRoutingLocal = true;
+    public boolean blockRoutingADR = true;
 
     public Algo(Element elem) {
 
@@ -154,6 +124,10 @@ public class Algo {
 
             this.fileReader(modelXml);
             this.nameAlgo = modelXml.nameAlgo;
+
+            if (!this.nameAlgo.startsWith("ADR Arbitrage XSGO IB")){
+               return;
+            }
 
             panelPositionsLoader.setLocation(Start.class.getResource("view/algos/PanelPositionsView.fxml"));
             lastPriceLoader.setLocation(Start.class.getResource("view/algos/LastPriceView.fxml"));
@@ -192,7 +166,6 @@ public class Algo {
             VBox vBox = new VBox();
             vBox.getChildren().add(switchButtonAlert);
             options.getChildren().add(vBox);
-
 
             inputButtonReadLog();
             inputVariacionDolar();
@@ -233,6 +206,7 @@ public class Algo {
 
                 MenuItem positions = new MenuItem("Export to Excel");
                 positions.setId(modelXml.nameAlgo);
+
                 positions.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -248,6 +222,7 @@ public class Algo {
 
             MenuItem lastPrice = new MenuItem("Export to Excel");
             lastPrice.setId(modelXml.nameAlgo);
+
             lastPrice.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -261,47 +236,9 @@ public class Algo {
             menulastPrice.getItems().addAll(lastPrice);
             lastPriceTableView.setContextMenu(menulastPrice);
 
-            readFromDolarListener = new ReadFromDolarListener(this);
-            readLogMkdAdrListener = new ReadLogMkdAdrListener(this);
-            readLogMkdLocalListener = new ReadLogMkdLocalListener(this);
-            readlogRoutingAdrListener = new ReadlogRoutingAdrListener(this);
-            readLogRoutingLocalListener = new ReadLogRoutingLocalListener(this);
-            calculateLastPriceListener = new CalculateLastPriceListener(this);
-
-            dolarListener =  new DolarListener(this);
-            marketDataAdrListener = new MarketDataAdrListener(this);
-            marketDataLocalListener = new MarketDataLocalListener(this);
-            routingAdrListener = new RoutingAdrListener(this);
-            routingLocalListener = new RoutingLocalListener(this);
-            alertListener = new AlertListener(this);
-            alertMarketMakerBCSListener = new AlertMarketMakerBCSListener(this);
-            calculatePositionsListener = new CalculatePositionsListener(this);
-            lastPriceListener = new LastPriceListener(this);
-            positionViewListener = new PositionViewListener(this);
-
-            Controller.addEventListener(AlertEvent.class, alertListener);
-            Controller.addEventListener(AlertEvent.class, alertMarketMakerBCSListener);
-            Controller.addEventListener(ReadFromDolarEvent.class, readFromDolarListener);
-            Controller.addEventListener(ReadLogMkdAdrEvent.class, readLogMkdAdrListener);
-            Controller.addEventListener(ReadLogMkdLocalEvent.class, readLogMkdLocalListener);
-            Controller.addEventListener(ReadlogRoutingAdrEvent.class, readlogRoutingAdrListener);
-            Controller.addEventListener(ReadLogRoutingLocalEvent.class, readLogRoutingLocalListener);
-            Controller.addEventListener(CalculateLastPriceEvent.class, calculateLastPriceListener);
-            Controller.addEventListener(CalculatePositionsEvent.class, calculatePositionsListener);
-
-            Controller.addEventListener(LastPriceEvent.class, lastPriceListener);
-            Controller.addEventListener(DolarEvent.class, dolarListener);
-            Controller.addEventListener(MarketDataADREvent.class, marketDataAdrListener);
-            Controller.addEventListener(MarketDataLocalEvent.class, marketDataLocalListener);
-            Controller.addEventListener(RoutingAdrEvent.class, routingAdrListener);
-            Controller.addEventListener(RoutingLocalEvent.class, routingLocalListener);
-
-            Controller.addEventListener(PositionViewEvent.class, positionViewListener);
-
             Repository.strategy.put(modelXml.nameAlgo, this);
 
             start(modelXml);
-
 
         } catch (Exception ex){
             ex.printStackTrace();
@@ -479,7 +416,6 @@ public class Algo {
             options.getChildren().add(HBosRouting_Adr);
         }
 
-
     }
 
     public void fileReader(ModelXml xmlVO) throws Exception {
@@ -506,53 +442,56 @@ public class Algo {
 
     }
 
-    public void start(ModelXml xmlVO) throws Exception {
-
-
-        stopTimer();
+    public synchronized void start(ModelXml xmlVO) throws Exception {
 
         timerTask = new TimerTask(){
 
             public void run() {
 
-
                 try {
-                    start(xmlVO);
-                } catch (Exception ex) {
+
+                    Algo algo = Repository.strategy.get(xmlVO.nameAlgo);
+
+
+                    if (mkdDolarToggle && xmlVO.booleanDolar && blockDolar) {
+                        blockDolar = false;
+                        ReadFromDolarListener readFromDolarListener = new ReadFromDolarListener(algo);
+                        readFromDolarListener.start();
+                    }
+
+                    if (mkdAdrToggle && xmlVO.booleanMAdr && blockMKDADR) {
+                        blockMKDADR = false;
+                        ReadLogMkdAdrListener readLogMkdAdrListener = new ReadLogMkdAdrListener(algo);
+                        readLogMkdAdrListener.start();
+                    }
+
+                    if (mkdLocalToggle && xmlVO.booleanMLocal && blockMKDLocal) {
+                        blockMKDLocal = false;
+                        ReadLogMkdLocalListener readLogMkdLocalListener = new ReadLogMkdLocalListener(algo);
+                        readLogMkdLocalListener.start();
+                    }
+
+                    if (routingLocalToggle && xmlVO.booleanRLocal && blockRoutingLocal) {
+                        blockRoutingLocal= false;
+                        ReadLogRoutingLocalListener readLogRoutingLocalListener = new ReadLogRoutingLocalListener(algo);
+                        readLogRoutingLocalListener.start();
+                    }
+
+                    if (routingAdrToggle && xmlVO.booleanRAdr && blockRoutingADR) {
+                        blockRoutingADR = false;
+                        ReadlogRoutingAdrListener readlogRoutingAdrListener = new ReadlogRoutingAdrListener(algo);
+                        readlogRoutingAdrListener.start();
+                    }
+
+                } catch (Exception ex){
                     ex.printStackTrace();
-                    Helper.printerLog(ex.toString());
-                    Notifier.INSTANCE.notifyError("Error", ex.toString());
                 }
-
-
-                Algo algo = Repository.strategy.get(xmlVO.nameAlgo);
-
-                if (mkdDolarToggle && xmlVO.booleanDolar) {
-                   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
-                }
-
-                if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
-                }
-
-                if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
-                }
-
-                if (routingLocalToggle && xmlVO.booleanRLocal) {
-                   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
-                }
-
-                if (routingAdrToggle && xmlVO.booleanRAdr) {
-                   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
-                }
-
             }
 
         };
 
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(timerTask, 1, 1);
+        timer.scheduleAtFixedRate(timerTask, 1, 400);
 
     }
 
@@ -629,14 +568,6 @@ public class Algo {
 
     }
 
-    public void stopTimer() {
-
-        if (timerTask != null) {
-            timerTask.cancel();
-            timerTask = null;
-        }
-
-    }
 
     public boolean isAlert() {
         return alert;
@@ -645,7 +576,6 @@ public class Algo {
     public void setAlert(boolean alert) {
         this.alert = alert;
     }
-
 
 }
 

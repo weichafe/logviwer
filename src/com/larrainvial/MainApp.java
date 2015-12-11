@@ -24,11 +24,13 @@ public class MainApp extends Application {
         new Start().start(primaryStage);
 
         //Todo: Sell Side
-        new MainSellSide().start();
+       new MainSellSide().start();
+
 
     }
 
     public static void main(String[] args) {
+
 
         try {
             if (isWindows()) {

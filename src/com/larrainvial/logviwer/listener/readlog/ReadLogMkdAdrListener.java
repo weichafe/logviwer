@@ -1,17 +1,13 @@
 package com.larrainvial.logviwer.listener.readlog;
 
 import com.larrainvial.logviwer.Algo;
-import com.larrainvial.logviwer.event.readlog.ReadLogMkdAdrEvent;
-import com.larrainvial.logviwer.event.stringtofix.MarketDataADREvent;
-import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
+import com.larrainvial.logviwer.listener.stringtofix.MarketDataAdrListener;
 import org.apache.log4j.Logger;
 
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class ReadLogMkdAdrListener implements Listener {
+public class ReadLogMkdAdrListener extends Thread  {
 
     public Algo algo;
     private Logger logger = Logger.getLogger(this.getClass().getName());
@@ -21,13 +17,11 @@ public class ReadLogMkdAdrListener implements Listener {
     }
 
     @Override
-    public synchronized void eventOccurred(Event event){
+    public synchronized void run(){
 
         try {
 
-            ReadLogMkdAdrEvent ev = (ReadLogMkdAdrEvent) event;
-
-            if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if(!algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             Scanner sc = new Scanner(algo.inputStreamMkdAdr, "UTF-8");
 
@@ -36,12 +30,13 @@ public class ReadLogMkdAdrListener implements Listener {
                 String message = sc.nextLine();
 
                 if (verifyMessageFix(message)) {
-                    Controller.dispatchEvent(new MarketDataADREvent(algo, message));
+                    MarketDataAdrListener marketDataAdrListener = new MarketDataAdrListener(algo, message);
+                    marketDataAdrListener.start();
                     algo.countMdkAdr++;
-
                 }
             }
 
+            algo.blockMKDADR = true;
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

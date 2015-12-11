@@ -66,11 +66,11 @@ public class Process {
     public FXMLLoader loader;
     public TimerTask timerTask;
 
-    public TableView<ModelProcess> tableView = new TableView<>();
-    public TableColumn<ModelProcess, String> name = new TableColumn<>("Name");
-    public TableColumn<ModelProcess, String> processName = new TableColumn<>("Process Name");
-    public TableColumn<ModelProcess, String> pathbin = new TableColumn<>("Path Bin");
-    public TableColumn<ModelProcess, String> comentary = new TableColumn<>("Comentary");
+    public TableView<ModelProcess> tableView = new TableView<ModelProcess>();
+    public TableColumn<ModelProcess, String> name = new TableColumn<ModelProcess, String>("Name");
+    public TableColumn<ModelProcess, String> processName = new TableColumn<ModelProcess, String>("Process Name");
+    public TableColumn<ModelProcess, String> pathbin = new TableColumn<ModelProcess, String>("Path Bin");
+    public TableColumn<ModelProcess, String> comentary = new TableColumn<ModelProcess, String>("Comentary");
     public TableColumn<ModelProcess, ModelProcess> core = new TableColumn<ModelProcess, ModelProcess>("Core");
 
     public Process(Stage primaryStage, String properties) {

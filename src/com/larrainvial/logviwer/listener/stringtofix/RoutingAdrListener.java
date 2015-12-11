@@ -2,45 +2,46 @@ package com.larrainvial.logviwer.listener.stringtofix;
 
 import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
-import com.larrainvial.logviwer.event.utils.AlertEvent;
-import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
-import com.larrainvial.logviwer.event.stringtofix.RoutingAdrEvent;
+import com.larrainvial.logviwer.listener.alert.AlertListener;
+import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.model.ModelRoutingData;
-import com.larrainvial.logviwer.utils.*;
-import com.larrainvial.trading.emp.Controller;
-import com.larrainvial.trading.emp.Event;
-import com.larrainvial.trading.emp.Listener;
+import com.larrainvial.logviwer.utils.CalculatePositions;
+import com.larrainvial.logviwer.utils.Constants;
+import com.larrainvial.logviwer.utils.Latency;
+import com.larrainvial.logviwer.utils.StringToRoutingData;
 import org.apache.log4j.Logger;
+
 import java.util.logging.Level;
 
-public class RoutingAdrListener implements Listener {
+public class RoutingADRListener extends Thread {
 
     public Algo algo;
-
+    public String message;
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
-    public RoutingAdrListener(Algo algo) {
+
+    public RoutingADRListener(Algo algo, String message) {
         this.algo = algo;
+        this.message = message;
     }
 
     @Override
-    public synchronized void eventOccurred(Event event) {
+    public synchronized void run(){
 
         try {
 
-            RoutingAdrEvent ev = (RoutingAdrEvent) event;
-
-            if (ev.lineFromLog.equals(Constants.EMPTY)) return;
-            if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
+            if (message.equals(Constants.EMPTY)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
-            ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
+            ModelRoutingData modelRoutingData = stringToRoutingData.routing(message);
 
-            Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
-            Controller.dispatchEvent(new AlertEvent(algo, modelRoutingData, Constants.TypeMarket.ROUTING_ADR));
+            AlertListener alertListener = new AlertListener(algo, modelRoutingData, Constants.TypeMarket.ROUTING_ADR);
+            alertListener.start();
 
-             new CalculatePositions(Repository.strategy.get(ev.algo.nameAlgo), modelRoutingData);
+            PositionViewListener positionViewListener = new PositionViewListener(algo, modelRoutingData);
+            positionViewListener.start();
 
+            new CalculatePositions(Repository.strategy.get(algo.nameAlgo), modelRoutingData);
 
             if (algo.graphEnable) {
                 Latency.latencyADR(algo, modelRoutingData);

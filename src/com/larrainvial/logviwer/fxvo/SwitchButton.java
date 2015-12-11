@@ -79,20 +79,16 @@ public class SwitchButton extends Label {
 
                     if (switchBtn.getId().equals("Alert")) {
                         algo.setAlert(false);
-
                         switchBtn.setText(nameType + " OFF");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-
                     }
 
                     if (switchBtn.getId().equals("Graph")) {
                         algo.graphEnable = false;
-
                         switchBtn.setText(nameType + " OFF");
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: red; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
-
                     }
 
                     if (switchBtn.getId().equals("Strart")) {
@@ -100,8 +96,6 @@ public class SwitchButton extends Label {
                         switchBtn.setStyle("-fx-background-radius: 6, 5; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,255,0,0.5) , 5, 0.0 , 0 , 1 ); -fx-text-fill: #10bd22; -fx-font-weight: bold;");
                         switchBtn.setContentDisplay(ContentDisplay.LEFT);
                         new QuickFixAdapter(com.larrainvial.logviwer.Repository.locationPath + Repository.nameFileQuickFix);
-
-
                     }
 
                     if (switchBtn.getId().equals("Reset")) {
