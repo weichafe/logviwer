@@ -35,7 +35,6 @@ public class LastPriceListener implements Listener {
 
             if(!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
-
             synchronized (algo.lastPriceMasterListHash) {
 
                 for (Map.Entry<String, ModelMarketData> e : algo.lastPriceMasterListHash.entrySet()) {
@@ -45,7 +44,6 @@ public class LastPriceListener implements Listener {
                     if (!algo.lastPrice.containsKey(e.getKey())) {
 
                         algo.lastPriceTableView.getItems().add(algo.countLastPrice, modelMarketData);
-
                         algo.lastPrice.put(e.getKey(), algo.countLastPrice);
                         algo.countLastPrice++;
 
@@ -56,9 +54,6 @@ public class LastPriceListener implements Listener {
                 }
 
             }
-
-
-
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

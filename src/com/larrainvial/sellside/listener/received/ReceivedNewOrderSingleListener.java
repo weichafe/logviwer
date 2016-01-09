@@ -78,7 +78,15 @@ public class ReceivedNewOrderSingleListener implements Listener {
         executionReport.set(newOrderSingle.getOrdType());
         executionReport.set(newOrderSingle.getHandlInst());
         executionReport.set(newOrderSingle.getTimeInForce());
-        executionReport.set(newOrderSingle.getSecurityExchange());
+
+        if(newOrderSingle.isSetSecondaryClOrdID()){
+            executionReport.set(newOrderSingle.getSecondaryClOrdID());
+        }
+
+        if(newOrderSingle.isSetSecurityExchange()){
+            executionReport.set(newOrderSingle.getSecurityExchange());
+        }
+
         executionReport.set(newOrderSingle.getSettlType());
         executionReport.set(new LeavesQty(newOrderSingle.getOrderQty().getValue()));
 

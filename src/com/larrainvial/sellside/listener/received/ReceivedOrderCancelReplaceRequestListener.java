@@ -84,6 +84,10 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
             workOrders.set(orderCancelReplaceRequest.getOrderQty());
             workOrders.set(new OrdStatus(OrdStatus.NEW));
 
+            if(orderCancelReplaceRequest.isSetSecondaryClOrdID()){
+                workOrders.set(orderCancelReplaceRequest.getSecondaryClOrdID());
+            }
+
             if (workOrders.getLeavesQty().getValue() == 0d) {
                 workOrders.set(new OrdStatus(OrdStatus.FILLED));
 

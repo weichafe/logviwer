@@ -9,11 +9,11 @@
       <columns>
         <TableColumn text="Received" fx:id="received" />
         <TableColumn text="Type" fx:id="messageByType" />
+        <TableColumn text="ExecType" fx:id="execType" />
         <TableColumn text="Symbol" fx:id="symbol" />
         <TableColumn text="ClOrdID" fx:id="clOrdID" />
         <TableColumn text="OrderID" fx:id="orderID" />
         <TableColumn text="OrigClOrdID" fx:id="origClOrdID" />
-        <TableColumn text="ExecType" fx:id="execType" />
         <TableColumn text="OrdStatus" fx:id="ordStatus" />
         <TableColumn text="Account" fx:id="account" />
         <TableColumn text="Side" fx:id="side" />
