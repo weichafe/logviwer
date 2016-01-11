@@ -30,6 +30,10 @@ public class OrderCancelRejectListener implements Listener {
                 orderCancelReject.set(new OrderID(IDGenerator.getID()));
             }
 
+            if (ev.message.isSetField(SecondaryClOrdID.FIELD)){
+                orderCancelReject.set(new SecondaryClOrdID(ev.message.getString(SecondaryClOrdID.FIELD)));
+            }
+
             orderCancelReject.set(new OrdStatus(OrdStatus.REJECTED));
             orderCancelReject.set(new CxlRejReason(Integer.valueOf(ev.cxlRejReason[0])));
             orderCancelReject.set(new Text("Orden no procesada"));
