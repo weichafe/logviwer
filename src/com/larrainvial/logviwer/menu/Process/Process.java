@@ -135,7 +135,6 @@ public class Process {
 
             tableView.setItems(dataList);
             tableView.getColumns().addAll(name, processName, pathbin, comentary, core);
-
             general.getChildren().add(tableView);
 
             this.consoles();

@@ -69,7 +69,8 @@ public class MMBCSController {
     @FXML
     private TableColumn<ModelMMBCS, String> pxqSell;
 
-    private DecimalFormat numFormat = new DecimalFormat("###,###");
+
+    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0.00" );
 
 
 
@@ -88,8 +89,7 @@ public class MMBCSController {
         cumQtySell.setCellValueFactory(cellData2 -> new SimpleStringProperty(cellData2.getValue().cumQtySell.toString()));
         pxqSell.setCellValueFactory(cellData2 -> new SimpleStringProperty(String.valueOf(cellData2.getValue().pxqSell.toString())));
 
-
-        priceBuy.setCellFactory(column -> {
+        pxqSell.setCellFactory(column -> {
             return new TableCell<ModelMMBCS, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -97,21 +97,16 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             };
         });
 
-        priceBuy.setCellFactory(column -> {
+        cumQtySell.setCellFactory(column -> {
             return new TableCell<ModelMMBCS, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -119,20 +114,14 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             };
         });
-
 
         leavesQtySell.setCellFactory(column -> {
             return new TableCell<ModelMMBCS, String>() {
@@ -142,61 +131,11 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
-                }
-            };
-        });
-
-        leavesQtyBuy.setCellFactory(column -> {
-            return new TableCell<ModelMMBCS, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
-                }
-            };
-        });
-
-
-        orderQtyBuy.setCellFactory(column -> {
-            return new TableCell<ModelMMBCS, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    try {
-
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
-
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
-
                 }
             };
         });
@@ -209,21 +148,16 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             };
         });
 
-        pxqSell.setCellFactory(column -> {
+        priceSell.setCellFactory(column -> {
             return new TableCell<ModelMMBCS, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
@@ -231,16 +165,11 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             };
         });
@@ -253,16 +182,80 @@ public class MMBCSController {
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-                        } else {
-                            setText(numFormat.format(Double.valueOf(item)));
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
+                }
+            };
+        });
 
+        cumQtyBuy.setCellFactory(column -> {
+            return new TableCell<ModelMMBCS, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+        leavesQtyBuy.setCellFactory(column -> {
+            return new TableCell<ModelMMBCS, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+        orderQtyBuy.setCellFactory(column -> {
+            return new TableCell<ModelMMBCS, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+
+        priceBuy.setCellFactory(column -> {
+            return new TableCell<ModelMMBCS, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             };
         });
@@ -282,7 +275,6 @@ public class MMBCSController {
         lastPxBuy.setVisible(true);
         lastQtyBuy.setVisible(true);
         pxqSell.setVisible(true);
-
         priceSell.setVisible(true);
         orderQtySell.setVisible(true);
         leavesQtySell.setVisible(true);

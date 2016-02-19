@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
+import org.w3c.dom.NodeList;
 import quickfix.SessionID;
 import quickfix.SocketAcceptor;
 
@@ -35,6 +36,7 @@ public class  Repository {
     public static String year = new SimpleDateFormat("yyyy/MM/dd").format(new Date()).replace("/", "");
     public static String nameFileQuickFix;
     public static String log4j;
+    public static NodeList nodeList;
 
 
     public static com.larrainvial.sellside.utils.PropertiesFile buySide;

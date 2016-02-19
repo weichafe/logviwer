@@ -2,6 +2,7 @@ package com.larrainvial.sellside.event;
 
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.trading.emp.Event;
+import quickfix.field.*;
 import quickfix.fix44.Message;
 
 
@@ -11,6 +12,7 @@ public class SendToViewEvent extends Event {
 
 
     public SendToViewEvent(Object source, Message message, String typeMessage) {
+
         super(source);
 
         try {
@@ -19,83 +21,82 @@ public class SendToViewEvent extends Event {
 
             modelRoutingData.received = typeMessage;
             modelRoutingData.messageByType = message.getHeader().getString(35);
-            modelRoutingData.symbol = message.getString(55);
-            modelRoutingData.clOrdID = message.getString(11);
+            modelRoutingData.symbol = message.isSetField(Symbol.FIELD) ? message.getString(Symbol.FIELD) : "";
+            modelRoutingData.clOrdID = message.getString(ClOrdID.FIELD);
 
-            if (message.isSetField(37)){
-                modelRoutingData.orderID = message.getString(37);
+            if (message.isSetField(OrderID.FIELD)){
+                modelRoutingData.orderID = message.getString(OrderID.FIELD);
             }
 
-            if (message.isSetField(41)){
-                modelRoutingData.origClOrdID = message.getString(41);
+            if (message.isSetField(OrigClOrdID.FIELD)){
+                modelRoutingData.origClOrdID = message.getString(OrigClOrdID.FIELD);
             }
 
-            if (message.isSetField(583)){
-                modelRoutingData.clOrdLinkID = message.getString(583);
+            if (message.isSetField(ClOrdLinkID.FIELD)){
+                modelRoutingData.clOrdLinkID = message.getString(ClOrdLinkID.FIELD);
             }
 
-            if (message.isSetField(17)){
-                modelRoutingData.execID = message.getString(17);
+            if (message.isSetField(ExecID.FIELD)){
+                modelRoutingData.execID = message.getString(ExecID.FIELD);
             }
 
-            if (message.isSetField(150)){
-                modelRoutingData.execType = message.getString(150);
+            if (message.isSetField(ExecType.FIELD)){
+                modelRoutingData.execType = message.getString(ExecType.FIELD);
             }
 
-            if (message.isSetField(39)){
-                modelRoutingData.ordStatus = message.getString(39);
+            if (message.isSetField(OrdStatus.FIELD)){
+                modelRoutingData.ordStatus = message.getString(OrdStatus.FIELD);
             }
 
-            if (message.isSetField(1)){
-                modelRoutingData.account = message.getString(1);
+            if (message.isSetField(Account.FIELD)){
+                modelRoutingData.account = message.getString(Account.FIELD);
             }
 
-            if (message.isSetField(54)){
-                modelRoutingData.side = message.getString(54);
+            if (message.isSetField(Side.FIELD)){
+                modelRoutingData.side = message.getString(Side.FIELD);
             }
 
-            if (message.isSetField(58)){
-                modelRoutingData.text = message.getString(58);
+            if (message.isSetField(Text.FIELD)){
+                modelRoutingData.text = message.getString(Text.FIELD);
             }
 
-            if (message.isSetField(32)){
-                modelRoutingData.lastQty = message.getDouble(32);
+            if (message.isSetField(LastQty.FIELD)){
+                modelRoutingData.lastQty = message.getDouble(LastQty.FIELD);
             }
 
-            if (message.isSetField(31)){
-                modelRoutingData.lastPx = message.getDouble(31);
+            if (message.isSetField(LastPx.FIELD)){
+                modelRoutingData.lastPx = message.getDouble(LastPx.FIELD);
             }
 
-            if (message.isSetField(14)){
-                modelRoutingData.cumQty = message.getDouble(14);
+            if (message.isSetField(CumQty.FIELD)){
+                modelRoutingData.cumQty = message.getDouble(CumQty.FIELD);
             }
 
-            if (message.isSetField(6)){
-                modelRoutingData.avgPx = message.getDouble(6);
+            if (message.isSetField(AvgPx.FIELD)){
+                modelRoutingData.avgPx = message.getDouble(AvgPx.FIELD);
             }
 
-            if (message.isSetField(151)){
-                modelRoutingData.leavesQty = message.getDouble(151);
+            if (message.isSetField(LeavesQty.FIELD)){
+                modelRoutingData.leavesQty = message.getDouble(LeavesQty.FIELD);
             }
 
-            if (message.isSetField(111)){
-                modelRoutingData.maxFloor = message.getDouble(111);
+            if (message.isSetField(MaxFloor.FIELD)){
+                modelRoutingData.maxFloor = message.getDouble(MaxFloor.FIELD);
             }
 
-            if (message.isSetField(100)){
-                modelRoutingData.exDestination = message.getString(100);
+            if (message.isSetField(ExDestination.FIELD)){
+                modelRoutingData.exDestination = message.getString(ExDestination.FIELD);
             }
 
-            if (message.isSetField(207)){
-                modelRoutingData.securityExchange = message.getString(207);
+            if (message.isSetField(SecurityExchange.FIELD)){
+                modelRoutingData.securityExchange = message.getString(SecurityExchange.FIELD);
             }
 
-            modelRoutingData.price = message.getDouble(44);
-            modelRoutingData.orderQty = message.getDouble(38);
+            if (message.isSetField(Price.FIELD)){
+                modelRoutingData.price = message.getDouble(Price.FIELD);
+            }
 
-            //modelRoutingData.effectiveTime;
-            //modelRoutingData.expireTime;
-
+            modelRoutingData.orderQty = message.isSetField(OrderQty.FIELD) ? message.getDouble(OrderQty.FIELD) : 0d;
 
         } catch (Exception ex){
             ex.printStackTrace();

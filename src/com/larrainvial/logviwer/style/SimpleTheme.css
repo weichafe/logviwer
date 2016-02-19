@@ -45,8 +45,6 @@
     -fx-font-weight: bold;
 }
 
-
-
 .optionsblack {
     -fx-background-color: #333333;
     -fx-table-header-border-color: transparent;
@@ -88,12 +86,10 @@
     -fx-text-fill: -fx-text-inner-color;
 }
 
-
 .table-view {
     -fx-table-cell-border-color:derive(-fx-base,+20%);
     -fx-table-header-border-color:derive(-fx-base,+20%);
 }
-
 
 .split-pane:horizontal > * > .split-pane-divider {
     -fx-border-color: transparent -fx-base transparent -fx-base;
@@ -109,16 +105,9 @@
     -fx-text-fill: orange;
 }
 
-
-/* GRILLA ESTRATEGIAS */
-.grillStrategy {
-    -fx-pref-width: 100%;
-    -fx-spacing: 20px;
-}
-
 .hboxGeneral {
-    -fx-padding: 35px;
-    -fx-spacing: 20px;
+    -fx-padding: 5px;
+    -fx-spacing: 10px;
     -fx-gap-start-and-end: true;
     -fx-pref-width: 100%;
 }
@@ -259,11 +248,52 @@
     -fx-spacing: 10;
 }
 
-
 .table-cell {
     -fx-alignment: BASELINE_CENTER;
 }
 
+.menuHBox{
+    -fx-background-color: #333333;
+    -fx-table-header-border-color: transparent;
+    -fx-alignment: center;
+    -fx-padding: 10,10,10,10;
+    -fx-spacing: 10;
+    -fx-border-color: red;
+}
+
+.labelHBoxHBox{
+    -fx-background-color: #333333;
+    -fx-table-header-border-color: transparent;
+    -fx-alignment: center;
+    -fx-padding: 10,10,10,10;
+    -fx-spacing: 10;
+}
+
+.generalEditStrategy {
+    -fx-pref-width: 1600px;
+    -fx-pref-height: 870px;
+    -fx-border-color: red;
+    -fx-background-color: #1f1f1f;
+    -fx-alignment: center;
+    -fx-border-width: 2px;
+    -fx-padding: 35px;
+    -fx-stroke: black;
+    -fx-font-weight: bold;
+}
+
+
+
+.tableviewEditStrategy {
+    -fx-pref-width: 1600px;
+    -fx-pref-height: 870px;
+    -fx-border-color: red;
+    -fx-background-color: #1f1f1f;
+    -fx-alignment: center;
+    -fx-border-width: 2px;
+    -fx-padding: 35px;
+    -fx-stroke: black;
+    -fx-font-weight: bold;
+}
 
 
 

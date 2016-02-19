@@ -33,7 +33,7 @@ public class StringToRoutingData {
 
             modelRoutingData.clOrdID = messageMap.containsKey(FixConstants.ClOrdID) ? messageMap.get(FixConstants.ClOrdID).toString().trim() : "";
             modelRoutingData.side = messageMap.containsKey(FixConstants.Side) ? Helper.side(messageMap.get(FixConstants.Side).toString()) : "";
-            modelRoutingData.symbol = messageMap.containsKey(FixConstants.Symbol) ? messageMap.get(FixConstants.Symbol).toString() : "";
+            modelRoutingData.symbol = messageMap.containsKey(FixConstants.Symbol) ? messageMap.get(FixConstants.Symbol).toString() : messageMap.get(FixConstants.SecurityID).toString();
             modelRoutingData.account = messageMap.containsKey(FixConstants.Account) ? messageMap.get(FixConstants.Account).toString() : "";
             modelRoutingData.execType = messageMap.containsKey(FixConstants.ExecType) ? Helper.execType(messageMap.get(FixConstants.ExecType).toString()) : "";
             modelRoutingData.orderID = messageMap.containsKey(FixConstants.OrderID) ? messageMap.get(FixConstants.OrderID).toString() : "";

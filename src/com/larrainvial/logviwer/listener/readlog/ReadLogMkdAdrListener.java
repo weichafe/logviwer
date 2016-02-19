@@ -42,6 +42,7 @@ public class ReadLogMkdAdrListener implements Listener {
                 }
             }
 
+            algo.validateMKDADR = true;
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

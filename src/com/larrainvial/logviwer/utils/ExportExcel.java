@@ -34,11 +34,11 @@ public class ExportExcel {
 
                 ModelPositions modelPositions = algo.positionsMasterListHash.get(x);
 
-                escribir.write(modelPositions.symbolLocal      + ","  + modelPositions.symbolAdr          + "," +
-                               modelPositions.qtyBuyLocalRatio + ", " + modelPositions.qtySellAdr         + "," +
-                               modelPositions.differenceInflow + ","  + modelPositions.qtySellLocalRatio  + "," +
-                               modelPositions.qtyBuyAdr        + ","  + modelPositions.differenceflowback + "," +
-                               modelPositions.qtyBuyLocal      + ","  + modelPositions.qtySellLocal       + "," +
+                escribir.write(modelPositions.localSymbol + ","  + modelPositions.adrSymbol + "," +
+                               modelPositions.inflowLocal + ", " + modelPositions.inflowAdr + "," +
+                               modelPositions.differenceInflow + ","  + modelPositions.flowbackLocal + "," +
+                               modelPositions.flobackSell + ","  + modelPositions.differenceflowback + "," +
+                               modelPositions.localBuy + ","  + modelPositions.localSell + "," +
                                modelPositions.ratio +
                                "\n"
                 );

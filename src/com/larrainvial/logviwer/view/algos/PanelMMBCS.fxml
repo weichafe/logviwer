@@ -6,7 +6,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.MMBCSController">
   <children>
 
-    <TableView fx:id="mmbcs" prefWidth="860">
+    <TableView fx:id="mmbcs" prefWidth="835">
       <columns>
 
         <TableColumn fx:id="symbol" text="Symbol" prefWidth="90"/>

@@ -1,6 +1,7 @@
 package com.larrainvial.sellside.listener.received;
 
 import com.larrainvial.logviwer.Repository;
+import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.sellside.event.receievd.ReceivedNewOrderSingleEvent;
 import com.larrainvial.sellside.event.send.ExecutionReportEvent;
 import com.larrainvial.sellside.event.send.TradeEvent;
@@ -50,7 +51,6 @@ public class ReceivedNewOrderSingleListener implements Listener {
 
             Controller.dispatchEvent(new TradeEvent(this, orders));
 
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -72,12 +72,35 @@ public class ReceivedNewOrderSingleListener implements Listener {
         executionReport.set(newOrderSingle.getOrderQty());
         executionReport.set(newOrderSingle.getClOrdID());
         executionReport.set(newOrderSingle.getSide());
-        executionReport.set(newOrderSingle.getSymbol());
+
+        if(newOrderSingle.isSetSymbol()){
+            executionReport.set(newOrderSingle.getSymbol());
+        } else {
+            executionReport.set(newOrderSingle.getSecurityID());
+        }
+
         executionReport.set((newOrderSingle.isSetAccount()) ? newOrderSingle.getAccount() : new Account("NONE"));
-        executionReport.setField(ExDestination.FIELD, new ExDestination(newOrderSingle.getExDestination().getValue()));
-        executionReport.set(newOrderSingle.getOrdType());
-        executionReport.set(newOrderSingle.getHandlInst());
-        executionReport.set(newOrderSingle.getTimeInForce());
+
+        if(executionReport.isSetField(ExDestination.FIELD)){
+            executionReport.setField(ExDestination.FIELD, new ExDestination(newOrderSingle.getExDestination().getValue()));
+        }
+
+        if(newOrderSingle.isSetOrdType()){
+            executionReport.set(newOrderSingle.getOrdType());
+        }
+
+        if(newOrderSingle.isSetHandlInst()){
+            executionReport.set(newOrderSingle.getHandlInst());
+        }
+
+        if(newOrderSingle.isSetTimeInForce()){
+            executionReport.set(newOrderSingle.getTimeInForce());
+        }
+
+
+        if (newOrderSingle.isSetSecurityType()) {
+            executionReport.set(newOrderSingle.getSecurityType());
+        }
 
         if(newOrderSingle.isSetSecondaryClOrdID()){
             executionReport.set(newOrderSingle.getSecondaryClOrdID());
@@ -87,7 +110,10 @@ public class ReceivedNewOrderSingleListener implements Listener {
             executionReport.set(newOrderSingle.getSecurityExchange());
         }
 
-        executionReport.set(newOrderSingle.getSettlType());
+        if(newOrderSingle.isSetSettlType()){
+            executionReport.set(newOrderSingle.getSettlType());
+        }
+
         executionReport.set(new LeavesQty(newOrderSingle.getOrderQty().getValue()));
 
         if(newOrderSingle.isSetPrice()){
@@ -118,7 +144,7 @@ public class ReceivedNewOrderSingleListener implements Listener {
             executionReport.set(newOrderSingle.getText());
 
         } else {
-            executionReport.set(new Text("New " + (executionReport.getSide().valueEquals(Side.BUY) ? "Buy " : "Sell ") + executionReport.getSymbol().getValue() + " " + executionReport.getDouble(OrderQty.FIELD) + " @ " + (executionReport.isSetField(Price.FIELD) ? executionReport.getDouble(Price.FIELD) : "MARKET")));
+            executionReport.set(new Text(Constants.INFO));
         }
 
         if(newOrderSingle.isSetEffectiveTime()){

@@ -42,6 +42,8 @@ public class ReadFromDolarListener implements Listener {
                 }
             }
 
+            algo.validateDolar = true;
+
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
             ex.printStackTrace();

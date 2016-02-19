@@ -38,7 +38,7 @@ public class RejectedListener implements Listener {
 
             RejectedEvent ev = (RejectedEvent) event;
 
-            rejected.set(new OrdRejReason(Integer.valueOf(ev.ordRejReason[0])));
+            rejected.set(new OrdRejReason(0));
 
             rejected.set(new TransactTime(new Date()));
 
@@ -47,7 +47,7 @@ public class RejectedListener implements Listener {
             if (ev.message.isSetField(ClOrdID.FIELD)){
                 rejected.set(new ClOrdID(ev.message.getString(ClOrdID.FIELD)));
 
-            } else{
+            } else {
                 required = " required tag missing: 11=?";
             }
 
@@ -118,7 +118,7 @@ public class RejectedListener implements Listener {
                 rejected.set(new ClOrdLinkID(ev.message.getString(ClOrdLinkID.FIELD)));
             }
 
-            rejected.set(new Text(" LogViwer SellSide: " + ev.ordRejReason[1] + required));
+            rejected.set(new Text(" LogViwer SellSide: " + ev.text.getValue()));
 
             quickfix.Session.sendToTarget(rejected, Configuration.Buyside.SenderCompID, Configuration.Buyside.TargetCompID);
 

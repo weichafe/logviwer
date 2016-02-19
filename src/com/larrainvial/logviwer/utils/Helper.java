@@ -34,14 +34,15 @@ public class Helper {
 
             Document document = builder.parse(xmlFile);
 
-            NodeList nodeList = document.getDocumentElement().getChildNodes();
+            Repository.nodeList = document.getDocumentElement().getChildNodes();
 
-            for (int i = 0; i < nodeList.getLength(); i++) {
+            for (int i = 0; i < Repository.nodeList.getLength(); i++) {
 
-                Node node = nodeList.item(i);
+                Node node = Repository.nodeList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     new Algo((Element) node);
+
                 }
             }
 
@@ -392,9 +393,6 @@ public class Helper {
         if(!entries.isEmpty()) orderedFixMessage.put(attributes.get(String.valueOf(FixConstants.NoMDEntries.getId())), entries);
         return orderedFixMessage;
 
-
-
-
     }
 
     public static Boolean isRouting(ModelRoutingData modelRoutingData){
@@ -440,15 +438,18 @@ public class Helper {
         logger.info("timeEnd " + latencyVO.timeEnd);
         logger.info("timeLatency " + latencyVO.timeLatency);
         logger.info(latencyVO.routing);
-        logger.info("----------");
+
     }
 
-    public static void  printerLog(String msg){
-        logger.info("----------------");
-        logger.info("\n");
-        logger.info(new Date());
-        logger.info(msg);
-        logger.info("\n");
+    public synchronized static void  printerLog(String msg){
+
+        try {
+            logger.info(msg + "\n");
+        } catch (Exception ex){
+            ex.printStackTrace();
+            ex.printStackTrace();
+        }
+
     }
 
     public static Boolean validateTime(String time){

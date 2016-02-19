@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer;
 
+import com.larrainvial.copyfile.MainCopyFile;
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.MMBCSController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
@@ -50,11 +51,27 @@ public class Algo {
 
     private static Logger logger = Logger.getLogger(Algo.class.getName());
 
-    public int countQtyOrderLocal = 0;
+    public int countQtyOrderLocal;
+    public int countLastPrice;
+    public int countPositions;
+    public int countMMBCC;
+
+    public int countDolar;
+    public int countMkdLocal;
+    public int countMdkAdr;
+    public int countRoutingLocal;
+    public int countRoutingAdr;
+
+    public boolean validateDolar = true;
+    public boolean validateMKDLocal = true;
+    public boolean validateMKDADR = true;
+    public boolean validateRoutingLocal = true;
+    public boolean validateRoutingADR = true;
+
     public String nameAlgo;
 
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
-    public FXMLLoader sellSideLoader = new FXMLLoader();
+
     public FXMLLoader lastPriceLoader = new FXMLLoader();
     public FXMLLoader panelMMBCS = new FXMLLoader();
 
@@ -66,27 +83,20 @@ public class Algo {
 
     public Map<String,ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
     public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
-
-
-
     public Map<String, ModelLatency> latencyADR = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
     public Map<String, ModelLatency> latencyLocal = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
-
-    public int countLastPrice = 0;
-    public int countPositions = 0;
-    public int countMMBCC = 0;
 
     public TableView<ModelPositions> panelPositionsTableView;
     public TableView<ModelMMBCS> panelMMBCSTableView;
     public TableView<ModelMarketData> lastPriceTableView;
     public TableView<ModelRoutingData> sellsideTableView = new  TableView<ModelRoutingData> ();
 
-    public boolean mkdDolarToggle = false;
-    public boolean mkdLocalToggle = false;
-    public boolean mkdAdrToggle = false;
-    public boolean routingLocalToggle = false;
-    public boolean routingAdrToggle = false;
-    public boolean alert = false;
+    public boolean mkdDolarToggle;
+    public boolean mkdLocalToggle;
+    public boolean mkdAdrToggle;
+    public boolean routingLocalToggle;
+    public boolean routingAdrToggle;
+    public boolean alert;
 
     public TimerTask timerTask;
 
@@ -128,20 +138,15 @@ public class Algo {
     public Button buttonDolar;
     public Button graphButton;
 
+    public MainCopyFile mainCopyFile;
+
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
     public LineChart<Number,Number> lineChart;
-    public boolean graphEnable  = false;
-
-    public int countDolar = 0;
-    public int countMkdLocal = 0;
-    public int countMdkAdr = 0;
-    public int countRoutingLocal = 0;
-    public int countRoutingAdr = 0;
-
-    public static ModelXml modelXml;
+    public boolean graphEnable;
 
     private HBox options;
+    public ModelXml modelXml;
 
 
     public Algo(Element elem) {
@@ -149,12 +154,14 @@ public class Algo {
         try {
 
             modelXml = new ModelXml();
-
             readXML(elem);
+
+            if (modelXml.remoteFile == true){
+                mainCopyFile = new MainCopyFile(modelXml);
+            }
 
             this.fileReader(modelXml);
             this.nameAlgo = modelXml.nameAlgo;
-
             panelPositionsLoader.setLocation(Start.class.getResource("view/algos/PanelPositionsView.fxml"));
             lastPriceLoader.setLocation(Start.class.getResource("view/algos/LastPriceView.fxml"));
             panelMMBCS.setLocation(Start.class.getResource("view/algos/PanelMMBCS.fxml"));
@@ -163,13 +170,12 @@ public class Algo {
             grill.getStyleClass().add("grillStrategy");
             grill.getChildren().add((AnchorPane) lastPriceLoader.load());
 
+
             if (modelXml.nameAlgo.equals(Constants.NameAlgo.MarketMakerBCS)){
                 grill.getChildren().add((AnchorPane) panelMMBCS.load());
-
             } else {
                 grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
             }
-
 
             HBox grillLastPricePositions = new HBox();
             grillLastPricePositions.getChildren().addAll(grill);
@@ -192,7 +198,6 @@ public class Algo {
             VBox vBox = new VBox();
             vBox.getChildren().add(switchButtonAlert);
             options.getChildren().add(vBox);
-
 
             inputButtonReadLog();
             inputVariacionDolar();
@@ -302,7 +307,6 @@ public class Algo {
 
             start(modelXml);
 
-
         } catch (Exception ex){
             ex.printStackTrace();
             logger.error(Level.SEVERE, ex);
@@ -318,6 +322,7 @@ public class Algo {
             modelXml = new ModelXml();
             modelXml.nameAlgo = "Sell Side";
 
+            FXMLLoader sellSideLoader = new FXMLLoader();
             sellSideLoader.setLocation(MainSellSide.class.getResource("view/SellSide.fxml"));
 
             SwitchButton switchButtonReset = new SwitchButton("Reset", this);
@@ -397,31 +402,22 @@ public class Algo {
     public void readXML(Element elem){
 
         modelXml.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
+        modelXml.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
+
         modelXml.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
         modelXml.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
         modelXml.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
         modelXml.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
         modelXml.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
 
-        modelXml.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.mkdDolar = elem.getElementsByTagName("mkdDolar").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.mkdLocal = elem.getElementsByTagName("mkdLocal").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.mkdAdr = elem.getElementsByTagName("mkdAdr").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.routingLocal = elem.getElementsByTagName("routingLocal").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.routingAdr = elem.getElementsByTagName("routingAdr").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.time = Integer.valueOf(elem.getElementsByTagName("time").item(0).getChildNodes().item(0).getNodeValue());
-
         modelXml.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
         modelXml.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
         modelXml.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
         modelXml.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
         modelXml.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
+        modelXml.remoteFile = Boolean.valueOf(elem.getElementsByTagName("booleanRemote").item(0).getChildNodes().item(0).getNodeValue());
 
-        fileMkdDolar = new File(modelXml.location + modelXml.mkd_dolar + Repository.year + ".log");
-        fileMkdLocal = new File(modelXml.location + modelXml.mkd_local + Repository.year + ".log");
-        fileMkdAdr = new File(modelXml.location + modelXml.mkd_nyse + Repository.year + ".log");
-        fileRoutingLocal = new File(modelXml.location + modelXml.routing_local + Repository.year + ".log");
-        fileRoutingAdr = new File(modelXml.location + modelXml.routing_nyse + Repository.year + ".log");
+
 
     }
 
@@ -485,74 +481,78 @@ public class Algo {
     public void fileReader(ModelXml xmlVO) throws Exception {
 
         if (xmlVO.booleanDolar) {
+            fileMkdDolar = new File(modelXml.location + modelXml.mkd_dolar + Repository.year + ".log");
             inputStreamDolar = new FileInputStream(fileMkdDolar);
         }
 
         if (xmlVO.booleanMLocal) {
+            fileMkdLocal = new File(modelXml.location + modelXml.mkd_local + Repository.year + ".log");
             inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
         }
 
         if (xmlVO.booleanMAdr) {
+            fileMkdAdr = new File(modelXml.location + modelXml.mkd_nyse + Repository.year + ".log");
             inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
         }
 
         if (xmlVO.booleanRLocal) {
+            fileRoutingLocal = new File(modelXml.location + modelXml.routing_local + Repository.year + ".log");
             inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
         }
 
         if (xmlVO.booleanRAdr) {
+            fileRoutingAdr = new File(modelXml.location + modelXml.routing_nyse + Repository.year + ".log");
             inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
         }
 
     }
 
-    public void start(ModelXml xmlVO) throws Exception {
 
+    public synchronized  void start(ModelXml xmlVO) {
 
-        stopTimer();
+        try {
 
-        timerTask = new TimerTask(){
+            timerTask = new TimerTask() {
 
-            public void run() {
+                public void run() {
 
+                    Algo algo = Repository.strategy.get(xmlVO.nameAlgo);
 
-                try {
-                    start(xmlVO);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    Helper.printerLog(ex.toString());
-                    Notifier.INSTANCE.notifyError("Error", ex.toString());
+                    if (mkdDolarToggle && xmlVO.booleanDolar && validateDolar) {
+                        validateDolar = false;
+                        Controller.dispatchEvent(new ReadFromDolarEvent(algo));
+                    }
+
+                    if (mkdAdrToggle && xmlVO.booleanMAdr && validateMKDADR) {
+                        validateMKDADR = false;
+                        Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
+                    }
+
+                    if (mkdLocalToggle && xmlVO.booleanMLocal && validateMKDLocal) {
+                        validateMKDLocal = false;
+                        Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
+                    }
+
+                    if (routingLocalToggle && xmlVO.booleanRLocal && validateRoutingLocal) {
+                        validateRoutingLocal = false;
+                        Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
+                    }
+
+                    if (routingAdrToggle && xmlVO.booleanRAdr && validateRoutingADR) {
+                        validateRoutingADR = false;
+                        Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
+                    }
+
                 }
 
+            };
 
-                Algo algo = Repository.strategy.get(xmlVO.nameAlgo);
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(timerTask, 250, 1);
 
-                if (mkdDolarToggle && xmlVO.booleanDolar) {
-                   Controller.dispatchEvent(new ReadFromDolarEvent(algo));
-                }
-
-                if (mkdAdrToggle && xmlVO.booleanMAdr) {
-                   Controller.dispatchEvent(new ReadLogMkdAdrEvent(algo));
-                }
-
-                if (mkdLocalToggle && xmlVO.booleanMLocal) {
-                   Controller.dispatchEvent(new ReadLogMkdLocalEvent(algo));
-                }
-
-                if (routingLocalToggle && xmlVO.booleanRLocal) {
-                   Controller.dispatchEvent(new ReadLogRoutingLocalEvent(algo));
-                }
-
-                if (routingAdrToggle && xmlVO.booleanRAdr) {
-                   Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
-                }
-
-            }
-
-        };
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(timerTask, 1, 1);
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 
@@ -625,15 +625,6 @@ public class Algo {
 
             });
 
-        }
-
-    }
-
-    public void stopTimer() {
-
-        if (timerTask != null) {
-            timerTask.cancel();
-            timerTask = null;
         }
 
     }

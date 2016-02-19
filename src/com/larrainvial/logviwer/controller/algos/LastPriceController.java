@@ -1,12 +1,8 @@
 package com.larrainvial.logviwer.controller.algos;
 
 import com.larrainvial.logviwer.model.ModelMarketData;
+import com.larrainvial.logviwer.utils.Helper;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -14,13 +10,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
+import java.text.DecimalFormat;
+
 public class LastPriceController {
 
     @FXML
     private TableView<ModelMarketData> lastPrice;
-
-    @FXML
-    private TextField filterField;
 
     @FXML
     private TableColumn<ModelMarketData, String> anio;
@@ -33,9 +28,6 @@ public class LastPriceController {
 
     @FXML
     public TableColumn<ModelMarketData, String> symbol;
-
-    @FXML
-    private TextField textField;
 
     @FXML
     private TableColumn<ModelMarketData, String> buyPx;
@@ -55,11 +47,8 @@ public class LastPriceController {
     @FXML
     private TableColumn<ModelMarketData, String> tradeAmount;
 
-    private boolean filter = false;
 
-    private ObservableList<ModelMarketData> auxFilterData;
-
-    private TextField auxFilterField;
+    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0.00" );
 
 
     @FXML
@@ -76,55 +65,111 @@ public class LastPriceController {
         tradeAmount.setCellValueFactory(cellData2 -> new SimpleStringProperty(String.valueOf(cellData2.getValue().tradeAmount)));
 
 
-        messageByType.setCellFactory(column -> {
+        tradeAmount.setCellFactory(column -> {
             return new TableCell<ModelMarketData, String>() {
-
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
 
                     try {
 
-                        if (item == null || empty) {
-                            setText("");
-
-                        } else {
-
-                            if (item.equals("V")) {
-                                setText(item);
-
-                            } else if (item.equals("W")) {
-                                setText(item);
-
-                            } else if (item.equals("X")) {
-                                setText(item);
-
-                            } else if (item.equals("5")) {
-                                setTextFill(Color.RED);
-                                setText(item);
-
-                            } else if (item.equals("1")) {
-                                setTextFill(Color.AQUA);
-                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else if (item.equals("A")) {
-                                setTextFill(Color.RED);
-                                setStyle("-fx-alignment: CENTER; -fx-font-weight: bold;");
-                                setText(item);
-
-                            } else {
-                                setText(item);
-                            }
-                        }
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-
                 }
             };
         });
+
+        closePx.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+        sellPx.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+        sellQty.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+
+        buyPx.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+        buyQty.setCellFactory(column -> {
+            return new TableCell<ModelMarketData, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    try {
+
+                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            };
+        });
+
+
+
 
     }
 

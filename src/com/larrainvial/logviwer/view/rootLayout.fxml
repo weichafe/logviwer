@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
-<BorderPane prefHeight="400.0" prefWidth="700.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.larrainvial.logviwer.controller.RootLayoutController">
+<BorderPane prefHeight="400.0" prefWidth="700.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.larrainvial.logviwer.controller.RootController">
   <stylesheets>
     <URL value="@../style/SimpleTheme.css" />
   </stylesheets>
@@ -27,14 +27,15 @@
             <accelerator>
               <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
             </accelerator></MenuItem>
-          <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As..." /><MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+          <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As..." />
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
         </items>
 
       </Menu>
 
-      <Menu mnemonicParsing="false" text="Edit">
+      <Menu mnemonicParsing="false" text="Strategy">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#editStrategy" text="Strategy" />
+          <MenuItem mnemonicParsing="false" onAction="#editStrategy" text="Edit Strategy" />
         </items>
       </Menu>
 

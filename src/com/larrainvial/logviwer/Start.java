@@ -60,7 +60,6 @@ public class Start extends Application {
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
                     logger.info("\nClose Aplications\n");
-                    Repository.socketAcceptor.stop();
                     System.exit(0);
                 }
             });

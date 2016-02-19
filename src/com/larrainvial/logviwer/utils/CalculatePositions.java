@@ -44,7 +44,7 @@ public class CalculatePositions {
             algo.positionsMasterListHash.put(keyHashPositions, new ModelPositions());
             positions = algo.positionsMasterListHash.get(keyHashPositions);
             positions.ratio = helper.ratio(keyHashPositions);
-            positions.symbolLocal = keyHashPositions;
+            positions.localSymbol = keyHashPositions;
             positions.positions = helper.positions(keyHashPositions);
         }
 
@@ -52,15 +52,16 @@ public class CalculatePositions {
 
             if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
 
-                positions.qtyBuyLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtyBuyLocalRatio;
-                positions.qtyBuyLocal = modelRoutingData.lastQty + positions.qtyBuyLocal;
-                positions.symbolLocal = modelRoutingData.getSymbol();
+                positions.inflowLocal = modelRoutingData.lastQty / positions.ratio + positions.inflowLocal;
+                positions.localBuy = modelRoutingData.lastQty + positions.localBuy;
+                positions.localSymbol = modelRoutingData.getSymbol();
+
 
             } else {
 
-                positions.qtyBuyAdr = modelRoutingData.lastQty + positions.qtyBuyAdr;
-                positions.symbolAdr = modelRoutingData.getSymbol();
-
+                positions.flobackSell = modelRoutingData.lastQty + positions.flobackSell;
+                positions.adrSymbol = modelRoutingData.getSymbol();
+                positions.leaveFlowback = modelRoutingData.getLeavesQty();
             }
         }
 
@@ -68,22 +69,23 @@ public class CalculatePositions {
 
             if (helper.local(modelRoutingData.symbol) && !modelRoutingData.exDestination.equals("SMART") && !modelRoutingData.exDestination.equals("US")) {
 
-                positions.qtySellLocalRatio = modelRoutingData.lastQty / positions.ratio + positions.qtySellLocalRatio;
-                positions.qtySellLocal = modelRoutingData.lastQty + positions.qtySellLocal;
-                positions.symbolLocal = modelRoutingData.getSymbol();
+                positions.flowbackLocal = modelRoutingData.lastQty / positions.ratio + positions.flowbackLocal;
+                positions.localSell = modelRoutingData.lastQty + positions.localSell;
+                positions.localSymbol = modelRoutingData.getSymbol();
 
 
             } else {
 
-                positions.qtySellAdr = modelRoutingData.lastQty + positions.qtySellAdr;
-                positions.symbolAdr = modelRoutingData.getSymbol();
+                positions.inflowAdr = modelRoutingData.lastQty + positions.inflowAdr;
+                positions.adrSymbol = modelRoutingData.getSymbol();
+                positions.leaveInflow = modelRoutingData.getLeavesQty();
 
             }
 
         }
 
-        positions.differenceInflow = Math.round((positions.qtyBuyLocalRatio - positions.qtySellAdr));
-        positions.differenceflowback = Math.round((positions.qtySellLocalRatio - positions.qtyBuyAdr));
+        positions.differenceInflow = Math.round((positions.inflowLocal - positions.inflowAdr));
+        positions.differenceflowback = Math.round((positions.flowbackLocal - positions.flobackSell));
 
     }
 }

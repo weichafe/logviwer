@@ -44,7 +44,7 @@ public class RoutingLocalListener implements Listener {
                 Latency.latencyLocal(algo, modelRoutingData);
             }
 
-            if(algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
+            if (algo.nameAlgo.equals(Constants.MarketMakerBCS.NAME)){
                 new CalculateMMBCSListener(algo, modelRoutingData);
                 Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));
 

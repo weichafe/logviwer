@@ -4127,6 +4127,7 @@
 			<value enum="H" description="CLEARINGHOUSE"/>
 			<value enum="I" description="FPML"/>
 			<value enum="J" description="OPTIONPRICEREPORTINGAUTHORITY"/>
+			<value enum="99" description="UNKNOWN"/>
 		</field>
 		<field number="23" name="IOIID" type="STRING"/>
 		<field number="24" name="IOIOthSvc" type="CHAR"/>

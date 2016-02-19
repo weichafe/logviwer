@@ -41,6 +41,8 @@ public class ReadlogRoutingAdrListener implements Listener {
                 }
             }
 
+            algo.validateRoutingADR = true;
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

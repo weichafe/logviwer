@@ -41,6 +41,8 @@ public class ReadLogRoutingLocalListener implements Listener {
                 }
             }
 
+            algo.validateRoutingLocal = true;
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

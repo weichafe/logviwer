@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.URL?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.EditStrategyController">
+    <stylesheets>
+        <URL value="@../style/SimpleTheme.css" />
+    </stylesheets>
+
+    <children>
+
+        <TableView fx:id="editStrategy" prefWidth="1400">
+
+            <columns>
+                <TableColumn style="-fx-alignment: CENTER;" text="Name Algo" fx:id="nameAlgo" prefWidth="180"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="Location" fx:id="direccion" prefWidth="300"/>
+
+                <TableColumn style="-fx-alignment: CENTER;" text="MKD Dolar" fx:id="mkd_dolar" prefWidth="330"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="MKD Nyse" fx:id="mkd_nyse" prefWidth="330"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="MKD Local" fx:id="mkd_local" prefWidth="350"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="Routing Local" fx:id="routing_local" prefWidth="330"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="Routing Nyse" fx:id="routing_nyse" prefWidth="330"/>
+
+                <TableColumn style="-fx-alignment: CENTER;" text="Dolar" fx:id="booleanDolar" prefWidth="120"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="MKD Local" fx:id="booleanMLocal" prefWidth="120"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="MKD Nyse" fx:id="booleanMAdr" prefWidth="120"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="Routing Local" fx:id="booleanRLocal" prefWidth="120"/>
+                <TableColumn style="-fx-alignment: CENTER;" text="Routing Adr" fx:id="booleanRAdr" prefWidth="120"/>
+
+            </columns>
+
+        </TableView>
+    </children>
+</AnchorPane>

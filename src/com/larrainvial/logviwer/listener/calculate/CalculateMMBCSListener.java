@@ -9,9 +9,10 @@ import java.util.logging.Level;
 
 public class CalculateMMBCSListener {
 
+    private Algo algo;
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private ModelRoutingData modelRoutingData;
-    private Algo algo;
+
 
     public CalculateMMBCSListener(Algo algo, ModelRoutingData modelRoutingData){
 
