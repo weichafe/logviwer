@@ -1,14 +1,17 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.logviwer.model.ModelMarketData;
+import com.larrainvial.logviwer.model.ModelHardDisk;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.utils.Constants;
 import com.larrainvial.logviwer.utils.PropertiesFile;
 import com.larrainvial.logviwer.model.ModelProcess;
 import com.larrainvial.sellside.orders.Orders;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.w3c.dom.NodeList;
@@ -38,7 +41,6 @@ public class  Repository {
     public static String log4j;
     public static NodeList nodeList;
 
-
     public static com.larrainvial.sellside.utils.PropertiesFile buySide;
     public static SocketAcceptor socketAcceptor;
     public static SessionID sessionID;
@@ -49,14 +51,17 @@ public class  Repository {
     public static String date;
     public static String XPUS_NAME;
     public static String XPUS_UUID;
+    public static Algo sellside;
 
     public static HashMap<String, String> UUID = new HashMap<String, String>();
     public static Map<String, Orders> executionWorkOrderBuy = Collections.synchronizedMap(new LinkedHashMap<String, Orders>());
     public static Map<String, Orders> executionWorkOrderSell = Collections.synchronizedMap(new LinkedHashMap<String, Orders>());
 
     public static Map<String, ModelRoutingData> sellSideMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelRoutingData>());
-    public static Algo sellside;
 
+    public static TableView<ModelHardDisk> hardDiskTableView;
+
+    public static ObservableList<ModelHardDisk> listServerHardDisk = FXCollections.observableArrayList();
 
     public static void deleteOrder(){
         executionWorkOrderBuy.clear();
@@ -68,5 +73,8 @@ public class  Repository {
 
         logger.info(Constants.ORDERS_DELETED);
     }
+
+
+
 
 }

@@ -4,14 +4,9 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.event.sendtoview.PositionViewEvent;
 import com.larrainvial.logviwer.model.ModelMMBCS;
 import com.larrainvial.logviwer.model.ModelPositions;
-import com.larrainvial.logviwer.fxvo.Dialog;
 import com.larrainvial.logviwer.utils.Constants;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import eu.hansolo.enzo.notification.Notification;
-import javafx.application.Platform;
 import org.apache.log4j.Logger;
 
 import java.util.Map;

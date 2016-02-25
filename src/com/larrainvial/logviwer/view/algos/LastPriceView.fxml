@@ -5,7 +5,7 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.LastPriceController">
   <children>
 
-    <TableView fx:id="lastPrice" prefWidth="720">
+    <TableView fx:id="lastPrice" prefWidth="740">
 
       <columns>
         <TableColumn style="-fx-alignment: CENTER;" text="Last Price" fx:id="hour" prefWidth="90"/>
@@ -16,7 +16,7 @@
         <TableColumn style="-fx-alignment: CENTER;" text="Sell Px" fx:id="sellPx" prefWidth="70"/>
         <TableColumn style="-fx-alignment: CENTER;" text="Sell Qty" fx:id="sellQty" prefWidth="70"/>
         <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" prefWidth="70"/>
-        <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" prefWidth="75"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" prefWidth="80"/>
       </columns>
 
     </TableView>

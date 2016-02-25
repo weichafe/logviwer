@@ -1,4 +1,4 @@
-package com.larrainvial.copyfile;
+package com.larrainvial.logviwer.utils;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
@@ -14,7 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 
-public class MainCopyFile {
+public class CopyFile {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -25,11 +25,9 @@ public class MainCopyFile {
     public TimerTask timerTask;
 
 
-    public MainCopyFile(ModelXml xmlVO) {
-
+    public CopyFile(ModelXml xmlVO) {
         startFile(xmlVO);
         copyFile(xmlVO);
-
     }
 
 
@@ -47,6 +45,7 @@ public class MainCopyFile {
             Channel channel = session.openChannel("sftp");
             channel.connect();
             ChannelSftp sftpChannel = (ChannelSftp) channel;
+
             sftpChannel.get(copyFrom, copyTo);
             sftpChannel.exit();
             session.disconnect();
@@ -71,15 +70,13 @@ public class MainCopyFile {
             timerTask = new TimerTask() {
 
                 public void run() {
-
                     startFile(xmlVO);
-
                 }
 
             };
 
             Timer timer = new Timer();
-            timer.scheduleAtFixedRate(timerTask, 1200000, 1);
+            timer.scheduleAtFixedRate(timerTask, 300000, 1);
 
         } catch (Exception ex){
             ex.printStackTrace();

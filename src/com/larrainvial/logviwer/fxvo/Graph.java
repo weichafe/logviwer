@@ -12,12 +12,13 @@ public class Graph {
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
+
         xAxis.setLabel("Cantidad de Solicitudes");
         yAxis.setLabel("Milesegundos");
 
         algo.lineChart = new LineChart<Number,Number>(xAxis,yAxis);
 
-        algo.lineChart.setPrefWidth(2000);
+        algo.lineChart.setPrefWidth(735);
 
         algo.adrRouting = new XYChart.Series();
         algo.adrRouting.setName("ADR Routing");

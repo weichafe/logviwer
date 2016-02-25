@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.HardDiskController">
+  <children>
+
+    <TableView fx:id="hardDisk" prefWidth="837">
+
+      <columns>
+        <TableColumn style="-fx-alignment: CENTER;" text="Server" fx:id="hostname" prefWidth="210"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Tamaño" fx:id="tamano" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Usado" fx:id="usados" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Disponible" fx:id="disponible" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="'%' Uso" fx:id="uso" prefWidth="90"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Montado" fx:id="montado" prefWidth="90"/>
+      </columns>
+
+    </TableView>
+  </children>
+</AnchorPane>

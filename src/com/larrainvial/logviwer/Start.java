@@ -1,9 +1,7 @@
 package com.larrainvial.logviwer;
 
 import com.larrainvial.logviwer.model.ModelDolar;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Latency;
-import com.larrainvial.logviwer.utils.PropertiesFile;
+import com.larrainvial.logviwer.utils.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -53,9 +51,14 @@ public class Start extends Application {
             primaryStage.setScene(Repository.scene);
             primaryStage.show();
 
+            //Todo: inicaliza lectura de HHDD
+            HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
+
+            //Todo: inicaliza lectura de HHDD
+            //HardDishCheckWindows HardDishCheckWindows = new HardDishCheckWindows();
+
             Helper helper = new Helper();
             helper.createStrategy();
-
 
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {

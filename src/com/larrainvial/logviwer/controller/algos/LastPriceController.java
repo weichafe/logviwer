@@ -168,9 +168,6 @@ public class LastPriceController {
             };
         });
 
-
-
-
     }
 
     @FXML

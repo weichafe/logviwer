@@ -1,6 +1,7 @@
 package com.larrainvial.logviwer;
 
-import com.larrainvial.copyfile.MainCopyFile;
+import com.larrainvial.logviwer.controller.algos.HardDiskController;
+import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.MMBCSController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
@@ -22,10 +23,6 @@ import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
 import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.*;
-import com.larrainvial.logviwer.utils.Constants;
-import com.larrainvial.logviwer.utils.ExportExcel;
-import com.larrainvial.logviwer.utils.Helper;
-import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.logviwer.controller.SellSideController;
 import com.larrainvial.trading.emp.Controller;
@@ -71,9 +68,9 @@ public class Algo {
     public String nameAlgo;
 
     public FXMLLoader panelPositionsLoader = new FXMLLoader();
-
     public FXMLLoader lastPriceLoader = new FXMLLoader();
     public FXMLLoader panelMMBCS = new FXMLLoader();
+    public FXMLLoader panelHardDisk = new FXMLLoader();
 
     public Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
     public HashMap<String, Integer> positions = new HashMap<String, Integer>();
@@ -130,6 +127,7 @@ public class Algo {
     public AlertListener alertListener;
     public AlertMarketMakerBCSListener alertMarketMakerBCSListener;
 
+
     public Button buttonAlert;
     public Button buttonRoutingADR;
     public Button buttonRoutingLocal;
@@ -138,12 +136,13 @@ public class Algo {
     public Button buttonDolar;
     public Button graphButton;
 
-    public MainCopyFile mainCopyFile;
+    public CopyFile mainCopyFile;
 
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
     public LineChart<Number,Number> lineChart;
     public boolean graphEnable;
+
 
     private HBox options;
     public ModelXml modelXml;
@@ -157,19 +156,20 @@ public class Algo {
             readXML(elem);
 
             if (modelXml.remoteFile == true){
-                mainCopyFile = new MainCopyFile(modelXml);
+                mainCopyFile = new CopyFile(modelXml);
             }
 
             this.fileReader(modelXml);
             this.nameAlgo = modelXml.nameAlgo;
+
             panelPositionsLoader.setLocation(Start.class.getResource("view/algos/PanelPositionsView.fxml"));
             lastPriceLoader.setLocation(Start.class.getResource("view/algos/LastPriceView.fxml"));
             panelMMBCS.setLocation(Start.class.getResource("view/algos/PanelMMBCS.fxml"));
+            panelHardDisk.setLocation(Start.class.getResource("view/algos/HardDisk.fxml"));
 
             HBox grill = new HBox();
             grill.getStyleClass().add("grillStrategy");
             grill.getChildren().add((AnchorPane) lastPriceLoader.load());
-
 
             if (modelXml.nameAlgo.equals(Constants.NameAlgo.MarketMakerBCS)){
                 grill.getChildren().add((AnchorPane) panelMMBCS.load());
@@ -205,7 +205,7 @@ public class Algo {
 
             HBox graph = new HBox();
             graph.getStyleClass().add("hboxGraph");
-            graph.getChildren().add(lineChart);
+            graph.getChildren().addAll(lineChart, panelHardDisk.load());
 
             VBox general = new VBox();
             general.getStyleClass().add("hboxGeneral");
@@ -225,6 +225,10 @@ public class Algo {
 
             LastPriceController lastPriceLocal = this.lastPriceLoader.getController();
             lastPriceTableView = lastPriceLocal.getType();
+
+            HardDiskController hardDiskController = this.panelHardDisk.getController();
+            Repository.hardDiskTableView = hardDiskController.getType();
+            Repository.hardDiskTableView.getItems().addAll(Repository.listServerHardDisk);
 
             if (modelXml.nameAlgo.equals(Constants.NameAlgo.MarketMakerBCS)) {
 
@@ -264,6 +268,7 @@ public class Algo {
 
             ContextMenu menulastPrice = new ContextMenu();
             menulastPrice.getItems().addAll(lastPrice);
+
             lastPriceTableView.setContextMenu(menulastPrice);
 
             readFromDolarListener = new ReadFromDolarListener(this);
@@ -352,7 +357,7 @@ public class Algo {
             ip.setLayoutX(30);
             ip.setLayoutY(80);
 
-            Label port = new Label("Port : " + Repository.socketAcceptPort );
+            Label port = new Label("Port : " + Repository.socketAcceptPort);
             port.setLayoutX(30);
             port.setLayoutY(100);
 
@@ -401,23 +406,27 @@ public class Algo {
 
     public void readXML(Element elem){
 
-        modelXml.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
+        try {
+            modelXml.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
 
-        modelXml.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
-        modelXml.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.mkd_dolar = elem.getElementsByTagName("mkd_dolar").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.mkd_nyse = elem.getElementsByTagName("mkd_nyse").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.mkd_local = elem.getElementsByTagName("mkd_local").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.routing_local = elem.getElementsByTagName("routing_local").item(0).getChildNodes().item(0).getNodeValue();
+            modelXml.routing_nyse = elem.getElementsByTagName("routing_nyse").item(0).getChildNodes().item(0).getNodeValue();
 
-        modelXml.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
-        modelXml.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
-        modelXml.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
-        modelXml.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
-        modelXml.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
-        modelXml.remoteFile = Boolean.valueOf(elem.getElementsByTagName("booleanRemote").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.booleanDolar = Boolean.valueOf(elem.getElementsByTagName("booleanDolar").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.booleanMLocal = Boolean.valueOf(elem.getElementsByTagName("booleanMLocal").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
+            modelXml.remoteFile = Boolean.valueOf(elem.getElementsByTagName("booleanRemote").item(0).getChildNodes().item(0).getNodeValue());
 
-
+        } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
+        }
 
     }
 
@@ -551,6 +560,7 @@ public class Algo {
             timer.scheduleAtFixedRate(timerTask, 250, 1);
 
         } catch (Exception ex){
+            logger.error(Level.SEVERE, ex);
             ex.printStackTrace();
         }
 

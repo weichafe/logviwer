@@ -43,7 +43,8 @@ public class About {
             texto.append("Version Shorizos 1.0.0.4 25/11/2015\n");
             texto.append("Version Destripeitor 1.0.0.5 09/12/2015\n");
             texto.append("Version Wotan  1.0.0.6 16/01/2016\n");
-            texto.append("Version Anikileitor  1.0.0.7 02/05/2016\n");
+            texto.append("Version Anikileitor  1.0.0.7 05/02/2016\n");
+            texto.append("Version Anikileitor  1.0.0.8 25/02/2016\n");
 
             Label label1 = new Label(texto.toString());
             text.getChildren().addAll(label1);
