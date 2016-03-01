@@ -16,6 +16,7 @@ public class Constants {
     public static final String SEND = "Send";
     public static final String ORDERS_DELETED = "Orders Deleted";
     public static final Double DIFFERENCE_QTY = 1200d;
+    public static final Double CERO = 0d;
     public static final String INFO = "info: para forzar un rechazo  35 = G 44=100.000 y 35 = F 38=100.000 ";
     public static final String NONE = "NONE";
     public static final String LN = "\n";

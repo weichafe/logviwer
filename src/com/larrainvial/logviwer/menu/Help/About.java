@@ -17,7 +17,7 @@ public class About {
 
     public AnchorPane ventanaPrincipal;
     public VBox general = new VBox();
-    private static Logger logger = Logger.getLogger(About.class.getName());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public About(Stage primaryStage){
 
@@ -26,7 +26,7 @@ public class About {
             FXMLLoader loader = new FXMLLoader(Start.class.getResource("view/about.fxml"));
             ventanaPrincipal = (AnchorPane) loader.load();
             ventanaPrincipal.setPrefWidth(300);
-            ventanaPrincipal.setPrefHeight(200);
+            ventanaPrincipal.setPrefHeight(400);
 
             general.prefWidthProperty().bind(ventanaPrincipal.widthProperty());
             ventanaPrincipal.getChildren().addAll(general);
@@ -43,7 +43,7 @@ public class About {
             texto.append("Version Shorizos 1.0.0.4 25/11/2015\n");
             texto.append("Version Destripeitor 1.0.0.5 09/12/2015\n");
             texto.append("Version Wotan  1.0.0.6 16/01/2016\n");
-            texto.append("Version Anikileitor  1.0.0.7 05/02/2016\n");
+            texto.append("Version Anikileitor (dio la cacha)  1.0.0.7 05/02/2016\n");
             texto.append("Version Anikileitor  1.0.0.8 25/02/2016\n");
 
             Label label1 = new Label(texto.toString());

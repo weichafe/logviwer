@@ -7,18 +7,14 @@ import com.larrainvial.sellside.orders.Orders;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
-import quickfix.fix44.NewOrderSingle;
-
 import java.util.Map;
 
 public class TradeListener implements Listener {
 
     private Orders receivedOrder;
     private Orders repositoryOrders;
-    private NewOrderSingle.NoPartyIDs noPartyIDs;
 
     @Override
     public void eventOccurred(Event event) {
@@ -135,7 +131,7 @@ public class TradeListener implements Listener {
         workOrders.set(new LastPx(lastprice));
         workOrders.set(new LastQty(lastQty));
 
-        workOrders.set(new ExecID(IDGenerator.getID()));
+        workOrders.set(new ExecID(Repository.getID()));
 
         orders.pXq = (workOrders.getLastPx().getValue() * workOrders.getLastQty().getValue()) + orders.pXq;
         orders.cumQtyLocal = (workOrders.getLastQty().getValue() + orders.cumQtyLocal);
@@ -155,51 +151,6 @@ public class TradeListener implements Listener {
         if (workOrders.getCumQty().getValue() > 0d && workOrders.getCumQty().getValue() < workOrders.getOrderQty().getValue()) {
             workOrders.set(new OrdStatus(OrdStatus.PARTIALLY_FILLED));
         }
-
-
-        /*
-        this.noPartyIDs = new NewOrderSingle.NoPartyIDs();
-        this.noPartyIDs.set(new PartyID("062X01"));
-        this.noPartyIDs.set(new PartyIDSource('C'));
-        this.noPartyIDs.set(new PartyRole(11));
-        workOrders.addGroup(this.noPartyIDs);
-
-        this.noPartyIDs = new NewOrderSingle.NoPartyIDs();
-        this.noPartyIDs.set(new PartyID("062X01"));
-        this.noPartyIDs.set(new PartyIDSource('C'));
-        this.noPartyIDs.set(new PartyRole(36));
-        workOrders.addGroup(this.noPartyIDs);
-
-        this.noPartyIDs = new NewOrderSingle.NoPartyIDs();
-        this.noPartyIDs.set(new PartyID("062"));
-        this.noPartyIDs.set(new PartyIDSource('C'));
-        this.noPartyIDs.set(new PartyRole(7));
-        workOrders.addGroup(this.noPartyIDs);
-
-        this.noPartyIDs = new NewOrderSingle.NoPartyIDs();
-        this.noPartyIDs.set(new PartyID("062"));
-        this.noPartyIDs.set(new PartyIDSource('C'));
-        this.noPartyIDs.set(new PartyRole(12));
-        workOrders.addGroup(this.noPartyIDs);
-
-        this.noPartyIDs = new NewOrderSingle.NoPartyIDs();
-        this.noPartyIDs.set(new PartyID("062"));
-        this.noPartyIDs.set(new PartyIDSource('C'));
-        this.noPartyIDs.set(new PartyRole(1));
-        workOrders.addGroup(this.noPartyIDs);
-
-        workOrders.setString(TrdMatchID.FIELD, "20160122-000000000137");
-        workOrders.setString(SettlDate.FIELD, "20160127");
-        workOrders.setString(SecuritySubType.FIELD, "EQTY");
-        workOrders.setBoolean(AggressorIndicator.FIELD, true);
-
-        workOrders.setString(TradeDate.FIELD, "20160122");
-        workOrders.setString(GrossTradeAmt.FIELD, "3439440");
-
-        workOrders.getHeader().setString(TargetSubID.FIELD, "062X01");
-        workOrders.setString(SettlType.FIELD, "4");
-        workOrders.setString(SecurityIDSource.FIELD, "99");
-        */
 
     }
 

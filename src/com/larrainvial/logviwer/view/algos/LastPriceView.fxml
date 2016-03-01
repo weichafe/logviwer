@@ -15,7 +15,7 @@
         <TableColumn style="-fx-alignment: CENTER;" text="Buy Qty" fx:id="buyQty" prefWidth="70"/>
         <TableColumn style="-fx-alignment: CENTER;" text="Sell Px" fx:id="sellPx" prefWidth="70"/>
         <TableColumn style="-fx-alignment: CENTER;" text="Sell Qty" fx:id="sellQty" prefWidth="70"/>
-        <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" prefWidth="70"/>
+        <TableColumn style="-fx-alignment: CENTER;" text="Close Px" fx:id="closePx" prefWidth="80"/>
         <TableColumn style="-fx-alignment: CENTER;" text="Trade Amount" fx:id="tradeAmount" prefWidth="80"/>
       </columns>
 

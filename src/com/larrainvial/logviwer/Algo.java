@@ -44,6 +44,7 @@ import java.net.Inet4Address;
 import java.util.*;
 import java.util.logging.Level;
 
+
 public class Algo {
 
     private static Logger logger = Logger.getLogger(Algo.class.getName());
@@ -95,6 +96,12 @@ public class Algo {
     public boolean routingAdrToggle;
     public boolean alert;
 
+    public boolean blokedDolar = true;
+    public boolean blokedMkdLocal = true;
+    public boolean blokedMkdAdr = true;
+    public boolean blokedRoutingLocal = true;
+    public boolean blokedRoutingAdr = true;
+
     public TimerTask timerTask;
 
     public File fileMkdDolar;
@@ -136,7 +143,7 @@ public class Algo {
     public Button buttonDolar;
     public Button graphButton;
 
-    public CopyFile mainCopyFile;
+    public CopyFileXbog mainCopyFile;
 
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
@@ -156,7 +163,7 @@ public class Algo {
             readXML(elem);
 
             if (modelXml.remoteFile == true){
-                mainCopyFile = new CopyFile(modelXml);
+                mainCopyFile = new CopyFileXbog(this);
             }
 
             this.fileReader(modelXml);
@@ -407,6 +414,7 @@ public class Algo {
     public void readXML(Element elem){
 
         try {
+
             modelXml.location = elem.getElementsByTagName("location").item(0).getChildNodes().item(0).getNodeValue();
             modelXml.nameAlgo = elem.getElementsByTagName("nameAlgo").item(0).getChildNodes().item(0).getNodeValue();
 
@@ -430,86 +438,40 @@ public class Algo {
 
     }
 
-    public void inputButtonReadLog() throws Exception {
 
-        if (modelXml.booleanDolar.equals(true)){
-            SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
-            Button switchBtn1 = switchButtonDolar.returnButton();
-            this.buttonDolar = switchBtn1;
-
-            VBox ButtonDolar = new VBox();
-            ButtonDolar.getChildren().add(switchButtonDolar);
-            options.getChildren().add(ButtonDolar);
-        }
-
-        if (modelXml.booleanMLocal.equals(true)){
-            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
-            Button switchBtn3 = switchButtonMkd_Local.returnButton();
-            this.buttonMKDLocal = switchBtn3;
-
-            VBox HBoswitchButtonMkd_Local = new VBox();
-            HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
-            options.getChildren().add(HBoswitchButtonMkd_Local);
-        }
-
-        if (modelXml.booleanMAdr.equals(true)){
-            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
-            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
-            this.buttonMDKDAdr = switchBtn2;
-
-            VBox HBoxButtonMkd = new VBox();
-            HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
-            options.getChildren().add(HBoxButtonMkd);
-
-        }
-
-        if (modelXml.booleanRLocal.equals(true)){
-            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
-            Button switchBtn4 = switchButtonRouting_Local.returnButton();
-            this.buttonRoutingLocal = switchBtn4;
-
-            VBox HBosRouting_Local = new VBox();
-            HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
-            options.getChildren().add(HBosRouting_Local);
-
-        }
-
-        if (modelXml.booleanRAdr.equals(true)){
-            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
-            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
-            this.buttonRoutingADR = switchBtn5;
-
-            VBox HBosRouting_Adr = new VBox();
-            HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
-            options.getChildren().add(HBosRouting_Adr);
-        }
-
-
-    }
 
     public void fileReader(ModelXml xmlVO) throws Exception {
 
-        if (xmlVO.booleanDolar) {
+
+        if (xmlVO.booleanDolar && blokedDolar) {
+
+            if (modelXml.remoteFile == true) mainCopyFile.copyDolarFile();
             fileMkdDolar = new File(modelXml.location + modelXml.mkd_dolar + Repository.year + ".log");
             inputStreamDolar = new FileInputStream(fileMkdDolar);
         }
 
-        if (xmlVO.booleanMLocal) {
+        if (xmlVO.booleanMLocal && blokedMkdLocal) {
+
+            if (modelXml.remoteFile == true) mainCopyFile.copyMkdLocalFile();
             fileMkdLocal = new File(modelXml.location + modelXml.mkd_local + Repository.year + ".log");
             inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
         }
 
-        if (xmlVO.booleanMAdr) {
+        if (xmlVO.booleanMAdr && blokedMkdAdr) {
+
+            if (modelXml.remoteFile == true) mainCopyFile.copyMkdAdrFile();
             fileMkdAdr = new File(modelXml.location + modelXml.mkd_nyse + Repository.year + ".log");
             inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
         }
 
-        if (xmlVO.booleanRLocal) {
+        if (xmlVO.booleanRLocal && blokedRoutingLocal) {
+            if (modelXml.remoteFile == true) mainCopyFile.copyRoutingLocalFile();
             fileRoutingLocal = new File(modelXml.location + modelXml.routing_local + Repository.year + ".log");
             inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
         }
 
-        if (xmlVO.booleanRAdr) {
+        if (xmlVO.booleanRAdr && blokedRoutingAdr) {
+            if (modelXml.remoteFile == true) mainCopyFile.copyRoutingAdrFile();
             fileRoutingAdr = new File(modelXml.location + modelXml.routing_nyse + Repository.year + ".log");
             inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
         }
@@ -636,6 +598,63 @@ public class Algo {
             });
 
         }
+
+    }
+
+    public void inputButtonReadLog() throws Exception {
+
+        if (modelXml.booleanDolar.equals(true)){
+            SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
+            Button switchBtn1 = switchButtonDolar.returnButton();
+            this.buttonDolar = switchBtn1;
+
+            VBox ButtonDolar = new VBox();
+            ButtonDolar.getChildren().add(switchButtonDolar);
+            options.getChildren().add(ButtonDolar);
+        }
+
+        if (modelXml.booleanMLocal.equals(true)){
+            SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
+            Button switchBtn3 = switchButtonMkd_Local.returnButton();
+            this.buttonMKDLocal = switchBtn3;
+
+            VBox HBoswitchButtonMkd_Local = new VBox();
+            HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
+            options.getChildren().add(HBoswitchButtonMkd_Local);
+        }
+
+        if (modelXml.booleanMAdr.equals(true)){
+            SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
+            Button switchBtn2 = switchButtonMkd_nyse.returnButton();
+            this.buttonMDKDAdr = switchBtn2;
+
+            VBox HBoxButtonMkd = new VBox();
+            HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
+            options.getChildren().add(HBoxButtonMkd);
+
+        }
+
+        if (modelXml.booleanRLocal.equals(true)){
+            SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
+            Button switchBtn4 = switchButtonRouting_Local.returnButton();
+            this.buttonRoutingLocal = switchBtn4;
+
+            VBox HBosRouting_Local = new VBox();
+            HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
+            options.getChildren().add(HBosRouting_Local);
+
+        }
+
+        if (modelXml.booleanRAdr.equals(true)){
+            SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
+            Button switchBtn5 = switchButtonRouting_Adr.returnButton();
+            this.buttonRoutingADR = switchBtn5;
+
+            VBox HBosRouting_Adr = new VBox();
+            HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
+            options.getChildren().add(HBosRouting_Adr);
+        }
+
 
     }
 

@@ -33,10 +33,6 @@ public class HardDiskController {
     @FXML
     private TableColumn<ModelHardDisk, String> montado;
 
-    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0" );
-    private DecimalFormat formatNumberDecimal = new DecimalFormat( "#,###,###,##0.00" );
-
-
     @FXML
     private synchronized void initialize() throws Exception {
 
@@ -56,7 +52,7 @@ public class HardDiskController {
                     try {
 
                         setText(item);
-                        setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: white;");
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -74,7 +70,7 @@ public class HardDiskController {
 
                     try {
                         setText(item);
-                        setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: white;");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -97,11 +93,11 @@ public class HardDiskController {
                         setText(item);
 
                         if(Integer.valueOf(item.replace("%","")) >= 90){
-                            setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                            setStyle("-fx-text-fill: #fa1f18;");
                         } else if (Integer.valueOf(item.replace("%","")) >= 70)  {
-                            setStyle("-fx-text-fill: #ffc208; -fx-font-weight: bold;");
+                            setStyle("-fx-text-fill: #ffc208; -fx-font-weight: bold; ");
                         } else {
-                            setStyle("-fx-text-fill: #10bd22; -fx-font-weight: bold;");
+                            setStyle("-fx-text-fill: #10bd22; -fx-font-weight: bold; ");
                         }
 
                     } catch (Exception ex) {
@@ -120,7 +116,7 @@ public class HardDiskController {
 
                     try {
                         setText(item);
-                        setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: white;");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -138,7 +134,7 @@ public class HardDiskController {
 
                     try {
                         setText(item);
-                        setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: white;");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -155,7 +151,7 @@ public class HardDiskController {
 
                     try {
                         setText(item);
-                        setStyle("-fx-text-fill: white; -fx-font-weight: bold;");
+                        setStyle("-fx-text-fill: white;");
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -175,8 +171,6 @@ public class HardDiskController {
         disponible.setVisible(true);
         uso.setVisible(true);
         montado.setVisible(true);
-
-
     }
 
 

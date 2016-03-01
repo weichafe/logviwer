@@ -42,7 +42,14 @@ public class ReadFromDolarListener implements Listener {
                 }
             }
 
+
             algo.validateDolar = true;
+
+            if (ev.algo.modelXml.remoteFile == true) {
+                ev.algo.blokedDolar = false;
+                ev.algo.mainCopyFile.copyDolarFile();
+            }
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

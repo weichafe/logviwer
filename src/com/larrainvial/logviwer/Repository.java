@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import quickfix.SessionID;
 import quickfix.SocketAcceptor;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -58,8 +59,17 @@ public class  Repository {
     public static Map<String, Orders> executionWorkOrderSell = Collections.synchronizedMap(new LinkedHashMap<String, Orders>());
 
     public static Map<String, ModelRoutingData> sellSideMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelRoutingData>());
-
     public static TableView<ModelHardDisk> hardDiskTableView;
+
+    public static DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0");
+    public static DecimalFormat formatNumber1 = new DecimalFormat( "#,###,###,##0.0");
+    public static DecimalFormat formatNumber2 = new DecimalFormat( "#,###,###,##0.00");
+    public static DecimalFormat formatNumber3 = new DecimalFormat( "#,###,###,##0.000");
+    public static DecimalFormat formatNumber4 = new DecimalFormat( "#,###,###,##0.0000");
+
+    public static String getID() {
+        return Long.toString(java.util.UUID.randomUUID().getMostSignificantBits(), 16);
+    }
 
     public static ObservableList<ModelHardDisk> listServerHardDisk = FXCollections.observableArrayList();
 

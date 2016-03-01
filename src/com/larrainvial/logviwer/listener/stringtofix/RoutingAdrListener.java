@@ -34,6 +34,7 @@ public class RoutingAdrListener implements Listener {
             if (!ev.algo.nameAlgo.equals(algo.nameAlgo)) return;
 
             StringToRoutingData stringToRoutingData = new StringToRoutingData();
+
             ModelRoutingData modelRoutingData = stringToRoutingData.routing(ev.lineFromLog);
 
             Controller.dispatchEvent(new PositionViewEvent(algo, modelRoutingData));

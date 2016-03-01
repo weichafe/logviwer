@@ -10,7 +10,6 @@ import com.larrainvial.sellside.utils.Validation;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
 import quickfix.fix44.NewOrderSingle;
@@ -66,8 +65,8 @@ public class ReceivedNewOrderSingleListener implements Listener {
         executionReport.set(new LastQty(0d));
         executionReport.set(new LastPx(0d));
         executionReport.set(new AvgPx(0d));
-        executionReport.set(new ExecID(IDGenerator.getID()));
-        executionReport.set(new OrderID(IDGenerator.getID()));
+        executionReport.set(new ExecID(Repository.getID()));
+        executionReport.set(new OrderID(Repository.getID()));
         executionReport.set(new TransactTime(new Date()));
         executionReport.set(newOrderSingle.getOrderQty());
         executionReport.set(newOrderSingle.getClOrdID());

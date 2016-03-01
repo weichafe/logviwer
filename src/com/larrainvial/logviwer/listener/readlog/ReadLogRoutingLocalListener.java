@@ -43,6 +43,10 @@ public class ReadLogRoutingLocalListener implements Listener {
 
             algo.validateRoutingLocal = true;
 
+            if (algo.modelXml.remoteFile == true) {
+                ev.algo.blokedRoutingLocal = false;
+                algo.mainCopyFile.copyRoutingLocalFile();
+            }
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);

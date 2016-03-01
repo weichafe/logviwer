@@ -8,7 +8,6 @@ public class ModelXml {
     public String passServer;
 
     public String location;
-    public String locationLinux;
     public String nameAlgo;
 
     public String mkd_dolar;

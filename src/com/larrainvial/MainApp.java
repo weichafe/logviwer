@@ -17,20 +17,11 @@ public class MainApp extends Application {
     private static final String OS = System.getProperty("os.name").toLowerCase();
     private static final Logger logger = Logger.getLogger(MainApp.class.getName());
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-        //Todo: logviewer
-        new Start().start(primaryStage);
-
-        //Todo: Sell Side
-        new MainSellSide().start();
-
-    }
 
     public static void main(String[] args) {
 
         try {
+
             if (isWindows()) {
                 Repository.locationPath = "C:\\Program Files (x86)\\LarrainVial\\Logviewer\\Resources\\";
                 PropertyConfigurator.configure(Repository.locationPath + "log4jWindows.properties");
@@ -55,6 +46,17 @@ public class MainApp extends Application {
         } catch (Exception ex){
             ex.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        //Todo: Inicia logviewer
+        new Start().start(primaryStage);
+
+        //Todo: Inicia Sell Side
+        new MainSellSide().start();
 
     }
 

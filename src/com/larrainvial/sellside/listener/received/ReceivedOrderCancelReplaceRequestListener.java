@@ -9,7 +9,6 @@ import com.larrainvial.sellside.utils.Validation;
 import com.larrainvial.trading.emp.Controller;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import com.larrainvial.trading.utils.IDGenerator;
 import quickfix.field.*;
 import quickfix.fix44.ExecutionReport;
 import quickfix.fix44.OrderCancelReplaceRequest;
@@ -78,7 +77,7 @@ public class ReceivedOrderCancelReplaceRequestListener implements Listener {
 
             workOrders.set(orderCancelReplaceRequest.getClOrdID());
             workOrders.set(orderCancelReplaceRequest.getOrigClOrdID());
-            workOrders.set(new ExecID(IDGenerator.getID()));
+            workOrders.set(new ExecID(Repository.getID()));
             workOrders.set(new TransactTime(new Date()));
             workOrders.set(orderCancelReplaceRequest.getPrice());
             workOrders.set(orderCancelReplaceRequest.getOrderQty());

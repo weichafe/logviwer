@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.controller.algos;
 
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.utils.Helper;
 import javafx.beans.property.SimpleStringProperty;
@@ -48,9 +49,6 @@ public class LastPriceController {
     private TableColumn<ModelMarketData, String> tradeAmount;
 
 
-    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0.00" );
-
-
     @FXML
     private synchronized void initialize() throws Exception {
 
@@ -73,7 +71,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -90,7 +88,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber4.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -107,7 +105,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -124,7 +122,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -142,7 +140,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -159,7 +157,7 @@ public class LastPriceController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();

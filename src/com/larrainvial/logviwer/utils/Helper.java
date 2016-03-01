@@ -283,37 +283,43 @@ public class Helper {
             HashMap attributes = getHashWithAttribute();
 
             String[] valuesFixMessage = fixMessageString.split("\1");
+
             for (String tag : valuesFixMessage) {
 
-                String[] value = tag.split("=");
+                try {
 
-                Attribute attribute = (Attribute) attributes.get(value[0]);
+                    String[] value = tag.split("=");
 
-                if (attribute != null) {
+                    Attribute attribute = (Attribute) attributes.get(value[0]);
 
-                    if (attribute.equals(FixConstants.NoPartyIDs)) noPartyIDs = Integer.valueOf(value[1]);
+                    if (attribute != null) {
 
-                    if (attribute.equals(FixConstants.PartyID)) {
+                        if (attribute.equals(FixConstants.NoPartyIDs)) noPartyIDs = Integer.valueOf(value[1]);
 
-                        mdParties = new HashMap<Object, Object>();
-                        mdParties.put(attribute, value[1]);
-                        parties.add(mdParties);
+                        if (attribute.equals(FixConstants.PartyID)) {
 
-                        countId++;
-                        continue;
+                            mdParties = new HashMap<Object, Object>();
+                            mdParties.put(attribute, value[1]);
+                            parties.add(mdParties);
 
-                    } else if (countId <= noPartyIDs
-                            && attribute.equals(FixConstants.PartyID)
-                            || attribute.equals(FixConstants.PartyIDSource)
-                            || attribute.equals(FixConstants.PartyRole)) {
+                            countId++;
+                            continue;
 
-                        if (mdParties != null) mdParties.put(attribute, value[1]);
+                        } else if (countId <= noPartyIDs
+                                && attribute.equals(FixConstants.PartyID)
+                                || attribute.equals(FixConstants.PartyIDSource)
+                                || attribute.equals(FixConstants.PartyRole)) {
 
-                    } else {
+                            if (mdParties != null) mdParties.put(attribute, value[1]);
 
-                        orderedFixMessage.put(attribute, value[1]);
+                        } else {
+                            orderedFixMessage.put(attribute, value[1]);
+                        }
+
                     }
 
+                } catch (Exception ex){
+                    continue;
                 }
             }
 

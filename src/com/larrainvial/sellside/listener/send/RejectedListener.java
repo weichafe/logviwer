@@ -1,10 +1,10 @@
 package com.larrainvial.sellside.listener.send;
 
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.event.send.RejectedEvent;
 import com.larrainvial.sellside.utils.Configuration;
 import com.larrainvial.trading.emp.Event;
 import com.larrainvial.trading.emp.Listener;
-import com.larrainvial.trading.utils.IDGenerator;
 import org.apache.log4j.Logger;
 import quickfix.StringField;
 import quickfix.field.*;
@@ -20,8 +20,8 @@ public class RejectedListener implements Listener {
     public RejectedListener(){
 
         rejected = new ExecutionReport();
-        rejected.set(new OrderID(IDGenerator.getID()));
-        rejected.set(new ExecID(IDGenerator.getID()));
+        rejected.set(new OrderID(Repository.getID()));
+        rejected.set(new ExecID(Repository.getID()));
         rejected.set(new ExecType(ExecType.REJECTED));
         rejected.set(new OrdStatus(OrdStatus.REJECTED));
         rejected.set(new LastPx(0d));

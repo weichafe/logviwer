@@ -12,5 +12,4 @@ public class ModelLatency {
     public String routing;
     public String nameAlgo;
 
-
 }

@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.controller.algos;
 
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.model.ModelPositions;
 import com.larrainvial.logviwer.utils.Constants;
 import javafx.beans.property.SimpleStringProperty;
@@ -59,10 +60,6 @@ public class PanelPositionsController {
     @FXML
     private TableColumn<ModelPositions, String> ratio;
 
-
-    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0.00" );
-
-
     @FXML
     private void initialize() throws Exception {
 
@@ -87,7 +84,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -105,7 +102,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -126,7 +123,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                         if (item != null && (Math.abs(Double.valueOf(item)) >= Constants.DIFFERENCE_QTY)) {
                             setStyle("-fx-text-fill: #ffc208; -fx-font-weight: bold;");
@@ -150,7 +147,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                         if (item != null && (Math.abs(Double.valueOf(item)) >= Constants.DIFFERENCE_QTY)) {
                             setStyle("-fx-text-fill: #ffc208; -fx-font-weight: bold;");
@@ -174,7 +171,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -193,7 +190,7 @@ public class PanelPositionsController {
                     try {
 
                         setStyle("-fx-text-fill: #10bd22;");
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -214,7 +211,7 @@ public class PanelPositionsController {
                     try {
 
                         setStyle("-fx-text-fill: #fa1f18;");
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -232,7 +229,7 @@ public class PanelPositionsController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -251,7 +248,7 @@ public class PanelPositionsController {
                     try {
 
                         setStyle("-fx-text-fill: #10bd22;");
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -270,7 +267,7 @@ public class PanelPositionsController {
                     try {
 
                         setStyle("-fx-text-fill: #fa1f18;");
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();

@@ -18,7 +18,6 @@ import java.util.logging.Level;
 public class HardDishCheckLinux {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    public TimerTask timerTask;
 
     public HardDishCheckLinux(){
 
@@ -37,8 +36,6 @@ public class HardDishCheckLinux {
     public void setServerData(){
 
         try {
-
-            System.out.println("");
 
             Repository.listServerHardDisk.add(0, new ModelHardDisk("everest.larrainvial.com", "root", "larralinuxvial"));
             Repository.listServerHardDisk.add(1, new ModelHardDisk("aconcagua.larrainvial.com", "root", "larralinuxvial"));
@@ -89,8 +86,7 @@ public class HardDishCheckLinux {
                         modelHardDisk.tamano = resultado[2].trim();
 
                     } catch (Exception ex) {
-                        logger.info("Error controlado");
-                        logger.error(Level.SEVERE, ex);
+
                     }
 
                 }

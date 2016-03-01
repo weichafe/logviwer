@@ -13,9 +13,6 @@ public class ModelHardDisk {
     public String user;
     public String password;
 
-    public ModelHardDisk(){
-
-    }
 
     public ModelHardDisk(String hostname, String user, String password){
         this.hostname = hostname;

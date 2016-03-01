@@ -1,5 +1,6 @@
 package com.larrainvial.logviwer.controller.algos;
 
+import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.model.ModelMMBCS;
 import com.larrainvial.logviwer.model.ModelMarketData;
 import com.larrainvial.logviwer.model.ModelPositions;
@@ -70,10 +71,6 @@ public class MMBCSController {
     private TableColumn<ModelMMBCS, String> pxqSell;
 
 
-    private DecimalFormat formatNumber = new DecimalFormat( "#,###,###,##0.00" );
-
-
-
     @FXML
     private synchronized void initialize() throws Exception {
 
@@ -97,7 +94,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -114,7 +111,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -131,7 +128,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -148,7 +145,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -165,7 +162,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -182,7 +179,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -199,7 +196,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -216,7 +213,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -233,7 +230,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
@@ -251,7 +248,7 @@ public class MMBCSController {
 
                     try {
 
-                        setText((item == null) ? "" : formatNumber.format(Double.valueOf(item)));
+                        setText((item == null) ? "" : Repository.formatNumber1.format(Double.valueOf(item)));
 
                     } catch (Exception ex) {
                         ex.printStackTrace();

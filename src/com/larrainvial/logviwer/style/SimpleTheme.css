@@ -70,7 +70,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #acacac;
+    -fx-background-color: #020202;
 }
 
 .table-row-cell:odd {
@@ -78,7 +78,7 @@
 }
 
 .table-row-cell:hover {
-    -fx-background-color: #c5c5c5;
+    -fx-background-color: #020202;
 }
 
 .list-cell:filled:hover {

@@ -54,9 +54,6 @@ public class Start extends Application {
             //Todo: inicaliza lectura de HHDD
             HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
 
-            //Todo: inicaliza lectura de HHDD
-            //HardDishCheckWindows HardDishCheckWindows = new HardDishCheckWindows();
-
             Helper helper = new Helper();
             helper.createStrategy();
 

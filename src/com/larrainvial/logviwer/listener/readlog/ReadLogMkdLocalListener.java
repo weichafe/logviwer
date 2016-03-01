@@ -45,6 +45,11 @@ public class ReadLogMkdLocalListener implements Listener {
 
             algo.validateMKDLocal = true;
 
+            if (algo.modelXml.remoteFile == true) {
+                ev.algo.blokedMkdLocal = false;
+                algo.mainCopyFile.copyMkdLocalFile();
+            }
+
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
