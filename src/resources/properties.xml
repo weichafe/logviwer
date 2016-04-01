@@ -34,20 +34,20 @@
     </com.larrainvial.trading.adrarbitrage.linux.vo.StrategyVO>
   </entry>
   <entry>
-    <string>BCA</string>
+    <string>ITCB</string>
     <com.larrainvial.trading.adrarbitrage.linux.vo.StrategyVO>
-      <StrategyName>BCA</StrategyName>
+      <StrategyName>ITCB</StrategyName>
       <Ratio>1500.0</Ratio>
-      <SymbolRouting>BCA</SymbolRouting>
+      <SymbolRouting>ITCB</SymbolRouting>
       <ExDestinationRouting>XNYS</ExDestinationRouting>
       <BrokerRouting>TRADE</BrokerRouting>
       <AccountRouting>19215793</AccountRouting>
-      <SymbolSec>CORPBANCA</SymbolSec>
+      <SymbolSec>ITAUCORP</SymbolSec>
       <ExDestinationSec>XSGO</ExDestinationSec>
       <BrokerSec>LVIAL001</BrokerSec>
       <AccountSec>591866109-00</AccountSec>
-      <SymbolRoutingMM>BCA</SymbolRoutingMM>
-      <SymbolSecMM>CORPBANCA</SymbolSecMM>
+      <SymbolRoutingMM>ITCB</SymbolRoutingMM>
+      <SymbolSecMM>ITAUCORP</SymbolSecMM>
       <SpreadInflow>0.03</SpreadInflow>
       <FixQtyInflow>1000.0</FixQtyInflow>
       <RatioZInflow>0.0</RatioZInflow>

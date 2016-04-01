@@ -74,6 +74,7 @@ public class  Repository {
     public static ObservableList<ModelHardDisk> listServerHardDisk = FXCollections.observableArrayList();
 
     public static void deleteOrder(){
+
         executionWorkOrderBuy.clear();
         executionWorkOrderSell.clear();
 

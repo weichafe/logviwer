@@ -59,21 +59,22 @@ public final class QuickFixAdapter extends MessageCracker implements Application
             Repository.senderCompID = sessionSettings.getString(Repository.sessionID, "SenderCompID");
             Repository.targetCompID = sessionSettings.getString(Repository.sessionID, "TargetCompID");
 
+
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
         }
     }
 
     public void onLogon(SessionID sessionID) {
-        Repository.executionWorkOrderBuy.clear();
-        Repository.executionWorkOrderSell.clear();
+        System.out.println(sessionID);
+        Repository.deleteOrder();
     }
 
     public void onLogout(SessionID sessionID) {
     }
 
     public void toAdmin(Message message, SessionID sessionID) {
-        // nothing
+
     }
 
     public void fromAdmin(Message message, SessionID sessionID) throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, RejectLogon {

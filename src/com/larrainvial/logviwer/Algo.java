@@ -134,7 +134,6 @@ public class Algo {
     public AlertListener alertListener;
     public AlertMarketMakerBCSListener alertMarketMakerBCSListener;
 
-
     public Button buttonAlert;
     public Button buttonRoutingADR;
     public Button buttonRoutingLocal;
@@ -149,7 +148,6 @@ public class Algo {
     public XYChart.Series localRouting;
     public LineChart<Number,Number> lineChart;
     public boolean graphEnable;
-
 
     private HBox options;
     public ModelXml modelXml;
@@ -207,7 +205,7 @@ public class Algo {
             options.getChildren().add(vBox);
 
             inputButtonReadLog();
-            inputVariacionDolar();
+            //inputVariacionDolar();
             Graph.newLineChart(this);
 
             HBox graph = new HBox();
@@ -264,6 +262,7 @@ public class Algo {
 
             MenuItem lastPrice = new MenuItem("Export to Excel");
             lastPrice.setId(modelXml.nameAlgo);
+
             lastPrice.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
