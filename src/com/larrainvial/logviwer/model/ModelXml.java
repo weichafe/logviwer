@@ -21,6 +21,5 @@ public class ModelXml {
     public Boolean booleanMAdr;
     public Boolean booleanRLocal;
     public Boolean booleanRAdr;
-    public Boolean remoteFile;
 
 }

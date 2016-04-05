@@ -49,6 +49,7 @@ public class RoutingAdrListener implements Listener {
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }

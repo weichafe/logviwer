@@ -43,15 +43,9 @@ public class ReadlogRoutingAdrListener implements Listener {
 
             algo.validateRoutingADR = true;
 
-            if (algo.modelXml.remoteFile == true) {
-                ev.algo.blokedRoutingAdr = false;
-                algo.mainCopyFile.copyRoutingAdrFile();
-
-            }
-
-
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }
@@ -59,12 +53,7 @@ public class ReadlogRoutingAdrListener implements Listener {
 
     public boolean verifyMessageFix(String message){
 
-        if (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1){
-            return true;
-
-        } else {
-            return false;
-        }
+        return (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1) ? true : false;
 
     }
 

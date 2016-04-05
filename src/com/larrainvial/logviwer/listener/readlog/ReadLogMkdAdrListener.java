@@ -44,13 +44,9 @@ public class ReadLogMkdAdrListener implements Listener {
 
             algo.validateMKDADR = true;
 
-            if (ev.algo.modelXml.remoteFile == true) {
-                ev.algo.blokedMkdAdr = false;
-                ev.algo.mainCopyFile.copyMkdAdrFile();
-            }
-
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }

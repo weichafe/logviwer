@@ -24,6 +24,7 @@ public class CalculateMMBCSListener {
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }

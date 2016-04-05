@@ -6,6 +6,7 @@ import com.larrainvial.logviwer.Algo;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.logviwer.model.ModelRoutingData;
 import com.larrainvial.logviwer.model.ModelLatency;
+import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -23,7 +24,7 @@ public class Helper {
 
     private static Logger logger = Logger.getLogger(Helper.class.getName());
 
-    public void createStrategy() {
+    public void createStrategy(Stage primaryStage) {
 
         try {
 
@@ -41,7 +42,7 @@ public class Helper {
                 Node node = Repository.nodeList.item(i);
 
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    new Algo((Element) node);
+                    new Algo((Element) node, primaryStage);
 
                 }
             }
@@ -82,7 +83,7 @@ public class Helper {
         if (symbolLocal.equals("BSAC")) return "BSANTANDER";
         if (symbolLocal.equals("CNCO")) return "CENCOSUD";
         if (symbolLocal.equals("CCU")) return "CCU";
-        if (symbolLocal.equals("BCA")) return "CORPBANCA";
+        if (symbolLocal.equals("ITCB")) return "ITAUCORP";
         if (symbolLocal.equals("AKO.A")) return "ANDINA-A";
         if (symbolLocal.equals("AKO/A")) return "ANDINA-A";
         if (symbolLocal.equals("AKO/B")) return "ANDINA-B";
@@ -115,7 +116,7 @@ public class Helper {
         if (symbolLocal.equals("BSANTANDER"))  return 3;
         if (symbolLocal.equals("CENCOSUD"))    return 4;
         if (symbolLocal.equals("CCU"))         return 5;
-        if (symbolLocal.equals("CORPBANCA"))   return 6;
+        if (symbolLocal.equals("ITAUCORP"))   return 6;
         if (symbolLocal.equals("ANDINA-A"))    return 7;
         if (symbolLocal.equals("ANDINA-B"))    return 8;
         if (symbolLocal.equals("ENDESA"))      return 9;
@@ -144,7 +145,7 @@ public class Helper {
         if (symbolLocal.equals("BSANTANDER"))  return 400d;
         if (symbolLocal.equals("CENCOSUD"))    return 3d;
         if (symbolLocal.equals("CCU"))         return 2d;
-        if (symbolLocal.equals("CORPBANCA"))   return 1500d;
+        if (symbolLocal.equals("ITAUCORP"))   return 1500d;
         if (symbolLocal.equals("ANDINA-A"))    return 6d;
         if (symbolLocal.equals("ANDINA-B"))    return 6d;
         if (symbolLocal.equals("ENDESA"))      return 30d;
@@ -173,7 +174,7 @@ public class Helper {
         if (symbolLocal.equals("BSANTANDER"))  return 3;
         if (symbolLocal.equals("CENCOSUD"))    return 4;
         if (symbolLocal.equals("CCU"))         return 5;
-        if (symbolLocal.equals("CORPBANCA"))   return 6;
+        if (symbolLocal.equals("ITAUCORP"))   return 6;
         if (symbolLocal.equals("ANDINA-A"))    return 7;
         if (symbolLocal.equals("ANDINA-B"))    return 8;
         if (symbolLocal.equals("ENDESA"))      return 9;
@@ -202,7 +203,7 @@ public class Helper {
         if (symbolLocal.equals("BSANTANDER"))  return true;
         if (symbolLocal.equals("CENCOSUD"))    return true;
         if (symbolLocal.equals("CCU"))         return true;
-        if (symbolLocal.equals("CORPBANCA"))   return true;
+        if (symbolLocal.equals("ITAUCORP"))   return true;
         if (symbolLocal.equals("ANDINA-A"))    return true;
         if (symbolLocal.equals("ANDINA-B"))    return true;
         if (symbolLocal.equals("ENDESA"))      return true;

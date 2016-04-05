@@ -247,7 +247,7 @@ public class AlertDolar {
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
-            ex.printStackTrace();
+            logger.error(algo.nameAlgo);
         }
 
     }

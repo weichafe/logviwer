@@ -47,9 +47,7 @@ public class PositionViewListener implements Listener {
                             algo.countMMBCC++;
 
                         } else {
-
                             algo.panelMMBCSTableView.getItems().set(algo.mmBCE.get(e.getKey()), modelMMBCS);
-
                         }
 
                     }
@@ -84,6 +82,7 @@ public class PositionViewListener implements Listener {
 
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }

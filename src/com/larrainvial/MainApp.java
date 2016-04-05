@@ -5,6 +5,7 @@ import com.larrainvial.logviwer.Start;
 import com.larrainvial.logviwer.Repository;
 import com.larrainvial.sellside.MainSellSide;
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -16,7 +17,6 @@ public class MainApp extends Application {
 
     private static final String OS = System.getProperty("os.name").toLowerCase();
     private static final Logger logger = Logger.getLogger(MainApp.class.getName());
-
 
     public static void main(String[] args) {
 
@@ -49,6 +49,8 @@ public class MainApp extends Application {
 
     }
 
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -56,7 +58,7 @@ public class MainApp extends Application {
         new Start().start(primaryStage);
 
         //Todo: Inicia Sell Side
-        new MainSellSide().start();
+        //new MainSellSide().start();
 
     }
 

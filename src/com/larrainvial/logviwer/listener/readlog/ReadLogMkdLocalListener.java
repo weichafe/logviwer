@@ -45,27 +45,15 @@ public class ReadLogMkdLocalListener implements Listener {
 
             algo.validateMKDLocal = true;
 
-            if (algo.modelXml.remoteFile == true) {
-                ev.algo.blokedMkdLocal = false;
-                algo.mainCopyFile.copyMkdLocalFile();
-            }
-
-
         } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
+            logger.error(algo.nameAlgo);
         }
 
     }
 
     public boolean verifyMessageFix(String message){
-
-        if (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1){
-            return true;
-
-        } else {
-            return false;
-        }
-
+        return (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1) ? true : false;
     }
 
 

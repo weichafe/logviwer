@@ -112,16 +112,9 @@
     -fx-pref-width: 100%;
 }
 
-.options {
-    -fx-background-color: #1f1f1f;
-    -fx-table-header-border-color: transparent;
-    -fx-padding: 35px;
-    -fx-gap-start-and-end: true;
-    -fx-pref-height: 100px;
-    -fx-spacing: 35px;
-}
 
-.hboxGraph{
+
+.graphPanel{
     -fx-background-color: #1f1f1f;
     -fx-font-size: 10;
     -fx-border-style: solid;
@@ -212,9 +205,7 @@
     -fx-border-width: 2px;
 }
 
-.hboxGrillProcess {
-    -fx-spacing: 20px;
-}
+
 
 .generalKillProcess {
     -fx-pref-width: 1600px;
@@ -284,6 +275,19 @@
 
 
 .tableviewEditStrategy {
+     -fx-pref-width: 1600px;
+     -fx-pref-height: 870px;
+     -fx-border-color: red;
+     -fx-background-color: #1f1f1f;
+     -fx-alignment: center;
+     -fx-border-width: 2px;
+     -fx-padding: 35px;
+     -fx-stroke: black;
+     -fx-font-weight: bold;
+ }
+
+
+.tableviewEditStrategy {
     -fx-pref-width: 1600px;
     -fx-pref-height: 870px;
     -fx-border-color: red;
@@ -294,6 +298,63 @@
     -fx-stroke: black;
     -fx-font-weight: bold;
 }
+
+
+
+.layoutStyle {
+    -fx-border-color: red;
+    -fx-background-color: #1f1f1f;
+    -fx-alignment: center;
+    -fx-border-width: 2px;
+}
+
+
+.optionsPanel {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+}
+
+.positionsPanel {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+}
+
+.graphPanel {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+}
+
+.hardDiskPanel {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+}
+
+
+.lastPricePanel {
+    -fx-border-color: red;
+    -fx-border-width: 2px;
+    -fx-background-color: #1f1f1f;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 20px;
+    -fx-alignment: top-center;
+}
+
 
 
 

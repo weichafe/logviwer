@@ -3,13 +3,21 @@ package com.larrainvial.logviwer;
 import com.larrainvial.logviwer.model.ModelDolar;
 import com.larrainvial.logviwer.utils.*;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.InputEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.log4j.Logger;
+
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.logging.Level;
 
 public class Start extends Application {
@@ -52,10 +60,10 @@ public class Start extends Application {
             primaryStage.show();
 
             //Todo: inicaliza lectura de HHDD
-            HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
+           // HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
 
             Helper helper = new Helper();
-            helper.createStrategy();
+            helper.createStrategy(primaryStage);
 
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
@@ -65,6 +73,7 @@ public class Start extends Application {
             });
 
 
+
         } catch (Exception ex){
             logger.error(Level.SEVERE);
             ex.printStackTrace();
@@ -72,6 +81,8 @@ public class Start extends Application {
         }
 
     }
+
+
 
 
 }

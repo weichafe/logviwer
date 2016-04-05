@@ -1,7 +1,7 @@
 package com.larrainvial.logviwer;
 
+import com.larrainvial.logviwer.controller.SellSideController;
 import com.larrainvial.logviwer.controller.algos.HardDiskController;
-import com.larrainvial.logviwer.utils.*;
 import com.larrainvial.logviwer.controller.algos.LastPriceController;
 import com.larrainvial.logviwer.controller.algos.MMBCSController;
 import com.larrainvial.logviwer.controller.algos.PanelPositionsController;
@@ -14,28 +14,32 @@ import com.larrainvial.logviwer.event.utils.CalculateLastPriceEvent;
 import com.larrainvial.logviwer.event.utils.CalculatePositionsEvent;
 import com.larrainvial.logviwer.fxvo.Graph;
 import com.larrainvial.logviwer.fxvo.SwitchButton;
+import com.larrainvial.logviwer.listener.alert.AlertListener;
 import com.larrainvial.logviwer.listener.alert.AlertMarketMakerBCSListener;
 import com.larrainvial.logviwer.listener.calculate.CalculateLastPriceListener;
 import com.larrainvial.logviwer.listener.calculate.CalculatePositionsListener;
-import com.larrainvial.logviwer.listener.alert.AlertListener;
 import com.larrainvial.logviwer.listener.readlog.*;
 import com.larrainvial.logviwer.listener.sendtoview.LastPriceListener;
 import com.larrainvial.logviwer.listener.sendtoview.PositionViewListener;
 import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.*;
+import com.larrainvial.logviwer.utils.Constants;
+import com.larrainvial.logviwer.utils.ExportExcel;
+import com.larrainvial.logviwer.utils.Notifier;
 import com.larrainvial.sellside.MainSellSide;
-import com.larrainvial.logviwer.controller.SellSideController;
 import com.larrainvial.trading.emp.Controller;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -73,13 +77,13 @@ public class Algo {
     public FXMLLoader panelMMBCS = new FXMLLoader();
     public FXMLLoader panelHardDisk = new FXMLLoader();
 
-    public Map<String,ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
+    public Map<String, ModelPositions> positionsMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelPositions>());
     public HashMap<String, Integer> positions = new HashMap<String, Integer>();
 
-    public Map<String,ModelMMBCS> mmBCSMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMMBCS>());
+    public Map<String, ModelMMBCS> mmBCSMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMMBCS>());
     public HashMap<String, Integer> mmBCE = new HashMap<String, Integer>();
 
-    public Map<String,ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
+    public Map<String, ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
     public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
     public Map<String, ModelLatency> latencyADR = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
     public Map<String, ModelLatency> latencyLocal = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
@@ -87,7 +91,7 @@ public class Algo {
     public TableView<ModelPositions> panelPositionsTableView;
     public TableView<ModelMMBCS> panelMMBCSTableView;
     public TableView<ModelMarketData> lastPriceTableView;
-    public TableView<ModelRoutingData> sellsideTableView = new  TableView<ModelRoutingData> ();
+    public TableView<ModelRoutingData> sellsideTableView = new TableView<ModelRoutingData>();
 
     public boolean mkdDolarToggle;
     public boolean mkdLocalToggle;
@@ -95,12 +99,6 @@ public class Algo {
     public boolean routingLocalToggle;
     public boolean routingAdrToggle;
     public boolean alert;
-
-    public boolean blokedDolar = true;
-    public boolean blokedMkdLocal = true;
-    public boolean blokedMkdAdr = true;
-    public boolean blokedRoutingLocal = true;
-    public boolean blokedRoutingAdr = true;
 
     public TimerTask timerTask;
 
@@ -134,7 +132,6 @@ public class Algo {
     public AlertListener alertListener;
     public AlertMarketMakerBCSListener alertMarketMakerBCSListener;
 
-
     public Button buttonAlert;
     public Button buttonRoutingADR;
     public Button buttonRoutingLocal;
@@ -143,29 +140,21 @@ public class Algo {
     public Button buttonDolar;
     public Button graphButton;
 
-    public CopyFileXbog mainCopyFile;
-
     public XYChart.Series adrRouting;
     public XYChart.Series localRouting;
-    public LineChart<Number,Number> lineChart;
+    public LineChart<Number, Number> lineChart;
     public boolean graphEnable;
 
-
-    private HBox options;
     public ModelXml modelXml;
 
 
-    public Algo(Element elem) {
+    public Algo(Element elem, Stage primaryStage) {
 
         try {
 
             modelXml = new ModelXml();
-            readXML(elem);
 
-            if (modelXml.remoteFile == true){
-                mainCopyFile = new CopyFileXbog(this);
-            }
-
+            this.readXML(elem);
             this.fileReader(modelXml);
             this.nameAlgo = modelXml.nameAlgo;
 
@@ -174,66 +163,52 @@ public class Algo {
             panelMMBCS.setLocation(Start.class.getResource("view/algos/PanelMMBCS.fxml"));
             panelHardDisk.setLocation(Start.class.getResource("view/algos/HardDisk.fxml"));
 
-            HBox grill = new HBox();
-            grill.getStyleClass().add("grillStrategy");
-            grill.getChildren().add((AnchorPane) lastPriceLoader.load());
+            VBox optionsPanel = new VBox();
+            optionsPanel.getStyleClass().add("optionsPanel");
 
-            if (modelXml.nameAlgo.equals(Constants.NameAlgo.MarketMakerBCS)){
-                grill.getChildren().add((AnchorPane) panelMMBCS.load());
-            } else {
-                grill.getChildren().add((AnchorPane) panelPositionsLoader.load());
-            }
+            this.setOptionsPanel(optionsPanel);
+            this.inputButtonReadLog(optionsPanel);
 
-            HBox grillLastPricePositions = new HBox();
-            grillLastPricePositions.getChildren().addAll(grill);
+            HBox positionsPanel = new HBox();
+            positionsPanel.getStyleClass().add("positionsPanel");
 
-            options = new HBox();
-            options.getStyleClass().add("options");
+            positionsPanel.getChildren().add((modelXml.nameAlgo.equals(Constants.NameAlgo.MarketMakerBCS)) ?
+                    (AnchorPane) panelMMBCS.load() : (AnchorPane) panelPositionsLoader.load());
 
-            SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
-            Button switchBtn6 = switchButtonAlert.returnButton();
-            this.buttonAlert =  switchBtn6;
+            VBox lastPricePanel = new VBox();
+            lastPricePanel.getStyleClass().add("lastPricePanel");
+            lastPricePanel.getChildren().addAll((AnchorPane) lastPriceLoader.load());
 
-            SwitchButton graphSwith = new SwitchButton("Graph", this);
-            Button switchBtn7 = graphSwith.returnButton();
-            this.graphButton = switchBtn7;
-
-            VBox vBoxgraph = new VBox();
-            vBoxgraph.getChildren().add(graphSwith);
-            options.getChildren().add(vBoxgraph);
-
-            VBox vBox = new VBox();
-            vBox.getChildren().add(switchButtonAlert);
-            options.getChildren().add(vBox);
-
-            inputButtonReadLog();
-            inputVariacionDolar();
             Graph.newLineChart(this);
 
-            HBox graph = new HBox();
-            graph.getStyleClass().add("hboxGraph");
-            graph.getChildren().addAll(lineChart, panelHardDisk.load());
+            VBox graphPanel = new VBox();
+            graphPanel.getStyleClass().add("graphPanel");
+            graphPanel.getChildren().addAll(lineChart);
 
-            VBox general = new VBox();
-            general.getStyleClass().add("hboxGeneral");
-            general.getChildren().addAll(options, grillLastPricePositions, graph);
+            VBox hardDiskPanel = new VBox();
+            hardDiskPanel.getStyleClass().add("hardDiskPanel");
+            hardDiskPanel.getChildren().add(panelHardDisk.load());
+
+            HBox layout = new HBox();
+            layout.setPrefWidth(primaryStage.getWidth());
+            layout.setPrefHeight(primaryStage.getHeight());
+            layout.getStyleClass().add("layoutStyle");
+            layout.getChildren().addAll(optionsPanel, positionsPanel, lastPricePanel, graphPanel, hardDiskPanel);
 
             ScrollPane scrollBar = new ScrollPane();
-            scrollBar.prefHeightProperty().bind(general.heightProperty());
-            scrollBar.prefWidthProperty().bind(general.widthProperty());
-            scrollBar.setContent(general);
+            scrollBar.prefHeightProperty().bind(layout.maxHeightProperty());
+            scrollBar.prefWidthProperty().bind(layout.maxWidthProperty());
+            scrollBar.setContent(layout);
             scrollBar.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
-            Tab tabNameAlgo = new Tab();
-            tabNameAlgo.setText(modelXml.nameAlgo);
-
-            Repository.tabPanePrincipalTabPanel.getTabs().add(tabNameAlgo);
+            Repository.tabPanePrincipalTabPanel.getTabs().add(new Tab(modelXml.nameAlgo));
             Repository.tabPanePrincipalTabPanel.getTabs().get(Repository.tabPanePrincipalTabPanel.getTabs().size() - 1).setContent(scrollBar);
 
             LastPriceController lastPriceLocal = this.lastPriceLoader.getController();
             lastPriceTableView = lastPriceLocal.getType();
 
             HardDiskController hardDiskController = this.panelHardDisk.getController();
+
             Repository.hardDiskTableView = hardDiskController.getType();
             Repository.hardDiskTableView.getItems().addAll(Repository.listServerHardDisk);
 
@@ -262,8 +237,10 @@ public class Algo {
                 panelPositionsTableView.setContextMenu(menuPositions);
             }
 
+
             MenuItem lastPrice = new MenuItem("Export to Excel");
             lastPrice.setId(modelXml.nameAlgo);
+
             lastPrice.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -285,7 +262,7 @@ public class Algo {
             readLogRoutingLocalListener = new ReadLogRoutingLocalListener(this);
             calculateLastPriceListener = new CalculateLastPriceListener(this);
 
-            dolarListener =  new DolarListener(this);
+            dolarListener = new DolarListener(this);
             marketDataAdrListener = new MarketDataAdrListener(this);
             marketDataLocalListener = new MarketDataLocalListener(this);
             routingAdrListener = new RoutingAdrListener(this);
@@ -319,8 +296,27 @@ public class Algo {
 
             start(modelXml);
 
-        } catch (Exception ex){
+            primaryStage.widthProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+                    layout.setPrefWidth(newSceneWidth.doubleValue());
+                    positionsPanel.setPrefWidth(newSceneWidth.doubleValue());
+                    optionsPanel.setPrefWidth(primaryStage.getWidth() * 0.3);
+
+                }
+            });
+
+            primaryStage.heightProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+                    layout.setPrefHeight(newSceneHeight.doubleValue());
+                    positionsPanel.setPrefWidth(newSceneHeight.doubleValue());
+                }
+            });
+
+        } catch (Exception ex) {
             ex.printStackTrace();
+            logger.error(modelXml.nameAlgo);
             logger.error(Level.SEVERE, ex);
             Notifier.INSTANCE.notifyError("Error " + modelXml.nameAlgo, ex.toString());
         }
@@ -401,7 +397,7 @@ public class Algo {
 
             Repository.strategy.put(modelXml.nameAlgo, this);
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             logger.error(Level.SEVERE, ex);
             Notifier.INSTANCE.notifyError("Error", ex.toString());
@@ -411,7 +407,7 @@ public class Algo {
     }
 
 
-    public void readXML(Element elem){
+    public void readXML(Element elem) {
 
         try {
 
@@ -429,9 +425,8 @@ public class Algo {
             modelXml.booleanMAdr = Boolean.valueOf(elem.getElementsByTagName("booleanMAdr").item(0).getChildNodes().item(0).getNodeValue());
             modelXml.booleanRLocal = Boolean.valueOf(elem.getElementsByTagName("booleanRLocal").item(0).getChildNodes().item(0).getNodeValue());
             modelXml.booleanRAdr = Boolean.valueOf(elem.getElementsByTagName("booleanRAdr").item(0).getChildNodes().item(0).getNodeValue());
-            modelXml.remoteFile = Boolean.valueOf(elem.getElementsByTagName("booleanRemote").item(0).getChildNodes().item(0).getNodeValue());
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
             ex.printStackTrace();
         }
@@ -439,39 +434,29 @@ public class Algo {
     }
 
 
-
     public void fileReader(ModelXml xmlVO) throws Exception {
 
-
-        if (xmlVO.booleanDolar && blokedDolar) {
-
-            if (modelXml.remoteFile == true) mainCopyFile.copyDolarFile();
+        if (xmlVO.booleanDolar) {
             fileMkdDolar = new File(modelXml.location + modelXml.mkd_dolar + Repository.year + ".log");
             inputStreamDolar = new FileInputStream(fileMkdDolar);
         }
 
-        if (xmlVO.booleanMLocal && blokedMkdLocal) {
-
-            if (modelXml.remoteFile == true) mainCopyFile.copyMkdLocalFile();
+        if (xmlVO.booleanMLocal) {
             fileMkdLocal = new File(modelXml.location + modelXml.mkd_local + Repository.year + ".log");
             inputStreamMkdLocal = new FileInputStream(fileMkdLocal);
         }
 
-        if (xmlVO.booleanMAdr && blokedMkdAdr) {
-
-            if (modelXml.remoteFile == true) mainCopyFile.copyMkdAdrFile();
+        if (xmlVO.booleanMAdr) {
             fileMkdAdr = new File(modelXml.location + modelXml.mkd_nyse + Repository.year + ".log");
             inputStreamMkdAdr = new FileInputStream(fileMkdAdr);
         }
 
-        if (xmlVO.booleanRLocal && blokedRoutingLocal) {
-            if (modelXml.remoteFile == true) mainCopyFile.copyRoutingLocalFile();
+        if (xmlVO.booleanRLocal) {
             fileRoutingLocal = new File(modelXml.location + modelXml.routing_local + Repository.year + ".log");
             inputStreamRoutingLocal = new FileInputStream(fileRoutingLocal);
         }
 
-        if (xmlVO.booleanRAdr && blokedRoutingAdr) {
-            if (modelXml.remoteFile == true) mainCopyFile.copyRoutingAdrFile();
+        if (xmlVO.booleanRAdr) {
             fileRoutingAdr = new File(modelXml.location + modelXml.routing_nyse + Repository.year + ".log");
             inputStreamRoutingAdr = new FileInputStream(fileRoutingAdr);
         }
@@ -479,7 +464,7 @@ public class Algo {
     }
 
 
-    public synchronized  void start(ModelXml xmlVO) {
+    public synchronized void start(ModelXml xmlVO) {
 
         try {
 
@@ -521,138 +506,65 @@ public class Algo {
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(timerTask, 250, 1);
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             logger.error(Level.SEVERE, ex);
             ex.printStackTrace();
         }
 
     }
 
-    public void inputVariacionDolar(){
+    public void inputButtonReadLog(VBox optionsPanel) throws Exception {
 
-        if (modelXml.nameAlgo.startsWith("ADR")){
-
-            Label labelCofx = new Label("COFX VAR ");
-            labelCofx.setTranslateY(3);
-            labelCofx.setStyle("-fx-font-weight: bold");
-
-            TextField cofxvar = new TextField();
-            cofxvar.setPrefWidth(60);
-
-            Label labelCAD = new Label("CAD VAR ");
-            labelCAD.setTranslateY(3);
-            labelCAD.setStyle("-fx-font-weight: bold");
-
-            TextField cadvar = new TextField();
-            cadvar.setPrefWidth(60);
-
-            Label labelCLP = new Label("CLP VAR ");
-            labelCLP.setTranslateY(3);
-            labelCLP.setStyle("-fx-font-weight: bold");
-
-            TextField clpvar = new TextField();
-            clpvar.setPrefWidth(60);
-
-            HBox variacion = new HBox();
-            variacion.setSpacing(10);
-            variacion.setPadding(new Insets(0, 0, 0, 0));
-            variacion.getChildren().addAll(labelCAD, cadvar, labelCofx, cofxvar, labelCLP, clpvar);
-            options.getChildren().add(variacion);
-
-            HBox submit = new HBox();
-            Button save = new Button("Save");
-            save.setPrefWidth(80);
-            submit.getChildren().add(save);
-
-            options.getChildren().add(submit);
-
-            save.setOnAction(new EventHandler<ActionEvent>() {
-
-                @Override
-                public void handle(ActionEvent e) {
-                    if (cofxvar.getText() != null){
-                        if (Helper.isNumber(cofxvar.getText())) {
-                            ModelDolar.setVARIACION_COFX(Double.valueOf(cofxvar.getText()));
-                            Notifier.INSTANCE.notifySuccess("COFX Index", "Variacion: " + cofxvar.getText());
-                            logger.info(cofxvar.getText());
-                        }
-                    }
-
-                    if (cadvar.getText() != null) {
-                        if (Helper.isNumber(cadvar.getText())) {
-                            ModelDolar.setVARIACION_CAD(Double.valueOf(cadvar.getText()));
-                            Notifier.INSTANCE.notifySuccess("CAD Curncy", "Variacion: " + cadvar.getText());
-                            logger.info(ModelDolar.VARIACION_CAD);
-                        }
-                    }
-
-                    if (clpvar.getText() != null) {
-                        if (Helper.isNumber(clpvar.getText())) {
-                            ModelDolar.setVARIACION_CLP(Double.valueOf(clpvar.getText()));
-                            Notifier.INSTANCE.notifySuccess("CLP", "Variacion: " + clpvar.getText());
-                            logger.info(ModelDolar.VARIACION_CLP);
-                        }
-                    }
-                }
-
-            });
-
-        }
-
-    }
-
-    public void inputButtonReadLog() throws Exception {
-
-        if (modelXml.booleanDolar.equals(true)){
+        if (modelXml.booleanDolar.equals(true)) {
             SwitchButton switchButtonDolar = new SwitchButton("Dolar", this);
             Button switchBtn1 = switchButtonDolar.returnButton();
             this.buttonDolar = switchBtn1;
 
             VBox ButtonDolar = new VBox();
             ButtonDolar.getChildren().add(switchButtonDolar);
-            options.getChildren().add(ButtonDolar);
+            optionsPanel.getChildren().add(ButtonDolar);
         }
 
-        if (modelXml.booleanMLocal.equals(true)){
+        if (modelXml.booleanMLocal.equals(true)) {
             SwitchButton switchButtonMkd_Local = new SwitchButton("MKD Local", this);
             Button switchBtn3 = switchButtonMkd_Local.returnButton();
             this.buttonMKDLocal = switchBtn3;
 
             VBox HBoswitchButtonMkd_Local = new VBox();
             HBoswitchButtonMkd_Local.getChildren().add(switchButtonMkd_Local);
-            options.getChildren().add(HBoswitchButtonMkd_Local);
+            optionsPanel.getChildren().add(HBoswitchButtonMkd_Local);
         }
 
-        if (modelXml.booleanMAdr.equals(true)){
+        if (modelXml.booleanMAdr.equals(true)) {
             SwitchButton switchButtonMkd_nyse = new SwitchButton("MKD ADR", this);
             Button switchBtn2 = switchButtonMkd_nyse.returnButton();
             this.buttonMDKDAdr = switchBtn2;
 
             VBox HBoxButtonMkd = new VBox();
             HBoxButtonMkd.getChildren().add(switchButtonMkd_nyse);
-            options.getChildren().add(HBoxButtonMkd);
+            optionsPanel.getChildren().add(HBoxButtonMkd);
 
         }
 
-        if (modelXml.booleanRLocal.equals(true)){
+        if (modelXml.booleanRLocal.equals(true)) {
             SwitchButton switchButtonRouting_Local = new SwitchButton("Routing Local", this);
             Button switchBtn4 = switchButtonRouting_Local.returnButton();
             this.buttonRoutingLocal = switchBtn4;
 
             VBox HBosRouting_Local = new VBox();
             HBosRouting_Local.getChildren().add(switchButtonRouting_Local);
-            options.getChildren().add(HBosRouting_Local);
+            optionsPanel.getChildren().add(HBosRouting_Local);
 
         }
 
-        if (modelXml.booleanRAdr.equals(true)){
+        if (modelXml.booleanRAdr.equals(true)) {
             SwitchButton switchButtonRouting_Adr = new SwitchButton("Routing ADR", this);
             Button switchBtn5 = switchButtonRouting_Adr.returnButton();
             this.buttonRoutingADR = switchBtn5;
 
             VBox HBosRouting_Adr = new VBox();
             HBosRouting_Adr.getChildren().add(switchButtonRouting_Adr);
-            options.getChildren().add(HBosRouting_Adr);
+            optionsPanel.getChildren().add(HBosRouting_Adr);
         }
 
 
@@ -664,6 +576,27 @@ public class Algo {
 
     public void setAlert(boolean alert) {
         this.alert = alert;
+    }
+
+
+    public void setOptionsPanel(VBox optionsPanel){
+
+        SwitchButton switchButtonAlert = new SwitchButton("Alert", this);
+        Button switchBtn6 = switchButtonAlert.returnButton();
+        this.buttonAlert = switchBtn6;
+
+        SwitchButton graphSwith = new SwitchButton("Graph", this);
+        Button switchBtn7 = graphSwith.returnButton();
+        this.graphButton = switchBtn7;
+
+        VBox vBoxgraph = new VBox();
+        vBoxgraph.getChildren().add(graphSwith);
+        optionsPanel.getChildren().add(vBoxgraph);
+
+        VBox vBox = new VBox();
+        vBox.getChildren().add(switchButtonAlert);
+        optionsPanel.getChildren().add(vBox);
+
     }
 
 

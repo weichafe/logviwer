@@ -5,11 +5,11 @@
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.larrainvial.logviwer.controller.algos.PanelPositionsController">
   <children>
-    <TableView fx:id="positionTable" prefWidth="835">
+    <TableView fx:id="positionTable" prefWidth="1150">
 
       <columns>
         <TableColumn fx:id="localSymbol" text="Symbol" prefWidth="80"/>
-        <TableColumn fx:id="adrSymbol" text="ADR" prefWidth="65"/>
+        <TableColumn fx:id="adrSymbol" text="ADR" prefWidth="80"/>
 
         <TableColumn fx:id="inflowLocal" text="Buy Inflow" prefWidth="75"/>
         <TableColumn fx:id="inflowAdr" text="Sell Inflow"  prefWidth="75"/>
@@ -18,12 +18,12 @@
 
         <TableColumn fx:id="flowbackLocal" text="Sell Flowback" prefWidth="80"/>
         <TableColumn fx:id="flobackSell" text="Buy Flowback" prefWidth="80"/>
-        <TableColumn fx:id="leaveFlowback" text="Leave Flowback"  prefWidth="88"/>
+        <TableColumn fx:id="leaveFlowback" text="Leave Flowback"  prefWidth="100"/>
         <TableColumn fx:id="differenceFlowback" text="Difference" prefWidth="85"/>
 
-        <TableColumn fx:id="localBuy" text="Local Buy" prefWidth="80"/>
-        <TableColumn fx:id="localSell" text="Local Sell" prefWidth="80"/>
-        <TableColumn fx:id="ratio" text="Ratio" prefWidth="60"/>
+        <TableColumn fx:id="localBuy" text="Local Buy" prefWidth="100"/>
+        <TableColumn fx:id="localSell" text="Local Sell" prefWidth="100"/>
+        <TableColumn fx:id="ratio" text="Ratio" prefWidth="70"/>
 
 
       </columns>
