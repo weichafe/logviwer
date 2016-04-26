@@ -56,7 +56,6 @@ public class CalculatePositions {
                 positions.localBuy = modelRoutingData.lastQty + positions.localBuy;
                 positions.localSymbol = modelRoutingData.getSymbol();
 
-
             } else {
 
                 positions.flobackSell = modelRoutingData.lastQty + positions.flobackSell;

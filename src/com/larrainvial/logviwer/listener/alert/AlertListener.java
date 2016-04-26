@@ -30,15 +30,16 @@ public class AlertListener implements Listener {
             
             AlertEvent ev = (AlertEvent) event;
 
-            if (!ev.algo.nameAlgo.equals(algo.nameAlgo) || Helper.validateTime(ev.hour)) return;
+            //if (!ev.algo.nameAlgo.equals(algo.nameAlgo) || Helper.validateTime(ev.hour)) return;
 
             if (ev.messageByType.equals("8") && ev.execType.equals("8")) {
 
-                Notifier.INSTANCE.notifyError(ev.algo.nameAlgo, ev.modelRoutingData.text + " " + ev.typeMarket + "\n" + "Rejected, 35=8 ;150 = 8 !");
+                Notifier.INSTANCE.notifyError(ev.algo.nameAlgo, ev.text + " " + ev.typeMarket + "\n" + "Rejected, 35=8 ;150 = 8 !");
                 Helper.printerLog(algo.nameAlgo + " Rejected, 35=8 ;150 = 8 ! " + ev.modelRoutingData.text + " " + ev.typeMarket);
+
                 if (algo.isAlert()) new Sound();
 
-            } else if (ev.messageByType.equals("9") && ev.modelRoutingData.text.equals("RMG Reject: routing failure")) {
+            } else if (ev.messageByType.equals("9") && ev.text.equals("RMG Reject: routing failure")) {
 
                 StringBuffer stringBuffer = new StringBuffer();
                 stringBuffer.append("Rejected, check log files!\n");

@@ -60,6 +60,7 @@ public class StringToRoutingData {
 
         } catch (Exception ex){
             logger.error(Level.SEVERE, ex);
+            ex.printStackTrace();
         }
 
 

@@ -85,6 +85,7 @@ public class Algo {
 
     public Map<String, ModelMarketData> lastPriceMasterListHash = Collections.synchronizedMap(new LinkedHashMap<String, ModelMarketData>());
     public HashMap<String, Integer> lastPrice = new HashMap<String, Integer>();
+
     public Map<String, ModelLatency> latencyADR = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
     public Map<String, ModelLatency> latencyLocal = Collections.synchronizedMap(new HashMap<String, ModelLatency>());
 
