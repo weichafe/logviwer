@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><db-parms create=";create=true" database="kiDB100" dbversion="embedded" driver="org.apache.derby.jdbc.EmbeddedDriver" protocol="jdbc:derby:" shutdown=";shutdown=true" vendor="derby"/>
