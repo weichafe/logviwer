@@ -48,18 +48,6 @@ public class Validation {
 
             }
 
-            if (newOrderSingle.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.IB)) {
-
-                if (!newOrderSingle.isSetCurrency()){
-                    Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new Text("Reject IB")));
-                    return false;
-                }
-
-                if (!newOrderSingle.isSetMaxFloor()){
-                    Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new Text("Reject IB Max Floor")));
-                    return false;
-                }
-            }
 
             if (newOrderSingle.getPrice().getValue() == 100000d){
                 Controller.dispatchEvent(new RejectedEvent(this, newOrderSingle, new Text("Rechazado Forzado")));
@@ -144,19 +132,6 @@ public class Validation {
 
             }
 
-            if(orderCancelReplaceRequest.getGroup(i, NoPartyIDs.FIELD).getString(PartyID.FIELD).equals(Constants.Brokers.IB)){
-
-                if (!orderCancelReplaceRequest.isSetCurrency()) {
-                    Controller.dispatchEvent(new OrderCancelRejectEvent(this, orderCancelReplaceRequest, new Text("Rejected IB")));
-                    return false;
-                }
-
-                if (!orderCancelReplaceRequest.isSetMaxFloor()) {
-                    Controller.dispatchEvent(new OrderCancelRejectEvent(this, orderCancelReplaceRequest, new Text("Rejected IB MAX FLoor")));
-                    return false;
-                }
-
-            }
 
         }
 

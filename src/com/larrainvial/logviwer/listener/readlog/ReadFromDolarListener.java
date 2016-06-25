@@ -60,13 +60,7 @@ public class ReadFromDolarListener implements Listener {
 
 
     public boolean verifyMessageFix(String message){
-
-        if (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1){
-            return true;
-
-        } else {
-            return false;
-        }
+        return (message.indexOf("8=FIX.4.4") > -1 && message.indexOf("10=") > -1) ? true : false;
 
     }
 

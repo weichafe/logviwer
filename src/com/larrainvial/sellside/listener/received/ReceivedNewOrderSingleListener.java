@@ -48,6 +48,7 @@ public class ReceivedNewOrderSingleListener implements Listener {
                 Repository.executionWorkOrderSell.put(orders.workOrders.getString(ClOrdID.FIELD), orders);
             }
 
+
             Controller.dispatchEvent(new TradeEvent(this, orders));
 
         } catch (Exception ex) {
@@ -181,4 +182,5 @@ public class ReceivedNewOrderSingleListener implements Listener {
 
         return executionReport;
     }
+
 }

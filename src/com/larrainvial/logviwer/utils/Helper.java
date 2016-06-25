@@ -94,6 +94,14 @@ public class Helper {
         if (symbolLocal.equals("SQM")) return "SQM-B";
         if (symbolLocal.equals("VCO")) return "CONCHATORO";
 
+        if (symbolLocal.equals("EOCA")) return "ENDESA-AM";
+        if (symbolLocal.equals("EOCC")) return "ENDESA-CH";
+
+        if (symbolLocal.equals("ENIA")) return "ENERSIS-AM";
+        if (symbolLocal.equals("ENIC")) return "ENERSIS-CH";
+
+
+
         return symbolLocal;
     }
 
@@ -101,9 +109,9 @@ public class Helper {
 
         //XBOG
         if (symbolLocal.equals("PFAVAL"))      return 0;
+        if (symbolLocal.equals("ECOPETROL"))   return 1;
         if (symbolLocal.equals("PFAVH"))       return 2;
         if (symbolLocal.equals("PFBCOLOM"))    return 3;
-        if (symbolLocal.equals("ECOPETROL"))   return 1;
 
         //XTSE
         if (symbolLocal.equals("PREC"))        return 0;
@@ -111,17 +119,22 @@ public class Helper {
 
         //XSGO
         if (symbolLocal.equals("CHILE"))       return 0;
+        if (symbolLocal.equals("CONCHATORO"))  return 1;
         if (symbolLocal.equals("LAN"))         return 2;
         if (symbolLocal.equals("BSANTANDER"))  return 3;
         if (symbolLocal.equals("CENCOSUD"))    return 4;
         if (symbolLocal.equals("CCU"))         return 5;
-        if (symbolLocal.equals("ITAUCORP"))   return 6;
+        if (symbolLocal.equals("ITAUCORP"))    return 6;
         if (symbolLocal.equals("ANDINA-A"))    return 7;
         if (symbolLocal.equals("ANDINA-B"))    return 8;
         if (symbolLocal.equals("ENDESA"))      return 9;
         if (symbolLocal.equals("ENERSIS"))     return 10;
         if (symbolLocal.equals("SQM-B"))       return 11;
-        if (symbolLocal.equals("CONCHATORO"))  return 1;
+
+        if (symbolLocal.equals("ENDESA-AM"))   return 12;
+        if (symbolLocal.equals("ENDESA-CH"))   return 13;
+        if (symbolLocal.equals("ENERSIS-AM"))  return 14;
+        if (symbolLocal.equals("ENERSIS-CH"))  return 15;
 
         return 0;
     }
@@ -151,6 +164,11 @@ public class Helper {
         if (symbolLocal.equals("ENERSIS"))     return 50d;
         if (symbolLocal.equals("SQM-B"))       return 1d;
         if (symbolLocal.equals("CONCHATORO"))  return 50d;
+
+        if (symbolLocal.equals("ENDESA-AM"))   return 30d;
+        if (symbolLocal.equals("ENDESA-CH"))   return 30d;
+        if (symbolLocal.equals("ENERSIS-AM"))  return 50d;
+        if (symbolLocal.equals("ENERSIS-CH"))  return 50d;
 
         return 1d;
     }
@@ -209,6 +227,11 @@ public class Helper {
         if (symbolLocal.equals("ENERSIS"))     return true;
         if (symbolLocal.equals("SQM-B"))       return true;
         if (symbolLocal.equals("CONCHATORO"))  return true;
+
+        if (symbolLocal.equals("ENERSIS-CH"))  return true;
+        if (symbolLocal.equals("ENERSIS-AM"))  return true;
+        if (symbolLocal.equals("ENDESA-CH"))  return true;
+        if (symbolLocal.equals("ENDESA-AM"))  return true;
 
         return false;
     }

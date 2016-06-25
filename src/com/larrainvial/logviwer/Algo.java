@@ -25,17 +25,23 @@ import com.larrainvial.logviwer.listener.stringtofix.*;
 import com.larrainvial.logviwer.model.*;
 import com.larrainvial.sellside.MainSellSide;
 import com.larrainvial.logviwer.controller.SellSideController;
+import com.larrainvial.sellside.utils.CreateOrden;
 import com.larrainvial.trading.emp.Controller;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Reflection;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -275,6 +281,7 @@ public class Algo {
             ContextMenu menulastPrice = new ContextMenu();
             menulastPrice.getItems().addAll(lastPrice);
 
+
             lastPriceTableView.setContextMenu(menulastPrice);
 
             readFromDolarListener = new ReadFromDolarListener(this);
@@ -383,9 +390,58 @@ public class Algo {
             label.getStyleClass().add("labelSellSide");
             label.getChildren().addAll(ip, port, sender, target, type);
 
+
+            GridPane gridPane = new GridPane();
+            gridPane.setPadding(new Insets(20, 20, 20, 20));
+            gridPane.setHgap(5);
+            gridPane.setVgap(5);
+
+            Label lbSIde = new Label("Side");
+            final TextField txtSide = new TextField();
+
+            Label lblQty = new Label("Qty");
+            final TextField qty = new TextField();
+
+            Label lblPrice = new Label("Price");
+            final TextField price = new TextField();
+
+            Label lblSymbol = new Label("Symbol");
+            final TextField symbol = new TextField();
+
+            Button btnLogin = new Button("Send Order");
+
+            gridPane.add(lbSIde, 0, 0);
+            gridPane.add(txtSide, 1, 0);
+            gridPane.add(lblQty, 0, 1);
+            gridPane.add(qty, 1, 1);
+            gridPane.add(lblPrice, 0, 2);
+            gridPane.add(price, 1, 2);
+            gridPane.add(lblSymbol, 0, 3);
+            gridPane.add(symbol, 1, 3);
+            gridPane.add(btnLogin, 3, 1);
+
+            btnLogin.setOnAction(new EventHandler() {
+                @Override
+                public void handle(Event event) {
+
+                    try {
+                        new CreateOrden(txtSide.getText().toString(), qty.getText().toString(), price.getText().toString(),  symbol.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+            });
+
+
+
+
+
             VBox general = new VBox();
             general.getStyleClass().add("generalSellSide");
-            general.getChildren().addAll(buttons, consoleSellSide, label);
+            general.getChildren().addAll(buttons, consoleSellSide, label, gridPane);
 
             ScrollPane scrollBar = new ScrollPane();
             scrollBar.prefWidthProperty().bind(general.widthProperty());
@@ -488,6 +544,7 @@ public class Algo {
 
                     Algo algo = Repository.strategy.get(xmlVO.nameAlgo);
 
+                    /*
                     if (mkdDolarToggle && xmlVO.booleanDolar && validateDolar) {
                         validateDolar = false;
                         Controller.dispatchEvent(new ReadFromDolarEvent(algo));
@@ -512,6 +569,7 @@ public class Algo {
                         validateRoutingADR = false;
                         Controller.dispatchEvent(new ReadlogRoutingAdrEvent(algo));
                     }
+                    */
 
                 }
 

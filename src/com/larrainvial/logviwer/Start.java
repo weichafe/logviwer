@@ -52,7 +52,7 @@ public class Start extends Application {
             primaryStage.show();
 
             //Todo: inicaliza lectura de HHDD
-            HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
+            //HardDishCheckLinux HardDishCheckLinux = new HardDishCheckLinux();
 
             Helper helper = new Helper();
             helper.createStrategy();
